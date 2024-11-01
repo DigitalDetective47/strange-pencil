@@ -4,8 +4,9 @@ return {
             j_pencil_swimmers = {
                 name = "Synchronized Swimmers",
                 text = {
-                    "{C:mult}+#1#{} mult if all scoring cards",
-                    "have the same {C:attention}Enhancement",
+                    "Each scored card gives {C:mult}+#1#{} mult",
+                    "if all scoring cards have",
+                    "the same {C:attention}Enhancement",
                     "{C:inactive}(Played cards must be {C:attention}Enhanced{C:inactive}){}"
                 }
             }

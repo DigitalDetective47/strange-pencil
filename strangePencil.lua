@@ -68,7 +68,7 @@ SMODS.Atlas({
 
 SMODS.Joker({
     key = "swimmers",
-    config = { extra = { mult = 22 } },
+    config = { extra = { mult = 11 } },
     loc_vars = function(self, info_queue, center)
         return {
             vars = {
@@ -82,7 +82,7 @@ SMODS.Joker({
     cost = 5,
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.cardarea == G.jokers and not context.before and not context.after and context.scoring_hand then
+        if context.cardarea == G.play and context.individual then
             local enhancement = nil;
             for i = 1, #context.scoring_hand do
                 if enhancement then
@@ -97,7 +97,8 @@ SMODS.Joker({
             end
             return {
                 message = localize({ type = "variable", key = "a_mult", vars = { card.ability.extra.mult } }),
-                mult_mod = card.ability.extra.mult,
+                mult = card.ability.extra.mult,
+                card = card,
             }
         end
     end,
