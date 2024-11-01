@@ -20,3 +20,27 @@ if G.GAME.modifiers.pencil_most_played_only then
 end
 '''
 match_indent = true
+
+# Make royal deck only give face cards
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = '''
+if self.effect.config.remove_faces then
+    G.GAME.starting_params.no_faces = true
+end
+'''
+position = "after"
+payload = '''
+if self.effect.config.pencil_only_faces then
+    G.GAME.starting_params.pencil_only_faces = true
+end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if keep then card_protos[#card_protos+1] = {s=_s,r=_r,e=_e,d=_d,g=_g} end"
+position = "before"
+payload = "if self.GAME.starting_params.pencil_only_faces and not SMODS.Ranks[v.value].face then keep = false end"
+match_indent = false

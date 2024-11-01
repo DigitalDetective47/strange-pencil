@@ -10,6 +10,17 @@ return {
                     "{C:inactive}(Played cards must be {C:attention}Enhanced{C:inactive}){}"
                 }
             }
+        },
+        Back = {
+            b_pencil_royal = {
+                name = "Royal Deck",
+                text = {
+                    "Start run with",
+                    "only {C:attention}Face Cards",
+                    "in your deck",
+                    "{C:attention}-4{} hand size",
+                },
+            },
         }
     },
     misc = {
