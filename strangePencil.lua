@@ -8,51 +8,31 @@
 --- PREFIX: pencil
 
 SMODS.Challenge({
-    object_type = "Challenge",
     key = "debug",
     rules = {
-        custom = {
-        },
         modifiers = {
             { id = "dollars", value = 1e200 },
         }
     },
     jokers = {
-        {id = "j_pencil_swimmers"},
-        {id = "j_cry_gemino"}
+        { id = "j_pencil_swimmers" },
+        { id = "j_cry_gemino" }
     },
     consumeables = {
         { id = "c_cry_pointer" },
         { id = "c_cry_pointer" },
-    },
-    vouchers = {
     },
     deck = {
         cards = { { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, },
         type = 'Challenge Deck'
     },
-    restrictions = {
-        banned_cards = {
-        },
-        banned_tags = {
-        },
-        banned_other = {
-        }
-    }
 })
 SMODS.Challenge({
-    object_type = "Challenge",
     key = "permamouth",
     rules = {
         custom = {
             { id = "pencil_most_played_only" },
         },
-        modifiers = {
-        }
-    },
-    jokers = {
-    },
-    consumeables = {
     },
     vouchers = {
         { id = "v_telescope" },
@@ -65,8 +45,6 @@ SMODS.Challenge({
         banned_cards = {
             { id = "j_obelisk" },
             { id = "j_cry_fspinner" },
-        },
-        banned_tags = {
         },
         banned_other = {
             { id = 'bl_ox',            type = 'blind' },
