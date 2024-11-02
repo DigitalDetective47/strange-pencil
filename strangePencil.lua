@@ -129,3 +129,104 @@ SMODS.Back({
     pos = { x = 0, y = 0 },
     atlas = "decks",
 })
+
+SMODS.Atlas({
+    key = "indexes",
+    path = "indexes.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.ConsumableType({
+    key = "index",
+    primary_colour = HEX("FFFFFF"),
+    secondary_colour = HEX("FF0000"),
+    shop_rate = 4,
+    loc_txt = {},
+})
+SMODS.UndiscoveredSprite({
+    key = "index",
+    atlas = "indexes",
+    pos = { x = 0, y = 0 },
+})
+
+SMODS.Consumable({
+    key = "replica",
+    set = "index",
+    atlas = "indexes",
+    pos = { x = 1, y = 0 },
+    loc_vars = function(self, info_queue, center)
+        return { vars = { self.config.selections } }
+    end,
+    cost = 5,
+    config = { selections = 1 },
+    can_use = function(self, card)
+        local targets = {}
+        for k, v in ipairs(G.consumeables.highlighted) do
+            if v.ability.set == "Unique" or not v.ability.consumeable then
+                return false
+            end
+            if v ~= card then
+                table.insert(targets, v)
+            end
+        end
+        if G.shop_jokers ~= nil then
+            for k, v in ipairs(G.shop_jokers.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
+        if G.pack_cards ~= nil then
+            for k, v in ipairs(G.pack_cards.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
+        return #targets ~= 0 and #targets <= card.ability.selections and
+            #G.consumeables + #targets - (card.area == G.consumeables and 1 or 0) <= G.consumeables.config.card_limit
+    end,
+    use = function(self, card, area, copier)
+        local targets = {}
+        for k, v in ipairs(G.consumeables.highlighted) do
+            if v.ability.set == "Unique" or not v.ability.consumeable then
+                return false
+            end
+            if v ~= card then
+                table.insert(targets, v)
+            end
+        end
+        if G.shop_jokers ~= nil then
+            for k, v in ipairs(G.shop_jokers.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
+        if G.pack_cards ~= nil then
+            for k, v in ipairs(G.pack_cards.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
+        for k, v in ipairs(targets) do
+            local consume = create_card("Consumeables", G.consumables, nil, nil, nil, nil, v.config.center.key, nil)
+            consume:add_to_deck()
+            G.consumeables:emplace(consume)
+        end
+    end,
+})
