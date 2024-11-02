@@ -180,6 +180,26 @@ SMODS.Consumable({
                 end
             end
         end
+        if G.shop_booster ~= nil then
+            for k, v in ipairs(G.shop_booster.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
+        if G.shop_voucher ~= nil then
+            for k, v in ipairs(G.shop_voucher.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
         if G.pack_cards ~= nil then
             for k, v in ipairs(G.pack_cards.highlighted) do
                 if v.ability.set == "Unique" or not v.ability.consumeable then
