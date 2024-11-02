@@ -230,3 +230,61 @@ SMODS.Consumable({
         end
     end,
 })
+
+SMODS.Consumable({
+    key = "counterfeit",
+    set = "index",
+    atlas = "indexes",
+    pos = { x = 2, y = 0 },
+    loc_vars = function(self, info_queue, center)
+        return { vars = { self.config.dollars } }
+    end,
+    cost = 5,
+    config = { dollars = 15 },
+    can_use = function(self, card)
+        return true
+    end,
+    use = function(self, card, area, copier)
+        ease_dollars(card.ability.dollars)
+    end,
+})
+
+SMODS.Consumable({
+    key = "chisel",
+    set = "index",
+    atlas = "indexes",
+    pos = { x = 3, y = 0 },
+    cost = 5,
+    can_use = function(self, card)
+        return #G.jokers.highlighted == 1 and
+            (G.jokers.highlighted[1].ability.perishable or G.jokers.highlighted[1].pinned or G.jokers.highlighted[1].ability.rental or G.jokers.highlighted[1].ability.eternal)
+    end,
+    use = function(self, card, area, copier)
+        local target = G.jokers.highlighted[1]
+        target:flip()
+        play_sound("card1", 0.9)
+        target.ability.perishable = nil
+        target.pinned = nil
+        target:set_rental(nil)
+        target:set_eternal(nil)
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.3,
+            func = function()
+                play_sound("gold_seal", 1.2, 0.4)
+                target:juice_up(0.3, 0.3)
+                card:juice_up(0.3, 0.3)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.35,
+            func = function()
+                target:flip()
+                play_sound("card1", 1.1)
+                return true
+            end,
+        }))
+    end,
+})

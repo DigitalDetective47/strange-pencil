@@ -30,7 +30,20 @@ return {
                     "{C:attention}#1#{} selected {C:attention}consumable",
                     "{C:inactive}(Must have room)",
                 }
-            }
+            },
+            c_pencil_counterfeit = {
+                name = "Counterfeit",
+                text = {
+                    "Gain {C:money}$#1#",
+                }
+            },
+            c_pencil_chisel = {
+                name = "Chisel",
+                text = {
+                    "Remove all {C:attention}stickers{} from",
+                    "a selected {C:attention}joker{}",
+                }
+            },
         },
         Other = {
             undiscovered_index = {
