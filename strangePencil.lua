@@ -4,7 +4,6 @@
 --- MOD_AUTHOR: [DigitalDetective47]
 --- MOD_DESCRIPTION: A collection of random stuff that I've created and drawn in Paint.
 --- PRIORITY: 0
---- VERSION: 0.0.1
 --- PREFIX: pencil
 
 SMODS.Challenge({
