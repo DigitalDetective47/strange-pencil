@@ -27,7 +27,7 @@ SMODS.Challenge({
         type = 'Challenge Deck'
     },
 })
-SMODS.Challenge({
+local permamouth = {
     key = "permamouth",
     rules = {
         custom = {
@@ -47,16 +47,20 @@ SMODS.Challenge({
             { id = "j_cry_fspinner" },
         },
         banned_other = {
-            { id = 'bl_ox',            type = 'blind' },
-            { id = 'bl_eye',           type = 'blind' },
-            { id = 'bl_mouth',         type = 'blind' },
-            { id = "bl_cry_oldhouse",  type = 'blind' },
-            { id = "bl_cry_oldpillar", type = 'blind' },
-            { id = "bl_cry_oldflint",  type = 'blind' },
-            { id = "bl_cry_oldmark",   type = 'blind' },
+            { id = 'bl_ox',    type = 'blind' },
+            { id = 'bl_eye',   type = 'blind' },
+            { id = 'bl_mouth', type = 'blind' },
         }
     }
-})
+}
+-- if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Blinds"] then
+--     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldhouse", type = 'blind' })
+--     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldpillar", type = 'blind' })
+--     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldflint", type = 'blind' })
+--     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldmark", type = 'blind' })
+-- end
+
+SMODS.Challenge(permamouth)
 FirstHand = nil
 
 SMODS.Atlas({
@@ -124,6 +128,4 @@ SMODS.Back({
     -- end,
     pos = { x = 0, y = 0 },
     atlas = "decks",
-    apply = function(self)
-    end,
 })
