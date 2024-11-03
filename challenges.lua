@@ -1,24 +1,3 @@
-SMODS.Challenge({
-    key = "debug",
-    rules = {
-        modifiers = {
-            { id = "dollars", value = 1e200 },
-        }
-    },
-    jokers = {
-        { id = "j_pencil_swimmers" },
-        { id = "j_cry_gemino" }
-    },
-    consumeables = {
-        { id = "c_cry_pointer" },
-        { id = "c_cry_pointer" },
-    },
-    deck = {
-        cards = { { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, { s = "S", r = "K", e = "m_steel" }, },
-        type = 'Challenge Deck'
-    },
-})
-
 local permamouth = {
     key = "permamouth",
     rules = {
