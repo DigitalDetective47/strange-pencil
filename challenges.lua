@@ -44,13 +44,14 @@ local permamouth = {
         }
     }
 }
--- if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config.enabled["Blinds"] then
---     table.insert(permamouth.restrictions.banned_cards, { id = "j_cry_fspinner" })
---     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldhouse", type = 'blind' })
---     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldpillar", type = 'blind' })
---     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldflint", type = 'blind' })
---     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldmark", type = 'blind' })
--- end
-
+if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Blinds"] then
+    table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldhouse", type = 'blind' })
+    table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldpillar", type = 'blind' })
+    table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldflint", type = 'blind' })
+    table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldmark", type = 'blind' })
+end
+if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Misc. Jokers"] then
+    table.insert(permamouth.restrictions.banned_cards, { id = "j_cry_fspinner" })
+end
 SMODS.Challenge(permamouth)
 FirstHand = nil
