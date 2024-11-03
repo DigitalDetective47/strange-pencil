@@ -3,24 +3,6 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
-# Apply debuff for "Ride or Die" challenge
-[[patches]]
-[patches.pattern]
-target = "blind.lua"
-pattern = "function Blind:debuff_hand(cards, hand, handname, check)"
-position = "after"
-payload = '''
-if G.GAME.modifiers.pencil_most_played_only then
-    if FirstHand and FirstHand ~= handname then
-        return true
-    end
-    if not check then 
-        FirstHand = handname
-    end
-end
-'''
-match_indent = true
-
 # Make royal deck only give face cards
 [[patches]]
 [patches.pattern]
