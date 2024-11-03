@@ -9,7 +9,17 @@ return {
                     "the same {C:attention}Enhancement",
                     "{C:inactive}(Played cards must be {C:attention}Enhanced{C:inactive}){}"
                 }
-            }
+            },
+            j_pencil_lass = {
+                name = "The Lass",
+                text = {
+                    "Gives {X:mult,C:white}X#1#{} mult",
+                    "per {C:clubs}Queen of Clubs{}",
+                    "in your full deck",
+                    "{s:0.8}(Minimum of {X:mult,C:white,s:0.8}X1{})",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} mult)"
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
