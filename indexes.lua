@@ -89,7 +89,7 @@ SMODS.Consumable({
             end
         end
         return #targets ~= 0 and #targets <= card.ability.selections and
-            #G.consumeables + #targets - (card.area == G.consumeables and 1 or 0) <= G.consumeables.config.card_limit
+            #G.consumeables.cards + #targets - (card.area == G.consumeables and 1 or 0) <= G.consumeables.config.card_limit
     end,
     use = function(self, card, area, copier)
         local targets = {}
