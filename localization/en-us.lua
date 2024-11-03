@@ -41,7 +41,20 @@ return {
                 name = "Chisel",
                 text = {
                     "Remove all {C:attention}stickers{} from",
-                    "a selected {C:attention}joker{}",
+                    "a selected {C:attention}joker",
+                }
+            },
+            c_pencil_peek = {
+                name = "Peek",
+                text = {
+                    "Flip all {C:attention}face down{} cards",
+                }
+            },
+            c_pencil_mixnmatch = {
+                name = "Mix & Match",
+                text = {
+                    "Swap the {C:attention}rank{} and {C:attention}suit{} of",
+                    "two selected cards in hand",
                 }
             },
         },

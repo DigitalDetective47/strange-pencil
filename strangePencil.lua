@@ -50,7 +50,6 @@ local permamouth = {
     restrictions = {
         banned_cards = {
             { id = "j_obelisk" },
-            { id = "j_cry_fspinner" },
         },
         banned_other = {
             { id = 'bl_ox',    type = 'blind' },
@@ -60,6 +59,7 @@ local permamouth = {
     }
 }
 -- if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Blinds"] then
+--     table.insert(permamouth.restrictions.banned_cards, { id = "j_cry_fspinner" })
 --     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldhouse", type = 'blind' })
 --     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldpillar", type = 'blind' })
 --     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldflint", type = 'blind' })
@@ -216,10 +216,21 @@ SMODS.Consumable({
                 end
             end
         end
+        if G.hand ~= nil then
+            for k, v in ipairs(G.hand.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
         return #targets ~= 0 and #targets <= card.ability.selections and
             #G.consumeables + #targets - (card.area == G.consumeables and 1 or 0) <= G.consumeables.config.card_limit
     end,
     use = function(self, card, area, copier)
+        local targets = {}
         local targets = {}
         for k, v in ipairs(G.consumeables.highlighted) do
             if v.ability.set == "Unique" or not v.ability.consumeable then
@@ -239,6 +250,26 @@ SMODS.Consumable({
                 end
             end
         end
+        if G.shop_booster ~= nil then
+            for k, v in ipairs(G.shop_booster.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
+        if G.shop_voucher ~= nil then
+            for k, v in ipairs(G.shop_voucher.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
         if G.pack_cards ~= nil then
             for k, v in ipairs(G.pack_cards.highlighted) do
                 if v.ability.set == "Unique" or not v.ability.consumeable then
@@ -249,8 +280,19 @@ SMODS.Consumable({
                 end
             end
         end
+        if G.hand ~= nil then
+            for k, v in ipairs(G.hand.highlighted) do
+                if v.ability.set == "Unique" or not v.ability.consumeable then
+                    return false
+                end
+                if v ~= card then
+                    table.insert(targets, v)
+                end
+            end
+        end
         for k, v in ipairs(targets) do
             local consume = create_card("Consumeables", G.consumables, nil, nil, nil, nil, v.config.center.key, nil)
+            copy_card(v, consume)
             consume:add_to_deck()
             G.consumeables:emplace(consume)
         end
@@ -311,6 +353,159 @@ SMODS.Consumable({
                 play_sound("card1", 1.1)
                 return true
             end,
+        }))
+    end,
+})
+
+SMODS.Consumable({
+    key = "peek",
+    set = "index",
+    atlas = "indexes",
+    pos = { x = 4, y = 0 },
+    cost = 5,
+    can_use = function(self, card)
+        for k, v in ipairs(G.hand.cards or {}) do
+            if v.facing == "back" then
+                return true
+            end
+        end
+        return false
+    end,
+    use = function(self, card, area, copier)
+        for k, v in ipairs(G.hand.cards) do
+            if v.facing == "back" then
+                v:flip()
+            end
+        end
+    end,
+})
+
+SMODS.Consumable({
+    key = "peek",
+    set = "index",
+    atlas = "indexes",
+    pos = { x = 4, y = 0 },
+    cost = 5,
+    can_use = function(self, card)
+        for k, v in ipairs(G.hand.cards or {}) do
+            if v.facing == "back" then
+                return true
+            end
+        end
+        return false
+    end,
+    use = function(self, card, area, copier)
+        for k, v in ipairs(G.hand.cards) do
+            if v.facing == "back" then
+                v:flip()
+            end
+        end
+    end,
+})
+
+SMODS.Consumable({
+    key = "mixnmatch",
+    set = "index",
+    atlas = "indexes",
+    pos = { x = 5, y = 0 },
+    cost = 5,
+    can_use = function(self, card)
+        return #G.hand.highlighted - (card.area == G.hand and 1 or 0) == 2
+    end,
+    use = function(self, card, area, copier)
+        local left = false
+        local right = false
+        for k, v in ipairs(G.hand.highlighted) do
+            if v == card then
+            elseif left then
+                right = v
+            else
+                left = v
+            end
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.15,
+            func = function()
+                left:flip()
+                play_sound("card1", 1.15 - (1 - 0.999) / (2 - 0.998) * 0.3)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.15,
+            func = function()
+                right:flip()
+                play_sound("card1", 1.15 - (2 - 0.999) / (2 - 0.998) * 0.3)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.1,
+            func = function()
+                local left_suit_prefix = string.sub(left.base.suit, 1, 1) .. '_'
+                local left_rank_suffix = left.base.id
+                if left_rank_suffix < 10 then
+                    left_rank_suffix = tostring(left_rank_suffix)
+                elseif left_rank_suffix == 10 then
+                    left_rank_suffix = 'T'
+                elseif left_rank_suffix == 11 then
+                    left_rank_suffix = 'J'
+                elseif left_rank_suffix == 12 then
+                    left_rank_suffix = 'Q'
+                elseif left_rank_suffix == 13 then
+                    left_rank_suffix = 'K'
+                elseif left_rank_suffix == 14 then
+                    left_rank_suffix = 'A'
+                end
+                local right_suit_prefix = string.sub(right.base.suit, 1, 1) .. '_'
+                local right_rank_suffix = right.base.id
+                if right_rank_suffix < 10 then
+                    right_rank_suffix = tostring(right_rank_suffix)
+                elseif right_rank_suffix == 10 then
+                    right_rank_suffix = 'T'
+                elseif right_rank_suffix == 11 then
+                    right_rank_suffix = 'J'
+                elseif right_rank_suffix == 12 then
+                    right_rank_suffix = 'Q'
+                elseif right_rank_suffix == 13 then
+                    right_rank_suffix = 'K'
+                elseif right_rank_suffix == 14 then
+                    right_rank_suffix = 'A'
+                end
+                right:set_base(G.P_CARDS[left_suit_prefix .. left_rank_suffix])
+                left:set_base(G.P_CARDS[right_suit_prefix .. right_rank_suffix])
+                card:juice_up(0.3, 0.3)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.85,
+            func = function()
+                left:flip()
+                play_sound("card1", 1.15 - (1 - 0.999) / (2 - 0.998) * 0.3)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.15,
+            func = function()
+                right:flip()
+                play_sound("card1", 1.15 - (2 - 0.999) / (2 - 0.998) * 0.3)
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+            G.hand:unhighlight_all()
+                return true
+            end
         }))
     end,
 })
