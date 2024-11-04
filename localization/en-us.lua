@@ -16,8 +16,46 @@ return {
                     "Gives {X:mult,C:white}X#1#{} mult",
                     "per {C:clubs}Queen of Clubs{}",
                     "in your full deck",
-                    "{s:0.8}(Minimum of {X:mult,C:white,s:0.8}X1{})",
+                    "{C:inactive,s:0.8}(Minimum of {X:mult,C:white,s:0.8}X1{C:inactive,s:0.8})",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} mult)"
+                }
+            },
+            j_pencil_left_arm = {
+                name = "Left Arm of The Forbidden One",
+                text = {
+                    "{X:chips,C:white}X#1#{} chips",
+                }
+            },
+            j_pencil_right_arm = {
+                name = "Right Arm of The Forbidden One",
+                text = {
+                    "{X:mult,C:white}X#1#{} mult",
+                }
+            },
+            j_pencil_left_leg = {
+                name = "Left Leg of The Forbidden One",
+                text = {
+                    "{C:chips}+#1#{} chips",
+                }
+            },
+            j_pencil_right_leg = {
+                name = "Right Leg of The Forbidden One",
+                text = {
+                    "{C:mult}+#1#{} mult",
+                }
+            },
+            j_pencil_forbidden_one = {
+                name = "The Forbidden One",
+                text = {
+                    "Earn {C:money}$4{} at end of round",
+                    "If you have",
+                    "{C:attention}Left Arm of The Forbidden One{},",
+                    "{C:attention}Right Arm of The Forbidden One{},",
+                    "{C:attention}Left Leg of The Forbidden One{},",
+                    "and {C:attention}Right Leg of The Forbidden One{},",
+                    "create a {C:dark_edition}Negative{} {C:cry_code}Rigged{}",
+                    "{C:attention}Googol Play Card{}",
+                    "when {C:attention}Blind{} is selected"
                 }
             },
         },
@@ -52,6 +90,7 @@ return {
                 text = {
                     "Remove all {C:attention}stickers{} from",
                     "a selected {C:attention}joker",
+                    "{C:inactive,s:0.8}(Excludes stake win stickers)",
                 }
             },
             c_pencil_peek = {
