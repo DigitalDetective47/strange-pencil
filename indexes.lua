@@ -89,10 +89,10 @@ SMODS.Consumable({
             end
         end
         return #targets ~= 0 and #targets <= card.ability.selections and
-            #G.consumeables.cards + #targets - (card.area == G.consumeables and 1 or 0) <= G.consumeables.config.card_limit
+            #G.consumeables.cards + #targets - (card.area == G.consumeables and 1 or 0) <=
+            G.consumeables.config.card_limit
     end,
     use = function(self, card, area, copier)
-        local targets = {}
         local targets = {}
         for k, v in ipairs(G.consumeables.highlighted) do
             if v.ability.set == "Unique" or not v.ability.consumeable then
@@ -186,17 +186,20 @@ SMODS.Consumable({
     pos = { x = 3, y = 0 },
     cost = 5,
     can_use = function(self, card)
-        return #G.jokers.highlighted == 1 and
-            (G.jokers.highlighted[1].ability.perishable or G.jokers.highlighted[1].pinned or G.jokers.highlighted[1].ability.rental or G.jokers.highlighted[1].ability.eternal)
+        if #G.jokers.highlighted ~= 1 then
+            return false
+        end
+        for k, v in pairs(SMODS.Stickers) do
+            if G.jokers.highlighted[1].ability[v.key] then
+                return true
+            end
+        end
+        return false
     end,
     use = function(self, card, area, copier)
         local target = G.jokers.highlighted[1]
         target:flip()
         play_sound("card1", 0.9)
-        target.ability.perishable = nil
-        target.pinned = nil
-        target:set_rental(nil)
-        target:set_eternal(nil)
         G.E_MANAGER:add_event(Event({
             trigger = "after",
             delay = 0.3,
@@ -209,7 +212,17 @@ SMODS.Consumable({
         }))
         G.E_MANAGER:add_event(Event({
             trigger = "after",
-            delay = 0.35,
+            delay = 0.1,
+            func = function()
+                for k, v in pairs(SMODS.Stickers) do
+                    v:apply(target, nil)
+                end
+                return true
+            end,
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.85,
             func = function()
                 target:flip()
                 play_sound("card1", 1.1)
