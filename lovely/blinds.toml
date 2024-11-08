@@ -1,0 +1,36 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Dynamic blind scaling system
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "function Game:update(dt)"
+position = "after"
+payload = '''
+for k, v in ipairs({ "Small", "Big", "Boss" }) do
+    if
+        G.GAME
+        and G.GAME.round_resets
+        and G.GAME.round_resets.blind_choices
+        and G.GAME.round_resets.blind_choices[v]
+        and G.P_BLINDS[G.GAME.round_resets.blind_choices[v]].get_mult
+    then
+        G.P_BLINDS[G.GAME.round_resets.blind_choices[v]].mult =
+            G.P_BLINDS[G.GAME.round_resets.blind_choices[v]].get_mult()
+        if G.GAME.round_resets.blind_states[v] == "Current" and not G.GAME.blind.disabled then
+            if G.GAME.blind.ante == nil then
+                G.GAME.blind.ante = G.GAME.round_resets.ante
+            end
+            G.GAME.blind.chips = G.P_BLINDS[G.GAME.round_resets.blind_choices[v]].get_mult()
+                * get_blind_amount(G.GAME.blind.ante)
+                * G.GAME.starting_params.ante_scaling
+            G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+        end
+    end
+end
+
+'''
+match_indent = true

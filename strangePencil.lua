@@ -12,6 +12,7 @@ SMODS.Atlas({
     px = 32,
     py = 32,
 })
+SMODS.load_file("blinds.lua")()
 SMODS.load_file("challenges.lua")()
 SMODS.load_file("decks.lua")()
 SMODS.load_file("indexes.lua")()

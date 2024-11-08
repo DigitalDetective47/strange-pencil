@@ -70,6 +70,15 @@ return {
                 },
             },
         },
+        Blind = {
+            bl_pencil_glove = {
+                name = "Parchment Glove",
+                text = {
+                    "Gains 0.1X Base per",
+                    "hand played this run",
+                }
+            }
+        },
         index = {
             c_pencil_replica = {
                 name = "Replica",
