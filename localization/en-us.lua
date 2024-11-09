@@ -58,6 +58,14 @@ return {
                     "when {C:attention}Blind{} is selected"
                 }
             },
+            j_pencil_upgrade = {
+                name = "+1",
+                text = {
+                    "Gains {C:chips}+#2#{} chips when",
+                    "a {C:attention}playing card{} is scored",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips)"
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
@@ -97,8 +105,8 @@ return {
             c_pencil_chisel = {
                 name = "Chisel",
                 text = {
-                    "Remove all {C:attention}stickers{} from",
-                    "a selected {C:attention}joker",
+                    "Remove all {C:attention}stickers{}",
+                    "from a selected {C:attention}joker",
                     "{C:inactive,s:0.8}(Excludes stake win stickers)",
                 }
             },

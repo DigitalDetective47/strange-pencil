@@ -231,3 +231,35 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         end
     })
 end
+
+SMODS.Joker({
+    key = "upgrade",
+    config = { extra = { chips = 0, upgrade_size = 1 } },
+    loc_vars = function(self, info_queue, center)
+        return {
+            vars = {
+                center.ability.extra.chips,
+                center.ability.extra.upgrade_size,
+            },
+        }
+    end,
+    rarity = 1,
+    pos = { x = 2, y = 0 },
+    atlas = "jokers",
+    cost = 3,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.individual and not context.blueprint then
+            card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.upgrade_size
+            return {
+                extra = { focus = card, message = localize("k_upgrade_ex") },
+                card = card,
+            }
+        elseif context.joker_main then
+            return {
+                message = localize({ type = "variable", key = "a_chips", vars = { card.ability.extra.chips } }),
+                chip_mod = card.ability.extra.chips,
+            }
+        end
+    end,
+})
