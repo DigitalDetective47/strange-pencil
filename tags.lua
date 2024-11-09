@@ -53,7 +53,7 @@ SMODS.Tag({
     config = { type = "new_blind_choice" },
     key = "workshop",
     loc_vars = function(self, info_queue)
-        table.insert(info_queue, G.P_CENTERS.p_tarot_normal_1)
+        table.insert(info_queue, G.P_CENTERS.p_arcana_normal_2)
         table.insert(info_queue, G.P_CENTERS.c_death)
         table.insert(info_queue, G.P_CENTERS.c_hanged_man)
         table.insert(info_queue, G.P_CENTERS.c_hermit)
