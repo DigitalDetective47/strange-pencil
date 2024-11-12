@@ -159,6 +159,7 @@ return {
         challenge_names = {
             c_pencil_debug = "Debug Challenge",
             c_pencil_permamouth = "Ride or Die",
+            c_pencil_immutable = "Immutable",
         },
         dictionary = {
             k_index = "Index",
