@@ -17,9 +17,10 @@ local permamouth = {
             { id = "j_obelisk" },
         },
         banned_other = {
-            { id = "bl_ox",    type = "blind" },
-            { id = "bl_eye",   type = "blind" },
-            { id = "bl_mouth", type = "blind" },
+            { id = "bl_ox",      type = "blind" },
+            { id = "bl_psychic", type = "blind" },
+            { id = "bl_eye",     type = "blind" },
+            { id = "bl_mouth",   type = "blind" },
         }
     }
 }
@@ -69,6 +70,7 @@ local immutable = {
 
 if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Blinds"] then
     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldhouse", type = "blind" })
+    table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldarm", type = "blind" })
     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldpillar", type = "blind" })
     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldflint", type = "blind" })
     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldmark", type = "blind" })
