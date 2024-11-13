@@ -196,9 +196,8 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         pos = { x = 2, y = 1 },
         atlas = "jokers",
         cost = 10,
-        blueprint_compat = true,
         calculate = function(self, card, context)
-            if context.setting_blind then
+            if context.setting_blind and not context.blueprint then
                 local has_left_arm = false
                 local has_right_arm = false
                 local has_left_leg = false
