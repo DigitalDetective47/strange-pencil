@@ -11,12 +11,25 @@ pattern = "function Blind:debuff_hand(cards, hand, handname, check)"
 position = "after"
 payload = '''
 if G.GAME.modifiers.pencil_most_played_only then
-    if FirstHand and FirstHand ~= handname then
+    if G.GAME.first_hand and G.GAME.first_hand ~= handname then
         return true
     end
     if not check then
-        FirstHand = handname
+        G.GAME.first_hand = handname
     end
+end
+'''
+match_indent = true
+
+# Debuff text for "Ride or Die" challenge
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = "function Blind:get_loc_debuff_text()"
+position = "after"
+payload = '''
+if G.GAME.modifiers.pencil_most_played_only then
+    return 'Play only 1 hand type this run ['..localize(G.GAME.first_hand, 'poker_hands')..']'
 end
 '''
 match_indent = true

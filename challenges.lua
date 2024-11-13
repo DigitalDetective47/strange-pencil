@@ -118,5 +118,4 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Voucher
     table.insert(immutable.restrictions.banned_cards, { id = "v_cry_double_down" })
 end
 SMODS.Challenge(permamouth)
-FirstHand = nil
 SMODS.Challenge(immutable)
