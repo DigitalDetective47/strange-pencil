@@ -8,7 +8,7 @@ SMODS.Atlas({
 SMODS.Back({
     key = "royal",
     order = 3,
-    config = { hand_size = -4, pencil_only_faces = true },
+    config = { hand_size = -4 },
     -- loc_vars = function(self, info_queue, center)
     --     return {
     --         vars = {
@@ -18,4 +18,21 @@ SMODS.Back({
     -- end,
     pos = { x = 0, y = 0 },
     atlas = "decks",
+    apply = function(self)
+        G.E_MANAGER:add_event(Event({
+            blockable = false,
+            func = function()
+                for i = #G.playing_cards, 1, -1 do
+                    local card = G.playing_cards[i]
+                    local id = card:get_id()
+                    print("abcde")
+                    if id ~= 11 and id ~= 12 and id ~= 13 then
+                        print("die")
+                        card:remove()
+                    end
+                end
+                return true
+            end
+        }))
+    end
 })
