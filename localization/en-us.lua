@@ -53,9 +53,8 @@ return {
                     "{C:attention}Right Arm of The Forbidden One{},",
                     "{C:attention}Left Leg of The Forbidden One{},",
                     "and {C:attention}Right Leg of The Forbidden One{},",
-                    "create a {C:dark_edition}Negative{} {C:cry_code}Rigged{}",
-                    "{C:attention}Googol Play Card{}",
-                    "when {C:attention}Blind{} is selected"
+                    "create a {C:dark_edition}Negative{} {C:cry_code}Rigged{} {C:attention}Googol",
+                    "{C:attention}Play Card{} when {C:attention}Blind{} is selected"
                 }
             },
             j_pencil_upgrade = {
