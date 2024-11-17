@@ -10,6 +10,7 @@ SMODS.Atlas({
 SMODS.Blind({
     key = "glove",
     boss = { showdown = true },
+    dollars = 8,
     boss_colour = HEX("FFFFFF"),
     pos = { x = 0, y = 0 },
     atlas = "blinds",
