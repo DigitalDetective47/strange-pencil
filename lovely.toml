@@ -1,0 +1,13 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Dynamic blind scaling system
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "self.states.hover.can = false"
+position = "after"
+payload = "G.GAME.pack_size = self.ability.extra"
+match_indent = true

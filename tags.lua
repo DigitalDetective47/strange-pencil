@@ -17,10 +17,7 @@ SMODS.Booster({
     ease_background_colour = function(self)
         ease_background_colour_blind(G.STATES.TAROT_PACK)
     end,
-    create_UIBox = function(self)
-        G.GAME.pack_size = 3 -- This shouldn't be necessary
-        return create_UIBox_arcana_pack()
-    end,
+    create_UIBox = create_UIBox_arcana_pack,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
             timer = 0.015,
@@ -41,8 +38,12 @@ SMODS.Booster({
             return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_death")
         elseif i == 2 then
             return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hanged_man")
-        else
+        elseif i == 3 then
             return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hermit")
+        elseif G.GAME.used_vouchers.v_omen_globe and pseudorandom('omen_globe') > 0.8 then
+            return create_card("Spectral", G.pack_cards, nil, nil, true, true, nil, 'ar2')
+        else
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, nil, 'ar1')
         end
     end,
     group_key = "k_tarot_pack",
