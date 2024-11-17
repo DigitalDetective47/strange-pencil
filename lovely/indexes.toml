@@ -1,0 +1,53 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Increase highlight limit for areas that can contain consumables (required for functionality of Replica)
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "{card_limit = self.GAME.starting_params.consumable_slots, type = 'joker', highlight_limit = 1})"
+position = "at"
+payload = "{card_limit = self.GAME.starting_params.consumable_slots, type = 'joker', highlight_limit = 2})"
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{card_limit = G.GAME.shop.joker_max, type = 'shop', highlight_limit = 1})"
+position = "at"
+payload = "{card_limit = G.GAME.shop.joker_max, type = 'shop', highlight_limit = 2})"
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{card_limit = 1, type = 'shop', highlight_limit = 1})"
+position = "at"
+payload = "{card_limit = 1, type = 'shop', highlight_limit = 2})"
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{card_limit = 2, type = 'shop', highlight_limit = 1, card_w = 1.27*G.CARD_W})"
+position = "at"
+payload = "{card_limit = 2, type = 'shop', highlight_limit = 2, card_w = 1.27*G.CARD_W})"
+match_indent = true
+
+# Remove hardcoded shop selection limit
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+if self.config.type == 'shop' then
+    if self.highlighted[1] then
+        self:remove_from_highlighted(self.highlighted[1])
+    end
+    --if not G.FUNCS.check_for_buy_space(card) then return false end
+    self.highlighted[#self.highlighted+1] = card
+    card:highlight(true)
+    if not silent then play_sound('cardSlide1') end
+elseif self.config.type == 'joker' or self.config.type == 'consumeable' then
+'''
+position = "at"
+payload = "if self.config.type == 'joker' or self.config.type == 'consumeable' or self.config.type == 'shop' then"
+match_indent = true
