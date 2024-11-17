@@ -57,14 +57,6 @@ return {
                     "{C:attention}Play Card{} when {C:attention}Blind{} is selected"
                 }
             },
-            j_pencil_upgrade = {
-                name = "+1",
-                text = {
-                    "Gains {C:chips}+#2#{} chips when",
-                    "a {C:attention}playing card{} is scored",
-                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips)"
-                }
-            },
         },
         Back = {
             b_pencil_royal = {
