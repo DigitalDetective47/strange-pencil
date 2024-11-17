@@ -44,3 +44,12 @@ pattern = "function Game:update_shop(dt)"
 position = "after"
 payload = "G.GAME.blind.ante = nil"
 match_indent = true
+
+# Special collection base score display for The Point
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{n=G.UIT.T, config={text = blind.mult..localize('k_x_base'), scale = 0.4, colour = G.C.RED}},"
+position = "at"
+payload = "{n=G.UIT.T, config={text = blind.key == 'bl_pencil_caret' and '^'..blind.mult..' Base' or blind.mult..localize('k_x_base'), scale = 0.4, colour = G.C.RED}},"
+match_indent = true

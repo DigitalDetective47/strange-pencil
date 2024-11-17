@@ -76,7 +76,13 @@ return {
                     "Gains 0.1X Base per",
                     "hand played this run",
                 }
+            },
+            bl_pencil_caret = {
+                name = "The Point",
+                text = {
+                    "Extremely large blind",
             }
+            },
         },
         index = {
             c_pencil_replica = {

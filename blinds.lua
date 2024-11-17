@@ -23,3 +23,26 @@ SMODS.Blind({
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
     end,
 })
+
+SMODS.Blind({
+    key = "caret",
+    boss = { min = 9 },
+    in_pool = function()
+        return G.GAME.round_resets.ante >= G.GAME.win_ante -- Boss should only appear in endless
+    end,
+    boss_colour = HEX("FFFFFF"),
+    pos = { x = 0, y = 1 },
+    atlas = "blinds",
+    mult = 1.5,
+    get_mult = function(self)
+        if self.mult == 1.5 then
+            return math.sqrt(get_blind_amount(G.GAME.blind.ante == nil and G.GAME.round_resets.ante or G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling)
+        else
+            return (get_blind_amount(G.GAME.blind.ante == nil and G.GAME.round_resets.ante or G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^ (self.mult - 1)
+        end
+    end,
+    disable = function(self)
+        G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling
+        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+    end,
+})
