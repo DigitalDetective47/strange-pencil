@@ -81,7 +81,7 @@ return {
                 name = "The Point",
                 text = {
                     "Extremely large blind",
-            }
+                }
             },
         },
         index = {
@@ -130,6 +130,26 @@ return {
                     "and {C:attention}The Hermit{}",
                 },
             }
+        },
+        Voucher = {
+            v_pencil_half_chip = {
+                name = "Half Chip",
+                text = {
+                    "{C:red}X#1#{} base Blind size",
+                }
+            },
+            v_pencil_vision = {
+                name = "Miraculous Vision",
+                text = {
+                    "{C:red}X#1#{} base Blind size",
+                }
+            },
+            v_pencil_sqrt = {
+                name = "Squared Roots",
+                text = {
+                    "{C:red}^#1#{} base Blind size",
+                }
+            },
         },
         Other = {
             undiscovered_index = {
