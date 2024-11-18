@@ -21,21 +21,13 @@ for k, v in ipairs({ "Small", "Big", "Boss" }) do
         if G.GAME.blind.ante == nil then -- Prevents score from changing unexpectedly when boss is defeated
             G.GAME.blind.ante = G.GAME.round_resets.ante
         end
-        G.GAME.blind.chips = G.P_BLINDS[G.GAME.round_resets.blind_choices[v]]:get_mult()
-            * get_blind_amount(G.GAME.blind.ante)
-            * G.GAME.starting_params.ante_scaling
+        G.GAME.blind.chips = (get_blind_amount(G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^ G.GAME.starting_params.ante_scaling.exponential
+            * G.P_BLINDS[G.GAME.round_resets.blind_choices[v]]:get_mult()
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
     end
 end
 
 '''
-match_indent = true
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = "local blind_amt = get_blind_amount(G.GAME.round_resets.blind_ante)*blind_choice.config.mult*G.GAME.starting_params.ante_scaling"
-position = "at"
-payload = "local blind_amt = get_blind_amount(G.GAME.round_resets.blind_ante)*(blind_choice.config.get_mult and blind_choice.config:get_mult() or blind_choice.config.mult)*G.GAME.starting_params.ante_scaling"
 match_indent = true
 [[patches]]
 [patches.pattern]

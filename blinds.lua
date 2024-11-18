@@ -35,11 +35,7 @@ SMODS.Blind({
     atlas = "blinds",
     mult = 1.5,
     get_mult = function(self)
-        if self.mult == 1.5 then
-            return math.sqrt(get_blind_amount(G.GAME.blind.ante == nil and G.GAME.round_resets.ante or G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling)
-        else
-            return (get_blind_amount(G.GAME.blind.ante == nil and G.GAME.round_resets.ante or G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^ (self.mult - 1)
-        end
+        return (get_blind_amount(G.GAME.blind.ante == nil and G.GAME.round_resets.ante or G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^ (G.GAME.starting_params.ante_scaling_exponential * (self.mult - 1))
     end,
     disable = function(self)
         G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling
