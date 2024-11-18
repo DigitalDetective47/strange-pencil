@@ -3,7 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
-# Dynamic blind scaling system
+# Fix pack size issues
 [[patches]]
 [patches.pattern]
 target = "card.lua"
