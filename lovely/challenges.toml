@@ -33,3 +33,65 @@ if G.GAME.modifiers.pencil_most_played_only then
 end
 '''
 match_indent = true
+
+# Endless scaling for first 8 antes
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "if not G.GAME.modifiers.scaling or G.GAME.modifiers.scaling == 1 then"
+position = "before"
+payload = '''
+if G.GAME.modifiers.pencil_endless_scaling then
+    local amounts = {
+      300
+    }
+    if ante < 1 then return 100 end
+    if ante <= 1 then return amounts[ante] end
+    local a, b, c, d = amounts[1],1.6,ante-1, 1 + 0.2*(ante-1)
+    local amount = math.floor(a*(b+(k*c)^d)^c)
+    amount = amount - amount%(10^math.floor(math.log10(amount)-1))
+    return amount
+end
+'''
+match_indent = true
+
+# Talisman version
+[[patches]]
+[patches.pattern]
+target = "main.lua"
+pattern = "if not G.GAME.modifiers.scaling or G.GAME.modifiers.scaling == 1 then"
+position = "before"
+payload = '''
+if G.GAME.modifiers.pencil_endless_scaling then
+    local amounts = {
+        to_big(300)
+    }
+    if ante < 1 then return to_big(100) end
+    if ante <= 1 then return amounts[ante] end
+    local a, b, c, d = amounts[1],1.6,ante-1, 1 + 0.2*(ante-1)
+    local amount = a*(b+(k*c)^d)^c
+    if (amount:lt(R.E_MAX_SAFE_INTEGER)) then
+        local exponent = to_big(10)^(math.floor(amount:log10() - to_big(1))):to_number()
+        amount = math.floor(amount / exponent):to_number() * exponent
+    end
+    amount:normalize()
+    return amount
+end
+'''
+match_indent = true
+
+# Create epic jokers after every boss defeated in Melting Pot
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if G.GAME.modifiers.set_eternal_ante and (G.GAME.round_resets.ante == G.GAME.modifiers.set_eternal_ante) then "
+position = "before"
+payload = '''
+if G.GAME.modifiers.pencil_exotic_spam then
+    local card = create_card("Joker", G.jokers, true, "cry_exotic", nil, nil, nil, "")
+    card:add_to_deck()
+    card:start_materialize()
+    G.jokers:emplace(card)
+end
+'''
+match_indent = true

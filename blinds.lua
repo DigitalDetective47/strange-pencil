@@ -29,6 +29,7 @@ SMODS.Blind({
     boss = { min = 9 },
     in_pool = function()
         return G.GAME.round_resets.ante >= G.GAME.win_ante -- Boss should only appear in endless
+            or G.GAME.modifiers.endless_scaling            -- or if endless scaling is enabled
     end,
     boss_colour = HEX("FFFFFF"),
     pos = { x = 0, y = 1 },
