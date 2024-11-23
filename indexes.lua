@@ -155,6 +155,9 @@ SMODS.Consumable({
         for k, v in ipairs(targets) do
             local consume = create_card("Consumeables", G.consumables, nil, nil, nil, nil, v.config.center.key, nil)
             copy_card(v, consume)
+            if (SMODS.Mods["incantation"] or {}).can_load then
+                consume:setQty(1)
+            end
             consume:add_to_deck()
             G.consumeables:emplace(consume)
         end
