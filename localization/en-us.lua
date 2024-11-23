@@ -189,7 +189,7 @@ return {
         v_text = {
             ch_c_pencil_most_played_only = { "Play only 1 hand type this run" },
             ch_c_pencil_endless_scaling = { "Endless blind scaling" },
-            ch_c_pencil_exotic_spam = { "Create a random {C:cry_exotic,E:1}Exotic{C:attention} Joker{} when Boss Blind is defeated" },
+            ch_c_pencil_epic_spam = { "Create a random {C:cry_epic}Epic{C:attention} Joker{} when Boss Blind is defeated" },
         },
     }
 }

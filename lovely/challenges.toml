@@ -87,8 +87,8 @@ target = "functions/state_events.lua"
 pattern = "if G.GAME.modifiers.set_eternal_ante and (G.GAME.round_resets.ante == G.GAME.modifiers.set_eternal_ante) then "
 position = "before"
 payload = '''
-if G.GAME.modifiers.pencil_exotic_spam then
-    local card = create_card("Joker", G.jokers, true, "cry_exotic", nil, nil, nil, "")
+if G.GAME.modifiers.pencil_epic_spam then
+    local card = create_card("Joker", G.jokers, true, "cry_epic", nil, nil, nil, "")
     card:add_to_deck()
     card:start_materialize()
     G.jokers:emplace(card)

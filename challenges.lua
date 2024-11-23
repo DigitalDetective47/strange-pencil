@@ -120,13 +120,13 @@ end
 SMODS.Challenge(permamouth)
 SMODS.Challenge(immutable)
 
-if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Exotic Jokers"] then
+if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jokers"] then
     SMODS.Challenge({
         key = "meltingpot",
         rules = {
             custom = {
                 { id = "pencil_endless_scaling" },
-                { id = "pencil_exotic_spam" },
+                { id = "pencil_epic_spam" },
             }
         },
         deck = {
