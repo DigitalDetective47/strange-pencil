@@ -93,6 +93,7 @@ SMODS.Consumable({
             G.consumeables.config.card_limit
     end,
     use = function(self, card, area, copier)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local targets = {}
         for k, v in ipairs(G.consumeables.highlighted) do
             if v.ability.set == "Unique" or not v.ability.consumeable then
@@ -178,6 +179,7 @@ SMODS.Consumable({
         return true
     end,
     use = function(self, card, area, copier)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         ease_dollars(card.ability.dollars)
     end,
 })
@@ -200,6 +202,7 @@ SMODS.Consumable({
         return false
     end,
     use = function(self, card, area, copier)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local target = G.jokers.highlighted[1]
         target:flip()
         play_sound("card1", 0.9)
@@ -250,6 +253,7 @@ SMODS.Consumable({
         return false
     end,
     use = function(self, card, area, copier)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         for k, v in ipairs(G.hand.cards) do
             if v.facing == "back" then
                 v:flip()
@@ -273,6 +277,7 @@ SMODS.Consumable({
         return false
     end,
     use = function(self, card, area, copier)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         for k, v in ipairs(G.hand.cards) do
             if v.facing == "back" then
                 v:flip()
@@ -291,6 +296,7 @@ SMODS.Consumable({
         return #G.hand.highlighted - (card.area == G.hand and 1 or 0) == 2
     end,
     use = function(self, card, area, copier)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local left = false
         local right = false
         for k, v in ipairs(G.hand.highlighted) do

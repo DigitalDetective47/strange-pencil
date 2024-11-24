@@ -57,6 +57,14 @@ return {
                     "{C:attention}Play Card{} when {C:attention}Blind{} is selected"
                 }
             },
+            j_pencil_doodlebob = {
+                name = "Doodle Bob",
+                text = {
+                    "{C:blue}+#1#{} chips per {C:blue}Index{}",
+                    "card used this run",
+                    "{C:inactive}(Currently {C:blue}+#2#{C:inactive})",
+                },
+            },
         },
         Back = {
             b_pencil_royal = {

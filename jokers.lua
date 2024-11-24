@@ -230,3 +230,34 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         end,
     })
 end
+
+SMODS.Joker({
+    key = "doodlebob",
+    config = { chips_per_index = 10 },
+    loc_vars = function(self, info_queue, center)
+        return {
+            vars = {
+                center.ability.chips_per_index,
+                G.GAME.consumeable_usage_total.pencil_index and
+                center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index or 0,
+            },
+        }
+    end,
+    rarity = 1,
+    pos = { x = 2, y = 0 },
+    atlas = "jokers",
+    cost = 5,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.joker_main and G.GAME.consumeable_usage_total.pencil_index and G.GAME.consumeable_usage_total.pencil_index > 0 then
+            return {
+                message = localize({ type = "variable", key = "a_chips", vars = { center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
+                chip_mod = center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index,
+            }
+        elseif context.using_consumable and not context.blueprint and (context.consumeable.ability.set == "pencil_index") then
+            return {
+                message = localize({ type = 'variable', key = 'a_chips', vars = { center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
+            }
+        end
+    end,
+})
