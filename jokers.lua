@@ -79,7 +79,6 @@ SMODS.Joker({
 })
 
 if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jokers"] and SMODS.Mods.Cryptid.config["Code Cards"] then
-    SMODS.Joker({
         SMODS.Joker({
             key = "forbidden_one",
             config = { extra = { payout = 4 } },
@@ -134,7 +133,8 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
             calc_dollar_bonus = function(self, card)
                 return 4
             end
-        }),
+    })
+    SMODS.Joker({
         key = "left_arm",
         config = { extra = { xchips = 2.5, pencil_forbidden_left_arm = true } },
         loc_vars = function(self, info_queue, center)
