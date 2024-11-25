@@ -43,14 +43,24 @@ SMODS.Joker({
     end,
 })
 
+function lassCount()
+    local queens = 0
+    for k, v in ipairs(G.playing_cards or {}) do
+        if v.base.suit == "Clubs" and v.base.id == 12 then
+            queens = queens + 1
+        end
+    end
+    return queens
+end
+
 SMODS.Joker({
     key = "lass",
-    config = { extra = { xmult = 1, xmult_per_queen = 1 } },
+    config = { extra = { xmult_per_queen = 1 } },
     loc_vars = function(self, info_queue, center)
         return {
             vars = {
                 center.ability.extra.xmult_per_queen,
-                center.ability.extra.xmult,
+                math.max(lassCount() * center.ability.extra.xmult_per_queen, 1),
             },
         }
     end,
@@ -59,20 +69,11 @@ SMODS.Joker({
     atlas = "jokers",
     cost = 7,
     blueprint_compat = true,
-    update = function(self, card, dt)
-        card.ability.extra.xmult = 0
-        for k, v in ipairs(G.playing_cards or {}) do
-            if v.base.suit == "Clubs" and v.base.id == 12 then
-                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_per_queen
-            end
-        end
-        card.ability.extra.xmult = math.max(card.ability.extra.xmult, 1)
-    end,
     calculate = function(self, card, context)
-        if context.joker_main and card.ability.extra.xmult > 1 then
+        if context.joker_main and math.max(lassCount() * center.ability.extra.xmult_per_queen, 1) > 1 then
             return {
-                message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.xmult } }),
-                Xmult_mod = card.ability.extra.xmult,
+                message = localize({ type = "variable", key = "a_xmult", vars = { math.max(lassCount() * center.ability.extra.xmult_per_queen, 1) } }),
+                Xmult_mod = math.max(lassCount() * center.ability.extra.xmult_per_queen, 1),
             }
         end
     end,
