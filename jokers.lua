@@ -183,29 +183,6 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         end,
     })
     SMODS.Joker({
-        key = "right_leg",
-        name = "pencil_right_leg",
-        config = { extra = { mult = 10, pencil_forbidden_right_leg = true } },
-        loc_vars = function(self, info_queue, center)
-            return {
-                vars = { center.ability.extra.mult },
-            }
-        end,
-        rarity = 2,
-        pos = { x = 0, y = 1 },
-        atlas = "jokers",
-        cost = 5,
-        blueprint_compat = true,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return {
-                    message = localize({ type = "variable", key = "a_mult", vars = { card.ability.extra.mult } }),
-                    mult_mod = card.ability.extra.mult,
-                }
-            end
-        end,
-    })
-    SMODS.Joker({
         key = "right_arm",
         config = { extra = { xmult = 1.5, pencil_forbidden_right_arm = true } },
         loc_vars = function(self, info_queue, center)
@@ -225,6 +202,29 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
                 return {
                     message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.xmult } }),
                     Xmult_mod = card.ability.extra.xmult,
+                }
+            end
+        end,
+    })
+    SMODS.Joker({
+        key = "right_leg",
+        name = "pencil_right_leg",
+        config = { extra = { mult = 10, pencil_forbidden_right_leg = true } },
+        loc_vars = function(self, info_queue, center)
+            return {
+                vars = { center.ability.extra.mult },
+            }
+        end,
+        rarity = 2,
+        pos = { x = 0, y = 1 },
+        atlas = "jokers",
+        cost = 5,
+        blueprint_compat = true,
+        calculate = function(self, card, context)
+            if context.joker_main then
+                return {
+                    message = localize({ type = "variable", key = "a_mult", vars = { card.ability.extra.mult } }),
+                    mult_mod = card.ability.extra.mult,
                 }
             end
         end,
