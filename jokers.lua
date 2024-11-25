@@ -132,7 +132,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
                 end
             end,
             calc_dollar_bonus = function(self, card)
-                return 4
+            return center.ability.extra.payout
             end
     })
     SMODS.Joker({
