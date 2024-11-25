@@ -238,7 +238,7 @@ SMODS.Joker({
         return {
             vars = {
                 center.ability.chips_per_index,
-                G.GAME.consumeable_usage_total.pencil_index and
+                G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.pencil_index and
                 center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index or 0,
             },
         }
