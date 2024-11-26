@@ -58,8 +58,8 @@ SMODS.Consumable({
                 end
             end
         end
-        if G.shop_voucher ~= nil then
-            for k, v in ipairs(G.shop_voucher.highlighted) do
+        if G.shop_vouchers ~= nil then
+            for k, v in ipairs(G.shop_vouchers.highlighted) do
                 if v.ability.set == "Unique" or not v.ability.consumeable then
                     return false
                 end
@@ -123,8 +123,8 @@ SMODS.Consumable({
                 end
             end
         end
-        if G.shop_voucher ~= nil then
-            for k, v in ipairs(G.shop_voucher.highlighted) do
+        if G.shop_vouchers ~= nil then
+            for k, v in ipairs(G.shop_vouchers.highlighted) do
                 if v.ability.set == "Unique" or not v.ability.consumeable then
                     return false
                 end
