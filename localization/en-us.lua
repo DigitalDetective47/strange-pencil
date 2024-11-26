@@ -4,7 +4,7 @@ return {
             j_pencil_swimmers = {
                 name = "Synchronized Swimmers",
                 text = {
-                    "Each scored card gives {C:mult}+#1#{} mult",
+                    "Each scored card gives {C:mult}+#1#{} Mult",
                     "if all scoring cards have",
                     "the same {C:attention}Enhancement",
                     "{C:inactive}(Played cards must be {C:attention}Enhanced{C:inactive}){}"
@@ -13,35 +13,35 @@ return {
             j_pencil_lass = {
                 name = "The Lass",
                 text = {
-                    "Gives {X:mult,C:white}X#1#{} mult",
+                    "Gives {X:mult,C:white}X#1#{} Mult",
                     "per {C:clubs}Queen of Clubs{}",
                     "in your full deck",
                     "{C:inactive,s:0.8}(Minimum of {X:mult,C:white,s:0.8}X1{C:inactive,s:0.8})",
-                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} mult)"
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
                 }
             },
             j_pencil_left_arm = {
                 name = "Left Arm of The Forbidden One",
                 text = {
-                    "{X:chips,C:white}X#1#{} chips",
+                    "{X:chips,C:white}X#1#{} Chips",
                 }
             },
             j_pencil_right_arm = {
                 name = "Right Arm of The Forbidden One",
                 text = {
-                    "{X:mult,C:white}X#1#{} mult",
+                    "{X:mult,C:white}X#1#{} Mult",
                 }
             },
             j_pencil_left_leg = {
                 name = "Left Leg of The Forbidden One",
                 text = {
-                    "{C:chips}+#1#{} chips",
+                    "{C:chips}+#1#{} Chips",
                 }
             },
             j_pencil_right_leg = {
                 name = "Right Leg of The Forbidden One",
                 text = {
-                    "{C:mult}+#1#{} mult",
+                    "{C:mult}+#1#{} Mult",
                 }
             },
             j_pencil_forbidden_one = {
@@ -60,7 +60,7 @@ return {
             j_pencil_doodlebob = {
                 name = "Doodle Bob",
                 text = {
-                    "{C:blue}+#1#{} chips per {C:blue}Index{}",
+                    "{C:blue}+#1#{} Chips per {C:blue}Index{}",
                     "card used this run",
                     "{C:inactive}(Currently {C:blue}+#2#{C:inactive})",
                 },
