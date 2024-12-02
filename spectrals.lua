@@ -14,6 +14,8 @@ SMODS.Consumable({
     atlas = "spectrals",
     config = { multiplier = 1 },
     loc_vars = function(self, info_queue, center)
+        table.insert(info_queue, { key = "eternal", set = "Other", vars = {} })
+        table.insert(info_queue, G.P_CENTERS.e_negative)
         return { vars = { self.config.multiplier } }
     end,
     can_use = function(self, card)
