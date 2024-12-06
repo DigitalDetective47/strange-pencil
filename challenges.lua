@@ -68,6 +68,25 @@ local immutable = {
     },
 }
 
+if (SMODS.Mods["YART"] or {}).can_load then
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rmagician" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rempress" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rheirophant" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rlovers" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rchariot" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rjustice" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rwheel_of_fortune" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rstrength" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rdeath" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rtemperance" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rdevil" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rtower" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rstar" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rmoon" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rsun" })
+    table.insert(immutable.restrictions.banned_cards, { id = "c_yart_rworld" })
+end
+
 if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Blinds"] then
     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldhouse", type = "blind" })
     table.insert(permamouth.restrictions.banned_other, { id = "bl_cry_oldarm", type = "blind" })
