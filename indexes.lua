@@ -263,30 +263,6 @@ SMODS.Consumable({
 })
 
 SMODS.Consumable({
-    key = "peek",
-    set = "index",
-    atlas = "indexes",
-    pos = { x = 4, y = 0 },
-    cost = 5,
-    can_use = function(self, card)
-        for k, v in ipairs(G.hand.cards or {}) do
-            if v.facing == "back" then
-                return true
-            end
-        end
-        return false
-    end,
-    use = function(self, card, area, copier)
-        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
-        for k, v in ipairs(G.hand.cards) do
-            if v.facing == "back" then
-                v:flip()
-            end
-        end
-    end,
-})
-
-SMODS.Consumable({
     key = "mixnmatch",
     set = "index",
     atlas = "indexes",
