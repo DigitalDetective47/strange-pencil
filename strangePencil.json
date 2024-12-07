@@ -7,6 +7,7 @@
     "description": "A collection of random stuff that I've created and drawn in Paint.",
     "prefix": "pencil",
     "main_file": "strangePencil.lua",
+    "badge_colour": "FF9E49",
     "version": "0.1.0",
     "priority": 1e300
 }
