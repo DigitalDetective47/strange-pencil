@@ -255,10 +255,9 @@ SMODS.Joker({
                 message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
                 chip_mod = card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index,
             }
-        elseif context.using_consumable and not context.blueprint and (context.consumeable.ability.set == "pencil_index") then
-            return {
-                message = localize({ type = 'variable', key = 'a_chips', vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
-            }
+        elseif context.using_consumeable and not context.blueprint and context.consumeable.ability.set == "index" then
+            card_eval_status_text(card, "extra", nil, nil, nil,
+                { message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }) })
         end
     end,
 })
