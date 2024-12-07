@@ -73,7 +73,16 @@ return {
                     "Start run with",
                     "only {C:attention}Face Cards",
                     "in your deck",
-                    "{C:attention}-4{} hand size",
+                    "{C:attention}#1#{} hand size",
+                },
+            },
+            b_pencil_normal = {
+                name = "Normal Deck",
+                text = {
+                    "All {C:attention}Ranks{} in deck",
+                    "are randomized over a",
+                    "{C:attention}normal distribution",
+                    "{C:inactive}(mean {C:attention}#1#{C:inactive}, standard deviation {C:attention}#2#{C:inactive})",
                 },
             },
         },
