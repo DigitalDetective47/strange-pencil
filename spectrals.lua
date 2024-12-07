@@ -13,10 +13,10 @@ SMODS.Consumable({
     soul_set = "index",
     atlas = "spectrals",
     config = { multiplier = 1 },
-    loc_vars = function(self, info_queue, center)
+    loc_vars = function(self, info_queue, card)
         table.insert(info_queue, { key = "eternal", set = "Other", vars = {} })
         table.insert(info_queue, G.P_CENTERS.e_negative)
-        return { vars = { self.config.multiplier } }
+        return { vars = { card.ability.multiplier } }
     end,
     can_use = function(self, card)
         return true
@@ -26,7 +26,7 @@ SMODS.Consumable({
             trigger = "after",
             delay = 0.4,
             func = function()
-                for _ = 1, G.jokers.config.card_limit * self.config.multiplier, 1 do
+                for _ = 1, G.jokers.config.card_limit * card.ability.multiplier, 1 do
                     local card = nil
                     repeat
                         if card then
@@ -43,7 +43,7 @@ SMODS.Consumable({
                     card:add_to_deck()
                     G.jokers:emplace(card)
                 end
-                for _ = 1, G.consumeables.config.card_limit * self.config.multiplier, 1 do
+                for _ = 1, G.consumeables.config.card_limit * card.ability.multiplier, 1 do
                     local card = SMODS.create_card({
                         no_edition = true,
                         edition = "e_negative",
@@ -56,7 +56,7 @@ SMODS.Consumable({
                     G.consumeables:emplace(card)
                 end
                 if G.STATE == G.STATES.SELECTING_HAND then
-                    for _ = 1, G.hand.config.card_limit * self.config.multiplier, 1 do
+                    for _ = 1, G.hand.config.card_limit * card.ability.multiplier, 1 do
                         local card = SMODS.create_card({
                             no_edition = true,
                             edition = "e_negative",
@@ -70,7 +70,7 @@ SMODS.Consumable({
                     end
                 end
                 if G.shop_jokers ~= nil then
-                    for _ = 1, G.shop_jokers.config.card_limit * self.config.multiplier, 1 do
+                    for _ = 1, G.shop_jokers.config.card_limit * card.ability.multiplier, 1 do
                         local card = nil
                         repeat
                             if card then
@@ -86,7 +86,7 @@ SMODS.Consumable({
                     end
                 end
                 if G.shop_booster ~= nil then
-                    for _ = 1, G.shop_booster.config.card_limit * self.config.multiplier, 1 do
+                    for _ = 1, G.shop_booster.config.card_limit * card.ability.multiplier, 1 do
                         local card = SMODS.create_card({
                             no_edition = true,
                             edition = "e_negative",
@@ -102,7 +102,7 @@ SMODS.Consumable({
                     end
                 end
                 if G.shop_vouchers ~= nil then
-                    for _ = 1, G.shop_vouchers.config.card_limit * self.config.multiplier, 1 do
+                    for _ = 1, G.shop_vouchers.config.card_limit * card.ability.multiplier, 1 do
                         local card = SMODS.create_card({
                             no_edition = true,
                             edition = "e_negative",

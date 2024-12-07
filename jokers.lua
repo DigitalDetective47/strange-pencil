@@ -8,10 +8,10 @@ SMODS.Atlas({
 SMODS.Joker({
     key = "swimmers",
     config = { mult = 11 },
-    loc_vars = function(self, info_queue, center)
+    loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                center.ability.mult,
+                card.ability.mult,
             },
         }
     end,
@@ -56,11 +56,11 @@ end
 SMODS.Joker({
     key = "lass",
     config = { xmult_per_queen = 1 },
-    loc_vars = function(self, info_queue, center)
+    loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                center.ability.xmult_per_queen,
-                math.max(lassCount() * center.ability.xmult_per_queen, 1),
+                card.ability.xmult_per_queen,
+                math.max(lassCount() * card.ability.xmult_per_queen, 1),
             },
         }
     end,
@@ -70,10 +70,10 @@ SMODS.Joker({
     cost = 7,
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.joker_main and math.max(lassCount() * center.ability.xmult_per_queen, 1) > 1 then
+        if context.joker_main and math.max(lassCount() * card.ability.xmult_per_queen, 1) > 1 then
             return {
-                message = localize({ type = "variable", key = "a_xmult", vars = { math.max(lassCount() * center.ability.xmult_per_queen, 1) } }),
-                Xmult_mod = math.max(lassCount() * center.ability.xmult_per_queen, 1),
+                message = localize({ type = "variable", key = "a_xmult", vars = { math.max(lassCount() * card.ability.xmult_per_queen, 1) } }),
+                Xmult_mod = math.max(lassCount() * card.ability.xmult_per_queen, 1),
             }
         end
     end,
@@ -83,7 +83,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
     SMODS.Joker({
         key = "forbidden_one",
         config = { payout = 4 },
-        loc_vars = function(self, info_queue, center)
+        loc_vars = function(self, info_queue, card)
             table.insert(info_queue, { key = "j_pencil_left_arm", set = "Joker", specific_vars = { 2.5 } })
             table.insert(info_queue, { key = "j_pencil_right_arm", set = "Joker", specific_vars = { 1.5 } })
             table.insert(info_queue, { key = "j_pencil_left_leg", set = "Joker", specific_vars = { 50 } })
@@ -94,7 +94,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
                 { key = "j_cry_googol_play", set = "Joker", specific_vars = { tostring(G.GAME and G.GAME.probabilities.normal or 1), 8, 1e100 } })
             return {
                 vars = {
-                    center.ability.payout,
+                    card.ability.payout,
                 },
             }
         end,
@@ -132,16 +132,16 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
             end
         end,
         calc_dollar_bonus = function(self, card)
-            return center.ability.payout
+            return card.ability.payout
         end
     })
     SMODS.Joker({
         key = "left_arm",
         config = { xchips = 2.5, pencil_forbidden_left_arm = true },
-        loc_vars = function(self, info_queue, center)
+        loc_vars = function(self, info_queue, card)
             return {
                 vars = {
-                    center.ability.xchips,
+                    card.ability.xchips,
                 },
             }
         end,
@@ -164,9 +164,9 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         key = "left_leg",
         name = "pencil_left_leg",
         config = { chips = 50, pencil_forbidden_left_leg = true },
-        loc_vars = function(self, info_queue, center)
+        loc_vars = function(self, info_queue, card)
             return {
-                vars = { center.ability.chips },
+                vars = { card.ability.chips },
             }
         end,
         rarity = 2,
@@ -186,10 +186,10 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
     SMODS.Joker({
         key = "right_arm",
         config = { xmult = 1.5, pencil_forbidden_right_arm = true },
-        loc_vars = function(self, info_queue, center)
+        loc_vars = function(self, info_queue, card)
             return {
                 vars = {
-                    center.ability.xmult,
+                    card.ability.xmult,
                 },
             }
         end,
@@ -211,9 +211,9 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         key = "right_leg",
         name = "pencil_right_leg",
         config = { mult = 10, pencil_forbidden_right_leg = true },
-        loc_vars = function(self, info_queue, center)
+        loc_vars = function(self, info_queue, card)
             return {
-                vars = { center.ability.mult },
+                vars = { card.ability.mult },
             }
         end,
         rarity = 2,
@@ -235,12 +235,12 @@ end
 SMODS.Joker({
     key = "doodlebob",
     config = { chips_per_index = 10 },
-    loc_vars = function(self, info_queue, center)
+    loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                center.ability.chips_per_index,
+                card.ability.chips_per_index,
                 G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.pencil_index and
-                center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index or 0,
+                card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index or 0,
             },
         }
     end,
@@ -252,12 +252,12 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.joker_main and G.GAME.consumeable_usage_total.pencil_index and G.GAME.consumeable_usage_total.pencil_index > 0 then
             return {
-                message = localize({ type = "variable", key = "a_chips", vars = { center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
-                chip_mod = center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index,
+                message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
+                chip_mod = card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index,
             }
         elseif context.using_consumable and not context.blueprint and (context.consumeable.ability.set == "pencil_index") then
             return {
-                message = localize({ type = 'variable', key = 'a_chips', vars = { center.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
+                message = localize({ type = 'variable', key = 'a_chips', vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
             }
         end
     end,

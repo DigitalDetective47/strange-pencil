@@ -23,8 +23,8 @@ SMODS.Consumable({
     set = "index",
     atlas = "indexes",
     pos = { x = 1, y = 0 },
-    loc_vars = function(self, info_queue, center)
-        return { vars = { self.config.selections } }
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.selections } }
     end,
     cost = 5,
     config = { selections = 1 },
@@ -170,8 +170,8 @@ SMODS.Consumable({
     set = "index",
     atlas = "indexes",
     pos = { x = 2, y = 0 },
-    loc_vars = function(self, info_queue, center)
-        return { vars = { self.config.dollars } }
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.dollars } }
     end,
     cost = 5,
     config = { dollars = 15 },
@@ -375,8 +375,8 @@ SMODS.Consumable({
     set = "index",
     atlas = "indexes",
     pos = { x = 0, y = 1 },
-    loc_vars = function(self, info_queue, center)
-        return { vars = { self.config.cards } }
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.cards } }
     end,
     cost = 5,
     config = { cards = 2 },
@@ -385,7 +385,7 @@ SMODS.Consumable({
     end,
     use = function(self, card, area, copier)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
-        for i = 1, math.min(self.config.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
+        for i = 1, math.min(card.ability.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.4,
