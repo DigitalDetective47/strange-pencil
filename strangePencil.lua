@@ -18,5 +18,5 @@ function Card:open()
     if self.ability.set == "Booster" then
         G.GAME.pack_size = self.ability.extra
     end
-    hook(self)
+    return hook(self)
 end

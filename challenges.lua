@@ -36,7 +36,7 @@ function Blind:debuff_hand(cards, hand, handname, check)
             G.GAME.first_hand = handname
         end
     end
-    hook(self, cards, hand, handname, check)
+    return hook(self, cards, hand, handname, check)
 end
 
 -- Debuff text for "Ride or Die" challenge
@@ -45,7 +45,7 @@ function Blind:get_loc_debuff_text()
     if G.GAME.modifiers.pencil_most_played_only then
         return 'Play only 1 hand type this run [' .. localize(G.GAME.first_hand, 'poker_hands') .. ']'
     end
-    hook2(self)
+    return hook2(self)
 end
 
 local immutable = {
@@ -207,5 +207,5 @@ function get_blind_amount(ante)
             return amount
         end
     end
-    hook3(ante)
+    return hook3(ante)
 end

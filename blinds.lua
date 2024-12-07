@@ -27,12 +27,12 @@ function Game:update(dt)
             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         end
     end
-    hook(self, dt)
+    return hook(self, dt)
 end
 local hook2 = Game.update_shop
 function Game:update_shop(dt)
     G.GAME.blind.ante = nil
-    hook2(self, dt)
+    return hook2(self, dt)
 end
 
 SMODS.Blind({

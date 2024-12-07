@@ -24,8 +24,7 @@ SMODS.Back({
             func = function()
                 for i = #G.playing_cards, 1, -1 do
                     local card = G.playing_cards[i]
-                    local id = card:get_id()
-                    if id ~= 11 and id ~= 12 and id ~= 13 then
+                    if not card:is_face() then
                         card:remove()
                     end
                 end
