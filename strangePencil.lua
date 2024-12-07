@@ -22,10 +22,10 @@ SMODS.load_file("spectrals.lua")()
 SMODS.load_file("tags.lua")()
 SMODS.load_file("vouchers.lua")()
 
-local hook_origin = Card.open
+local hook = Card.open
 function Card:open()
     if self.ability.set == "Booster" then
         G.GAME.pack_size = self.ability.extra
     end
-    hook_origin(self)
+    hook(self)
 end

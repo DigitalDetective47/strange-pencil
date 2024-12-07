@@ -7,6 +7,34 @@ SMODS.Atlas({
     frames = 1,
 })
 
+-- Dynamic blind scaling system
+local hook = Game.update
+function Game:update(dt)
+    for k, v in ipairs({ "Small", "Big", "Boss" }) do
+        if
+            G.GAME
+            and G.GAME.round_resets
+            and G.GAME.round_resets.blind_choices
+            and G.GAME.round_resets.blind_choices[v]
+            and G.P_BLINDS[G.GAME.round_resets.blind_choices[v]].get_mult
+            and G.GAME.round_resets.blind_states[v] == "Current" and not G.GAME.blind.disabled then
+            if G.GAME.blind.ante == nil then -- Prevents score from changing unexpectedly when boss is defeated
+                G.GAME.blind.ante = G.GAME.round_resets.ante
+            end
+            G.GAME.blind.chips = (get_blind_amount(G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^
+                G.GAME.starting_params.ante_scaling.exponential *
+                G.P_BLINDS[G.GAME.round_resets.blind_choices[v]]:get_mult()
+            G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+        end
+    end
+    hook(self, dt)
+end
+local hook2 = Game.update_shop
+function Game:update_shop(dt)
+    G.GAME.blind.ante = nil
+    hook2(self, dt)
+end
+
 SMODS.Blind({
     key = "glove",
     boss = { showdown = true },
@@ -36,7 +64,8 @@ SMODS.Blind({
     atlas = "blinds",
     mult = 1.5,
     get_mult = function(self)
-        return (get_blind_amount(G.GAME.blind.ante == nil and G.GAME.round_resets.ante or G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^ (G.GAME.starting_params.ante_scaling_exponential * (self.mult - 1))
+        return (get_blind_amount(G.GAME.blind.ante == nil and G.GAME.round_resets.ante or G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^
+            (G.GAME.starting_params.ante_scaling_exponential * (self.mult - 1))
     end,
     disable = function(self)
         G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling

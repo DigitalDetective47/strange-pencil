@@ -3,40 +3,6 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
-# Dynamic blind scaling system
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = "function Game:update(dt)"
-position = "after"
-payload = '''
-for k, v in ipairs({ "Small", "Big", "Boss" }) do
-    if
-        G.GAME
-        and G.GAME.round_resets
-        and G.GAME.round_resets.blind_choices
-        and G.GAME.round_resets.blind_choices[v]
-        and G.P_BLINDS[G.GAME.round_resets.blind_choices[v]].get_mult
-        and G.GAME.round_resets.blind_states[v] == "Current" and not G.GAME.blind.disabled then
-        if G.GAME.blind.ante == nil then -- Prevents score from changing unexpectedly when boss is defeated
-            G.GAME.blind.ante = G.GAME.round_resets.ante
-        end
-        G.GAME.blind.chips = (get_blind_amount(G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^ G.GAME.starting_params.ante_scaling.exponential
-            * G.P_BLINDS[G.GAME.round_resets.blind_choices[v]]:get_mult()
-        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-    end
-end
-
-'''
-match_indent = true
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = "function Game:update_shop(dt)"
-position = "after"
-payload = "G.GAME.blind.ante = nil"
-match_indent = true
-
 # Special collection base score display for The Point
 [[patches]]
 [patches.pattern]
