@@ -128,6 +128,14 @@ return {
                     "two selected cards in hand",
                 }
             },
+            c_pencil_fractal = {
+                name = "Fractal",
+                text = {
+                    "Creates up to {C:attention}#1#",
+                    "random {C:blue}Index{} cards",
+                    "{C:inactive}(Must have room)",
+                }
+            },
         },
         Spectral = {
             c_pencil_negative_space = {

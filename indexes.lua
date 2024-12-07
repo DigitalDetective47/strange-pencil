@@ -369,3 +369,38 @@ SMODS.Consumable({
         }))
     end,
 })
+
+SMODS.Consumable({
+    key = "fractal",
+    set = "index",
+    atlas = "indexes",
+    pos = { x = 0, y = 1 },
+    loc_vars = function(self, info_queue, center)
+        return { vars = { self.config.cards } }
+    end,
+    cost = 5,
+    config = { cards = 2 },
+    can_use = function(self, card)
+        return #G.consumeables.cards < G.consumeables.config.card_limit or self.area == G.consumeables
+    end,
+    use = function(self, card, area, copier)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
+        for i = 1, math.min(self.config.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    if G.consumeables.config.card_limit > #G.consumeables.cards then
+                        play_sound('timpani')
+                        local card = SMODS.create_card({ set = "index" })
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        card:juice_up(0.3, 0.5)
+                    end
+                    return true
+                end
+            }))
+        end
+        delay(0.6)
+    end,
+})
