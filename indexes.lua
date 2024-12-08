@@ -392,9 +392,9 @@ SMODS.Consumable({
                 func = function()
                     if G.consumeables.config.card_limit > #G.consumeables.cards then
                         play_sound('timpani')
-                        local card = SMODS.create_card({ set = "index" })
-                        card:add_to_deck()
-                        G.consumeables:emplace(card)
+                        local new = SMODS.create_card({ set = "index" })
+                        new:add_to_deck()
+                        G.consumeables:emplace(new)
                         card:juice_up(0.3, 0.5)
                     end
                     return true
