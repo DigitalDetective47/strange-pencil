@@ -261,3 +261,32 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Joker({
+    key = "pencil",
+    rarity = 4,
+    config = { pencil_hold_consumables = true },
+    pos = { x = 3, y = 0 },
+    soul_pos = { x = 4, y = 0 },
+    atlas = "jokers",
+    cost = 20,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.using_consumeable and context.consumeable.ability.set ~= "index" then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4,
+                func = function()
+                    if G.consumeables.config.card_limit > #G.consumeables.cards then
+                        play_sound('timpani')
+                        local new = SMODS.create_card({ set = "index" })
+                        new:add_to_deck()
+                        G.consumeables:emplace(new)
+                        card:juice_up(0.3, 0.5)
+                    end
+                    return true
+                end
+            }))
+        end
+    end,
+})

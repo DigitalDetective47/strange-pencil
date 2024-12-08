@@ -65,6 +65,15 @@ return {
                     "{C:inactive}(Currently {C:blue}+#2#{C:inactive})",
                 },
             },
+            j_pencil_pencil = {
+                name = "Strange Pencil",
+                text = {
+                    "Creates a random {C:blue}Index",
+                    "card when a consumable of",
+                    "another type is used",
+                    "{C:inactive}(Must have room)",
+                },
+            },
         },
         Back = {
             b_pencil_royal = {
