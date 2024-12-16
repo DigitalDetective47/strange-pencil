@@ -60,7 +60,7 @@ SMODS.Tag({
         table.insert(info_queue, G.P_CENTERS.c_hermit)
         return { vars = {} }
     end,
-    apply = function(tag, context)
+    apply = function(self, tag, context)
         if context.type == "new_blind_choice" then
             if G.STATE ~= G.STATES.TAROT_PACK then
                 G.GAME.PACK_INTERRUPT = G.STATE
