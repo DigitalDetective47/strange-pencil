@@ -290,3 +290,43 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Joker({
+    key = "forty_seven",
+    rarity = 3,
+    config = { factor = 1 },
+    loc_vars = function(self, info_queue, card)
+        if card.ability.factor == 1 then
+            return { vars = { "once" } }
+        elseif card.ability.factor == 2 then
+            return { vars = { "twice" } }
+        elseif card.ability.factor == 3 then
+            return { vars = { "thrice" } }
+        else
+            return { vars = { card.ability.factor .. " times" } }
+        end
+    end,
+    pos = { x = 5, y = 0 },
+    atlas = "jokers",
+    cost = 11,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play and context.other_card.base.id == 4 then
+            local repetitions = 0
+            for k, v in ipairs(G.hand.cards) do
+                if v.base.id == 7 then
+                    repetitions = repetitions + 1
+                    -- G.E_MANAGER:add_event(Event({
+                    --     trigger = 'after',
+                    --     delay = 0.4,
+                    --     func = function()
+                    --         v:juice_up(0.3, 0.5)
+                    --         return true
+                    --     end
+                    -- }))
+                end
+            end
+            return { message = localize("k_again_ex"), repetitions = repetitions, card = card }
+        end
+    end,
+})

@@ -74,6 +74,13 @@ return {
                     "{C:inactive}(Must have room)",
                 },
             },
+            j_pencil_forty_seven = {
+                name = "Forty-seven",
+                text = {
+                    "Retrigger each played {C:attention}4 #1#",
+                    "for each {C:attention}7{} held in hand",
+                },
+            },
         },
         Back = {
             b_pencil_royal = {
