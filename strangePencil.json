@@ -8,6 +8,6 @@
     "prefix": "pencil",
     "main_file": "strangePencil.lua",
     "badge_colour": "FF9E49",
-    "version": "0.1.0",
+    "version": "0.2.0~dev",
     "priority": 1e300
 }
