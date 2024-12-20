@@ -329,3 +329,27 @@ SMODS.Joker({
         end
     end,
 })
+
+if (SMODS.Mods["Talisman"] or {}).can_load then
+SMODS.Joker({
+    key = "square",
+    rarity = 4,
+    config = { exponent = 2 },
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.exponent}}
+    end,
+    pos = { x = 0, y = 2 },
+    soul_pos = { x = 1, y = 2 },
+    atlas = "jokers",
+    cost = 20,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                message = localize({ type = "variable", key = "a_powchips", vars = { card.ability.exponent } }),
+                Echip_mod = card.ability.exponent
+            }
+        end
+    end,
+})
+end

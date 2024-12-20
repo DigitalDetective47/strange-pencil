@@ -81,6 +81,12 @@ return {
                     "for each {C:attention}7{} held in hand",
                 },
             },
+            j_pencil_square = {
+                name = "Square Chip",
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} Chips",
+                },
+            },
         },
         Back = {
             b_pencil_royal = {
