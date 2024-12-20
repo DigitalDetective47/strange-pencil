@@ -101,6 +101,13 @@ return {
                     "{C:inactive}(mean {C:attention}#1#{C:inactive}, standard deviation {C:attention}#2#{C:inactive})",
                 },
             },
+            b_pencil_rainbow = {
+                name = "Rainbow Deck",
+                text = {
+                    "Each {C:attention}rank{} is given",
+                    "a random {C:attention}suit",
+                },
+            },
         },
         Blind = {
             bl_pencil_glove = {
