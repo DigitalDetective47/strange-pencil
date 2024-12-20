@@ -66,7 +66,6 @@ SMODS.Back({
                     end
                     v:set_base(G.P_CARDS[string.sub(v.base.suit, 1, 1) .. '_' .. rank_suffix])
                 end
-                G.GAME.starting_deck_size = #G.playing_cards
                 return true
             end
         }))
