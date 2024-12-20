@@ -265,7 +265,6 @@ SMODS.Joker({
 SMODS.Joker({
     key = "pencil",
     rarity = 4,
-    config = { pencil_hold_consumables = true },
     pos = { x = 3, y = 0 },
     soul_pos = { x = 4, y = 0 },
     atlas = "jokers",
