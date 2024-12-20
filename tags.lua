@@ -6,10 +6,143 @@ SMODS.Atlas({
 })
 
 SMODS.Booster({
-    key = "workshop",
+    key = "workshop_1",
     kind = "Workshop",
     no_doe = true,
+    no_collection = true,
+    pos = { x = 0, y = 0 },
+    config = { extra = 3, choose = 1 },
+    weight = 0,
+    draw_hand = true,
+    loc_vars = SMODS.Booster.loc_vars,
+    ease_background_colour = function(self)
+        ease_background_colour_blind(G.STATES.TAROT_PACK)
+    end,
+    create_UIBox = create_UIBox_arcana_pack,
+    particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.PURPLE, 0.2), lighten(G.C.GOLD, 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = function(self, card, i)
+        if i == 1 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_death")
+        elseif i == 2 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hanged_man")
+        elseif i == 3 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hermit")
+        elseif G.GAME.used_vouchers.v_omen_globe and pseudorandom('omen_globe') > 0.8 then
+            return create_card("Spectral", G.pack_cards, nil, nil, true, true, nil, 'ar2')
+        else
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, nil, 'ar1')
+        end
+    end,
+    group_key = "k_tarot_pack",
+})
+SMODS.Booster({
+    key = "workshop_2",
+    kind = "Workshop",
+    no_doe = true,
+    no_collection = true,
     pos = { x = 1, y = 0 },
+    config = { extra = 3, choose = 1 },
+    weight = 0,
+    draw_hand = true,
+    loc_vars = SMODS.Booster.loc_vars,
+    ease_background_colour = function(self)
+        ease_background_colour_blind(G.STATES.TAROT_PACK)
+    end,
+    create_UIBox = create_UIBox_arcana_pack,
+    particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.PURPLE, 0.2), lighten(G.C.GOLD, 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = function(self, card, i)
+        if i == 1 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_death")
+        elseif i == 2 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hanged_man")
+        elseif i == 3 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hermit")
+        elseif G.GAME.used_vouchers.v_omen_globe and pseudorandom('omen_globe') > 0.8 then
+            return create_card("Spectral", G.pack_cards, nil, nil, true, true, nil, 'ar2')
+        else
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, nil, 'ar1')
+        end
+    end,
+    group_key = "k_tarot_pack",
+})
+SMODS.Booster({
+    key = "workshop_3",
+    kind = "Workshop",
+    no_doe = true,
+    no_collection = true,
+    pos = { x = 2, y = 0 },
+    config = { extra = 3, choose = 1 },
+    weight = 0,
+    draw_hand = true,
+    loc_vars = SMODS.Booster.loc_vars,
+    ease_background_colour = function(self)
+        ease_background_colour_blind(G.STATES.TAROT_PACK)
+    end,
+    create_UIBox = create_UIBox_arcana_pack,
+    particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.PURPLE, 0.2), lighten(G.C.GOLD, 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = function(self, card, i)
+        if i == 1 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_death")
+        elseif i == 2 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hanged_man")
+        elseif i == 3 then
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hermit")
+        elseif G.GAME.used_vouchers.v_omen_globe and pseudorandom('omen_globe') > 0.8 then
+            return create_card("Spectral", G.pack_cards, nil, nil, true, true, nil, 'ar2')
+        else
+            return create_card("Tarot", G.pack_cards, nil, nil, true, true, nil, 'ar1')
+        end
+    end,
+    group_key = "k_tarot_pack",
+})
+SMODS.Booster({
+    key = "workshop_4",
+    kind = "Workshop",
+    no_doe = true,
+    no_collection = true,
+    pos = { x = 3, y = 0 },
     config = { extra = 3, choose = 1 },
     weight = 0,
     draw_hand = true,
@@ -66,14 +199,13 @@ SMODS.Tag({
                 G.GAME.PACK_INTERRUPT = G.STATE
             end
             tag:yep("+", G.C.SECONDARY_SET.Tarot, function()
-                local key = "p_pencil_workshop"
                 local card = Card(
                     G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
                     G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
                     G.CARD_W * 1.27,
                     G.CARD_H * 1.27,
                     G.P_CARDS.empty,
-                    G.P_CENTERS[key],
+                    G.P_CENTERS["p_pencil_workshop_" .. math.random(1, 4)],
                     { bypass_discovery_center = true, bypass_discovery_ui = true }
                 )
                 card.cost = 0
