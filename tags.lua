@@ -7,7 +7,7 @@ SMODS.Atlas({
 
 SMODS.Booster({
     key = "workshop",
-    kind = "Tarot",
+    kind = "Workshop",
     no_doe = true,
     pos = { x = 1, y = 0 },
     config = { extra = 3, choose = 1 },
