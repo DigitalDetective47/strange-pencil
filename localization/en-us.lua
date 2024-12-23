@@ -114,6 +114,13 @@ return {
                     "a random {C:attention}suit",
                 },
             },
+            b_pencil_booster = {
+                name = "Boosted Booster Deck",
+                text = {
+                    "Take {C:attention}#1#{} extra card",
+                    "from each {C:attention}Booster Pack",
+                },
+            },
         },
         Blind = {
             bl_pencil_glove = {

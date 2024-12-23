@@ -109,3 +109,21 @@ SMODS.Back({
         }))
     end
 })
+
+SMODS.Back({
+    key = "booster",
+    config = { booster_choices = 1 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { self.config.booster_choices } }
+    end,
+    pos = { x = 3, y = 0 },
+    atlas = "decks",
+})
+
+local hook = Back.apply_to_run
+function Back:apply_to_run()
+    hook(self)
+    if self.effect.config.booster_choices then
+        G.GAME.modifiers.booster_choices = self.effect.config.booster_choices
+    end
+end
