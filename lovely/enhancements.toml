@@ -1,0 +1,52 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Diseased Card
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "G.GAME.unused_discards = (G.GAME.unused_discards or 0) + G.GAME.current_round.discards_left"
+position = "after"
+payload = '''
+for i = #G.playing_cards, 1, -1 do
+    local card = G.playing_cards[i]
+    if G.playing_cards[i].ability.name == "Diseased Card" then
+        G.playing_cards[i].ability.remaining = G.playing_cards[i].ability.remaining - 1
+        if G.playing_cards[i].ability.remaining <= 0 then
+            G.playing_cards[i]:remove()
+        end
+    end
+end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "local hand_text_set = false"
+position = "after"
+payload = '''
+for k, v in ipairs(G.play.cards) do
+    if v.ability.name == "Diseased Card" then
+        if v.ability.new then
+            v.ability.new = false
+        else
+            local changed = false
+            if k > 1 and G.play.cards[k - 1].ability.name ~= "Diseased Card" then
+                G.play.cards[k - 1]:set_ability(G.P_CENTERS["m_pencil_diseased"], nil, true)
+                changed = true
+            end
+            if k < #G.play.cards and G.play.cards[k + 1].ability.name ~= "Diseased Card" then
+                G.play.cards[k + 1]:set_ability(G.P_CENTERS["m_pencil_diseased"], nil, true)
+                G.play.cards[k + 1].ability.new = true
+                changed = true
+            end
+            if changed then
+                card_eval_status_text(v, 'extra', nil, nil, nil, { message = localize('k_infected') })
+            end
+        end
+    end
+end
+'''
+match_indent = true

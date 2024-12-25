@@ -137,6 +137,25 @@ return {
                 }
             },
         },
+        Enhanced = {
+            m_pencil_diseased = {
+                name = "Diseased Card",
+                text = {
+                    "Infect adjacent played cards",
+                    "Destroyed after {C:attention}#2#{} rounds",
+                    "{C:inactive}({C:attention}#1#{C:inactive} remaining)"
+                }
+            },
+        },
+        Tarot = {
+            c_pencil_plague = {
+                name = "The Plague",
+                text = {
+                    "Enhances {C:attention}#1#{} selected card",
+                    "into a {C:attention}Diseased Card",
+                }
+            }
+        },
         index = {
             c_pencil_replica = {
                 name = "Replica",
@@ -277,6 +296,7 @@ return {
         dictionary = {
             k_index = "Index",
             b_index_cards = "Index Cards",
+            k_infected = "Infected!",
         },
         labels = {
             index = "Index",
