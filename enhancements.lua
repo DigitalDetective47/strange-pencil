@@ -27,3 +27,5 @@ SMODS.Consumable({
         return { vars = { card.ability.max_highlighted } }
     end,
 })
+table.insert(SMODS.Challenges.c_fragile_1.restrictions.banned_cards, 8, { id = "c_pencil_plague" })
+table.insert(SMODS.Challenges.c_cry_ballin.restrictions.banned_cards, 10, { id = "c_pencil_plague" })
