@@ -141,7 +141,7 @@ return {
             m_pencil_diseased = {
                 name = "Diseased Card",
                 text = {
-                    "Infect adjacent played cards",
+                    "Infects adjacent played cards",
                     "Destroyed after {C:attention}#2#{} rounds",
                     "{C:inactive}({C:attention}#1#{C:inactive} remaining)"
                 }
