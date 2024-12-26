@@ -74,49 +74,12 @@ SMODS.Back({
 })
 
 SMODS.Back({
-    key = "rainbow",
-    pos = { x = 2, y = 0 },
-    atlas = "decks",
-    apply = function(self)
-        G.E_MANAGER:add_event(Event({
-            blockable = false,
-            func = function()
-                for r = 2, 14, 1 do
-                    local rank_suffix
-                    if r < 10 then
-                        rank_suffix = tostring(r)
-                    elseif r == 10 then
-                        rank_suffix = 'T'
-                    elseif r == 11 then
-                        rank_suffix = 'J'
-                    elseif r == 12 then
-                        rank_suffix = 'Q'
-                    elseif r == 13 then
-                        rank_suffix = 'K'
-                    elseif r == 14 then
-                        rank_suffix = 'A'
-                    end
-                    local suit = pseudorandom_element({ "S", "H", "C", "D" }, pseudoseed('rainbow_deck'))
-                    for k, v in ipairs(G.playing_cards) do
-                        if v.base.id == r then
-                            v:set_base(G.P_CARDS[suit .. '_' .. rank_suffix])
-                        end
-                    end
-                end
-                G.GAME.starting_deck_size = #G.playing_cards
-                return true
-            end
-        }))
-    end
-})
-
-SMODS.Back({
     key = "booster",
     config = { booster_choices = 1 },
     loc_vars = function(self, info_queue, card)
         return { vars = { self.config.booster_choices } }
     end,
-    pos = { x = 3, y = 0 },
+    pos = { x = 2, y = 0 },
     atlas = "decks",
 })
 
