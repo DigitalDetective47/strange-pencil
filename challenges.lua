@@ -189,7 +189,7 @@ function get_blind_amount(ante)
             if ante < 1 then return to_big(100) end
             if ante <= 1 then return amounts[ante] end
             local a, b, c, d = amounts[1], 1.6, ante - 1, 1 + 0.2 * (ante - 1)
-            local amount = a * (b + (k * c) ^ d) ^ c
+            local amount = a * (b + (to_big(0.75) * c) ^ d) ^ c
             if (amount:lt(R.E_MAX_SAFE_INTEGER)) then
                 local exponent = to_big(10) ^ (math.floor(amount:log10() - to_big(1))):to_number()
                 amount = math.floor(amount / exponent):to_number() * exponent
