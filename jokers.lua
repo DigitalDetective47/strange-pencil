@@ -70,7 +70,7 @@ SMODS.Joker({
     cost = 7,
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.joker_main and math.max(lassCount() * card.ability.xmult_per_queen, 1) > 1 then
+        if context.joker_main and lassCount() * card.ability.xmult_per_queen > 1 then
             return {
                 message = localize({ type = "variable", key = "a_xmult", vars = { math.max(lassCount() * card.ability.xmult_per_queen, 1) } }),
                 Xmult_mod = math.max(lassCount() * card.ability.xmult_per_queen, 1),
