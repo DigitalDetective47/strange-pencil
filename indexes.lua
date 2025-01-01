@@ -31,59 +31,41 @@ SMODS.Consumable({
     can_use = function(self, card)
         local targets = {}
         for k, v in ipairs(G.consumeables.highlighted) do
-            if v.ability.set == "Unique" or not v.ability.consumeable then
-                return false
-            end
-            if v ~= card then
+            if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                 table.insert(targets, v)
             end
         end
         if G.shop_jokers ~= nil then
             for k, v in ipairs(G.shop_jokers.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
         end
         if G.shop_booster ~= nil then
             for k, v in ipairs(G.shop_booster.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
         end
         if G.shop_vouchers ~= nil then
             for k, v in ipairs(G.shop_vouchers.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
         end
         if G.pack_cards ~= nil then
             for k, v in ipairs(G.pack_cards.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
         end
         if G.hand ~= nil then
             for k, v in ipairs(G.hand.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
@@ -105,50 +87,35 @@ SMODS.Consumable({
         end
         if G.shop_jokers ~= nil then
             for k, v in ipairs(G.shop_jokers.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
         end
         if G.shop_booster ~= nil then
             for k, v in ipairs(G.shop_booster.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
         end
         if G.shop_vouchers ~= nil then
             for k, v in ipairs(G.shop_vouchers.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
         end
         if G.pack_cards ~= nil then
             for k, v in ipairs(G.pack_cards.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
         end
         if G.hand ~= nil then
             for k, v in ipairs(G.hand.highlighted) do
-                if v.ability.set == "Unique" or not v.ability.consumeable then
-                    return false
-                end
-                if v ~= card then
+                if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                     table.insert(targets, v)
                 end
             end
