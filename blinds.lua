@@ -22,7 +22,7 @@ function Game:update(dt)
                 G.GAME.blind.ante = G.GAME.round_resets.ante
             end
             G.GAME.blind.chips = (get_blind_amount(G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^
-                G.GAME.starting_params.ante_scaling.exponential *
+                G.GAME.starting_params.ante_scaling_exponential *
                 G.P_BLINDS[G.GAME.round_resets.blind_choices[v]]:get_mult()
             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         end
