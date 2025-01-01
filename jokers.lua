@@ -9,11 +9,7 @@ SMODS.Joker({
     key = "swimmers",
     config = { mult = 11 },
     loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-                card.ability.mult,
-            },
-        }
+        return { vars = { card and card.ability.mult or self.config.mult } }
     end,
     rarity = 2,
     pos = { x = 0, y = 0 },
@@ -58,10 +54,8 @@ SMODS.Joker({
     config = { xmult_per_queen = 1 },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = {
-                card.ability.xmult_per_queen,
-                math.max(lassCount() * card.ability.xmult_per_queen, 1),
-            },
+            vars = { card and card.ability.xmult_per_queen or self.config.xmult_per_queen,
+                math.max(lassCount() * (card and card.ability.xmult_per_queen or self.config.xmult_per_queen), 1) }
         }
     end,
     rarity = 3,
@@ -92,11 +86,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
             table.insert(info_queue, { key = "cry_rigged", set = "Other", vars = {} })
             table.insert(info_queue,
                 { key = "j_cry_googol_play", set = "Joker", specific_vars = { tostring(G.GAME and G.GAME.probabilities.normal or 1), 8, 1e100 } })
-            return {
-                vars = {
-                    card.ability.payout,
-                },
-            }
+            return { vars = { card and card.ability.payout or self.config.payout } }
         end,
         rarity = "cry_epic",
         pos = { x = 2, y = 1 },
@@ -139,11 +129,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         key = "left_arm",
         config = { xchips = 2.5, pencil_forbidden_left_arm = true },
         loc_vars = function(self, info_queue, card)
-            return {
-                vars = {
-                    card.ability.xchips,
-                },
-            }
+            return { vars = { card and card.ability.xchips or self.config.xchips } }
         end,
         rarity = 2,
         pos = { x = 3, y = 1 },
@@ -164,9 +150,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         key = "left_leg",
         config = { chips = 50, pencil_forbidden_left_leg = true },
         loc_vars = function(self, info_queue, card)
-            return {
-                vars = { card.ability.chips },
-            }
+            return { vars = { card and card.ability.chips or self.config.chips } }
         end,
         rarity = 2,
         pos = { x = 4, y = 1 },
@@ -186,11 +170,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         key = "right_arm",
         config = { xmult = 1.5, pencil_forbidden_right_arm = true },
         loc_vars = function(self, info_queue, card)
-            return {
-                vars = {
-                    card.ability.xmult,
-                },
-            }
+            return { vars = { card and card.ability.xmult or self.config.xmult } }
         end,
         rarity = 2,
         pos = { x = 1, y = 1 },
@@ -210,9 +190,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         key = "right_leg",
         config = { mult = 10, pencil_forbidden_right_leg = true },
         loc_vars = function(self, info_queue, card)
-            return {
-                vars = { card.ability.mult },
-            }
+            return { vars = { card and card.ability.mult or self.config.mult } }
         end,
         rarity = 2,
         pos = { x = 0, y = 1 },
@@ -236,10 +214,11 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card.ability.chips_per_index,
+                card and card.ability.chips_per_index or self.config.chips_per_index,
                 G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.pencil_index and
-                card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index or 0,
-            },
+                (card and card.ability.chips_per_index or self.config.chips_per_index) *
+                G.GAME.consumeable_usage_total.pencil_index or 0,
+            }
         }
     end,
     rarity = 1,
@@ -293,14 +272,14 @@ SMODS.Joker({
     rarity = 3,
     config = { factor = 1 },
     loc_vars = function(self, info_queue, card)
-        if card.ability.factor == 1 then
+        if (card and card.ability.factor or self.config.factor) == 1 then
             return { vars = { "once" } }
-        elseif card.ability.factor == 2 then
+        elseif (card and card.ability.factor or self.config.factor) == 2 then
             return { vars = { "twice" } }
-        elseif card.ability.factor == 3 then
+        elseif (card and card.ability.factor or self.config.factor) == 3 then
             return { vars = { "thrice" } }
         else
-            return { vars = { card.ability.factor .. " times" } }
+            return { vars = { (card and card.ability.factor or self.config.factor) .. " times" } }
         end
     end,
     pos = { x = 5, y = 0 },
@@ -334,7 +313,7 @@ if (SMODS.Mods["Talisman"] or {}).can_load then
         rarity = 4,
         config = { exponent = 2 },
         loc_vars = function(self, info_queue, card)
-            return { vars = { card.ability.exponent } }
+            return { vars = { card and card.ability.exponent or self.config.exponent } }
         end,
         pos = { x = 0, y = 2 },
         soul_pos = { x = 1, y = 2 },
