@@ -162,7 +162,6 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
     })
     SMODS.Joker({
         key = "left_leg",
-        name = "pencil_left_leg",
         config = { chips = 50, pencil_forbidden_left_leg = true },
         loc_vars = function(self, info_queue, card)
             return {
@@ -209,7 +208,6 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
     })
     SMODS.Joker({
         key = "right_leg",
-        name = "pencil_right_leg",
         config = { mult = 10, pencil_forbidden_right_leg = true },
         loc_vars = function(self, info_queue, card)
             return {
