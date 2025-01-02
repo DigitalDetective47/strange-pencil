@@ -330,3 +330,37 @@ if (SMODS.Mods["Talisman"] or {}).can_load then
         end,
     })
 end
+
+SMODS.Joker({
+    key = "pee_pants",
+    rarity = 1,
+    config = { scaling = 4, mult = 0, required_diamonds = 2 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card and card.ability.scaling or self.config.scaling, card and card.ability.required_diamonds or self.config.required_diamonds, card and card.ability.mult or self.config.mult } }
+    end,
+    pos = { x = 5, y = 1 },
+    atlas = "jokers",
+    cost = 11,
+    blueprint_compat = true,
+    perishable_compat = false,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                message = localize({ type = "variable", key = "a_mult", vars = { card.ability.mult } }),
+                mult_mod = card.ability.mult,
+                card = card,
+            }
+        elseif context.before and not context.blueprint and next(context.poker_hands["Two Pair"]) then
+            local diamonds = 0
+            for k, v in ipairs(context.scoring_hand) do
+                if v:is_suit("Diamonds") then
+                    diamonds = diamonds + 1
+                    if diamonds >= card.ability.required_diamonds then
+                        card.ability.mult = card.ability.mult + card.ability.scaling
+                        return { message = localize('k_upgrade_ex'), colour = G.C.MULT, card = card }
+                    end
+                end
+            end
+        end
+    end,
+})

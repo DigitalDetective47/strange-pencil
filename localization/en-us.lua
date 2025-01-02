@@ -87,6 +87,16 @@ return {
                     "{X:dark_edition,C:white}^#1#{} Chips",
                 },
             },
+            j_pencil_pee_pants = {
+                name = "Pee Pants",
+                text = {
+                    "This Joker gains {C:mult}+#1#{} Mult",
+                    "if played hand contains",
+                    "a {C:attention}Two Pair",
+                    "and at least {C:attention}#2#{} {C:diamonds}Diamonds",
+                    "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)",
+                },
+            },
         },
         Back = {
             b_pencil_royal = {
