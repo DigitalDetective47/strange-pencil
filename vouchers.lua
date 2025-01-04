@@ -85,4 +85,5 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Voucher
 			}))
 		end,
 	})
+	table.insert(Cryptid.Megavouchers, "v_pencil_sqrt")
 end
