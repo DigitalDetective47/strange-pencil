@@ -36,15 +36,13 @@ SMODS.Booster({
     end,
     create_card = function(self, card, i)
         if i == 1 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_death")
+            return { key = "c_death", area = G.pack_cards, skip_materialize = true }
         elseif i == 2 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hanged_man")
+            return { key = "c_hanged_man", area = G.pack_cards, skip_materialize = true }
         elseif i == 3 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hermit")
-        elseif G.GAME.used_vouchers.v_omen_globe and pseudorandom('omen_globe') > 0.8 then
-            return create_card("Spectral", G.pack_cards, nil, nil, true, true, nil, 'ar2')
+            return { key = "c_hermit", area = G.pack_cards, skip_materialize = true }
         else
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, nil, 'ar1')
+            return G.P_CENTERS.p_arcana_normal_1:create_card(card, i)
         end
     end,
     group_key = "k_tarot_pack",
@@ -80,15 +78,13 @@ SMODS.Booster({
     end,
     create_card = function(self, card, i)
         if i == 1 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_death")
+            return { key = "c_death", area = G.pack_cards, skip_materialize = true }
         elseif i == 2 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hanged_man")
+            return { key = "c_hanged_man", area = G.pack_cards, skip_materialize = true }
         elseif i == 3 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hermit")
-        elseif G.GAME.used_vouchers.v_omen_globe and pseudorandom('omen_globe') > 0.8 then
-            return create_card("Spectral", G.pack_cards, nil, nil, true, true, nil, 'ar2')
+            return { key = "c_hermit", area = G.pack_cards, skip_materialize = true }
         else
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, nil, 'ar1')
+            return G.P_CENTERS.p_arcana_normal_2:create_card(card, i)
         end
     end,
     group_key = "k_tarot_pack",
@@ -124,15 +120,13 @@ SMODS.Booster({
     end,
     create_card = function(self, card, i)
         if i == 1 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_death")
+            return { key = "c_death", area = G.pack_cards, skip_materialize = true }
         elseif i == 2 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hanged_man")
+            return { key = "c_hanged_man", area = G.pack_cards, skip_materialize = true }
         elseif i == 3 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hermit")
-        elseif G.GAME.used_vouchers.v_omen_globe and pseudorandom('omen_globe') > 0.8 then
-            return create_card("Spectral", G.pack_cards, nil, nil, true, true, nil, 'ar2')
+            return { key = "c_hermit", area = G.pack_cards, skip_materialize = true }
         else
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, nil, 'ar1')
+            return G.P_CENTERS.p_arcana_normal_3:create_card(card, i)
         end
     end,
     group_key = "k_tarot_pack",
@@ -168,15 +162,13 @@ SMODS.Booster({
     end,
     create_card = function(self, card, i)
         if i == 1 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_death")
+            return { key = "c_death", area = G.pack_cards, skip_materialize = true }
         elseif i == 2 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hanged_man")
+            return { key = "c_hanged_man", area = G.pack_cards, skip_materialize = true }
         elseif i == 3 then
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, "c_hermit")
-        elseif G.GAME.used_vouchers.v_omen_globe and pseudorandom('omen_globe') > 0.8 then
-            return create_card("Spectral", G.pack_cards, nil, nil, true, true, nil, 'ar2')
+            return { key = "c_hermit", area = G.pack_cards, skip_materialize = true }
         else
-            return create_card("Tarot", G.pack_cards, nil, nil, true, true, nil, 'ar1')
+            return G.P_CENTERS.p_arcana_normal_4:create_card(card, i)
         end
     end,
     group_key = "k_tarot_pack",
