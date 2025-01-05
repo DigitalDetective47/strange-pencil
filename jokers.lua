@@ -255,9 +255,7 @@ SMODS.Joker({
                 func = function()
                     if G.consumeables.config.card_limit > #G.consumeables.cards then
                         play_sound('timpani')
-                        local new = SMODS.create_card({ set = "index" })
-                        new:add_to_deck()
-                        G.consumeables:emplace(new)
+                        SMODS.add_card({ set = "index" })
                         card:juice_up(0.3, 0.5)
                     end
                     return true
