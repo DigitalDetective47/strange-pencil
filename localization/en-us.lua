@@ -97,6 +97,14 @@ return {
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)",
                 },
             },
+            j_pencil_jake = {
+                name = "Anachronic Hipster",
+                text = {
+                    "This Joker gains {X:mult,C:white}X#1#{} Mult",
+                    "when {C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
