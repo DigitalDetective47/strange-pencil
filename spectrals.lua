@@ -27,95 +27,95 @@ SMODS.Consumable({
             delay = 0.4,
             func = function()
                 for _ = 1, G.jokers.config.card_limit * card.ability.multiplier, 1 do
-                    local card = nil
+                    local new = nil
                     repeat
-                        if card then
-                            card:remove()
+                        if new then
+                            new:remove()
                         end
-                        card = SMODS.create_card({
+                        new = SMODS.create_card({
                             no_edition = true,
                             edition = "e_negative",
                             -- stickers = { "eternal" },
                             set = "Joker",
                         })
-                        card:set_eternal(true)
-                    until card.ability.eternal
-                    card:add_to_deck()
-                    G.jokers:emplace(card)
+                        new:set_eternal(true)
+                    until new.ability.eternal
+                    new:add_to_deck()
+                    G.jokers:emplace(new)
                 end
                 for _ = 1, G.consumeables.config.card_limit * card.ability.multiplier, 1 do
-                    local card = SMODS.create_card({
+                    local new = SMODS.create_card({
                         no_edition = true,
                         edition = "e_negative",
                         -- stickers = { "eternal" },
                         area = G.consumeables,
                         key = pseudorandom_element(G.P_CENTER_POOLS.Consumeables, pseudoseed(seed or "grc")).key,
                     })
-                    card.ability.eternal = true
-                    card:add_to_deck()
-                    G.consumeables:emplace(card)
+                    new.ability.eternal = true
+                    new:add_to_deck()
+                    G.consumeables:emplace(new)
                 end
-                if G.STATE == G.STATES.SELECTING_HAND then
+                if #G.hand.cards ~= 0 then
                     for _ = 1, G.hand.config.card_limit * card.ability.multiplier, 1 do
-                        local card = SMODS.create_card({
+                        local new = SMODS.create_card({
                             no_edition = true,
                             edition = "e_negative",
                             -- stickers = { "eternal" },
                             set = "Enhanced",
                             area = G.consumeables,
                         })
-                        card.ability.eternal = true
-                        card:add_to_deck()
-                        G.hand:emplace(card)
+                        new.ability.eternal = true
+                        new:add_to_deck()
+                        G.hand:emplace(new)
                     end
                 end
                 if G.shop_jokers ~= nil then
                     for _ = 1, G.shop_jokers.config.card_limit * card.ability.multiplier, 1 do
-                        local card = nil
+                        local new = nil
                         repeat
-                            if card then
-                                card:remove()
+                            if new then
+                                new:remove()
                             end
-                            card = create_card_for_shop(G.shop_jokers)
-                            card:set_eternal(true)
-                            card:set_edition("e_negative")
-                        until card.ability.eternal
-                        card.cost = 0
-                        card:add_to_deck()
-                        G.shop_jokers:emplace(card)
+                            new = create_card_for_shop(G.shop_jokers)
+                            new:set_eternal(true)
+                            new:set_edition("e_negative")
+                        until new.ability.eternal
+                        new.cost = 0
+                        new:add_to_deck()
+                        G.shop_jokers:emplace(new)
                     end
                 end
                 if G.shop_booster ~= nil then
                     for _ = 1, G.shop_booster.config.card_limit * card.ability.multiplier, 1 do
-                        local card = SMODS.create_card({
+                        local new = SMODS.create_card({
                             no_edition = true,
                             edition = "e_negative",
                             -- stickers = { "eternal" },
                             area = G.shop_booster,
                             key = pseudorandom_element(G.P_CENTER_POOLS.Booster, pseudoseed(seed or "grc")).key,
                         })
-                        card.ability.eternal = true
-                        card.cost = 0
-                        card:add_to_deck()
-                        create_shop_card_ui(card, 'Booster', G.shop_booster)
-                        G.shop_booster:emplace(card)
+                        new.ability.eternal = true
+                        new.cost = 0
+                        new:add_to_deck()
+                        create_shop_card_ui(new, 'Booster', G.shop_booster)
+                        G.shop_booster:emplace(new)
                     end
                 end
                 if G.shop_vouchers ~= nil then
                     for _ = 1, G.shop_vouchers.config.card_limit * card.ability.multiplier, 1 do
-                        local card = SMODS.create_card({
+                        local new = SMODS.create_card({
                             no_edition = true,
                             edition = "e_negative",
                             -- stickers = { "eternal" },
                             area = G.shop_voucher,
                             key = get_next_voucher_key(true),
                         })
-                        card.ability.eternal = true
-                        card.cost = 0
-                        card:add_to_deck()
+                        new.ability.eternal = true
+                        new.cost = 0
+                        new:add_to_deck()
                         G.shop_vouchers.config.card_limit = G.shop_vouchers.config.card_limit + 1
-                        create_shop_card_ui(card, 'Voucher', G.shop_vouchers)
-                        G.shop_vouchers:emplace(card)
+                        create_shop_card_ui(new, 'Voucher', G.shop_vouchers)
+                        G.shop_vouchers:emplace(new)
                     end
                 end
                 play_sound("timpani")
