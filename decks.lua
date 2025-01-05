@@ -79,12 +79,7 @@ SMODS.Back({
     end,
     pos = { x = 2, y = 0 },
     atlas = "decks",
-})
-
-local hook = Back.apply_to_run
-function Back:apply_to_run()
-    hook(self)
-    if self.effect.config.booster_choices then
-        G.GAME.modifiers.booster_choices = self.effect.config.booster_choices
+    apply = function (self)
+        G.GAME.modifiers.booster_choices = self.config.booster_choices
     end
-end
+})
