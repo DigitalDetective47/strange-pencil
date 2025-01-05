@@ -52,20 +52,18 @@ SMODS.Back({
                     repeat
                         rank_suffix = math.floor(Gaussian(self.config.mean, self.config.variance) + 0.5)
                     until rank_suffix >= 2 and rank_suffix <= 14
-                    if rank_suffix < 10 then
+                    if rank_suffix <= 10 then
                         rank_suffix = tostring(rank_suffix)
-                    elseif rank_suffix == 10 then
-                        rank_suffix = 'T'
                     elseif rank_suffix == 11 then
-                        rank_suffix = 'J'
+                        rank_suffix = 'Jack'
                     elseif rank_suffix == 12 then
-                        rank_suffix = 'Q'
+                        rank_suffix = 'Queen'
                     elseif rank_suffix == 13 then
-                        rank_suffix = 'K'
+                        rank_suffix = 'King'
                     elseif rank_suffix == 14 then
-                        rank_suffix = 'A'
+                        rank_suffix = 'Ace'
                     end
-                    v:set_base(G.P_CARDS[string.sub(v.base.suit, 1, 1) .. '_' .. rank_suffix])
+                    SMODS.change_base(v, nil, rank_suffix)
                 end
                 return true
             end
