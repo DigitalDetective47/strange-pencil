@@ -389,3 +389,40 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Joker({
+    key = "squeeze",
+    rarity = 1,
+    config = { chance = 4, rounds = 0 },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { G.GAME.probabilities.normal, card and card.ability.chance or self.config.chance, card and card.ability.rounds or self.config.rounds }
+        }
+    end,
+    pos = { x = 3, y = 2 },
+    atlas = "jokers",
+    cost = 5,
+    blueprint_compat = false,
+    eternal_compat = false,
+    calculate = function(self, card, context)
+        if context.end_of_round and not (context.individual or context.repetition or context.blueprint) then
+            if pseudorandom('j_pencil_squeeze') < G.GAME.probabilities.normal / card.ability.chance then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.jokers:remove_card(card)
+                        card:shatter()
+                        return true
+                    end
+                }))
+                return { message = localize('k_cracked') }
+            else
+                SMODS.eval_this(card, { message = localize("k_safe_ex") })
+                card.ability.rounds = card.ability.rounds + 1
+                card.ability.extra_value = card.ability.extra_value + card.ability.rounds
+                card:set_cost()
+                delay(0.4)
+                return { message = localize("k_val_up"), colour = G.C.MONEY }
+            end
+        end
+    end,
+})

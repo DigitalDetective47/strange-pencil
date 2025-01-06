@@ -105,6 +105,18 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                 }
             },
+            j_pencil_squeeze = {
+                name = "Egg Squeeze",
+                text = {
+                    "Gains sell value equal to",
+                    "the number of rounds this",
+                    "Joker has been held",
+                    "{C:inactive}(Currently {C:money}$#3#{C:inactive})",
+                    "{C:green}#1# in #2#{} chance this",
+                    "card is destroyed",
+                    "at end of round",
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
@@ -315,6 +327,7 @@ return {
             k_index = "Index",
             b_index_cards = "Index Cards",
             k_infected = "Infected!",
+            k_cracked = "Cracked!"
         },
         labels = {
             index = "Index",
