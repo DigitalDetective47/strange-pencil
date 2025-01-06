@@ -147,6 +147,12 @@ return {
                     "Extremely large blind",
                 }
             },
+            bl_pencil_arrow = {
+                name = "The Arrow",
+                text = {
+                    "Retrigger abilities are disabled",
+                }
+            },
         },
         Enhanced = {
             m_pencil_diseased = {
