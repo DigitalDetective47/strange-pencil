@@ -150,7 +150,8 @@ return {
             bl_pencil_arrow = {
                 name = "The Arrow",
                 text = {
-                    "Retrigger abilities are disabled",
+                    "Retrigger abilities",
+                    "are disabled",
                 }
             },
         },
