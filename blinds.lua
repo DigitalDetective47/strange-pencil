@@ -95,14 +95,3 @@ function Card:calculate_seal(context)
         return hook4(self, context)
     end
 end
-
-local hook5 = G.FUNCS.evaluate_play
-G.FUNCS.evaluate_play = function(e)
-    local ret = hook5(e)
-    for k, v in ipairs(G.GAME.blind.debuffs or {}) do
-        SMODS.debuff_card(v, false, "bl_pencil_arrow")
-        SMODS.recalc_debuff(v)
-    end
-    G.GAME.blind.debuffs = nil
-    return ret
-end
