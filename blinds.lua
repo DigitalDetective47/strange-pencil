@@ -86,6 +86,8 @@ local hook3 = Card.calculate_joker
 function Card:calculate_joker(context)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and (context.repetition or context.retrigger_joker_check)) then
         return hook3(self, context)
+    elseif hook3(self, context) then
+        G.GAME.blind.triggered = true
     end
 end
 
@@ -93,5 +95,7 @@ local hook4 = Card.calculate_seal
 function Card:calculate_seal(context)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and context.repetition) then
         return hook4(self, context)
+    elseif hook4(self, context) then
+        G.GAME.blind.triggered = true
     end
 end
