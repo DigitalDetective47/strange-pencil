@@ -79,8 +79,8 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         config = { payout = 4 },
         loc_vars = function(self, info_queue, card)
             table.insert(info_queue, { key = "j_pencil_left_arm", set = "Joker", specific_vars = { 2.5 } })
-            table.insert(info_queue, { key = "j_pencil_right_arm", set = "Joker", specific_vars = { 1.5 } })
-            table.insert(info_queue, { key = "j_pencil_left_leg", set = "Joker", specific_vars = { 50 } })
+            table.insert(info_queue, { key = "j_pencil_left_leg", set = "Joker", specific_vars = { 1.5 } })
+            table.insert(info_queue, { key = "j_pencil_right_arm", set = "Joker", specific_vars = { 50 } })
             table.insert(info_queue, { key = "j_pencil_right_leg", set = "Joker", specific_vars = { 10 } })
             table.insert(info_queue, G.P_CENTERS.e_negative)
             table.insert(info_queue, { key = "cry_rigged", set = "Other", vars = {} })
