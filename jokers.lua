@@ -73,129 +73,132 @@ SMODS.Joker({
     end,
 })
 
-if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jokers"] and SMODS.Mods.Cryptid.config["Code Cards"] then
-    SMODS.Joker({
-        key = "forbidden_one",
-        config = { payout = 4 },
-        loc_vars = function(self, info_queue, card)
-            table.insert(info_queue, { key = "j_pencil_left_arm", set = "Joker", specific_vars = { 2.5 } })
-            table.insert(info_queue, { key = "j_pencil_left_leg", set = "Joker", specific_vars = { 1.5 } })
-            table.insert(info_queue, { key = "j_pencil_right_arm", set = "Joker", specific_vars = { 50 } })
-            table.insert(info_queue, { key = "j_pencil_right_leg", set = "Joker", specific_vars = { 10 } })
-            table.insert(info_queue, G.P_CENTERS.e_negative)
-            table.insert(info_queue, { key = "cry_rigged", set = "Other", vars = {} })
-            table.insert(info_queue,
-                { key = "j_cry_googol_play", set = "Joker", specific_vars = { tostring(G.GAME and G.GAME.probabilities.normal or 1), 8, 1e100 } })
-            return { vars = { card and card.ability.payout or self.config.payout } }
-        end,
-        rarity = "cry_epic",
-        pos = { x = 2, y = 1 },
-        atlas = "jokers",
-        cost = 10,
-        calculate = function(self, card, context)
-            if context.setting_blind and not context.blueprint then
-                if #SMODS.find_card("j_pencil_left_arm") ~= 0
-                    and #SMODS.find_card("j_pencil_left_leg") ~= 0
-                    and #SMODS.find_card("j_pencil_right_arm") ~= 0
-                    and #SMODS.find_card("j_pencil_right_leg") ~= 0
-                then
-                    local googol = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_cry_googol_play")
-                    googol:set_edition("e_negative", true, nil, true)
-                    googol:add_to_deck()
-                    SMODS.Stickers.cry_rigged:apply(googol, true)
-                    G.jokers:emplace(googol)
-                    return {
-                        card = card,
-                    }
-                end
+function forbidden_part_added(center, card, from_debuff)
+    if not (G.GAME.won or G.GAME.win_notified)
+    then
+        for k, v in ipairs({"j_pencil_forbidden_one", "j_pencil_left_arm", "j_pencil_left_leg", "j_pencil_right_arm", "j_pencil_right_leg"}) do
+            if center.key ~= v and #SMODS.find_card(v) == 0 then
+                return
             end
-        end,
-        calc_dollar_bonus = function(self, card)
-            return card.ability.payout
         end
-    })
-    SMODS.Joker({
-        key = "left_arm",
-        config = { xchips = 2.5 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card and card.ability.xchips or self.config.xchips } }
-        end,
-        rarity = 2,
-        pos = { x = 3, y = 1 },
-        atlas = "jokers",
-        cost = 6,
-        blueprint_compat = true,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return {
-                    message = localize({ type = "variable", key = "a_xchips", vars = { card.ability.xchips } }),
-                    colour = G.C.CHIPS,
-                    Xchip_mod = card.ability.xchips,
-                }
-            end
-        end,
-    })
-    SMODS.Joker({
-        key = "left_leg",
-        config = { chips = 50 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card and card.ability.chips or self.config.chips } }
-        end,
-        rarity = 2,
-        pos = { x = 4, y = 1 },
-        atlas = "jokers",
-        cost = 5,
-        blueprint_compat = true,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return {
-                    message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips } }),
-                    chip_mod = card.ability.chips,
-                }
-            end
-        end,
-    })
-    SMODS.Joker({
-        key = "right_arm",
-        config = { xmult = 1.5 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card and card.ability.xmult or self.config.xmult } }
-        end,
-        rarity = 2,
-        pos = { x = 1, y = 1 },
-        atlas = "jokers",
-        cost = 6,
-        blueprint_compat = true,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return {
-                    message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.xmult } }),
-                    Xmult_mod = card.ability.xmult,
-                }
-            end
-        end,
-    })
-    SMODS.Joker({
-        key = "right_leg",
-        config = { mult = 10 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card and card.ability.mult or self.config.mult } }
-        end,
-        rarity = 2,
-        pos = { x = 0, y = 1 },
-        atlas = "jokers",
-        cost = 5,
-        blueprint_compat = true,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return {
-                    message = localize({ type = "variable", key = "a_mult", vars = { card.ability.mult } }),
-                    mult_mod = card.ability.mult,
-                }
-            end
-        end,
-    })
+        G.GAME.win_notified = true
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            blocking = false,
+            blockable = false,
+            func = (function()
+                win_game()
+                G.GAME.won = true
+                return true
+            end)
+        }))
+    end
 end
+
+SMODS.Joker({
+    key = "forbidden_one",
+    config = { payout = 4 },
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, { key = "j_pencil_left_arm", set = "Joker", specific_vars = { 2.5 } })
+        table.insert(info_queue, { key = "j_pencil_left_leg", set = "Joker", specific_vars = { 1.5 } })
+        table.insert(info_queue, { key = "j_pencil_right_arm", set = "Joker", specific_vars = { 50 } })
+        table.insert(info_queue, { key = "j_pencil_right_leg", set = "Joker", specific_vars = { 10 } })
+        return { vars = { card and card.ability.payout or self.config.payout } }
+    end,
+    rarity = 1,
+    pos = { x = 2, y = 1 },
+    atlas = "jokers",
+    cost = 8,
+    add_to_deck = forbidden_part_added,
+    calc_dollar_bonus = function(self, card)
+        return card.ability.payout
+    end
+})
+SMODS.Joker({
+    key = "left_arm",
+    config = { xchips = 2.5 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card and card.ability.xchips or self.config.xchips } }
+    end,
+    rarity = 1,
+    pos = { x = 3, y = 1 },
+    atlas = "jokers",
+    cost = 6,
+    blueprint_compat = true,
+    add_to_deck = forbidden_part_added,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                message = localize({ type = "variable", key = "a_xchips", vars = { card.ability.xchips } }),
+                colour = G.C.CHIPS,
+                Xchip_mod = card.ability.xchips,
+            }
+        end
+    end,
+})
+SMODS.Joker({
+    key = "left_leg",
+    config = { chips = 50 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card and card.ability.chips or self.config.chips } }
+    end,
+    rarity = 1,
+    pos = { x = 4, y = 1 },
+    atlas = "jokers",
+    cost = 5,
+    blueprint_compat = true,
+    add_to_deck = forbidden_part_added,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips } }),
+                chip_mod = card.ability.chips,
+            }
+        end
+    end,
+})
+SMODS.Joker({
+    key = "right_arm",
+    config = { xmult = 1.5 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card and card.ability.xmult or self.config.xmult } }
+    end,
+    rarity = 1,
+    pos = { x = 1, y = 1 },
+    atlas = "jokers",
+    cost = 6,
+    blueprint_compat = true,
+    add_to_deck = forbidden_part_added,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.xmult } }),
+                Xmult_mod = card.ability.xmult,
+            }
+        end
+    end,
+})
+SMODS.Joker({
+    key = "right_leg",
+    config = { mult = 10 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card and card.ability.mult or self.config.mult } }
+    end,
+    rarity = 1,
+    pos = { x = 0, y = 1 },
+    atlas = "jokers",
+    cost = 5,
+    blueprint_compat = true,
+    add_to_deck = forbidden_part_added,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                message = localize({ type = "variable", key = "a_mult", vars = { card.ability.mult } }),
+                mult_mod = card.ability.mult,
+            }
+        end
+    end,
+})
 
 SMODS.Joker({
     key = "doodlebob",

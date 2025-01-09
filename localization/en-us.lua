@@ -48,13 +48,11 @@ return {
                 name = "The Forbidden One",
                 text = {
                     "Earn {C:money}$4{} at end of round",
-                    "If you have",
+                    "Instantly win if you have",
                     "{C:attention}Left Arm of The Forbidden One{},",
                     "{C:attention}Left Leg of The Forbidden One{},",
                     "{C:attention}Right Arm of The Forbidden One{},",
-                    "and {C:attention}Right Leg of The Forbidden One{},",
-                    "create a {C:dark_edition}Negative{} {C:cry_code}Rigged{} {C:attention}Googol",
-                    "{C:attention}Play Card{} when {C:attention}Blind{} is selected"
+                    "and {C:attention}Right Leg of The Forbidden One{}",
                 }
             },
             j_pencil_doodlebob = {
