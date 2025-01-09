@@ -3,6 +3,8 @@ SMODS.ConsumableType({
     primary_colour = HEX("FFFFFF"),
     secondary_colour = HEX("FF0000"),
     shop_rate = 4,
+    can_stack = true,
+    can_divide = true,
     loc_txt = {},
     default = "c_pencil_ono99",
 })
@@ -401,9 +403,14 @@ SMODS.Consumable({
     can_use = function(self, card)
         return true
     end,
+    can_bulk_use = true,
     use = function(self, card, area, copier)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         ease_dollars(card.ability.dollars)
+    end,
+    bulk_use = function(self, card, area, copier, number)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + number
+        ease_dollars(card.ability.dollars * number)
     end,
 })
 
