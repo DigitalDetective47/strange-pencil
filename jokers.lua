@@ -94,22 +94,11 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
         cost = 10,
         calculate = function(self, card, context)
             if context.setting_blind and not context.blueprint then
-                local has_left_arm = false
-                local has_right_arm = false
-                local has_left_leg = false
-                local has_right_leg = false
-                for k, v in ipairs(G.jokers.cards) do
-                    if v.ability.pencil_forbidden_left_arm then
-                        has_left_arm = true
-                    elseif v.ability.pencil_forbidden_right_arm then
-                        has_right_arm = true
-                    elseif v.ability.pencil_forbidden_left_leg then
-                        has_left_leg = true
-                    elseif v.ability.pencil_forbidden_right_leg then
-                        has_right_leg = true
-                    end
-                end
-                if has_left_arm and has_right_arm and has_left_leg and has_right_leg then
+                if #SMODS.find_card("j_pencil_left_arm") ~= 0
+                    and #SMODS.find_card("j_pencil_left_leg") ~= 0
+                    and #SMODS.find_card("j_pencil_right_arm") ~= 0
+                    and #SMODS.find_card("j_pencil_right_leg") ~= 0
+                then
                     local googol = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_cry_googol_play")
                     googol:set_edition("e_negative", true, nil, true)
                     googol:add_to_deck()
@@ -127,7 +116,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
     })
     SMODS.Joker({
         key = "left_arm",
-        config = { xchips = 2.5, pencil_forbidden_left_arm = true },
+        config = { xchips = 2.5 },
         loc_vars = function(self, info_queue, card)
             return { vars = { card and card.ability.xchips or self.config.xchips } }
         end,
@@ -148,7 +137,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
     })
     SMODS.Joker({
         key = "left_leg",
-        config = { chips = 50, pencil_forbidden_left_leg = true },
+        config = { chips = 50 },
         loc_vars = function(self, info_queue, card)
             return { vars = { card and card.ability.chips or self.config.chips } }
         end,
@@ -168,7 +157,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
     })
     SMODS.Joker({
         key = "right_arm",
-        config = { xmult = 1.5, pencil_forbidden_right_arm = true },
+        config = { xmult = 1.5 },
         loc_vars = function(self, info_queue, card)
             return { vars = { card and card.ability.xmult or self.config.xmult } }
         end,
@@ -188,7 +177,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Epic Jo
     })
     SMODS.Joker({
         key = "right_leg",
-        config = { mult = 10, pencil_forbidden_right_leg = true },
+        config = { mult = 10 },
         loc_vars = function(self, info_queue, card)
             return { vars = { card and card.ability.mult or self.config.mult } }
         end,
