@@ -144,6 +144,15 @@ return {
                     "from each {C:attention}Booster Pack",
                 },
             },
+            b_pencil_diseased = {
+                name = "Plagued Deck",
+                text = {
+                    "All {C:attention}playing cards",
+                    "are {C:attention,T:m_pencil_diseased}Diseased Cards",
+                    "Cards cannot change enhancements",
+                    "{s:0.8,C:inactive}Reminds of {s:0.8,C:inactive,T:b_cry_perishable}Perishable Deck",
+                },
+            },
         },
         Blind = {
             bl_pencil_glove = {
