@@ -30,11 +30,7 @@ SMODS.Joker({
                     return {}
                 end
             end
-            return {
-                message = localize({ type = "variable", key = "a_mult", vars = { card.ability.mult } }),
-                mult = card.ability.mult,
-                card = card,
-            }
+            return { mult = card.ability.mult }
         end
     end,
 })
@@ -65,10 +61,7 @@ SMODS.Joker({
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main and lassCount() * card.ability.xmult_per_queen > 1 then
-            return {
-                message = localize({ type = "variable", key = "a_xmult", vars = { math.max(lassCount() * card.ability.xmult_per_queen, 1) } }),
-                Xmult_mod = math.max(lassCount() * card.ability.xmult_per_queen, 1),
-            }
+            return { xmult = math.max(lassCount() * card.ability.xmult_per_queen, 1) }
         end
     end,
 })
@@ -128,11 +121,7 @@ SMODS.Joker({
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                message = localize({ type = "variable", key = "a_xchips", vars = { card.ability.xchips } }),
-                colour = G.C.CHIPS,
-                Xchip_mod = card.ability.xchips,
-            }
+            return { x_chips = card.ability.xchips }
         end
     end,
 })
@@ -150,10 +139,7 @@ SMODS.Joker({
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips } }),
-                chip_mod = card.ability.chips,
-            }
+            return { chips = card.ability.chips }
         end
     end,
 })
@@ -171,10 +157,7 @@ SMODS.Joker({
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.xmult } }),
-                Xmult_mod = card.ability.xmult,
-            }
+            return { xmult = card.ability.xmult }
         end
     end,
 })
@@ -192,10 +175,7 @@ SMODS.Joker({
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                message = localize({ type = "variable", key = "a_mult", vars = { card.ability.mult } }),
-                mult_mod = card.ability.mult,
-            }
+            return { mult = card.ability.mult }
         end
     end,
 })
@@ -220,13 +200,9 @@ SMODS.Joker({
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main and G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.pencil_index and G.GAME.consumeable_usage_total.pencil_index > 0 then
-            return {
-                message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }),
-                chip_mod = card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index,
-            }
+            return { chips = card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index }
         elseif context.using_consumeable and not context.blueprint and context.consumeable.ability.set == "index" then
-            card_eval_status_text(card, "extra", nil, nil, nil,
-                { message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }) })
+            return { message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }) }
         end
     end,
 })
@@ -312,10 +288,7 @@ if (SMODS.Mods["Talisman"] or {}).can_load then
         blueprint_compat = true,
         calculate = function(self, card, context)
             if context.joker_main then
-                return {
-                    message = localize({ type = "variable", key = "a_powchips", vars = { card.ability.exponent } }),
-                    Echip_mod = card.ability.exponent
-                }
+                return { e_chips = card.ability.exponent }
             end
         end,
     })
@@ -335,11 +308,7 @@ SMODS.Joker({
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                message = localize({ type = "variable", key = "a_mult", vars = { card.ability.mult } }),
-                mult_mod = card.ability.mult,
-                card = card,
-            }
+            return { mult = card.ability.mult }
         elseif context.before and not context.blueprint and next(context.poker_hands["Two Pair"]) then
             local diamonds = 0
             for k, v in ipairs(context.scoring_hand) do
@@ -347,7 +316,7 @@ SMODS.Joker({
                     diamonds = diamonds + 1
                     if diamonds >= card.ability.required_diamonds then
                         card.ability.mult = card.ability.mult + card.ability.scaling
-                        return { message = localize('k_upgrade_ex'), colour = G.C.MULT, card = card }
+                        return { message = localize('k_upgrade_ex'), colour = G.C.MULT }
                     end
                 end
             end
@@ -371,10 +340,7 @@ SMODS.Joker({
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.xmult } }),
-                Xmult_mod = card.ability.xmult
-            }
+            return { xmult = card.ability.xmult }
         elseif context.end_of_round and not (context.individual or context.repetition or context.blueprint) and G.GAME.blind.boss then
             card.ability.xmult = card.ability.xmult + card.ability.scaling
             return { message = localize("k_upgrade_ex") }
@@ -408,7 +374,7 @@ SMODS.Joker({
                 }))
                 return { message = localize('k_cracked') }
             else
-                SMODS.eval_this(card, { message = localize("k_safe_ex") })
+                SMODS.calculate_effect({ message = localize("k_safe_ex") }, card)
                 card.ability.rounds = card.ability.rounds + 1
                 card.ability.extra_value = card.ability.extra_value + card.ability.rounds
                 card:set_cost()
