@@ -148,7 +148,7 @@ return {
                     "All {C:attention}playing cards",
                     "are {C:attention,T:m_pencil_diseased}Diseased Cards",
                     "Cards cannot change enhancements",
-                    "{s:0.8,C:inactive}Reminds of {s:0.8,C:inactive,T:b_cry_perishable}Perishable Deck",
+                    "{s:0.8,C:inactive}Reminds of {s:0.8,C:inactive,T:b_cry_cry-perishable_deck}Perishable Deck",
                 },
             },
         },
