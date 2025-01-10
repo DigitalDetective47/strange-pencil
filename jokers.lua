@@ -92,10 +92,10 @@ SMODS.Joker({
     key = "forbidden_one",
     config = { payout = 4 },
     loc_vars = function(self, info_queue, card)
-        table.insert(info_queue, { key = "j_pencil_left_arm", set = "Joker", specific_vars = { 2.5 } })
-        table.insert(info_queue, { key = "j_pencil_left_leg", set = "Joker", specific_vars = { 1.5 } })
-        table.insert(info_queue, { key = "j_pencil_right_arm", set = "Joker", specific_vars = { 50 } })
-        table.insert(info_queue, { key = "j_pencil_right_leg", set = "Joker", specific_vars = { 10 } })
+        table.insert(info_queue, SMODS.Centers.j_pencil_left_arm)
+        table.insert(info_queue, SMODS.Centers.j_pencil_left_leg)
+        table.insert(info_queue, SMODS.Centers.j_pencil_right_arm)
+        table.insert(info_queue, SMODS.Centers.j_pencil_right_leg)
         return { vars = { card and card.ability.payout or self.config.payout } }
     end,
     rarity = 1,
