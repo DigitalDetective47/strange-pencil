@@ -405,7 +405,7 @@ SMODS.Joker({
                 card.ability.mult = card.ability.mult + card.ability.gain
                 return {
                     message = localize({ type = "variable", key = "a_mult", vars = { card.ability.gain } }),
-                    card = card
+                    message_card = card
                 }
             end
             if context.other_card:is_suit("Hearts") and card.ability.mult ~= 0 then
@@ -413,7 +413,7 @@ SMODS.Joker({
                 return {
                     message = localize({ type = "variable", key = "a_mult_minus", vars = { card.ability.loss } }),
                     colour = G.C.RED,
-                    card = card
+                    message_card = card
                 }
             end
         elseif context.joker_main then
