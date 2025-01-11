@@ -384,3 +384,40 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Joker({
+    key = "eclipse",
+    rarity = 2,
+    config = { gain = 1, loss = 1, mult = 0 },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card and card.ability.gain or self.config.gain, card and card.ability.loss or self.config.loss, card and card.ability.mult or self.config.mult }
+        }
+    end,
+    pos = { x = 4, y = 2 },
+    atlas = "jokers",
+    cost = 6,
+    blueprint_compat = true,
+    perishable_compat = false,
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.individual and not context.blueprint then
+            if context.other_card:is_suit("Clubs") then
+                card.ability.mult = card.ability.mult + card.ability.gain
+                return {
+                    message = localize({ type = "variable", key = "a_mult", vars = { card.ability.gain } }),
+                    message_card = card
+                }
+            end
+            if context.other_card:is_suit("Hearts") and card.ability.mult ~= 0 then
+                card.ability.mult = math.max(card.ability.mult - card.ability.loss, 0)
+                return {
+                    message = localize({ type = "variable", key = "a_mult_minus", vars = { card.ability.loss } }),
+                    colour = G.C.RED,
+                    message_card = card
+                }
+            end
+        elseif context.joker_main then
+            return { mult = card.ability.mult }
+        end
+    end,
+})
