@@ -1,0 +1,57 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if _center.name == 'Square Joker' and (_center.discovered or self.bypass_discovery_center) then 
+    self.children.center.scale.y = self.children.center.scale.x
+end
+'''
+position = "after"
+payload = '''
+if _center.key == 'j_pencil_jake' and (_center.discovered or self.bypass_discovery_center) then 
+    self.children.center.scale.y = self.children.center.scale.y*(86/95)
+    self.children.center.scale.x = self.children.center.scale.x*(64/71)
+end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if center.name == "Wee Joker" and (center.discovered or self.bypass_discovery_center) then 
+    H = H*0.7
+    W = W*0.7
+    self.T.h = H
+    self.T.w = W
+end
+'''
+position = "after"
+payload = '''
+if center.key == "j_pencil_jake" then 
+    H = H*(86/95)
+    W = W*(64/71)
+    self.T.h = H
+    self.T.w = W
+end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.VT.h = self.T.H
+self.VT.w = self.T.w
+'''
+position = "before"
+payload = '''
+if self.config.center.key == "j_pencil_jake" then 
+    self.T.h = H*(86/95)
+    self.T.w = W*(64/71)
+end
+'''
+match_indent = true
