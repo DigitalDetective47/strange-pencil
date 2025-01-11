@@ -282,6 +282,9 @@ return {
         alt_texture = {
             alt_tex_tspa_spectral = {
                 c_pencil_negative_space = { badge = 'spectrans_card' },
+            },
+            alt_tex_pencil_LeSpectrals_spectrals = {
+                name = "Lesbian Spectrals Strange Pencil Expansion"
             }
         },
         Other = {

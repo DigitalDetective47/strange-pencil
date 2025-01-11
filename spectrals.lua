@@ -136,3 +136,14 @@ if (SMODS.Mods["TSpectrals"] or {}).can_load then
     })
     table.insert(TexturePacks.texpack_tspa_spectrans.textures, "pencil_TSpectrals_spectrals")
 end
+if (SMODS.Mods["LeSpectrals"] or {}).can_load then
+    AltTexture({
+        key = "LeSpectrals_spectrals",
+        set = "Spectral",
+        path = "LeSpectrals/spectrals.png",
+        keys = {
+            "c_pencil_negative_space",
+        }
+    })
+    table.insert(TexturePacks.texpack_lspa_LeSpectrals.textures, "pencil_LeSpectrals_spectrals")
+end
