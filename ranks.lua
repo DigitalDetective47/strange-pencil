@@ -11,7 +11,7 @@ SMODS.Atlas({
     py = 95,
 })
 
-local sneven = {
+SMODS.Rank({
     key = "sneven",
     card_key = "7~",
     pos = { x = 0 },
@@ -24,8 +24,6 @@ local sneven = {
     in_pool = function(self, args)
         return not args.initial_deck
     end,
-}
+})
 
-SMODS.Rank(sneven)
-
-table.insert(SMODS.Ranks["7"], sneven)
+table.insert(SMODS.Ranks["6"].next, "pencil_sneven")
