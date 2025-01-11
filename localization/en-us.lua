@@ -354,6 +354,9 @@ return {
             k_infected = "Infected!",
             k_cracked = "Cracked!"
         },
+        ranks = {
+            pencil_sneven = "Sñeven",
+        },
         labels = {
             index = "Index",
         },
