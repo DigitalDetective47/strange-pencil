@@ -279,6 +279,11 @@ return {
                 }
             },
         },
+        alt_texture = {
+            alt_tex_tspa_spectral = {
+                c_pencil_negative_space = { badge = 'spectrans_card' },
+            }
+        },
         Other = {
             undiscovered_index = {
                 name = "Not Discovered",
