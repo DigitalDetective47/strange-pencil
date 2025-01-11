@@ -121,7 +121,7 @@ SMODS.Joker({
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
-            return { x_chips = card.ability.xchips }
+            return { xchips = card.ability.xchips }
         end
     end,
 })
@@ -288,7 +288,7 @@ if (SMODS.Mods["Talisman"] or {}).can_load then
         blueprint_compat = true,
         calculate = function(self, card, context)
             if context.joker_main then
-                return { e_chips = card.ability.exponent }
+                return { echips = card.ability.exponent }
             end
         end,
     })
