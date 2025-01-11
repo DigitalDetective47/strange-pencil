@@ -115,6 +115,16 @@ return {
                     "at end of round",
                 }
             },
+            j_pencil_eclipse = {
+                name = "Solar Eclipse",
+                text = {
+                    "Gains {C:mult}+#1#{} Mult when",
+                    "a {C:clubs}Club{} is scored",
+                    "Loses {C:mult}-#2#{} Mult when",
+                    "a {C:hearts}Heart{} is scored",
+                    "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
