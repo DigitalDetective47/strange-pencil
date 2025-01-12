@@ -125,6 +125,14 @@ return {
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
                 }
             },
+            j_pencil_club = {
+                name = "Club.",
+                text = {
+                    "All played {C:clubs}Clubs{} give {X:mult,C:white}X#1#{} Mult",
+                    "and are retriggered {C:attention}#2#{} times",
+                    "Destroyed if a non-{C:clubs}Club{} is played"
+                }
+            },
         },
         Back = {
             b_pencil_royal = {

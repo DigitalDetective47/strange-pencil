@@ -421,3 +421,51 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Joker({
+    key = "club",
+    rarity = 4,
+    config = { xmult = 1.3, retriggers = 3, dead = false },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card and card.ability.xmult or self.config.xmult, card and card.ability.retriggers or self.config.retriggers } }
+    end,
+    pos = { x = 0, y = 3 },
+    soul_pos = { x = 1, y = 3 },
+    atlas = "jokers",
+    cost = 20,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.repetition and not card.ability.dead then
+            return { message = localize("k_again_ex"), repetitions = card.ability.retriggers, card = card }
+        elseif context.cardarea == G.play and context.individual and not card.ability.dead then
+            return { x_mult = card.ability.xmult }
+        elseif context.before then
+            for k, v in ipairs(context.full_hand) do
+                if not v:is_suit("Clubs") then
+                    card.ability.dead = true
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            play_sound('tarot1')
+                            card.T.r = -0.2
+                            card:juice_up(0.3, 0.4)
+                            card.states.drag.is = true
+                            card.children.center.pinch.x = true
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after',
+                                delay = 0.3,
+                                func = function()
+                                    G.jokers:remove_card(card)
+                                    card:remove()
+                                    return true
+                                end
+                            }))
+                            return true
+                        end
+                    }))
+                    delay(0.4)
+                    return
+                end
+            end
+        end
+    end,
+})
