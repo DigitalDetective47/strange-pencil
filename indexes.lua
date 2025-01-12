@@ -11,6 +11,7 @@ SMODS.ConsumableType({
     secondary_colour = HEX("FF0000"),
     shop_rate = 4,
     loc_txt = {},
+    default = "c_pencil_ono99",
 })
 SMODS.UndiscoveredSprite({
     key = "index",
