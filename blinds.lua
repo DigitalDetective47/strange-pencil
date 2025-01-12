@@ -29,6 +29,7 @@ function Game:update(dt)
     end
     return hook(self, dt)
 end
+
 local hook2 = Game.update_shop
 function Game:update_shop(dt)
     G.GAME.blind.ante = nil
@@ -99,3 +100,46 @@ function Card:calculate_seal(context)
         G.GAME.blind.triggered = true
     end
 end
+
+SMODS.Blind({
+    key = "lock",
+    boss = { min = 3 },
+    in_pool = function(self)
+        if G.GAME.round_resets.ante < 3 then
+            return false
+        end
+        for k, v in ipairs(G.jokers.cards) do
+            if not v.ability.pinned then
+                return true
+            end
+        end
+        return false
+    end,
+    boss_colour = HEX("FFFFFF"),
+    pos = { x = 0, y = 3 },
+    atlas = "blinds",
+    mult = 2,
+    press_play = function(self)
+        local targets = {}
+        for k, v in ipairs(G.jokers.cards) do
+            if not v.ability.pinned then
+                table.insert(targets, v)
+            end
+        end
+        if #targets >= 1 then
+            local hit = pseudorandom_element(targets, pseudoseed(self.key))
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.3,
+                func = function()
+                    play_sound("gold_seal", 1.2, 0.4)
+                    hit:juice_up(0.3, 0.3)
+                    SMODS.Stickers.pinned:apply(hit, true)
+                    SMODS.juice_up_blind()
+                    return true
+                end
+            }))
+            G.GAME.blind.triggered = true
+        end
+    end,
+})

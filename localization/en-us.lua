@@ -183,6 +183,14 @@ return {
                     "are disabled",
                 }
             },
+            bl_pencil_lock = {
+                name = "The Lock",
+                text = {
+                    "Apply {C:attention}Pinned{} to",
+                    "a random {C:attention}Joker",
+                    "when hand is played",
+                }
+            },
         },
         Enhanced = {
             m_pencil_diseased = {
