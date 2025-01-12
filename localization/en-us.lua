@@ -247,6 +247,19 @@ return {
                     "{C:inactive}(Must have room)",
                 }
             },
+            c_pencil_ono99 = {
+                name = "O'no 99",
+                text = {
+                    "Destroy all {C:attention}O'no 99{}s in your",
+                    "consumable slots, and create a random",
+                    "{C:blue}Index{} card for each {C:attention}O'no 99{} destroyed",
+                    "{C:inactive,s:0.8}Created cards inherit the {C:dark_edition,s:0.8}edition",
+                    "{C:inactive,s:0.8} of the destroyed {C:attention,s:0.8}O'no 99",
+                    "{C:attention}O'no 99{} cannot appear again",
+                    "Must have at least {C:attention}#1#{} {C:attention}O'no 99{}s to use",
+                    "Cannot be sold",
+                }
+            },
         },
         Spectral = {
             c_pencil_negative_space = {

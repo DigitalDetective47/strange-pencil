@@ -371,3 +371,53 @@ SMODS.Consumable({
         delay(0.6)
     end,
 })
+
+SMODS.Consumable({
+    key = "ono99",
+    set = "index",
+    atlas = "indexes",
+    pos = { x = 1, y = 1 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card and card.ability.cards_needed or self.config.cards_needed } }
+    end,
+    cost = 5,
+    config = { cards_needed = 4 },
+    can_use = function(self, card)
+        if (SMODS.Mods["incantation"] or {}).can_load then
+            local total = 0
+            for k, v in ipairs(SMODS.find_card("c_pencil_ono99", true)) do
+                total = total + v:getQty()
+                if total >= card.ability.cards_needed then
+                    return true
+                end
+            end
+            return false
+        else
+            return #SMODS.find_card("c_pencil_ono99", true) >= card.ability.cards_needed
+        end
+    end,
+    use = function(self, card, area, copier)
+        G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
+        G.GAME.banned_keys.c_pencil_ono99 = true
+        play_sound('timpani')
+        for k, v in ipairs(SMODS.find_card("c_pencil_ono99")) do
+            if not v.ability.eternal then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    func = function()
+                        for i = 1, (SMODS.Mods["incantation"] or {}).can_load and v:getQty() or 1, 1 do
+                            SMODS.add_card({ set = "index", no_edition = true, edition = v.edition })
+                        end
+                        v:start_dissolve()
+                        return true
+                    end
+                }))
+            end
+        end
+    end,
+})
+
+local hook = Card.can_sell_card
+function Card:can_sell_card(context)
+    return self.config.center.key ~= "c_pencil_ono99" and hook(self, context)
+end
