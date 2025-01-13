@@ -88,7 +88,9 @@ local immutable = {
         banned_tags = {
             { id = "tag_pencil_workshop" },
         },
-        banned_other = {},
+        banned_other = {
+            { id = "bl_pencil_lock", type = "blind" },
+        },
     },
 }
 
