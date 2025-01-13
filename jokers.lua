@@ -334,6 +334,7 @@ SMODS.Joker({
         }
     end,
     pos = { x = 2, y = 2 },
+    pixel_size = { w = 64, h = 86 },
     atlas = "jokers",
     cost = 9,
     blueprint_compat = true,
