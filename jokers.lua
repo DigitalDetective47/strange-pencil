@@ -484,7 +484,7 @@ if calendar_date.month == 4 or calendar_date.month == 6 or calendar_date.month =
     month_type = 13
 elseif calendar_date.month ~= 2 then
     month_type = 20
-elseif calendar_date.year % 4 == 0 then
+elseif calendar_date.year % 4 == 0 and (calendar_date.year % 100 ~= 0 or calendar_date.year % 400 == 0) then
     month_type = 6
 end
 
