@@ -20,6 +20,6 @@ match_indent = true
 [patches.pattern]
 target = "card.lua"
 pattern = "G.GAME.pack_choices = self.config.center.config.choose or 1"
-position = "at"
+position = "after"
 payload = "G.GAME.pack_choices = self.ability.choose"
 match_indent = true
