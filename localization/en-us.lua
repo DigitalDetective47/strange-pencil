@@ -133,6 +133,14 @@ return {
                     "Destroyed if a non-{C:clubs}Club{} is played"
                 }
             },
+            j_pencil_calendar = {
+                name = "Calendar",
+                text = {
+                    "Adds current day of month to chips",
+                    "Adds current month to mult",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive}, {C:mult}+#2#{C:inactive})",
+                }
+            },
         },
         Back = {
             b_pencil_royal = {

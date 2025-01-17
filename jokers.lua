@@ -69,7 +69,7 @@ SMODS.Joker({
 function forbidden_part_added(center, card, from_debuff)
     if not (G.GAME.won or G.GAME.win_notified)
     then
-        for k, v in ipairs({"j_pencil_forbidden_one", "j_pencil_left_arm", "j_pencil_left_leg", "j_pencil_right_arm", "j_pencil_right_leg"}) do
+        for k, v in ipairs({ "j_pencil_forbidden_one", "j_pencil_left_arm", "j_pencil_left_leg", "j_pencil_right_arm", "j_pencil_right_leg" }) do
             if center.key ~= v and #SMODS.find_card(v) == 0 then
                 return
             end
@@ -467,6 +467,43 @@ SMODS.Joker({
                     return
                 end
             end
+        end
+    end,
+})
+
+SMODS.Atlas({
+    key = "calendar",
+    path = "calendar.png",
+    px = 71,
+    py = 95,
+})
+
+local calendar_date = os.date("*t")
+local month_type = -1
+if calendar_date.month == 4 or calendar_date.month == 6 or calendar_date.month == 9 or calendar_date.month == 11 then
+    month_type = 13
+elseif calendar_date.month ~= 2 then
+    month_type = 20
+elseif calendar_date.year % 4 == 0 then
+    month_type = 6
+end
+
+SMODS.Joker({
+    key = "calendar",
+    rarity = 1,
+    config = { month = calendar_date.month, day = calendar_date.day },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card and card.ability.day or self.config.day, card and card.ability.month or self.config.month } }
+    end,
+    pos = { x = calendar_date.day - 1, y = month_type + calendar_date.wday },
+    atlas = "calendar",
+    immutable = true,
+    cost = 5,
+    pixel_size = { h = 59 },
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { chips = card.ability.day, mult = card.ability.month }
         end
     end,
 })
