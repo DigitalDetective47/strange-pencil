@@ -70,3 +70,24 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Challen
     table.insert(SMODS.Challenges.c_cry_ballin.restrictions.banned_cards, 10, { id = "c_pencil_plague" })
     table.insert(SMODS.Challenges.c_cry_ballin.restrictions.banned_cards, 11, { id = "c_pencil_parade" })
 end
+
+if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Enhanced Decks"] then
+    SMODS.Back({
+        key = "diseased",
+        config = { cry_force_enhancement = "m_pencil_diseased" },
+        -- loc_vars = function(self, info_queue, card)
+        --     table.insert(info_queue, SMODS.Centers.m_pencil_diseased)
+        -- end,
+        pos = { x = 2, y = 0 },
+        atlas = "enhancements",
+    })
+    SMODS.Back({
+        key = "flagged",
+        config = { cry_force_enhancement = "m_pencil_flagged" },
+        -- loc_vars = function(self, info_queue, card)
+        --     table.insert(info_queue, SMODS.Centers.m_pencil_flagged)
+        -- end,
+        pos = { x = 2, y = 1 },
+        atlas = "enhancements",
+    })
+end

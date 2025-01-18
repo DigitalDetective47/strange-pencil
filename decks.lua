@@ -83,15 +83,3 @@ SMODS.Back({
         G.GAME.modifiers.booster_choices = self.config.booster_choices
     end
 })
-
-if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Enhanced Decks"] then
-    SMODS.Back({
-        key = "diseased",
-        config = { cry_force_enhancement = "m_pencil_diseased" },
-        -- loc_vars = function(self, info_queue, card)
-        --     table.insert(info_queue, SMODS.Centers.m_pencil_diseased)
-        -- end,
-        pos = { x = 3, y = 0 },
-        atlas = "decks",
-    })
-end
