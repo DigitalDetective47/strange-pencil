@@ -10,21 +10,21 @@ SMODS.Voucher({
 	atlas = "vouchers",
 	pos = { x = 0, y = 0 },
 	config = { multiplier = 0.5 },
-	loc_vars = function(self, info_queue)
-		return { vars = { self.config.multiplier } }
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.multiplier } }
 	end,
-	redeem = function(self)
+	redeem = function(self, card)
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * self.config.multiplier
+				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * card.ability.multiplier
 				return true
 			end,
 		}))
 	end,
-	unredeem = function(self)
+	unredeem = function(self, card)
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / self.config.multiplier
+				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
 				return true
 			end,
 		}))
@@ -36,22 +36,22 @@ SMODS.Voucher({
 	atlas = "vouchers",
 	pos = { x = 0, y = 1 },
 	config = { multiplier = 0.5 },
-	loc_vars = function(self, info_queue)
-		return { vars = { self.config.multiplier } }
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.multiplier } }
 	end,
 	requires = { "v_pencil_half_chip" },
-	redeem = function(self)
+	redeem = function(self, card)
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * self.config.multiplier
+				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * card.ability.multiplier
 				return true
 			end,
 		}))
 	end,
-	unredeem = function(self)
+	unredeem = function(self, card)
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / self.config.multiplier
+				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
 				return true
 			end,
 		}))
@@ -64,22 +64,22 @@ if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Voucher
 		atlas = "vouchers",
 		pos = { x = 0, y = 2 },
 		config = { exponent = 0.5 },
-		loc_vars = function(self, info_queue)
-			return { vars = { self.config.exponent } }
+		loc_vars = function(self, info_queue, card)
+			return { vars = { card.ability.exponent } }
 		end,
 		requires = { "v_pencil_vision" },
-		redeem = function(self)
+		redeem = function(self, card)
 			G.E_MANAGER:add_event(Event({
 				func = function()
-					G.GAME.starting_params.ante_scaling_exponential = G.GAME.starting_params.ante_scaling_exponential * self.config.exponent
+					G.GAME.starting_params.ante_scaling_exponential = G.GAME.starting_params.ante_scaling_exponential * card.ability.exponent
 					return true
 				end,
 			}))
 		end,
-		unredeem = function(self)
+		unredeem = function(self, card)
 			G.E_MANAGER:add_event(Event({
 				func = function()
-					G.GAME.starting_params.ante_scaling_exponential = G.GAME.starting_params.ante_scaling_exponential / self.config.exponent
+					G.GAME.starting_params.ante_scaling_exponential = G.GAME.starting_params.ante_scaling_exponential / card.ability.exponent
 					return true
 				end,
 			}))
