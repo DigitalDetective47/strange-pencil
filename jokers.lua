@@ -522,7 +522,6 @@ SMODS.Joker({
     atlas = "jokers",
     cost = 4,
     blueprint_compat = true,
-    perishable_compat = false,
     calculate = function(self, card, context)
         if context.before then
             local diseased = false
