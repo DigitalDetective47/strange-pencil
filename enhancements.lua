@@ -33,7 +33,7 @@ SMODS.Enhancement({
     name = "Flagged Card",
     config = { pos = nil },
     loc_vars = function(self, info_queue, card)
-        if not card then
+        if card.fake_card then
             return { vars = { "Shows its position in the deck", "" } }
         end
         if G.your_collection then
