@@ -503,3 +503,47 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Sound({
+    key = "doot",
+    path = "doot.ogg"
+})
+
+SMODS.Joker({
+    key = "doot",
+    rarity = 1,
+    config = { dollars = 5 },
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, SMODS.Centers.m_pencil_diseased)
+        table.insert(info_queue, SMODS.Centers.m_pencil_flagged)
+        return { vars = { card.ability.dollars } }
+    end,
+    pos = { x = 5, y = 2 },
+    atlas = "jokers",
+    cost = 4,
+    blueprint_compat = true,
+    perishable_compat = false,
+    calculate = function(self, card, context)
+        if context.before then
+            local diseased = false
+            local flagged = false
+            for k, v in ipairs(context.scoring_hand) do
+                if SMODS.has_enhancement(v, "m_pencil_diseased") then
+                    diseased = true
+                end
+                if SMODS.has_enhancement(v, "m_pencil_flagged") then
+                    flagged = true
+                end
+                if diseased and flagged then
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            play_sound("pencil_doot")
+                            return true
+                        end
+                    }))
+                    return { dollars = card.ability.dollars }
+                end
+            end
+        end
+    end,
+})

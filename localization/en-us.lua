@@ -141,6 +141,14 @@ return {
                     "{C:inactive}(Currently {C:chips}+#1#{C:inactive}, {C:mult}+#2#{C:inactive})",
                 }
             },
+            j_pencil_doot = {
+                name = "Doot",
+                text = {
+                    "Earn {C:money}$#1#{} if scored hand",
+                    "contains a {C:attention}Diseased Card",
+                    "and a {C:attention}Flagged Card",
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
