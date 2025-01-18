@@ -9,7 +9,7 @@ SMODS.Joker({
     key = "swimmers",
     config = { mult = 11 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.mult or self.config.mult } }
+        return { vars = { card.ability.mult } }
     end,
     rarity = 2,
     pos = { x = 0, y = 0 },
@@ -49,10 +49,7 @@ SMODS.Joker({
     key = "lass",
     config = { xmult_per_queen = 1 },
     loc_vars = function(self, info_queue, card)
-        return {
-            vars = { card and card.ability.xmult_per_queen or self.config.xmult_per_queen,
-                math.max(lassCount() * (card and card.ability.xmult_per_queen or self.config.xmult_per_queen), 1) }
-        }
+        return { vars = { card.ability.xmult_per_queen, math.max(lassCount() * card.ability.xmult_per_queen, 1) } }
     end,
     rarity = 3,
     pos = { x = 1, y = 0 },
@@ -96,7 +93,7 @@ SMODS.Joker({
         table.insert(info_queue, SMODS.Centers.j_pencil_left_leg)
         table.insert(info_queue, SMODS.Centers.j_pencil_right_arm)
         table.insert(info_queue, SMODS.Centers.j_pencil_right_leg)
-        return { vars = { card and card.ability.payout or self.config.payout } }
+        return { vars = { card.ability.payout } }
     end,
     rarity = 1,
     pos = { x = 2, y = 1 },
@@ -111,7 +108,7 @@ SMODS.Joker({
     key = "left_arm",
     config = { xchips = 2.5 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.xchips or self.config.xchips } }
+        return { vars = { card.ability.xchips } }
     end,
     rarity = 1,
     pos = { x = 3, y = 1 },
@@ -129,7 +126,7 @@ SMODS.Joker({
     key = "left_leg",
     config = { chips = 50 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.chips or self.config.chips } }
+        return { vars = { card.ability.chips } }
     end,
     rarity = 1,
     pos = { x = 4, y = 1 },
@@ -147,7 +144,7 @@ SMODS.Joker({
     key = "right_arm",
     config = { xmult = 1.5 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.xmult or self.config.xmult } }
+        return { vars = { card.ability.xmult } }
     end,
     rarity = 1,
     pos = { x = 1, y = 1 },
@@ -165,7 +162,7 @@ SMODS.Joker({
     key = "right_leg",
     config = { mult = 10 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.mult or self.config.mult } }
+        return { vars = { card.ability.mult } }
     end,
     rarity = 1,
     pos = { x = 0, y = 1 },
@@ -186,10 +183,9 @@ SMODS.Joker({
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card and card.ability.chips_per_index or self.config.chips_per_index,
+                card.ability.chips_per_index,
                 G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.pencil_index and
-                (card and card.ability.chips_per_index or self.config.chips_per_index) *
-                G.GAME.consumeable_usage_total.pencil_index or 0,
+                card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index or 0,
             }
         }
     end,
@@ -238,14 +234,14 @@ SMODS.Joker({
     rarity = 3,
     config = { factor = 1 },
     loc_vars = function(self, info_queue, card)
-        if (card and card.ability.factor or self.config.factor) == 1 then
+        if card.ability.factor == 1 then
             return { vars = { "once" } }
-        elseif (card and card.ability.factor or self.config.factor) == 2 then
+        elseif card.ability.factor == 2 then
             return { vars = { "twice" } }
-        elseif (card and card.ability.factor or self.config.factor) == 3 then
+        elseif card.ability.factor == 3 then
             return { vars = { "thrice" } }
         else
-            return { vars = { (card and card.ability.factor or self.config.factor) .. " times" } }
+            return { vars = { card.ability.factor .. " times" } }
         end
     end,
     pos = { x = 5, y = 0 },
@@ -279,7 +275,7 @@ if (SMODS.Mods["Talisman"] or {}).can_load then
         rarity = 4,
         config = { exponent = 2 },
         loc_vars = function(self, info_queue, card)
-            return { vars = { card and card.ability.exponent or self.config.exponent } }
+            return { vars = { card.ability.exponent } }
         end,
         pos = { x = 0, y = 2 },
         soul_pos = { x = 1, y = 2 },
@@ -299,7 +295,7 @@ SMODS.Joker({
     rarity = 1,
     config = { scaling = 4, mult = 0, required_diamonds = 2 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.scaling or self.config.scaling, card and card.ability.required_diamonds or self.config.required_diamonds, card and card.ability.mult or self.config.mult } }
+        return { vars = { card.ability.scaling, card.ability.required_diamonds, card.ability.mult } }
     end,
     pos = { x = 5, y = 1 },
     atlas = "jokers",
@@ -330,7 +326,7 @@ SMODS.Joker({
     config = { scaling = 1, xmult = 1 },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { card and card.ability.scaling or self.config.scaling, card and card.ability.xmult or self.config.xmult }
+            vars = { card.ability.scaling, card.ability.xmult }
         }
     end,
     pos = { x = 2, y = 2 },
@@ -355,7 +351,7 @@ SMODS.Joker({
     config = { chance = 4, rounds = 0 },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { G.GAME.probabilities.normal, card and card.ability.chance or self.config.chance, card and card.ability.rounds or self.config.rounds }
+            vars = { G.GAME.probabilities.normal, card.ability.chance, card.ability.rounds }
         }
     end,
     pos = { x = 3, y = 2 },
@@ -392,7 +388,7 @@ SMODS.Joker({
     config = { gain = 1, loss = 1, mult = 0 },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { card and card.ability.gain or self.config.gain, card and card.ability.loss or self.config.loss, card and card.ability.mult or self.config.mult }
+            vars = { card.ability.gain, card.ability.loss, card.ability.mult }
         }
     end,
     pos = { x = 4, y = 2 },
@@ -428,7 +424,7 @@ SMODS.Joker({
     rarity = 4,
     config = { xmult = 1.3, retriggers = 3, dead = false },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.xmult or self.config.xmult, card and card.ability.retriggers or self.config.retriggers } }
+        return { vars = { card.ability.xmult, card.ability.retriggers } }
     end,
     pos = { x = 0, y = 3 },
     soul_pos = { x = 1, y = 3 },
@@ -493,7 +489,7 @@ SMODS.Joker({
     rarity = 1,
     config = { month = calendar_date.month, day = calendar_date.day },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.day or self.config.day, card and card.ability.month or self.config.month } }
+        return { vars = { card.ability.day, card.ability.month } }
     end,
     pos = { x = calendar_date.day - 1, y = month_type + calendar_date.wday },
     atlas = "calendar",

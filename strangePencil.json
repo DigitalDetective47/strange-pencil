@@ -11,6 +11,6 @@
     "version": "0.2.0~dev",
     "priority": 1e300,
     "dependencies": [
-        "Steamodded (>=1.0.0~ALPHA-1312c)"
+        "Steamodded (>=1.0.0~ALPHA-1317b)"
     ]
 }

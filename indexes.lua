@@ -25,7 +25,7 @@ SMODS.Consumable({
     atlas = "indexes",
     pos = { x = 1, y = 0 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.selections or self.config.selections } }
+        return { vars = { card.ability.selections } }
     end,
     cost = 5,
     config = { selections = 1 },
@@ -139,7 +139,7 @@ SMODS.Consumable({
     atlas = "indexes",
     pos = { x = 2, y = 0 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.dollars or self.config.dollars } }
+        return { vars = { card.ability.dollars } }
     end,
     cost = 5,
     config = { dollars = 15 },
@@ -344,7 +344,7 @@ SMODS.Consumable({
     atlas = "indexes",
     pos = { x = 0, y = 1 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.cards or self.config.cards } }
+        return { vars = { card.ability.cards } }
     end,
     cost = 5,
     config = { cards = 2 },
@@ -379,7 +379,7 @@ SMODS.Consumable({
     atlas = "indexes",
     pos = { x = 1, y = 1 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.cards_needed or self.config.cards_needed } }
+        return { vars = { card.ability.cards_needed } }
     end,
     cost = 5,
     config = { cards_needed = 4 },

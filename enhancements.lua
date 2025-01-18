@@ -10,7 +10,7 @@ SMODS.Enhancement({
     name = "Diseased Card",
     config = { total = 5, remaining = 5, new = false },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card and card.ability.remaining or self.config.remaining, card and card.ability.total or self.config.total } }
+        return { vars = { card.ability.remaining, card.ability.total } }
     end,
     atlas = "enhancements",
     pos = { x = 0, y = 0 }
