@@ -50,3 +50,18 @@ for k, v in ipairs(G.play.cards) do
 end
 '''
 match_indent = true
+
+# Flagged Card
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "G.deck:shuffle('nr'..G.GAME.round_resets.ante)"
+position = "after"
+payload = '''
+for k, v in ipairs(G.deck.cards) do
+    if SMODS.has_enhancement(v, "m_pencil_flagged") then
+        v.ability.pos = k
+    end
+end
+'''
+match_indent = true

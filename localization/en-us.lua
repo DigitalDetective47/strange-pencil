@@ -217,6 +217,12 @@ return {
                     "{C:inactive}({C:attention}#1#{C:inactive} remaining)"
                 }
             },
+            m_pencil_flagged = {
+                name = "Flagged Card",
+                text = {
+                    "#1#{C:attention}#2#",
+                }
+            },
         },
         Tarot = {
             c_pencil_plague = {
@@ -224,6 +230,13 @@ return {
                 text = {
                     "Enhances {C:attention}#1#{} selected card",
                     "into a {C:attention}Diseased Card",
+                }
+            },
+            c_pencil_parade = {
+                name = "The Parade",
+                text = {
+                    "Enhances up to {C:attention}#1#{} selected cards",
+                    "into a {C:attention}Flagged Cards",
                 }
             }
         },
