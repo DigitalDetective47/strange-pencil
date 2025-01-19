@@ -273,38 +273,9 @@ SMODS.Consumable({
             trigger = "after",
             delay = 0.1,
             func = function()
-                local left_suit_prefix = string.sub(left.base.suit, 1, 1) .. '_'
-                local left_rank_suffix = left.base.id
-                if left_rank_suffix < 10 then
-                    left_rank_suffix = tostring(left_rank_suffix)
-                elseif left_rank_suffix == 10 then
-                    left_rank_suffix = 'T'
-                elseif left_rank_suffix == 11 then
-                    left_rank_suffix = 'J'
-                elseif left_rank_suffix == 12 then
-                    left_rank_suffix = 'Q'
-                elseif left_rank_suffix == 13 then
-                    left_rank_suffix = 'K'
-                elseif left_rank_suffix == 14 then
-                    left_rank_suffix = 'A'
-                end
-                local right_suit_prefix = string.sub(right.base.suit, 1, 1) .. '_'
-                local right_rank_suffix = right.base.id
-                if right_rank_suffix < 10 then
-                    right_rank_suffix = tostring(right_rank_suffix)
-                elseif right_rank_suffix == 10 then
-                    right_rank_suffix = 'T'
-                elseif right_rank_suffix == 11 then
-                    right_rank_suffix = 'J'
-                elseif right_rank_suffix == 12 then
-                    right_rank_suffix = 'Q'
-                elseif right_rank_suffix == 13 then
-                    right_rank_suffix = 'K'
-                elseif right_rank_suffix == 14 then
-                    right_rank_suffix = 'A'
-                end
-                right:set_base(G.P_CARDS[left_suit_prefix .. left_rank_suffix])
-                left:set_base(G.P_CARDS[right_suit_prefix .. right_rank_suffix])
+                local temp = { suit = left.base.suit, rank = left.base.value }
+                SMODS.change_base(left, right.base.suit, right.base.value)
+                SMODS.change_base(right, temp.suit, temp.rank)
                 card:juice_up(0.3, 0.3)
                 return true
             end,
