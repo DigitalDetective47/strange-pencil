@@ -64,6 +64,13 @@ SMODS.Consumable({
     end,
 })
 
+if (SMODS.Mods["cartomancer"] or {}).can_load then
+    local hook = Card.cart_to_string
+    function Card:cart_to_string(args)
+        return hook(self, args) .. (SMODS.has_enhancement(self, "m_pencil_flagged") and self.ability.pos and self.ability.pos <= #G.deck.cards and tostring(self.ability.pos) or "")
+    end
+end
+
 table.insert(SMODS.Challenges.c_fragile_1.restrictions.banned_cards, 8, { id = "c_pencil_plague" })
 table.insert(SMODS.Challenges.c_fragile_1.restrictions.banned_cards, 9, { id = "c_pencil_parade" })
 if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Challenges"] then
