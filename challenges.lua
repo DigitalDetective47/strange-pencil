@@ -73,6 +73,7 @@ local immutable = {
             { id = "c_sun" },
             { id = "c_world" },
             { id = "c_pencil_plague" },
+            { id = "c_pencil_parade" },
             { id = "c_talisman" },
             { id = "c_aura" },
             { id = "c_sigil" },
