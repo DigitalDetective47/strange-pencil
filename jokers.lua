@@ -269,7 +269,7 @@ SMODS.Joker({
     end,
 })
 
-if (SMODS.Mods["Talisman"] or {}).can_load then
+if SMODS.Mods.Talisman and SMODS.Mods.Talisman.can_load then
     SMODS.Joker({
         key = "square",
         rarity = 4,

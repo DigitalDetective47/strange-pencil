@@ -124,7 +124,7 @@ SMODS.Consumable({
         for k, v in ipairs(targets) do
             local consume = create_card("Consumeables", G.consumables, nil, nil, nil, nil, v.config.center.key, nil)
             copy_card(v, consume)
-            if (SMODS.Mods["incantation"] or {}).can_load then
+            if SMODS.Mods.incantation and SMODS.Mods.incantation.can_load then
                 consume:setQty(1)
             end
             consume:add_to_deck()
@@ -384,7 +384,7 @@ SMODS.Consumable({
     cost = 5,
     config = { cards_needed = 4 },
     can_use = function(self, card)
-        if (SMODS.Mods["incantation"] or {}).can_load then
+        if SMODS.Mods.incantation and SMODS.Mods.incantation.can_load then
             local total = 0
             for k, v in ipairs(SMODS.find_card("c_pencil_ono99", true)) do
                 total = total + v:getQty()
@@ -406,7 +406,7 @@ SMODS.Consumable({
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     func = function()
-                        for i = 1, (SMODS.Mods["incantation"] or {}).can_load and v:getQty() or 1, 1 do
+                        for i = 1, SMODS.Mods.incantation and SMODS.Mods.incantation.can_load and v:getQty() or 1, 1 do
                             SMODS.add_card({ set = "index", no_edition = true, edition = v.edition })
                         end
                         v:start_dissolve()

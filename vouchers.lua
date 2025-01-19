@@ -58,7 +58,7 @@ SMODS.Voucher({
 	end,
 })
 
-if (SMODS.Mods["Cryptid"] or {}).can_load and SMODS.Mods.Cryptid.config["Vouchers"] then -- Tier 3 vouchers should only appear with Cryptid Vouchers enabled
+if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config.Vouchers then -- Tier 3 vouchers should only appear with Cryptid Vouchers enabled
 	SMODS.Voucher({
 		key = "sqrt",
 		atlas = "vouchers",
