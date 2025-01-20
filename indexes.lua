@@ -27,7 +27,6 @@ SMODS.Booster({
     cost = 4,
     config = { extra = 2, choose = 1 },
     draw_hand = true,
-    loc_vars = SMODS.Booster.loc_vars,
     set_ability = function(self, card, initial, delay_sprites)
         card.ability.extra = card.ability.extra + (G.GAME.index_pack_bonus or 0)
     end,
@@ -62,7 +61,6 @@ SMODS.Booster({
     cost = 4,
     config = { extra = 2, choose = 1 },
     draw_hand = true,
-    loc_vars = SMODS.Booster.loc_vars,
     set_ability = SMODS.Centers.p_pencil_index_1.set_ability,
     ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
     particles = SMODS.Centers.p_pencil_index_1.particles,
@@ -77,7 +75,6 @@ SMODS.Booster({
     cost = 6,
     config = { extra = 4, choose = 1 },
     draw_hand = true,
-    loc_vars = SMODS.Booster.loc_vars,
     set_ability = SMODS.Centers.p_pencil_index_1.set_ability,
     ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
     particles = SMODS.Centers.p_pencil_index_1.particles,
@@ -92,7 +89,6 @@ SMODS.Booster({
     cost = 8,
     config = { extra = 4, choose = 2 },
     draw_hand = true,
-    loc_vars = SMODS.Booster.loc_vars,
     set_ability = SMODS.Centers.p_pencil_index_1.set_ability,
     ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
     particles = SMODS.Centers.p_pencil_index_1.particles,
