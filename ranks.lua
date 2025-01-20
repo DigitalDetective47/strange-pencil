@@ -22,7 +22,7 @@ SMODS.Rank({
     face_nominal = 0.01,
     next = { "8" },
     in_pool = function(self, args)
-        return not args.initial_deck
+        return not (args and args.initial_deck)
     end,
 })
 
