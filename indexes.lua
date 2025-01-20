@@ -19,6 +19,171 @@ SMODS.UndiscoveredSprite({
     pos = { x = 0, y = 0 },
 })
 
+SMODS.Booster({
+    key = "index_1",
+    kind = "Index",
+    atlas = "boosters",
+    pos = { x = 0, y = 1 },
+    cost = 4,
+    config = { extra = 2, choose = 1 },
+    draw_hand = true,
+    loc_vars = SMODS.Booster.loc_vars,
+    ease_background_colour = function(self)
+        ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
+    end,
+    particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.RED, lighten(G.C.WHITE, 0.4), lighten(G.C.WHITE, 0.2), lighten(G.C.BLUE, 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = function(self, card, i)
+        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
+    end,
+    group_key = "k_index_pack",
+})
+SMODS.Booster({
+    key = "index_2",
+    kind = "Index",
+    atlas = "boosters",
+    pos = { x = 1, y = 1 },
+    cost = 4,
+    config = { extra = 2, choose = 1 },
+    draw_hand = true,
+    loc_vars = SMODS.Booster.loc_vars,
+    ease_background_colour = function(self)
+        ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
+    end,
+    particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.RED, lighten(G.C.WHITE, 0.4), lighten(G.C.WHITE, 0.2), lighten(G.C.BLUE, 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = function(self, card, i)
+        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
+    end,
+    group_key = "k_index_pack",
+})
+SMODS.Booster({
+    key = "index_jumbo",
+    kind = "Index",
+    atlas = "boosters",
+    pos = { x = 2, y = 1 },
+    cost = 4,
+    config = { extra = 4, choose = 1 },
+    draw_hand = true,
+    loc_vars = SMODS.Booster.loc_vars,
+    ease_background_colour = function(self)
+        ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
+    end,
+    particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.RED, lighten(G.C.WHITE, 0.4), lighten(G.C.WHITE, 0.2), lighten(G.C.BLUE, 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = function(self, card, i)
+        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
+    end,
+    group_key = "k_index_pack",
+})
+SMODS.Booster({
+    key = "index_mega",
+    kind = "Index",
+    atlas = "boosters",
+    pos = { x = 3, y = 1 },
+    cost = 4,
+    config = { extra = 4, choose = 2 },
+    draw_hand = true,
+    loc_vars = SMODS.Booster.loc_vars,
+    ease_background_colour = function(self)
+        ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
+    end,
+    particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.RED, lighten(G.C.WHITE, 0.4), lighten(G.C.WHITE, 0.2), lighten(G.C.BLUE, 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+    create_card = function(self, card, i)
+        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
+    end,
+    group_key = "k_index_pack",
+})
+
+SMODS.Tag({
+    atlas = "tags",
+    pos = { x = 1, y = 0 },
+    config = { type = "new_blind_choice" },
+    key = "index",
+    min_ante = 2,
+    loc_vars = function(self, info_queue)
+        table.insert(info_queue, G.P_CENTERS.p_pencil_index_jumbo)
+    end,
+    apply = function(self, tag, context)
+        if context.type == "new_blind_choice" then
+            if G.STATE ~= G.STATES.TAROT_PACK then
+                G.GAME.PACK_INTERRUPT = G.STATE
+            end
+            tag:yep("+", G.C.BLUE, function()
+                local card = Card(
+                    G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
+                    G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
+                    G.CARD_W * 1.27,
+                    G.CARD_H * 1.27,
+                    G.P_CARDS.empty,
+                    G.P_CENTERS["p_pencil_index_jumbo"],
+                    { bypass_discovery_center = true, bypass_discovery_ui = true }
+                )
+                card.cost = 0
+                card.from_tag = true
+                G.FUNCS.use_card({ config = { ref_table = card } })
+                card:start_materialize()
+                return true
+            end)
+            tag.triggered = true
+            return true
+        end
+    end,
+})
+
 SMODS.Consumable({
     key = "replica",
     set = "index",

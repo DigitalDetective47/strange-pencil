@@ -4,6 +4,13 @@ SMODS.Atlas({
     px = 34,
     py = 34,
 })
+
+SMODS.Atlas({
+    key = "boosters",
+    path = "boosters.png",
+    px = 71,
+    py = 95,
+})
 SMODS.load_file("blinds.lua")()
 SMODS.load_file("challenges.lua")()
 SMODS.load_file("decks.lua")()

@@ -334,6 +334,13 @@ return {
                     "with {C:attention}Death{}, {C:attention}The Hanged Man{},",
                     "and {C:attention}The Hermit{}",
                 },
+            },
+            tag_pencil_index = {
+                name = "Scribble Tag",
+                text = {
+                    "Gives a free",
+                    "{C:blue}Jumbo Doodle Pack",
+                },
             }
         },
         Voucher = {
@@ -398,6 +405,38 @@ return {
                     "be used immediately",
                 }
             },
+            p_pencil_index_1 = {
+                name = "Doodle Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:blue}Index{} cards to",
+                    "be used immediately",
+                }
+            },
+            p_pencil_index_2 = {
+                name = "Doodle Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:blue}Index{} cards to",
+                    "be used immediately",
+                }
+            },
+            p_pencil_index_jumbo = {
+                name = "Jumbo Doodle Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:blue}Index{} cards to",
+                    "be used immediately",
+                }
+            },
+            p_pencil_index_mega = {
+                name = "Mega Doodle Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:blue}Index{} cards to",
+                    "be used immediately",
+                }
+            },
         }
     },
     misc = {
@@ -410,6 +449,7 @@ return {
         dictionary = {
             k_index = "Index",
             b_index_cards = "Index Cards",
+            k_index_pack = "Doodle Pack",
             k_infected = "Infected!",
             k_cracked = "Cracked!"
         },
