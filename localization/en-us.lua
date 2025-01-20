@@ -296,6 +296,13 @@ return {
                     "with {C:attention}Death{}, {C:attention}The Hanged Man{},",
                     "and {C:attention}The Hermit{}",
                 },
+            },
+            tag_pencil_index = {
+                name = "Scribble Tag",
+                text = {
+                    "Gives a free",
+                    "{C:blue}Jumbo Doodle Pack",
+                },
             }
         },
         Voucher = {

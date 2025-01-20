@@ -148,6 +148,42 @@ SMODS.Booster({
     group_key = "k_index_pack",
 })
 
+SMODS.Tag({
+    atlas = "tags",
+    pos = { x = 1, y = 0 },
+    config = { type = "new_blind_choice" },
+    key = "index",
+    min_ante = 2,
+    loc_vars = function(self, info_queue)
+        table.insert(info_queue, G.P_CENTERS.p_pencil_index_jumbo)
+    end,
+    apply = function(self, tag, context)
+        if context.type == "new_blind_choice" then
+            if G.STATE ~= G.STATES.TAROT_PACK then
+                G.GAME.PACK_INTERRUPT = G.STATE
+            end
+            tag:yep("+", G.C.BLUE, function()
+                local card = Card(
+                    G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
+                    G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
+                    G.CARD_W * 1.27,
+                    G.CARD_H * 1.27,
+                    G.P_CARDS.empty,
+                    G.P_CENTERS["p_pencil_index_jumbo"],
+                    { bypass_discovery_center = true, bypass_discovery_ui = true }
+                )
+                card.cost = 0
+                card.from_tag = true
+                G.FUNCS.use_card({ config = { ref_table = card } })
+                card:start_materialize()
+                return true
+            end)
+            tag.triggered = true
+            return true
+        end
+    end,
+})
+
 SMODS.Consumable({
     key = "replica",
     set = "index",
