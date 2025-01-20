@@ -47,7 +47,7 @@ SMODS.Booster({
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function(self, card, i)
-        return SMODS.create_card({ set = "index", area = G.pack_cards, soulable = true })
+        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
     end,
     group_key = "k_index_pack",
 })
@@ -79,7 +79,7 @@ SMODS.Booster({
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function(self, card, i)
-        return SMODS.create_card({ set = "index", area = G.pack_cards, soulable = true })
+        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
     end,
     group_key = "k_index_pack",
 })
@@ -111,7 +111,7 @@ SMODS.Booster({
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function(self, card, i)
-        return SMODS.create_card({ set = "index", area = G.pack_cards, soulable = true })
+        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
     end,
     group_key = "k_index_pack",
 })
@@ -143,7 +143,7 @@ SMODS.Booster({
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function(self, card, i)
-        return SMODS.create_card({ set = "index", area = G.pack_cards, soulable = true })
+        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
     end,
     group_key = "k_index_pack",
 })
