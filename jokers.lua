@@ -249,10 +249,10 @@ SMODS.Joker({
     cost = 11,
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.repetition and context.cardarea == G.play and context.other_card.base.id == 4 then
+        if context.repetition and context.cardarea == G.play and context.other_card.base.value == "4" then
             local repetitions = 0
             for k, v in ipairs(G.hand.cards) do
-                if v.base.id == 7 then
+                if v.base.value == "7" then
                     repetitions = repetitions + 1
                     -- G.E_MANAGER:add_event(Event({
                     --     trigger = 'after',
