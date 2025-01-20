@@ -60,27 +60,9 @@ SMODS.Booster({
     config = { extra = 2, choose = 1 },
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
-    ease_background_colour = function(self)
-        ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
-    end,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.2,
-            initialize = true,
-            lifespan = 1,
-            speed = 1.1,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.RED, lighten(G.C.WHITE, 0.4), lighten(G.C.WHITE, 0.2), lighten(G.C.BLUE, 0.2) },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
-    create_card = function(self, card, i)
-        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
-    end,
+    ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
+    particles = SMODS.Centers.p_pencil_index_1.particles,
+    create_card = SMODS.Centers.p_pencil_index_1.create_card,
     group_key = "k_index_pack",
 })
 SMODS.Booster({
@@ -92,27 +74,9 @@ SMODS.Booster({
     config = { extra = 4, choose = 1 },
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
-    ease_background_colour = function(self)
-        ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
-    end,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.2,
-            initialize = true,
-            lifespan = 1,
-            speed = 1.1,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.RED, lighten(G.C.WHITE, 0.4), lighten(G.C.WHITE, 0.2), lighten(G.C.BLUE, 0.2) },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
-    create_card = function(self, card, i)
-        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
-    end,
+    ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
+    particles = SMODS.Centers.p_pencil_index_1.particles,
+    create_card = SMODS.Centers.p_pencil_index_1.create_card,
     group_key = "k_index_pack",
 })
 SMODS.Booster({
@@ -124,27 +88,9 @@ SMODS.Booster({
     config = { extra = 4, choose = 2 },
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
-    ease_background_colour = function(self)
-        ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
-    end,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.2,
-            initialize = true,
-            lifespan = 1,
-            speed = 1.1,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.RED, lighten(G.C.WHITE, 0.4), lighten(G.C.WHITE, 0.2), lighten(G.C.BLUE, 0.2) },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
-    create_card = function(self, card, i)
-        return { set = "index", area = G.pack_cards, skip_materialize = true, soulable = true }
-    end,
+    ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
+    particles = SMODS.Centers.p_pencil_index_1.particles,
+    create_card = SMODS.Centers.p_pencil_index_1.create_card,
     group_key = "k_index_pack",
 })
 

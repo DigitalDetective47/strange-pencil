@@ -15,25 +15,9 @@ SMODS.Booster({
     weight = 0,
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
-    ease_background_colour = function(self)
-        ease_background_colour_blind(G.STATES.TAROT_PACK)
-    end,
+    ease_background_colour = G.P_CENTERS.p_arcana_normal_1.ease_background_colour,
     create_UIBox = create_UIBox_arcana_pack,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.2,
-            initialize = true,
-            lifespan = 1,
-            speed = 1.1,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.PURPLE, 0.2), lighten(G.C.GOLD, 0.2) },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
+    particles = G.P_CENTERS.p_arcana_normal_1.particles,
     create_card = function(self, card, i)
         if i == 1 then
             return { key = "c_death", area = G.pack_cards, skip_materialize = true }
@@ -57,25 +41,9 @@ SMODS.Booster({
     weight = 0,
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
-    ease_background_colour = function(self)
-        ease_background_colour_blind(G.STATES.TAROT_PACK)
-    end,
+    ease_background_colour = G.P_CENTERS.p_arcana_normal_2.ease_background_colour,
     create_UIBox = create_UIBox_arcana_pack,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.2,
-            initialize = true,
-            lifespan = 1,
-            speed = 1.1,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.PURPLE, 0.2), lighten(G.C.GOLD, 0.2) },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
+    particles = G.P_CENTERS.p_arcana_normal_2.particles,
     create_card = function(self, card, i)
         if i == 1 then
             return { key = "c_death", area = G.pack_cards, skip_materialize = true }
@@ -99,25 +67,9 @@ SMODS.Booster({
     weight = 0,
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
-    ease_background_colour = function(self)
-        ease_background_colour_blind(G.STATES.TAROT_PACK)
-    end,
+    ease_background_colour = G.P_CENTERS.p_arcana_normal_3.ease_background_colour,
     create_UIBox = create_UIBox_arcana_pack,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.2,
-            initialize = true,
-            lifespan = 1,
-            speed = 1.1,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.PURPLE, 0.2), lighten(G.C.GOLD, 0.2) },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
+    particles = G.P_CENTERS.p_arcana_normal_3.particles,
     create_card = function(self, card, i)
         if i == 1 then
             return { key = "c_death", area = G.pack_cards, skip_materialize = true }
@@ -141,25 +93,9 @@ SMODS.Booster({
     weight = 0,
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
-    ease_background_colour = function(self)
-        ease_background_colour_blind(G.STATES.TAROT_PACK)
-    end,
+    ease_background_colour = G.P_CENTERS.p_arcana_normal_4.ease_background_colour,
     create_UIBox = create_UIBox_arcana_pack,
-    particles = function(self)
-        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
-            timer = 0.015,
-            scale = 0.2,
-            initialize = true,
-            lifespan = 1,
-            speed = 1.1,
-            padding = -1,
-            attach = G.ROOM_ATTACH,
-            colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.PURPLE, 0.2), lighten(G.C.GOLD, 0.2) },
-            fill = true
-        })
-        G.booster_pack_sparkles.fade_alpha = 1
-        G.booster_pack_sparkles:fade(1, 0)
-    end,
+    particles = G.P_CENTERS.p_arcana_normal_4.particles,
     create_card = function(self, card, i)
         if i == 1 then
             return { key = "c_death", area = G.pack_cards, skip_materialize = true }
