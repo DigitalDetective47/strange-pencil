@@ -302,14 +302,14 @@ end
 
 SMODS.Joker({
     key = "pee_pants",
-    rarity = 1,
+    rarity = 2,
     config = { scaling = 4, mult = 0, required_diamonds = 2 },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.scaling, card.ability.required_diamonds, card.ability.mult } }
     end,
     pos = { x = 5, y = 1 },
     atlas = "jokers",
-    cost = 11,
+    cost = 6,
     blueprint_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
