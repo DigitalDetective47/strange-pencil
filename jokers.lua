@@ -38,7 +38,7 @@ SMODS.Joker({
 function lassCount()
     local queens = 0
     for k, v in ipairs(G.playing_cards or {}) do
-        if v:is_suit("Clubs") and v.base.id == 12 then
+        if v:is_suit("Clubs") and not SMODS.has_no_rank(v) and v.base.value == "Queen" then
             queens = queens + 1
         end
     end
