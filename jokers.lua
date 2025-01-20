@@ -251,20 +251,30 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play and context.other_card.base.value == "4" then
             local repetitions = 0
+            local juicers = {}
+            local juice_i = 1
             for k, v in ipairs(G.hand.cards) do
                 if v.base.value == "7" then
                     repetitions = repetitions + card.ability.factor
-                    -- G.E_MANAGER:add_event(Event({
-                    --     trigger = 'after',
-                    --     delay = 0.4,
-                    --     func = function()
-                    --         v:juice_up(0.3, 0.5)
-                    --         return true
-                    --     end
-                    -- }))
+                    while #juicers < repetitions do
+                        table.insert(juicers, v)
+                    end
                 end
             end
-            return { message = localize("k_again_ex"), repetitions = repetitions, card = card }
+            return {
+                repetitions = repetitions,
+                card = card,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            juicers[juice_i]:juice_up(0.3, 0.5)
+                            juice_i = juice_i + 1
+                            return true
+                        end
+                    }))
+                    SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
+                end
+            }
         end
     end,
 })
