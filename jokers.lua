@@ -546,3 +546,6 @@ SMODS.Joker({
         end
     end,
 })
+if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
+    table.insert(Cryptid.memepack, "j_pencil_doot")
+end
