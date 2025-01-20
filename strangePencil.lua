@@ -5,13 +5,8 @@ SMODS.Atlas({
     py = 34,
 })
 
-SMODS.Atlas({
-    key = "boosters",
-    path = "boosters.png",
-    px = 71,
-    py = 95,
-})
 SMODS.load_file("blinds.lua")()
+SMODS.load_file("boosters.lua")()
 SMODS.load_file("challenges.lua")()
 SMODS.load_file("decks.lua")()
 SMODS.load_file("enhancements.lua")()
@@ -21,11 +16,3 @@ SMODS.load_file("ranks.lua")()
 SMODS.load_file("spectrals.lua")()
 SMODS.load_file("tags.lua")()
 SMODS.load_file("vouchers.lua")()
-
-local hook = Card.open
-function Card:open()
-    if self.ability.set == "Booster" then
-        G.GAME.pack_size = self.ability.extra
-    end
-    return hook(self)
-end
