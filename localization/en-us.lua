@@ -362,6 +362,20 @@ return {
                     "{C:red}^#1#{} base Blind size",
                 }
             },
+            v_pencil_pull = {
+                name = "Storage Facility",
+                text = {
+                    "Cards from {C:blue}Index Packs{} can be",
+                    "saved in your consumable slots",
+                }
+            },
+            v_pencil_overstock = {
+                name = "Mass Storage",
+                text = {
+                    "All {C:blue}Index Packs{} contain",
+                    "{C:attention}#1#{} additional card",
+                }
+            },
         },
         Other = {
             undiscovered_index = {
@@ -451,7 +465,8 @@ return {
             b_index_cards = "Index Cards",
             k_index_pack = "Doodle Pack",
             k_infected = "Infected!",
-            k_cracked = "Cracked!"
+            k_cracked = "Cracked!",
+            b_pull = "PULL",
         },
         ranks = {
             pencil_sneven = "Sñeven",

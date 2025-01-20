@@ -71,7 +71,8 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
 		redeem = function(self, card)
 			G.E_MANAGER:add_event(Event({
 				func = function()
-					G.GAME.starting_params.ante_scaling_exponential = G.GAME.starting_params.ante_scaling_exponential * card.ability.exponent
+					G.GAME.starting_params.ante_scaling_exponential = G.GAME.starting_params.ante_scaling_exponential *
+						card.ability.exponent
 					return true
 				end,
 			}))
@@ -79,7 +80,8 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
 		unredeem = function(self, card)
 			G.E_MANAGER:add_event(Event({
 				func = function()
-					G.GAME.starting_params.ante_scaling_exponential = G.GAME.starting_params.ante_scaling_exponential / card.ability.exponent
+					G.GAME.starting_params.ante_scaling_exponential = G.GAME.starting_params.ante_scaling_exponential /
+						card.ability.exponent
 					return true
 				end,
 			}))
@@ -87,3 +89,26 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
 	})
 	table.insert(Cryptid.Megavouchers, "v_pencil_sqrt")
 end
+
+SMODS.Voucher({
+	key = "pull",
+	atlas = "vouchers",
+	pos = { x = 1, y = 0 },
+})
+
+SMODS.Voucher({
+	key = "overstock",
+	atlas = "vouchers",
+	pos = { x = 1, y = 1 },
+	config = { extra = 1 },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra } }
+	end,
+	requires = { "v_pencil_pull" },
+	redeem = function(self, card)
+		G.GAME.index_pack_bonus = (G.GAME.index_pack_bonus or 0) + card.ability.extra
+	end,
+	unredeem = function(self, card)
+		G.GAME.index_pack_bonus = G.GAME.index_pack_bonus - card.ability.extra
+	end,
+})

@@ -28,6 +28,9 @@ SMODS.Booster({
     config = { extra = 2, choose = 1 },
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
+    set_ability = function(self, card, initial, delay_sprites)
+        card.ability.extra = card.ability.extra + (G.GAME.index_pack_bonus or 0)
+    end,
     ease_background_colour = function(self)
         ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
     end,
@@ -60,6 +63,7 @@ SMODS.Booster({
     config = { extra = 2, choose = 1 },
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
+    set_ability = SMODS.Centers.p_pencil_index_1.set_ability,
     ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
     particles = SMODS.Centers.p_pencil_index_1.particles,
     create_card = SMODS.Centers.p_pencil_index_1.create_card,
@@ -74,6 +78,7 @@ SMODS.Booster({
     config = { extra = 4, choose = 1 },
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
+    set_ability = SMODS.Centers.p_pencil_index_1.set_ability,
     ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
     particles = SMODS.Centers.p_pencil_index_1.particles,
     create_card = SMODS.Centers.p_pencil_index_1.create_card,
@@ -88,11 +93,126 @@ SMODS.Booster({
     config = { extra = 4, choose = 2 },
     draw_hand = true,
     loc_vars = SMODS.Booster.loc_vars,
+    set_ability = SMODS.Centers.p_pencil_index_1.set_ability,
     ease_background_colour = SMODS.Centers.p_pencil_index_1.ease_background_colour,
     particles = SMODS.Centers.p_pencil_index_1.particles,
     create_card = SMODS.Centers.p_pencil_index_1.create_card,
     group_key = "k_index_pack",
 })
+
+local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons -- copied from Cryptid
+function G.UIDEF.use_and_sell_buttons(card)
+    if (card.area == G.pack_cards and G.pack_cards) and
+        G.GAME.used_vouchers.v_pencil_pull and SMODS.OPENED_BOOSTER.config.center.kind == "Index" then --Add a use button
+        return {
+            n = G.UIT.ROOT,
+            config = { padding = -0.1, colour = G.C.CLEAR },
+            nodes = {
+                {
+                    n = G.UIT.R,
+                    config = {
+                        ref_table = card,
+                        r = 0.08,
+                        padding = 0.1,
+                        align = "bm",
+                        minw = 0.5 * card.T.w - 0.15,
+                        minh = 0.7 * card.T.h,
+                        maxw = 0.7 * card.T.w - 0.15,
+                        hover = true,
+                        shadow = true,
+                        colour = G.C.UI.BACKGROUND_INACTIVE,
+                        one_press = true,
+                        button = "use_card",
+                        func = "can_reserve_card",
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.T,
+                            config = {
+                                text = localize("b_pull"),
+                                colour = G.C.UI.TEXT_LIGHT,
+                                scale = 0.55,
+                                shadow = true,
+                            },
+                        },
+                    },
+                },
+                {
+                    n = G.UIT.R,
+                    config = {
+                        ref_table = card,
+                        r = 0.08,
+                        padding = 0.1,
+                        align = "bm",
+                        minw = 0.5 * card.T.w - 0.15,
+                        maxw = 0.9 * card.T.w - 0.15,
+                        minh = 0.1 * card.T.h,
+                        hover = true,
+                        shadow = true,
+                        colour = G.C.UI.BACKGROUND_INACTIVE,
+                        one_press = true,
+                        button = "Do you know that this parameter does nothing?",
+                        func = "can_use_consumeable",
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.T,
+                            config = {
+                                text = localize("b_use"),
+                                colour = G.C.UI.TEXT_LIGHT,
+                                scale = 0.45,
+                                shadow = true,
+                            },
+                        },
+                    },
+                },
+                { n = G.UIT.R, config = { align = "bm", w = 7.7 * card.T.w } },
+                { n = G.UIT.R, config = { align = "bm", w = 7.7 * card.T.w } },
+                { n = G.UIT.R, config = { align = "bm", w = 7.7 * card.T.w } },
+                { n = G.UIT.R, config = { align = "bm", w = 7.7 * card.T.w } },
+                -- Betmma can't explain it, neither can I
+            },
+        }
+    end
+    return G_UIDEF_use_and_sell_buttons_ref(card)
+end
+
+--Code from Betmma's Vouchers
+G.FUNCS.can_reserve_card = function(e)
+    if #G.consumeables.cards < G.consumeables.config.card_limit then
+        e.config.colour = G.C.GREEN
+        e.config.button = "reserve_card"
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
+end
+G.FUNCS.reserve_card = function(e)
+    local c1 = e.config.ref_table
+    G.E_MANAGER:add_event(Event({
+        trigger = "after",
+        delay = 0.1,
+        func = function()
+            c1.area:remove_card(c1)
+            c1:add_to_deck()
+            if c1.children.price then
+                c1.children.price:remove()
+            end
+            c1.children.price = nil
+            if c1.children.buy_button then
+                c1.children.buy_button:remove()
+            end
+            c1.children.buy_button = nil
+            remove_nils(c1.children)
+            G.consumeables:emplace(c1)
+            G.GAME.pack_choices = G.GAME.pack_choices - 1
+            if G.GAME.pack_choices <= 0 then
+                G.FUNCS.end_consumeable(nil, delay_fac)
+            end
+            return true
+        end,
+    }))
+end
 
 SMODS.Tag({
     atlas = "tags",
