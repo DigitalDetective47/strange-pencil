@@ -237,6 +237,7 @@ return {
                 name = "Flagged Card",
                 text = {
                     "#1#{C:attention}#2#",
+                    "Cannot be flipped",
                 }
             },
         },
