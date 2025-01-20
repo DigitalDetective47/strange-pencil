@@ -253,7 +253,7 @@ SMODS.Joker({
             local repetitions = 0
             for k, v in ipairs(G.hand.cards) do
                 if v.base.value == "7" then
-                    repetitions = repetitions + 1
+                    repetitions = repetitions + card.ability.factor
                     -- G.E_MANAGER:add_event(Event({
                     --     trigger = 'after',
                     --     delay = 0.4,
