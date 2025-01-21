@@ -67,7 +67,7 @@ SMODS.Tag({
     pos = { x = 2, y = 0 },
     config = { type = "new_blind_choice" },
     key = "clubs",
-    min_ante = 2,
+    min_ante = 4,
     loc_vars = function(self, info_queue)
         table.insert(info_queue, G.P_CENTERS.p_pencil_clubs)
     end,
