@@ -141,6 +141,7 @@ end
 if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Misc."] then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_eclipse" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_meld" })
+    table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_seraph" })
     -- table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_other, { id = "cry_double_sided", type="edition" })
 end
 if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Misc. Jokers"] then
