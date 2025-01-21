@@ -130,7 +130,7 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_variable" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_malware" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_seed" })
-    table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_hook" })
+    -- table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_hook" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_class" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_merge" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_multiply" })
@@ -154,7 +154,7 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_hammerspace" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_replica" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_typhoon" })
-    table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_source" })
+    -- table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_source" })
 end
 if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config.Spooky then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_ghost" })
