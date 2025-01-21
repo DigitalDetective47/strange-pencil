@@ -548,3 +548,42 @@ SMODS.Joker({
 if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
     table.insert(Cryptid.memepack, "j_pencil_doot")
 end
+
+function stonehenge_edition(self, card, func)
+    card.ability.extra = func(self.ability.extra)
+end
+
+SMODS.Joker({
+    key = "stonehenge",
+    rarity = 1,
+    config = { chips = 0, extra = 5 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra, card.ability.chips } }
+    end,
+    pos = { x = 2, y = 3 },
+    atlas = "jokers",
+    cost = 6,
+    blueprint_compat = true,
+    set_ability = function(self, card, initial, delay_sprites)
+        card.ability.chips = G.PROFILES[G.SETTINGS.profile].pencil_stonehenge or 0
+    end,
+    apply_glitched = stonehenge_edition,
+    apply_oversat = stonehenge_edition,
+    add_to_deck = function(self, card, from_debuff)
+        if not from_debuff then
+            card.ability.chips = card.ability.chips + card.ability.extra
+            G.PROFILES[G.SETTINGS.profile].pencil_stonehenge = card.ability.chips
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    SMODS.calculate_effect({ message = localize("k_upgrade_ex"), colour = G.C.CHIPS }, card)
+                    return true
+                end
+            }))
+        end
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { chips = self.ability.chips }
+        end
+    end,
+})

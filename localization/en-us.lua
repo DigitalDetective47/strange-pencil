@@ -149,6 +149,14 @@ return {
                     "and a {C:attention}Flagged Card",
                 }
             },
+            j_pencil_stonehenge = {
+                name = "Stonehenge",
+                text = {
+                    "Gains {C:chips}+#1#{} Chips when purchased",
+                    "Value is persistent",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
