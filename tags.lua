@@ -35,17 +35,7 @@ SMODS.Booster({
     ease_background_colour = G.P_CENTERS.p_arcana_normal_2.ease_background_colour,
     create_UIBox = create_UIBox_arcana_pack,
     particles = G.P_CENTERS.p_arcana_normal_2.particles,
-    create_card = function(self, card, i)
-        if i == 1 then
-            return { key = "c_death", area = G.pack_cards, skip_materialize = true }
-        elseif i == 2 then
-            return { key = "c_hanged_man", area = G.pack_cards, skip_materialize = true }
-        elseif i == 3 then
-            return { key = "c_hermit", area = G.pack_cards, skip_materialize = true }
-        else
-            return G.P_CENTERS.p_arcana_normal_2:create_card(card, i)
-        end
-    end,
+    create_card = SMODS.Centers.p_pencil_workshop_1.create_card,
     group_key = "k_tarot_pack",
 })
 SMODS.Booster({
@@ -60,17 +50,7 @@ SMODS.Booster({
     ease_background_colour = G.P_CENTERS.p_arcana_normal_3.ease_background_colour,
     create_UIBox = create_UIBox_arcana_pack,
     particles = G.P_CENTERS.p_arcana_normal_3.particles,
-    create_card = function(self, card, i)
-        if i == 1 then
-            return { key = "c_death", area = G.pack_cards, skip_materialize = true }
-        elseif i == 2 then
-            return { key = "c_hanged_man", area = G.pack_cards, skip_materialize = true }
-        elseif i == 3 then
-            return { key = "c_hermit", area = G.pack_cards, skip_materialize = true }
-        else
-            return G.P_CENTERS.p_arcana_normal_3:create_card(card, i)
-        end
-    end,
+    create_card = SMODS.Centers.p_pencil_workshop_1.create_card,
     group_key = "k_tarot_pack",
 })
 SMODS.Booster({
@@ -85,17 +65,7 @@ SMODS.Booster({
     ease_background_colour = G.P_CENTERS.p_arcana_normal_4.ease_background_colour,
     create_UIBox = create_UIBox_arcana_pack,
     particles = G.P_CENTERS.p_arcana_normal_4.particles,
-    create_card = function(self, card, i)
-        if i == 1 then
-            return { key = "c_death", area = G.pack_cards, skip_materialize = true }
-        elseif i == 2 then
-            return { key = "c_hanged_man", area = G.pack_cards, skip_materialize = true }
-        elseif i == 3 then
-            return { key = "c_hermit", area = G.pack_cards, skip_materialize = true }
-        else
-            return G.P_CENTERS.p_arcana_normal_4:create_card(card, i)
-        end
-    end,
+    create_card = SMODS.Centers.p_pencil_workshop_1.create_card,
     group_key = "k_tarot_pack",
 })
 SMODS.Tag({
