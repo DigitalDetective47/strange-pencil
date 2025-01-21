@@ -583,7 +583,7 @@ SMODS.Joker({
     end,
     calculate = function(self, card, context)
         if context.joker_main then
-            return { chips = self.ability.chips }
+            return { chips = card.ability.chips }
         end
     end,
 })
