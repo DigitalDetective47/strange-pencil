@@ -9,9 +9,6 @@ SMODS.Challenge({
         { id = "v_telescope" },
         { id = "v_hieroglyph" },
     },
-    deck = {
-        type = "Challenge Deck"
-    },
     restrictions = {
         banned_cards = {
             { id = "j_obelisk" },
@@ -50,9 +47,6 @@ end
 
 SMODS.Challenge({
     key = "immutable",
-    deck = {
-        type = "Challenge Deck"
-    },
     restrictions = {
         banned_cards = {
             { id = "j_vampire" },
@@ -178,9 +172,6 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
                 { id = "pencil_endless_scaling" },
                 { id = "pencil_epic_spam" },
             }
-        },
-        deck = {
-            type = "Challenge Deck"
         },
     })
 end
