@@ -48,6 +48,7 @@ SMODS.Joker({
     pos = { x = 1, y = 0 },
     atlas = "jokers",
     cost = 7,
+    pools = { clubs_pack = true },
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main and lassCount() * card.ability.xmult_per_queen > 1 then
@@ -397,6 +398,7 @@ SMODS.Joker({
     pos = { x = 4, y = 2 },
     atlas = "jokers",
     cost = 6,
+    pools = { clubs_pack = true },
     blueprint_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
@@ -432,6 +434,7 @@ SMODS.Joker({
     pos = { x = 0, y = 3 },
     soul_pos = { x = 1, y = 3 },
     atlas = "jokers",
+    pools = { clubs_pack = true },
     cost = 20,
     blueprint_compat = true,
     calculate = function(self, card, context)

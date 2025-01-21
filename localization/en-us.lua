@@ -341,6 +341,13 @@ return {
                     "Gives a free",
                     "{C:blue}Jumbo Doodle Pack",
                 },
+            },
+            tag_pencil_clubs = {
+                name = "Club Tag",
+                text = {
+                    "Gives a free",
+                    "{C:clubs}Clubs Pack",
+                },
             }
         },
         Voucher = {
@@ -451,6 +458,13 @@ return {
                     "be used immediately",
                 }
             },
+            p_pencil_clubs = {
+                name = "Clubs Pack",
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:clubs}Club{}-related cards",
+                }
+            },
         }
     },
     misc = {
@@ -464,6 +478,7 @@ return {
             k_index = "Index",
             b_index_cards = "Index Cards",
             k_index_pack = "Doodle Pack",
+            k_clubs_pack = "Clubs Pack",
             k_infected = "Infected!",
             k_cracked = "Cracked!",
             b_pull = "PULL",
