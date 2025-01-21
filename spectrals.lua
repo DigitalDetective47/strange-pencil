@@ -1,10 +1,3 @@
-SMODS.Atlas({
-    key = "spectrals",
-    path = "spectrals.png",
-    px = 71,
-    py = 95,
-})
-
 SMODS.Consumable({
     key = "negative_space",
     set = "Spectral",

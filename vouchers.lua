@@ -1,10 +1,3 @@
-SMODS.Atlas({
-	key = "vouchers",
-	path = "vouchers.png",
-	px = 71,
-	py = 95,
-})
-
 SMODS.Voucher({
 	key = "half_chip",
 	atlas = "vouchers",

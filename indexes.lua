@@ -1,10 +1,3 @@
-SMODS.Atlas({
-    key = "indexes",
-    path = "indexes.png",
-    px = 71,
-    py = 95,
-})
-
 SMODS.ConsumableType({
     key = "index",
     primary_colour = HEX("FFFFFF"),

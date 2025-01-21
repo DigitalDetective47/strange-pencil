@@ -1,12 +1,3 @@
-SMODS.Atlas({
-    key = "blinds",
-    path = "blinds.png",
-    px = 34,
-    py = 34,
-    atlas_table = "ANIMATION_ATLAS",
-    frames = 1,
-})
-
 -- Dynamic blind scaling system
 local hook = Game.update
 function Game:update(dt)

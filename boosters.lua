@@ -1,10 +1,3 @@
-SMODS.Atlas({
-    key = "boosters",
-    path = "boosters.png",
-    px = 71,
-    py = 95,
-})
-
 local hook = Card.open
 function Card:open()
     if self.ability.set == "Booster" then

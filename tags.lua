@@ -1,10 +1,3 @@
-SMODS.Atlas({
-    key = "tags",
-    path = "tags.png",
-    px = 34,
-    py = 34,
-})
-
 SMODS.Booster({
     key = "workshop_1",
     kind = "Workshop",

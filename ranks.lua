@@ -1,16 +1,3 @@
-SMODS.Atlas({
-    key = "ranks",
-    path = "ranks.png",
-    px = 71,
-    py = 95,
-})
-SMODS.Atlas({
-    key = "hc_ranks",
-    path = "hc_ranks.png",
-    px = 71,
-    py = 95,
-})
-
 SMODS.Rank({
     key = "sneven",
     card_key = "7~",

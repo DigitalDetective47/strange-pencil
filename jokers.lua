@@ -1,10 +1,3 @@
-SMODS.Atlas({
-    key = "jokers",
-    path = "jokers.png",
-    px = 71,
-    py = 95,
-})
-
 SMODS.Joker({
     key = "swimmers",
     config = { mult = 11 },
@@ -475,13 +468,6 @@ SMODS.Joker({
             end
         end
     end,
-})
-
-SMODS.Atlas({
-    key = "calendar",
-    path = "calendar.png",
-    px = 71,
-    py = 95,
 })
 
 local calendar_date = os.date("*t")

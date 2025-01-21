@@ -1,10 +1,4 @@
-SMODS.Atlas({
-    key = "modicon",
-    path = "icon.png",
-    px = 34,
-    py = 34,
-})
-
+SMODS.load_file("atlas.lua")()
 SMODS.load_file("blinds.lua")()
 SMODS.load_file("boosters.lua")()
 SMODS.load_file("challenges.lua")()

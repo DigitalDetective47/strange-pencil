@@ -1,10 +1,3 @@
-SMODS.Atlas({
-    key = "enhancements",
-    path = "enhancements.png",
-    px = 71,
-    py = 95,
-})
-
 SMODS.Enhancement({
     key = "diseased",
     name = "Diseased Card",
