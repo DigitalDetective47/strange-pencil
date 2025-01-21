@@ -76,13 +76,6 @@ function CardArea:emplace(card, location, stay_flipped)
     return hook3(self, card, location, stay_flipped and not SMODS.has_enhancement(card, "m_pencil_flagged"))
 end
 
-table.insert(SMODS.Challenges.c_fragile_1.restrictions.banned_cards, 8, { id = "c_pencil_plague" })
-table.insert(SMODS.Challenges.c_fragile_1.restrictions.banned_cards, 9, { id = "c_pencil_parade" })
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config.Challenges then
-    table.insert(SMODS.Challenges.c_cry_ballin.restrictions.banned_cards, 10, { id = "c_pencil_plague" })
-    table.insert(SMODS.Challenges.c_cry_ballin.restrictions.banned_cards, 11, { id = "c_pencil_parade" })
-end
-
 if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Enhanced Decks"] then
     SMODS.Back({
         key = "diseased",
