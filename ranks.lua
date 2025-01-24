@@ -23,6 +23,18 @@ SMODS.Rank({
         end
         return false
     end,
+    suit_map = {
+        Hearts = 0,
+        Clubs = 1,
+        Diamonds = 2,
+        Spades = 3,
+        mtg_Clovers = 4,
+        minty_3s = 5,
+        six_Stars = 6,
+        six_Moons = 7,
+        bunc_Fleurons = 8,
+        bunc_Halberds = 9,
+    },
 })
 
 table.insert(SMODS.Ranks["6"].next, "pencil_sneven")
