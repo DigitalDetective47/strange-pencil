@@ -9,7 +9,19 @@ SMODS.Rank({
     face_nominal = 0.01,
     next = { "8" },
     in_pool = function(self, args)
-        return not (args and args.initial_deck or args.suit == "")
+        if args then
+            if args.initial_deck then
+                return false
+            elseif args.suit ~= "" then
+                return true
+            end
+        end
+        for i, card in ipairs(G.playing_cards or {}) do
+            if card.base.value == "pencil_sneven" then
+                return true
+            end
+        end
+        return false
     end,
 })
 
