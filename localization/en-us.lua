@@ -253,15 +253,17 @@ return {
             c_pencil_plague = {
                 name = "The Plague",
                 text = {
-                    "Enhances {C:attention}#1#{} selected card",
-                    "into a {C:attention}Diseased Card",
+                    "Enhances {C:attention}#1#{} selected",
+                    "card into a",
+                    "{C:attention}Diseased Card",
                 }
             },
             c_pencil_parade = {
                 name = "The Parade",
                 text = {
-                    "Enhances up to {C:attention}#1#{} selected cards",
-                    "into a {C:attention}Flagged Cards",
+                    "Enhances {C:attention}#1#{}",
+                    "selected cards to",
+                    "{C:attention}Flagged Cards",
                 }
             }
         },
