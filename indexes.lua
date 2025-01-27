@@ -605,24 +605,9 @@ SMODS.Consumable({
     set = "index",
     atlas = "indexes",
     pos = { x = 1, y = 1 },
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.cards_needed } }
-    end,
     cost = 5,
-    config = { cards_needed = 4 },
     can_use = function(self, card)
-        if SMODS.Mods.incantation and SMODS.Mods.incantation.can_load then
-            local total = 0
-            for k, v in ipairs(SMODS.find_card("c_pencil_ono99", true)) do
-                total = total + v:getQty()
-                if total >= card.ability.cards_needed then
-                    return true
-                end
-            end
-            return false
-        else
-            return #SMODS.find_card("c_pencil_ono99", true) >= card.ability.cards_needed
-        end
+        return #SMODS.find_card("c_pencil_ono99", true) >= #G.consumeables.cards
     end,
     use = function(self, card, area, copier)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
