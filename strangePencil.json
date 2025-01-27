@@ -8,6 +8,7 @@
     "prefix": "pencil",
     "main_file": "strangePencil.lua",
     "badge_colour": "FF9E49",
+    "badge_text_colour": "404040",
     "version": "0.3.0~dev",
     "priority": 1e10,
     "dependencies": [
