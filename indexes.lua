@@ -162,7 +162,7 @@ function G.UIDEF.use_and_sell_buttons(card)
                 -- Betmma can't explain it, neither can I
             },
         }
-    elseif card.ability.consumeable and (card.area == G.pack_cards and G.pack_cards) and SMODS.OPENED_BOOSTER.config.center.key == "p_pencil_clubs" then
+    elseif card.ability.consumeable and (card.area == G.pack_cards and G.pack_cards) and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config.center.key == "p_pencil_clubs" then
         return {
             n = G.UIT.ROOT,
             config = { padding = 0, colour = G.C.CLEAR },
