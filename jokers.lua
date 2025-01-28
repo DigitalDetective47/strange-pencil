@@ -551,8 +551,8 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
     table.insert(Cryptid.memepack, "j_pencil_doot")
 end
 
-function stonehenge_edition(self, card, func)
-    card.ability.extra = func(card.ability.extra)
+function set_stonehenge(self, card, func)
+    card.ability.chips = G.PROFILES[G.SETTINGS.profile].pencil_stonehenge or 0
 end
 
 SMODS.Joker({
@@ -566,11 +566,9 @@ SMODS.Joker({
     atlas = "jokers",
     cost = 6,
     blueprint_compat = true,
-    set_ability = function(self, card, initial, delay_sprites)
-        card.ability.chips = G.PROFILES[G.SETTINGS.profile].pencil_stonehenge or 0
-    end,
-    apply_glitched = stonehenge_edition,
-    apply_oversat = stonehenge_edition,
+    set_ability = set_stonehenge,
+    apply_glitched = set_stonehenge,
+    apply_oversat = set_stonehenge,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
             card.ability.chips = card.ability.chips + card.ability.extra
