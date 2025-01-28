@@ -92,7 +92,7 @@ SMODS.Booster({
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons -- copied from Cryptid
 function G.UIDEF.use_and_sell_buttons(card)
     if (card.area == G.pack_cards and G.pack_cards) and
-        G.GAME.used_vouchers.v_pencil_pull and SMODS.OPENED_BOOSTER.config.center.kind == "Index" then --Add a use button
+        G.GAME.used_vouchers.v_pencil_pull and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config.center.kind == "Index" then --Add a use button
         return {
             n = G.UIT.ROOT,
             config = { padding = -0.1, colour = G.C.CLEAR },
