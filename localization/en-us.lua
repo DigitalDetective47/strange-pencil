@@ -47,7 +47,7 @@ return {
             j_pencil_forbidden_one = {
                 name = "The Forbidden One",
                 text = {
-                    "Earn {C:money}$4{} at end of round",
+                    "Earn {C:money}$#1#{} at end of round",
                     "Instantly win if you have",
                     "{C:attention}Left Arm of The Forbidden One{},",
                     "{C:attention}Left Leg of The Forbidden One{},",
