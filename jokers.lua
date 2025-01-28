@@ -552,7 +552,7 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
 end
 
 function stonehenge_edition(self, card, func)
-    card.ability.extra = func(self.ability.extra)
+    card.ability.extra = func(card.ability.extra)
 end
 
 SMODS.Joker({
