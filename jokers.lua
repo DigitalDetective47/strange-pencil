@@ -436,7 +436,7 @@ SMODS.Joker({
     pos = { x = 0, y = 3 },
     soul_pos = { x = 1, y = 3 },
     atlas = "jokers",
-    pools = { clubs_pack = true },
+    pools = { clubs_legendary = true },
     cost = 20,
     blueprint_compat = true,
     calculate = function(self, card, context)

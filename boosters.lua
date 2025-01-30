@@ -23,6 +23,11 @@ SMODS.ObjectType({
         end
     end
 })
+SMODS.ObjectType({
+    key = "clubs_legendary",
+    default = "j_pencil_club",
+    cards = {},
+})
 
 SMODS.Booster({
     key = "clubs",
@@ -51,10 +56,13 @@ SMODS.Booster({
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function(self, card, i)
-        if pseudorandom('pencil_clubs_pack') < 0.1 then
+        local rng = pseudorandom('pencil_clubs_pack')
+        if rng < 0.1 then
             local new = SMODS.create_card(G.P_CENTERS.p_standard_jumbo_1:create_card(card, i))
             SMODS.change_base(new, "Clubs")
             return new
+        elseif rng > 0.997 then
+            return { set = "clubs_legendary", area = G.pack_cards, skip_materialize = true }
         else
             return { set = "clubs_pack", area = G.pack_cards, skip_materialize = true }
         end
