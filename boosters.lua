@@ -58,8 +58,14 @@ SMODS.Booster({
     create_card = function(self, card, i)
         local rng = pseudorandom('pencil_clubs_pack')
         if rng < 0.1 then
-            local new = SMODS.create_card(G.P_CENTERS.p_standard_jumbo_1:create_card(card, i))
-            SMODS.change_base(new, "Clubs")
+            local new = nil
+            repeat
+                if new then
+                    new:remove()
+                end
+                new = SMODS.create_card(G.P_CENTERS.p_standard_jumbo_1:create_card(card, i))
+                SMODS.change_base(new, "Clubs")
+            until not SMODS.has_no_suit(new)
             return new
         elseif rng > 0.997 then
             return { set = "clubs_legendary", area = G.pack_cards, skip_materialize = true }
