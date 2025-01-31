@@ -213,7 +213,8 @@ return {
             bl_pencil_caret = {
                 name = "The Point",
                 text = {
-                    "Extremely large blind",
+                    "Extremely",
+                    "large blind",
                 }
             },
             bl_pencil_arrow = {
