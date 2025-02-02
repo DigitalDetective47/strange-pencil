@@ -232,6 +232,13 @@ return {
                     "when hand is played",
                 }
             },
+            bl_pencil_star = {
+                name = "Flourescent Star",
+                text = {
+                    "Only the highest",
+                    "ranked card scores",
+                }
+            },
         },
         Enhanced = {
             m_pencil_diseased = {

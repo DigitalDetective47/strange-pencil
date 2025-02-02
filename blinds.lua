@@ -134,3 +134,32 @@ SMODS.Blind({
         end
     end,
 })
+
+SMODS.Blind({
+    key = "star",
+    boss = { showdown = true },
+    dollars = 8,
+    boss_colour = HEX("000058"),
+    pos = { x = 0, y = 4 },
+    atlas = "blinds",
+    mult = 2,
+})
+
+local hook5 = G.FUNCS.get_poker_hand_info
+G.FUNCS.get_poker_hand_info = function(_cards)
+    local text
+    local loc_disp_text
+    local poker_hands
+    local scoring_hand
+    local disp_text
+    text, loc_disp_text, poker_hands, scoring_hand, disp_text = hook5(_cards)
+    if G.GAME.blind.name == "bl_pencil_star" then
+        scoring_hand = SMODS.has_no_rank(poker_hands["High Card"][1][1]) and {} or poker_hands["High Card"][1]
+    end
+    return text, loc_disp_text, poker_hands, scoring_hand, disp_text
+end
+
+local hook6 = SMODS.always_scores
+function SMODS.always_scores(card)
+    return not (G.GAME.blind and G.GAME.blind.name == "bl_pencil_star") and hook6(card)
+end
