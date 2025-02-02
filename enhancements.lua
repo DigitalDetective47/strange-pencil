@@ -76,7 +76,7 @@ function CardArea:emplace(card, location, stay_flipped)
     return hook3(self, card, location, stay_flipped and not SMODS.has_enhancement(card, "m_pencil_flagged"))
 end
 
-if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config["Enhanced Decks"] then
+if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config["Enhanced Decks"] then
     SMODS.Back({
         key = "diseased",
         config = { cry_force_enhancement = "m_pencil_diseased" },
