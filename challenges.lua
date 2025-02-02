@@ -163,36 +163,3 @@ if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config.Vo
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "v_cry_double_slit" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "v_cry_double_down" })
 end
-
-if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config["Epic Jokers"] then
-    SMODS.Challenge({
-        key = "meltingpot",
-        rules = {
-            custom = {
-                { id = "pencil_endless_scaling" },
-                { id = "pencil_epic_spam" },
-            }
-        },
-    })
-end
-
--- Endless scaling for first 8 antes
-local hook3 = get_blind_amount
-function get_blind_amount(ante)
-    if G.GAME.modifiers.pencil_endless_scaling then
-        local amounts = {
-            to_big(300)
-        }
-        if ante < 1 then return to_big(100) end
-        if ante <= 1 then return amounts[ante] end
-        local a, b, c, d = amounts[1], 1.6, ante - 1, 1 + 0.2 * (ante - 1)
-        local amount = a * (b + (to_big(0.75) * c) ^ d) ^ c
-        if (amount:lt(R.E_MAX_SAFE_INTEGER)) then
-            local exponent = to_big(10) ^ (math.floor(amount:log10() - to_big(1))):to_number()
-            amount = math.floor(amount / exponent):to_number() * exponent
-        end
-        amount:normalize()
-        return amount
-    end
-    return hook3(ante)
-end
