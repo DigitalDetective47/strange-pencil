@@ -327,31 +327,6 @@ SMODS.Joker({
 })
 
 SMODS.Joker({
-    key = "jake",
-    rarity = 3,
-    config = { scaling = 1, xmult = 1 },
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = { card.ability.scaling, card.ability.xmult }
-        }
-    end,
-    pos = { x = 2, y = 2 },
-    pixel_size = { w = 64, h = 86 },
-    atlas = "jokers",
-    cost = 9,
-    blueprint_compat = true,
-    perishable_compat = false,
-    calculate = function(self, card, context)
-        if context.joker_main then
-            return { xmult = card.ability.xmult }
-        elseif context.end_of_round and not (context.individual or context.repetition or context.blueprint) and G.GAME.blind.boss then
-            card.ability.xmult = card.ability.xmult + card.ability.scaling
-            return { message = localize("k_upgrade_ex") }
-        end
-    end,
-})
-
-SMODS.Joker({
     key = "squeeze",
     rarity = 1,
     config = { chance = 4, rounds = 0 },
