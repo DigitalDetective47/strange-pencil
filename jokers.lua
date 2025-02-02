@@ -558,3 +558,67 @@ SMODS.Joker({
         end
     end,
 })
+
+function calc_ratio()
+    if not G.playing_cards then
+        return
+    end
+    local tallies = {}
+    for k, v in ipairs(G.playing_cards) do
+        tallies[v.base.suit] = (tallies[v.base.suit] or 0) + 1
+    end
+    local most = nil
+    local active = false
+    for k, v in pairs(tallies) do
+        if not most or v > tallies[most] then
+            most = k
+            active = true
+        elseif v == tallies[most] then
+            active = false
+        end
+    end
+    if active then
+        return most, tallies[most] / #G.playing_cards
+    end
+end
+
+SMODS.Joker({
+    key = "ratio",
+    rarity = 2,
+    config = { xmult = 1 },
+    loc_vars = function(self, info_queue, card)
+        local suit
+        local ratio
+        suit, ratio = calc_ratio()
+        if not suit then
+            suit = "Inactive"
+            ratio = 0
+        end
+        return { vars = { suit, ratio, card.ability.xmult } }
+    end,
+    pos = { x = 2, y = 2 },
+    atlas = "jokers",
+    cost = 7,
+    blueprint_compat = true,
+    perishable_compat = false,
+    calculate = function(self, card, context)
+        if context.before and not context.blueprint then
+            local suit
+            local ratio
+            suit, ratio = calc_ratio()
+            for k, v in ipairs(context.scoring_hand) do
+                if v:is_suit(suit) then
+                    card.ability.xmult = 1
+                    return { message = localize('k_reset'), colour = G.C.MULT }
+                end
+            end
+            card.ability.xmult = card.ability.xmult + ratio
+            return {
+                message = localize({ type = 'variable', key = 'a_xmult', vars = { card.ability.xmult } }),
+                colour = G.C.MULT
+            }
+        elseif context.joker_main then
+            return { xmult = card.ability.xmult }
+        end
+    end,
+})

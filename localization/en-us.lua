@@ -149,6 +149,18 @@ return {
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
                 }
             },
+            j_pencil_ratio = {
+                name = "Ratio",
+                text = {
+                    "If scored hand does not contain",
+                    "your most common suit, gain XMult",
+                    "equal to the proportion of your deck",
+                    "which is that suit; otherwise {C:attention}reset",
+                    "Does not scale if multiple suits are tied",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
+                    "{s:0.8,C:inactive}[{s:0.8,C:attention}#1#{s:0.8,C:inactive}, +{s:0.8,X:mult,C:white}X#2#{s:0.8,C:inactive}]",
+                },
+            },
         },
         Back = {
             b_pencil_royal = {
