@@ -57,7 +57,7 @@ SMODS.Consumable({
     end,
 })
 
-if SMODS.Mods.cartomancer and SMODS.Mods.cartomancer.can_load then
+if next(SMODS.find_mod("cartomancer")) then
     local hook = Card.cart_to_string
     function Card:cart_to_string(args)
         return hook(self, args) .. (SMODS.has_enhancement(self, "m_pencil_flagged") and self.ability.pos and self.ability.pos <= #G.deck.cards and tostring(self.ability.pos) or "")
@@ -76,7 +76,7 @@ function CardArea:emplace(card, location, stay_flipped)
     return hook3(self, card, location, stay_flipped and not SMODS.has_enhancement(card, "m_pencil_flagged"))
 end
 
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Enhanced Decks"] then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config["Enhanced Decks"] then
     SMODS.Back({
         key = "diseased",
         config = { cry_force_enhancement = "m_pencil_diseased" },

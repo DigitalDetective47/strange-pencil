@@ -89,7 +89,7 @@ SMODS.Challenge({
     },
 })
 
-if SMODS.Mods.YART and SMODS.Mods.YART.can_load then
+if next(SMODS.find_mod("YART")) then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_yart_rmagician" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_yart_rempress" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_yart_rheirophant" })
@@ -108,7 +108,7 @@ if SMODS.Mods.YART and SMODS.Mods.YART.can_load then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_yart_rworld" })
 end
 
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config.Blinds then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config.Blinds then
     table.insert(SMODS.Challenges.c_pencil_permamouth.restrictions.banned_other,
         { id = "bl_cry_oldhouse", type = "blind" })
     table.insert(SMODS.Challenges.c_pencil_permamouth.restrictions.banned_other,
@@ -120,7 +120,7 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
     table.insert(SMODS.Challenges.c_pencil_permamouth.restrictions.banned_other,
         { id = "bl_cry_oldmark", type = "blind" })
 end
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Code Cards"] then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config["Code Cards"] then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_variable" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_malware" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_seed" })
@@ -129,21 +129,21 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_merge" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_multiply" })
 end
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Exotic Jokers"] then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config["Exotic Jokers"] then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_gemino" })
 end
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Misc."] then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config["Misc."] then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_eclipse" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_meld" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_seraph" })
     -- table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_other, { id = "cry_double_sided", type="edition" })
 end
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Misc. Jokers"] then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config["Misc. Jokers"] then
     table.insert(SMODS.Challenges.c_pencil_permamouth.restrictions.banned_cards, { id = "j_cry_fspinner" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_kscope" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_seal_the_deal" })
 end
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config.Spectrals then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config.Spectrals then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_lock" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_vacuum" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_hammerspace" })
@@ -151,20 +151,20 @@ if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.con
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_typhoon" })
     -- table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "c_cry_source" })
 end
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config.Spooky then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config.Spooky then
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_ghost" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_jawbreaker" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_cotton_candy" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_brittle" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "j_cry_chocolate_dice" })
 end
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config.Vouchers then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config.Vouchers then
     -- table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "v_cry_double_vision" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "v_cry_double_slit" })
     table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = "v_cry_double_down" })
 end
 
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and SMODS.Mods.Cryptid.config["Epic Jokers"] then
+if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config["Epic Jokers"] then
     SMODS.Challenge({
         key = "meltingpot",
         rules = {

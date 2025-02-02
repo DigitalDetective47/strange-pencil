@@ -380,7 +380,7 @@ SMODS.Consumable({
         for k, v in ipairs(targets) do
             local consume = create_card("Consumeables", G.consumables, nil, nil, nil, nil, v.config.center.key, nil)
             copy_card(v, consume)
-            if SMODS.Mods.incantation and SMODS.Mods.incantation.can_load then
+            if next(SMODS.find_mod("incantation")) then
                 consume:setQty(1)
             end
             consume:add_to_deck()
@@ -618,7 +618,7 @@ SMODS.Consumable({
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     func = function()
-                        for i = 1, SMODS.Mods.incantation and SMODS.Mods.incantation.can_load and v:getQty() or 1, 1 do
+                        for i = 1, next(SMODS.find_mod("incantation")) and v:getQty() or 1, 1 do
                             SMODS.add_card({ set = "index", no_edition = true, edition = v.edition })
                         end
                         v:start_dissolve()

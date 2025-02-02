@@ -18,7 +18,7 @@ SMODS.ObjectType({
         self:inject_card(G.P_CENTERS.j_onyx_agate)
         self:inject_card(G.P_CENTERS.j_seeing_double)
         self:inject_card(G.P_CENTERS.c_moon)
-        if SMODS.Mods.YART and SMODS.Mods.YART.can_load then
+        if next(SMODS.find_mod("YART")) then
             self:inject_card(SMODS.Centers.c_yart_rmoon)
         end
     end

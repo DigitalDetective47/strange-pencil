@@ -518,7 +518,7 @@ SMODS.Joker({
         end
     end,
 })
-if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
+if next(SMODS.find_mod("Cryptid")) then
     table.insert(Cryptid.memepack, "j_pencil_doot")
 end
 
