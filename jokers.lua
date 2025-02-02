@@ -79,99 +79,97 @@ function forbidden_part_added(center, card, from_debuff)
     end
 end
 
-if SMODS.Mods.Talisman and SMODS.Mods.Talisman.can_load then
-    SMODS.Joker({
-        key = "forbidden_one",
-        config = { payout = 4 },
-        loc_vars = function(self, info_queue, card)
-            table.insert(info_queue, SMODS.Centers.j_pencil_left_arm)
-            table.insert(info_queue, SMODS.Centers.j_pencil_left_leg)
-            table.insert(info_queue, SMODS.Centers.j_pencil_right_arm)
-            table.insert(info_queue, SMODS.Centers.j_pencil_right_leg)
-            return { vars = { card.ability.payout } }
-        end,
-        rarity = 1,
-        pos = { x = 2, y = 1 },
-        atlas = "jokers",
-        cost = 8,
-        add_to_deck = forbidden_part_added,
-        calc_dollar_bonus = function(self, card)
-            return card.ability.payout
+SMODS.Joker({
+    key = "forbidden_one",
+    config = { payout = 4 },
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, SMODS.Centers.j_pencil_left_arm)
+        table.insert(info_queue, SMODS.Centers.j_pencil_left_leg)
+        table.insert(info_queue, SMODS.Centers.j_pencil_right_arm)
+        table.insert(info_queue, SMODS.Centers.j_pencil_right_leg)
+        return { vars = { card.ability.payout } }
+    end,
+    rarity = 1,
+    pos = { x = 2, y = 1 },
+    atlas = "jokers",
+    cost = 8,
+    add_to_deck = forbidden_part_added,
+    calc_dollar_bonus = function(self, card)
+        return card.ability.payout
+    end
+})
+SMODS.Joker({
+    key = "left_arm",
+    config = { xchips = 2.5 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.xchips } }
+    end,
+    rarity = 1,
+    pos = { x = 3, y = 1 },
+    atlas = "jokers",
+    cost = 6,
+    blueprint_compat = true,
+    add_to_deck = forbidden_part_added,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { xchips = card.ability.xchips }
         end
-    })
-    SMODS.Joker({
-        key = "left_arm",
-        config = { xchips = 2.5 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card.ability.xchips } }
-        end,
-        rarity = 1,
-        pos = { x = 3, y = 1 },
-        atlas = "jokers",
-        cost = 6,
-        blueprint_compat = true,
-        add_to_deck = forbidden_part_added,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return { xchips = card.ability.xchips }
-            end
-        end,
-    })
-    SMODS.Joker({
-        key = "left_leg",
-        config = { chips = 50 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card.ability.chips } }
-        end,
-        rarity = 1,
-        pos = { x = 4, y = 1 },
-        atlas = "jokers",
-        cost = 5,
-        blueprint_compat = true,
-        add_to_deck = forbidden_part_added,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return { chips = card.ability.chips }
-            end
-        end,
-    })
-    SMODS.Joker({
-        key = "right_arm",
-        config = { xmult = 1.5 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card.ability.xmult } }
-        end,
-        rarity = 1,
-        pos = { x = 1, y = 1 },
-        atlas = "jokers",
-        cost = 6,
-        blueprint_compat = true,
-        add_to_deck = forbidden_part_added,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return { xmult = card.ability.xmult }
-            end
-        end,
-    })
-    SMODS.Joker({
-        key = "right_leg",
-        config = { mult = 10 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card.ability.mult } }
-        end,
-        rarity = 1,
-        pos = { x = 0, y = 1 },
-        atlas = "jokers",
-        cost = 5,
-        blueprint_compat = true,
-        add_to_deck = forbidden_part_added,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return { mult = card.ability.mult }
-            end
-        end,
-    })
-end
+    end,
+})
+SMODS.Joker({
+    key = "left_leg",
+    config = { chips = 50 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.chips } }
+    end,
+    rarity = 1,
+    pos = { x = 4, y = 1 },
+    atlas = "jokers",
+    cost = 5,
+    blueprint_compat = true,
+    add_to_deck = forbidden_part_added,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { chips = card.ability.chips }
+        end
+    end,
+})
+SMODS.Joker({
+    key = "right_arm",
+    config = { xmult = 1.5 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.xmult } }
+    end,
+    rarity = 1,
+    pos = { x = 1, y = 1 },
+    atlas = "jokers",
+    cost = 6,
+    blueprint_compat = true,
+    add_to_deck = forbidden_part_added,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { xmult = card.ability.xmult }
+        end
+    end,
+})
+SMODS.Joker({
+    key = "right_leg",
+    config = { mult = 10 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.mult } }
+    end,
+    rarity = 1,
+    pos = { x = 0, y = 1 },
+    atlas = "jokers",
+    cost = 5,
+    blueprint_compat = true,
+    add_to_deck = forbidden_part_added,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { mult = card.ability.mult }
+        end
+    end,
+})
 
 SMODS.Joker({
     key = "doodlebob",
@@ -275,26 +273,24 @@ SMODS.Joker({
     end,
 })
 
-if SMODS.Mods.Talisman and SMODS.Mods.Talisman.can_load then
-    SMODS.Joker({
-        key = "square",
-        rarity = 4,
-        config = { exponent = 2 },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { card.ability.exponent } }
-        end,
-        pos = { x = 0, y = 2 },
-        soul_pos = { x = 1, y = 2 },
-        atlas = "jokers",
-        cost = 20,
-        blueprint_compat = true,
-        calculate = function(self, card, context)
-            if context.joker_main then
-                return { echips = card.ability.exponent }
-            end
-        end,
-    })
-end
+SMODS.Joker({
+    key = "square",
+    rarity = 4,
+    config = { exponent = 2 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.exponent } }
+    end,
+    pos = { x = 0, y = 2 },
+    soul_pos = { x = 1, y = 2 },
+    atlas = "jokers",
+    cost = 20,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { echips = card.ability.exponent }
+        end
+    end,
+})
 
 SMODS.Joker({
     key = "pee_pants",

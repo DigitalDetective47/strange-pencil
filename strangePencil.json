@@ -12,6 +12,7 @@
     "version": "0.3.0~dev",
     "priority": 1e10,
     "dependencies": [
-        "Steamodded (>=1.0.0~ALPHA-1320a)"
+        "Steamodded (>=1.0.0~ALPHA-1320a)",
+        "Talisman (>=2.0.3~dev)"
     ]
 }

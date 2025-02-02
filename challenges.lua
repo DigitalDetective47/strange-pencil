@@ -180,31 +180,19 @@ end
 local hook3 = get_blind_amount
 function get_blind_amount(ante)
     if G.GAME.modifiers.pencil_endless_scaling then
-        if SMODS.Mods.Talisman and SMODS.Mods.Cryptid.Talisman then
-            local amounts = {
-                to_big(300)
-            }
-            if ante < 1 then return to_big(100) end
-            if ante <= 1 then return amounts[ante] end
-            local a, b, c, d = amounts[1], 1.6, ante - 1, 1 + 0.2 * (ante - 1)
-            local amount = a * (b + (to_big(0.75) * c) ^ d) ^ c
-            if (amount:lt(R.E_MAX_SAFE_INTEGER)) then
-                local exponent = to_big(10) ^ (math.floor(amount:log10() - to_big(1))):to_number()
-                amount = math.floor(amount / exponent):to_number() * exponent
-            end
-            amount:normalize()
-            return amount
-        else
-            local amounts = {
-                300
-            }
-            if ante < 1 then return 100 end
-            if ante <= 1 then return amounts[ante] end
-            local a, b, c, d = amounts[1], 1.6, ante - 1, 1 + 0.2 * (ante - 1)
-            local amount = math.floor(a * (b + (0.75 * c) ^ d) ^ c)
-            amount = amount - amount % (10 ^ math.floor(math.log10(amount) - 1))
-            return amount
+        local amounts = {
+            to_big(300)
+        }
+        if ante < 1 then return to_big(100) end
+        if ante <= 1 then return amounts[ante] end
+        local a, b, c, d = amounts[1], 1.6, ante - 1, 1 + 0.2 * (ante - 1)
+        local amount = a * (b + (to_big(0.75) * c) ^ d) ^ c
+        if (amount:lt(R.E_MAX_SAFE_INTEGER)) then
+            local exponent = to_big(10) ^ (math.floor(amount:log10() - to_big(1))):to_number()
+            amount = math.floor(amount / exponent):to_number() * exponent
         end
+        amount:normalize()
+        return amount
     end
     return hook3(ante)
 end
