@@ -1,17 +1,6 @@
 local eternal = { banned_cards = { "c_pencil_chisel" } }
 local no_enhancements = { banned_cards = { "c_pencil_plague", "c_pencil_parade" } }
 
-if next(SMODS.find_mod("Cryptid")) and next(SMODS.find_mod("Cryptid")).config.Challenges then
-    for k, v in pairs(SMODS.Centers) do -- Reapply bans on sticker sheet
-        if v:is(SMODS.Joker) then
-            if not (v.perishable_compat and v.eternal_compat) then
-                table.insert(SMODS.Challenges.c_cry_sticker_sheet.restrictions.banned_cards, { id = k })
-                table.insert(SMODS.Challenges.c_cry_sticker_sheet_plus.restrictions.banned_cards, { id = k })
-            end
-        end
-    end
-end
-
 return {
     c_omelette_1 = {
         banned_cards = {
