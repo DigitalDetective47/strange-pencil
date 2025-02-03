@@ -14,7 +14,7 @@ return {
                 name = "The Lass",
                 text = {
                     "Gives {X:mult,C:white}X#1#{} Mult",
-                    "per {C:clubs}Queen of Clubs{}",
+                    "per {C:clubs}#3#{}",
                     "in your full deck",
                     "{C:inactive,s:0.8}(Minimum of {X:mult,C:white,s:0.8}X1{C:inactive,s:0.8})",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
@@ -66,7 +66,7 @@ return {
             j_pencil_pencil = {
                 name = "Strange Pencil",
                 text = {
-                    "Creates a random {C:blue}Index",
+                    "Creates a random {C:blue}#1#",
                     "card when a consumable of",
                     "another type is used",
                     "{C:inactive}(Must have room)",
@@ -75,8 +75,8 @@ return {
             j_pencil_forty_seven = {
                 name = "Forty-seven",
                 text = {
-                    "Retrigger each played {C:attention}4 #1#",
-                    "for each {C:attention}7{} held in hand",
+                    "Retrigger each played {C:attention}#2# #1#",
+                    "for each {C:attention}#3#{} held in hand",
                 },
             },
             j_pencil_square = {
@@ -91,7 +91,7 @@ return {
                     "This Joker gains {C:mult}+#1#{} Mult",
                     "if played hand contains",
                     "a {C:attention}Two Pair",
-                    "and at least {C:attention}#2#{} {C:diamonds}Diamonds",
+                    "and at least {C:attention}#2#{} {C:diamonds}#4#",
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)",
                 },
             },
@@ -111,18 +111,18 @@ return {
                 name = "Solar Eclipse",
                 text = {
                     "Gains {C:mult}+#1#{} Mult when",
-                    "a {C:clubs}Club{} is scored",
+                    "a {C:clubs}#4#{} is scored",
                     "Loses {C:mult}-#2#{} Mult when",
-                    "a {C:hearts}Heart{} is scored",
+                    "a {C:hearts}#5#{} is scored",
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
                 }
             },
             j_pencil_club = {
                 name = "Club.",
                 text = {
-                    "All played {C:clubs}Clubs{} give {X:mult,C:white}X#1#{} Mult",
+                    "All played {C:clubs}#3#{} give {X:mult,C:white}X#1#{} Mult",
                     "and are retriggered {C:attention}#2#{} times",
-                    "Destroyed if a non-{C:clubs}Club{} is played"
+                    "Destroyed if a non-{C:clubs}#4#{} is played"
                 }
             },
             j_pencil_calendar = {
@@ -137,8 +137,8 @@ return {
                 name = "Doot",
                 text = {
                     "Earn {C:money}$#1#{} if scored hand",
-                    "contains a {C:attention}Diseased Card",
-                    "and a {C:attention}Flagged Card",
+                    "contains a {C:attention}#2#",
+                    "and a {C:attention}#3#",
                 }
             },
             j_pencil_stonehenge = {

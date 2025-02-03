@@ -28,10 +28,10 @@ SMODS.Joker({
     end,
 })
 
-function lassCount()
+function lassCount(rank, suit)
     local queens = 0
     for k, v in ipairs(G.playing_cards or {}) do
-        if v:is_suit("Clubs") and not SMODS.has_no_rank(v) and v.base.value == "Queen" then
+        if v:is_suit(suit) and not SMODS.has_no_rank(v) and v.base.value == rank then
             queens = queens + 1
         end
     end
@@ -40,9 +40,14 @@ end
 
 SMODS.Joker({
     key = "lass",
-    config = { xmult_per_queen = 1 },
+    config = { xmult_per_queen = 1, suit = "Clubs", rank = "Queen" },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.xmult_per_queen, math.max(lassCount() * card.ability.xmult_per_queen, 1) } }
+        return {
+            vars = { card.ability.xmult_per_queen, math.max(
+                lassCount(card.ability.rank, card.ability.suit) * card.ability.xmult_per_queen, 1),
+                G.P_CARDS[SMODS.Suits[card.ability.suit].card_key .. "_"
+                    .. SMODS.Ranks[card.ability.rank].card_key].name }
+        }
     end,
     rarity = 3,
     pos = { x = 1, y = 0 },
@@ -200,20 +205,24 @@ SMODS.Joker({
 SMODS.Joker({
     key = "pencil",
     rarity = 4,
+    config = { set = "index" },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize("k_" .. string.lower(card.ability.set)) } }
+    end,
     pos = { x = 3, y = 0 },
     soul_pos = { x = 4, y = 0 },
     atlas = "jokers",
     cost = 20,
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.using_consumeable and context.consumeable.ability.set ~= "index" then
+        if context.using_consumeable and context.consumeable.ability.set ~= card.ability.set then
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.4,
                 func = function()
                     if G.consumeables.config.card_limit > #G.consumeables.cards then
                         play_sound('timpani')
-                        SMODS.add_card({ set = "index" })
+                        SMODS.add_card({ set = card.ability.set })
                         card:juice_up(0.3, 0.5)
                     end
                     return true
@@ -226,16 +235,16 @@ SMODS.Joker({
 SMODS.Joker({
     key = "forty_seven",
     rarity = 3,
-    config = { factor = 1 },
+    config = { factor = 1, scoring_rank = "4", held_rank = "7" },
     loc_vars = function(self, info_queue, card)
         if card.ability.factor == 1 then
-            return { vars = { "once" } }
+            return { vars = { "once", localize(card.ability.scoring_rank, "ranks"), localize(card.ability.held_rank, "ranks") } }
         elseif card.ability.factor == 2 then
-            return { vars = { "twice" } }
+            return { vars = { "twice", localize(card.ability.scoring_rank, "ranks"), localize(card.ability.held_rank, "ranks") } }
         elseif card.ability.factor == 3 then
-            return { vars = { "thrice" } }
+            return { vars = { "thrice", localize(card.ability.scoring_rank, "ranks"), localize(card.ability.held_rank, "ranks") } }
         else
-            return { vars = { card.ability.factor .. " times" } }
+            return { vars = { card.ability.factor .. " times", localize(card.ability.scoring_rank, "ranks"), localize(card.ability.held_rank, "ranks") } }
         end
     end,
     pos = { x = 5, y = 0 },
@@ -243,12 +252,12 @@ SMODS.Joker({
     cost = 11,
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.repetition and context.cardarea == G.play and context.other_card.base.value == "4" then
+        if context.repetition and context.cardarea == G.play and context.other_card.base.value == card.ability.scoring_rank then
             local repetitions = 0
             local juicers = {}
             local juice_i = 1
             for k, v in ipairs(G.hand.cards) do
-                if v.base.value == "7" then
+                if v.base.value == card.ability.held_rank then
                     repetitions = repetitions + card.ability.factor
                     while #juicers < repetitions do
                         table.insert(juicers, v)
@@ -295,9 +304,13 @@ SMODS.Joker({
 SMODS.Joker({
     key = "pee_pants",
     rarity = 2,
-    config = { scaling = 4, mult = 0, required_diamonds = 2 },
+    config = { scaling = 4, mult = 0, required_diamonds = 2, suit = "Diamonds" },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.scaling, card.ability.required_diamonds, card.ability.mult } }
+        return {
+            vars = { card.ability.scaling, card.ability.required_diamonds, card.ability.mult,
+                card.ability.required_diamonds == 1 and localize(card.ability.suit, "suits_singular") or
+                localize(card.ability.suit, "suits_plural") }
+        }
     end,
     pos = { x = 5, y = 1 },
     atlas = "jokers",
@@ -310,7 +323,7 @@ SMODS.Joker({
         elseif context.before and not context.blueprint and next(context.poker_hands["Two Pair"]) then
             local diamonds = 0
             for k, v in ipairs(context.scoring_hand) do
-                if v:is_suit("Diamonds") then
+                if v:is_suit(card.ability.suit) then
                     diamonds = diamonds + 1
                     if diamonds >= card.ability.required_diamonds then
                         card.ability.mult = card.ability.mult + card.ability.scaling
@@ -362,10 +375,12 @@ SMODS.Joker({
 SMODS.Joker({
     key = "eclipse",
     rarity = 2,
-    config = { gain = 1, loss = 1, mult = 0 },
+    config = { gain = 1, loss = 1, mult = 0, gain_suit = "Clubs", loss_suit = "Hearts" },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { card.ability.gain, card.ability.loss, card.ability.mult }
+            vars = { card.ability.gain, card.ability.loss, card.ability.mult,
+                localize(card.ability.gain_suit, "suits_singular"),
+                localize(card.ability.loss_suit, "suits_singular") }
         }
     end,
     pos = { x = 4, y = 2 },
@@ -376,14 +391,14 @@ SMODS.Joker({
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual and not context.blueprint then
-            if context.other_card:is_suit("Clubs") then
+            if context.other_card:is_suit(card.ability.gain_suit) then
                 card.ability.mult = card.ability.mult + card.ability.gain
                 return {
                     message = localize({ type = "variable", key = "a_mult", vars = { card.ability.gain } }),
                     message_card = card
                 }
             end
-            if context.other_card:is_suit("Hearts") and card.ability.mult ~= 0 then
+            if context.other_card:is_suit(card.ability.loss_suit) and card.ability.mult ~= 0 then
                 card.ability.mult = math.max(card.ability.mult - card.ability.loss, 0)
                 return {
                     message = localize({ type = "variable", key = "a_mult_minus", vars = { card.ability.loss } }),
@@ -400,9 +415,9 @@ SMODS.Joker({
 SMODS.Joker({
     key = "club",
     rarity = 4,
-    config = { xmult = 1.3, retriggers = 3, dead = false },
+    config = { xmult = 1.3, retriggers = 3, dead = false, suit = "Clubs" },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.xmult, card.ability.retriggers } }
+        return { vars = { card.ability.xmult, card.ability.retriggers, localize(card.ability.suit, "suits_plural"), localize(card.ability.suit, "suits_singular") } }
     end,
     pos = { x = 0, y = 3 },
     soul_pos = { x = 1, y = 3 },
@@ -417,7 +432,7 @@ SMODS.Joker({
             return { x_mult = card.ability.xmult }
         elseif context.before then
             for k, v in ipairs(context.full_hand) do
-                if not v:is_suit("Clubs") then
+                if not v:is_suit(card.ability.suit) then
                     card.ability.dead = true
                     G.E_MANAGER:add_event(Event({
                         func = function()
@@ -484,11 +499,16 @@ SMODS.Sound({
 SMODS.Joker({
     key = "doot",
     rarity = 1,
-    config = { dollars = 5 },
+    config = { dollars = 5, enhancements = { "m_pencil_diseased", "m_pencil_flagged" } },
     loc_vars = function(self, info_queue, card)
-        table.insert(info_queue, SMODS.Centers.m_pencil_diseased)
-        table.insert(info_queue, SMODS.Centers.m_pencil_flagged)
-        return { vars = { card.ability.dollars } }
+        for k, v in ipairs(enhancements) do
+            table.insert(info_queue, SMODS.Centers[v])
+        end
+        return {
+            vars = { card.ability.dollars,
+                localize({ type = "descriptions", key = card.ability.enhancements[1] }).name,
+                localize({ type = "descriptions", key = card.ability.enhancements[2] }).name }
+        }
     end,
     pos = { x = 5, y = 2 },
     atlas = "jokers",
@@ -496,25 +516,20 @@ SMODS.Joker({
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.before then
-            local diseased = false
-            local flagged = false
+            local enhancements = {}
             for k, v in ipairs(context.scoring_hand) do
-                if SMODS.has_enhancement(v, "m_pencil_diseased") then
-                    diseased = true
-                end
-                if SMODS.has_enhancement(v, "m_pencil_flagged") then
-                    flagged = true
-                end
-                if diseased and flagged then
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            play_sound("pencil_doot")
-                            return true
-                        end
-                    }))
-                    return { dollars = card.ability.dollars }
+                for kk, vv in ipairs(card.ability.enhancements) do
+                    if SMODS.has_enhancement(v, vv) then
+                        enhancements[vv] = true
+                    end
                 end
             end
+            for k, v in ipairs(enhancements) do
+                if not enhancements[v] then
+                    return
+                end
+            end
+            return { dollars = card.ability.dollars }
         end
     end,
 })
