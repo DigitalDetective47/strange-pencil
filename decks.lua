@@ -72,7 +72,45 @@ SMODS.Back({
     end,
     pos = { x = 2, y = 0 },
     atlas = "decks",
-    apply = function (self)
+    apply = function(self)
         G.GAME.modifiers.booster_choices = (G.GAME.modifiers.booster_choices or 0) + self.config.booster_choices
     end
 })
+
+SMODS.Back({
+    key = "slow_roll",
+    config = { reroll_discount = get_starting_params().reroll_cost, decrement = 1 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { get_starting_params().reroll_cost - self.config.reroll_discount, self.config.decrement } }
+    end,
+    pos = { x = 3, y = 0 },
+    atlas = "decks",
+    calculate = function(self, back, context)
+        if context.ending_shop then
+            G.GAME.b_pencil_slow_roll_reroll_cost = G.GAME.current_round.reroll_cost_increase
+        elseif context.end_of_round and G.GAME.b_pencil_slow_roll_reroll_cost then
+            G.GAME.current_round.reroll_cost_increase = math.max(
+                G.GAME.b_pencil_slow_roll_reroll_cost - self.config.decrement, 0)
+            calculate_reroll_cost(true)
+        end
+    end
+})
+
+SMODS.Tag:take_ownership("d_six", {
+    apply = function(self, tag, context)
+        if context.type == 'shop_start' and not G.GAME.shop_d6ed then
+            G.GAME.shop_d6ed = true
+            tag:yep('+', G.C.GREEN, function()
+                if G.GAME.selected_back.name == "b_pencil_slow_roll" then
+                    G.GAME.current_round.reroll_cost_increase = 0
+                else
+                    G.GAME.round_resets.temp_reroll_cost = 0
+                end
+                calculate_reroll_cost(true)
+                return true
+            end)
+            tag.triggered = true
+            return true
+        end
+    end
+}, true)

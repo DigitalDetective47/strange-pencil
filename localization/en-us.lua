@@ -205,6 +205,17 @@ return {
                     "Cards cannot change enhancements",
                 },
             },
+            b_pencil_slow_roll = {
+                name = "Slow Roller's Deck",
+                text = {
+                    "Reroll cost persists",
+                    "between shops",
+                    "Rerolls start at {C:money}$#1#",
+                    "Reroll cost is reduced by {C:money}$#2#",
+                    "when Blind is defeated",
+                    "{s:0.8,C:inactive}Cannot go below 0",
+                },
+            },
         },
         Blind = {
             bl_pencil_glove = {
