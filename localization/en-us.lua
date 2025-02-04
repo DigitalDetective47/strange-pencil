@@ -492,7 +492,6 @@ return {
     },
     misc = {
         challenge_names = {
-            c_pencil_debug = "Debug Challenge",
             c_pencil_permamouth = "Ride or Die",
             c_pencil_immutable = "Immutable",
         },
