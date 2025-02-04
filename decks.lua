@@ -73,6 +73,6 @@ SMODS.Back({
     pos = { x = 2, y = 0 },
     atlas = "decks",
     apply = function (self)
-        G.GAME.modifiers.booster_choices = self.config.booster_choices
+        G.GAME.modifiers.booster_choices = (G.GAME.modifiers.booster_choices or 0) + self.config.booster_choices
     end
 })
