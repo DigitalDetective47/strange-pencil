@@ -506,8 +506,8 @@ SMODS.Joker({
         end
         return {
             vars = { card.ability.dollars,
-                localize({ type = "descriptions", key = card.ability.enhancements[1] }).name,
-                localize({ type = "descriptions", key = card.ability.enhancements[2] }).name }
+                localize({ type = "descriptions", set="Enhanced", key = card.ability.enhancements[1] }).name,
+                localize({ type = "descriptions", set="Enhanced", key = card.ability.enhancements[2] }).name }
         }
     end,
     pos = { x = 5, y = 2 },
