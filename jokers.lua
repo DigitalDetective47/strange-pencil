@@ -501,7 +501,7 @@ SMODS.Joker({
     rarity = 1,
     config = { dollars = 5, enhancements = { "m_pencil_diseased", "m_pencil_flagged" } },
     loc_vars = function(self, info_queue, card)
-        for k, v in ipairs(enhancements) do
+        for k, v in ipairs(card.ability.enhancements) do
             table.insert(info_queue, SMODS.Centers[v])
         end
         return {
