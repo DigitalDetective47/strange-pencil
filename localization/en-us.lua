@@ -495,7 +495,6 @@ return {
             c_pencil_debug = "Debug Challenge",
             c_pencil_permamouth = "Ride or Die",
             c_pencil_immutable = "Immutable",
-            c_pencil_meltingpot = "Melting Pot",
         },
         dictionary = {
             k_index = "Index",
@@ -515,7 +514,6 @@ return {
         v_text = {
             ch_c_pencil_most_played_only = { "Play only 1 hand type this run" },
             ch_c_pencil_endless_scaling = { "Endless blind scaling" },
-            ch_c_pencil_epic_spam = { "Create a random {C:cry_epic}Epic{C:attention} Joker{} when Boss Blind is defeated" },
         },
     }
 }
