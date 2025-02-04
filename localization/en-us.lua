@@ -192,7 +192,7 @@ return {
                 name = "Plagued Deck",
                 text = {
                     "All {C:attention}playing cards",
-                    "are {C:attention,T:m_pencil_diseased}Diseased Cards",
+                    "are {C:attention,T:m_pencil_diseased}#1#s",
                     "Cards cannot change enhancements",
                     "{s:0.8,C:inactive}Reminds of {s:0.8,C:inactive,T:b_cry_cry-perishable_deck}Perishable Deck",
                 },
@@ -201,7 +201,7 @@ return {
                 name = "The Parade's Deck",
                 text = {
                     "All {C:attention}playing cards",
-                    "are {C:attention,T:m_pencil_flagged}Flagged Cards",
+                    "are {C:attention,T:m_pencil_flagged}#1#s",
                     "Cards cannot change enhancements",
                 },
             },
