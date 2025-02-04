@@ -16,8 +16,8 @@ SMODS.Consumable({
     pos = { x = 1, y = 0 },
     config = { mod_conv = "m_pencil_diseased", max_highlighted = 1 },
     loc_vars = function(self, info_queue, card)
-        table.insert(info_queue, G.P_CENTERS.m_pencil_diseased)
-        return { vars = { card.ability.max_highlighted } }
+        table.insert(info_queue, G.P_CENTERS[card.ability.mod_conv])
+        return { vars = { card.ability.max_highlighted, localize({ type = "name_text", set = "Enhanced", key = card.ability.mod_conv }) } }
     end,
 })
 
@@ -51,10 +51,7 @@ SMODS.Consumable({
     atlas = "enhancements",
     pos = { x = 1, y = 1 },
     config = { mod_conv = "m_pencil_flagged", max_highlighted = 2 },
-    loc_vars = function(self, info_queue, card)
-        table.insert(info_queue, G.P_CENTERS.m_pencil_flagged)
-        return { vars = { card.ability.max_highlighted } }
-    end,
+    loc_vars = SMODS.Centers.c_pencil_plague.loc_vars,
 })
 
 if next(SMODS.find_mod("cartomancer")) then
@@ -89,9 +86,7 @@ if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config["Enha
     SMODS.Back({
         key = "flagged",
         config = { cry_force_enhancement = "m_pencil_flagged" },
-        loc_vars = function(self, info_queue, card)
-            return { vars = { localize({ type = "name_text", set = "Enhanced", key = self.config.cry_force_enhancement }) } }
-        end,
+        loc_vars = SMODS.Backs.b_pencil_diseased.loc_vars,
         pos = { x = 2, y = 1 },
         atlas = "enhancements",
     })

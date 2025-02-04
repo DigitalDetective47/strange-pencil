@@ -267,7 +267,7 @@ return {
                 text = {
                     "Enhances {C:attention}#1#{} selected",
                     "card into a",
-                    "{C:attention}Diseased Card",
+                    "{C:attention}#2#",
                 }
             },
             c_pencil_parade = {
@@ -275,7 +275,7 @@ return {
                 text = {
                     "Enhances {C:attention}#1#{}",
                     "selected cards to",
-                    "{C:attention}Flagged Cards",
+                    "{C:attention}#2#s",
                 }
             }
         },
