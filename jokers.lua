@@ -256,6 +256,7 @@ SMODS.Joker({
                 end
             end
             return {
+                remove_default_message = true,
                 repetitions = repetitions,
                 card = card,
                 func = function()
@@ -412,7 +413,7 @@ SMODS.Joker({
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.repetition and not card.ability.dead then
-            return { message = localize("k_again_ex"), repetitions = card.ability.retriggers, card = card }
+            return { repetitions = card.ability.retriggers, card = card }
         elseif context.cardarea == G.play and context.individual and not card.ability.dead then
             return { x_mult = card.ability.xmult }
         elseif context.before then
