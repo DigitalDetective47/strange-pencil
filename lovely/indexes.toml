@@ -32,6 +32,13 @@ pattern = "{card_limit = 2, type = 'shop', highlight_limit = 1, card_w = 1.27*G.
 position = "at"
 payload = "{card_limit = 2, type = 'shop', highlight_limit = math.huge, card_w = 1.27*G.CARD_W})"
 match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{card_limit = _size, type = 'consumeable', highlight_limit = 1})"
+position = "at"
+payload = "{card_limit = _size, type = 'consumeable', highlight_limit = math.huge})"
+match_indent = true
 
 # Remove hardcoded shop selection limit
 [[patches]]
