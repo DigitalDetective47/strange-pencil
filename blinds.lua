@@ -154,7 +154,11 @@ G.FUNCS.get_poker_hand_info = function(_cards)
     local disp_text
     text, loc_disp_text, poker_hands, scoring_hand, disp_text = hook5(_cards)
     if G.GAME.blind and G.GAME.blind.name == "bl_pencil_star" then
+        local old_size = #scoring_hand
         scoring_hand = SMODS.has_no_rank(poker_hands["High Card"][1][1]) and {} or poker_hands["High Card"][1]
+        if old_size ~= #scoring_hand then
+            G.GAME.blind.triggered = true
+        end
     end
     return text, loc_disp_text, poker_hands, scoring_hand, disp_text
 end
