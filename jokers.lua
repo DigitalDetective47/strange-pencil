@@ -518,10 +518,8 @@ SMODS.Joker({
             end
         end
     end,
+    pools = { Meme = true }
 })
-if next(SMODS.find_mod("Cryptid")) then
-    table.insert(Cryptid.memepack, "j_pencil_doot")
-end
 
 function set_stonehenge(self, card, func)
     card.ability.chips = G.PROFILES[G.SETTINGS.profile].pencil_stonehenge or 0

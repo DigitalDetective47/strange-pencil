@@ -79,8 +79,8 @@ if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config.Vouch
 				end,
 			}))
 		end,
+		pools = {Tier3 = true},
 	})
-	table.insert(Cryptid.Megavouchers, "v_pencil_sqrt")
 end
 
 SMODS.Voucher({
