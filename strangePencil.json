@@ -9,10 +9,13 @@
     "main_file": "strangePencil.lua",
     "badge_colour": "FF9E49",
     "badge_text_colour": "404040",
-    "version": "0.3.0~0b06b",
+    "version": "0.3.0~0b07a",
     "priority": 1e10,
     "dependencies": [
         "Steamodded (>=1.0.0~ALPHA-1406a)",
         "Talisman (>=2.0.3~dev)"
+    ],
+    "conflicts": [
+        "Steamodded (>=1.0.0~ALPHA-1406c) (<<1.0.0~ALPHA-1407c)"
     ]
 }
