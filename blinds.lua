@@ -1,30 +1,5 @@
--- Dynamic blind scaling system
-local hook = Game.update
-function Game:update(dt)
-    for k, v in ipairs({ "Small", "Big", "Boss" }) do
-        if
-            G.GAME
-            and G.GAME.round_resets
-            and G.GAME.round_resets.blind_choices
-            and G.GAME.round_resets.blind_choices[v]
-            and G.P_BLINDS[G.GAME.round_resets.blind_choices[v]].get_mult
-            and G.GAME.round_resets.blind_states[v] == "Current" and not G.GAME.blind.disabled then
-            if G.GAME.blind.ante == nil then -- Prevents score from changing unexpectedly when boss is defeated
-                G.GAME.blind.ante = G.GAME.round_resets.ante
-            end
-            G.GAME.blind.chips = (get_blind_amount(G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^
-                (G.GAME.starting_params.ante_scaling_exponential or 1) *
-                G.P_BLINDS[G.GAME.round_resets.blind_choices[v]]:get_mult()
-            G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-        end
-    end
-    return hook(self, dt)
-end
-
-local hook2 = Game.update_shop
-function Game:update_shop(dt)
-    G.GAME.blind.ante = nil
-    return hook2(self, dt)
+local function recalculate_on_disable(self)
+    StrangeLib.dynablind.update_blind_scores(StrangeLib.dynablind.find_blind(self.key))
 end
 
 SMODS.Blind({
@@ -34,14 +9,12 @@ SMODS.Blind({
     boss_colour = HEX("FFFFFF"),
     pos = { x = 0, y = 0 },
     atlas = "blinds",
-    get_mult = function(self)
-        return 2 + 0.1 * G.GAME.hands_played
+    mult = 2,
+    increase = 0.1,
+    score = function(self, base)
+        return base * (self.mult + (self.disabled and 0 or (self.increase * G.GAME.hands_played)))
     end,
-    disable = function(self)
-        G.GAME.blind.chips = 2 *
-            get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling
-        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-    end,
+    disable = recalculate_on_disable,
 })
 
 SMODS.Blind({
@@ -55,14 +28,10 @@ SMODS.Blind({
     pos = { x = 0, y = 1 },
     atlas = "blinds",
     mult = 1.5,
-    get_mult = function(self)
-        return (get_blind_amount(G.GAME.blind.ante == nil and G.GAME.round_resets.ante or G.GAME.blind.ante) * G.GAME.starting_params.ante_scaling) ^
-            ((G.GAME.starting_params.ante_scaling_exponential or 1) * (self.mult - 1))
+    score = function(self, base)
+        return self.disabled and base or base ^ self.mult
     end,
-    disable = function(self)
-        G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling
-        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-    end,
+    disable = recalculate_on_disable,
 })
 
 SMODS.Blind({
