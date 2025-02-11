@@ -10,6 +10,7 @@ SMODS.Voucher({
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * card.ability.multiplier
+				StrangeLib.dynablind.update_blind_scores()
 				return true
 			end,
 		}))
@@ -18,6 +19,7 @@ SMODS.Voucher({
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
+				StrangeLib.dynablind.update_blind_scores()
 				return true
 			end,
 		}))
@@ -37,6 +39,7 @@ SMODS.Voucher({
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * card.ability.multiplier
+				StrangeLib.dynablind.update_blind_scores()
 				return true
 			end,
 		}))
@@ -45,6 +48,7 @@ SMODS.Voucher({
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
+				StrangeLib.dynablind.update_blind_scores()
 				return true
 			end,
 		}))
@@ -73,6 +77,7 @@ if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config.Vouch
 				func = function()
 					G.GAME.starting_params.ante_scaling_exponential = (G.GAME.starting_params.ante_scaling_exponential or 1) *
 						card.ability.exponent
+					StrangeLib.dynablind.update_blind_scores()
 					return true
 				end,
 			}))
@@ -82,6 +87,7 @@ if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config.Vouch
 				func = function()
 					G.GAME.starting_params.ante_scaling_exponential = (G.GAME.starting_params.ante_scaling_exponential or 1) /
 						card.ability.exponent
+					StrangeLib.dynablind.update_blind_scores()
 					return true
 				end,
 			}))
