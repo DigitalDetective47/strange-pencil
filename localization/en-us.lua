@@ -359,6 +359,15 @@ return {
                     "{C:inactive,s:0.8}Cards added to shop are free",
                 }
             },
+            c_pencil_pulsar = {
+                name = "Pulsar",
+                text = {
+                    "{C:attention}#1#{} the level",
+                    "of your most played",
+                    "{C:legendary,E:1}poker hand",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive})",
+                }
+            },
         },
         Tag = {
             tag_pencil_workshop = {
