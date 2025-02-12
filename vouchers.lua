@@ -58,6 +58,7 @@ SMODS.Voucher({
 if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config.Vouchers then -- Tier 3 vouchers should only appear with Cryptid Vouchers enabled
 	local hook = StrangeLib.dynablind.get_blind_score
 	function StrangeLib.dynablind.get_blind_score(blind, base)
+		G.GAME.modifiers.scaling = G.GAME.modifiers.scaling or 1
 		return hook(blind, base or
 			(SMODS.get_blind_amount(G.GAME.round_resets.blind_ante) * G.GAME.starting_params.ante_scaling) ^
 			(G.GAME.starting_params.ante_scaling_exponential or 1))
