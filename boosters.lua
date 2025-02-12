@@ -29,6 +29,16 @@ SMODS.ObjectType({
     cards = {},
 })
 
+local clubs_select_card = { Joker = "jokers", Default = "deck", Enhanced = "deck" }
+G.E_MANAGER:add_event(Event({
+    func = function()
+        for k, v in pairs(SMODS.ConsumableTypes) do
+            clubs_select_card[k] = "consumeables"
+        end
+        return true
+    end,
+}))
+
 SMODS.Booster({
     key = "clubs",
     kind = "Special",
@@ -37,6 +47,7 @@ SMODS.Booster({
     soul_pos = { x = 5, y = 1 },
     cost = 6,
     config = { extra = 5, choose = 1 },
+    select_card = clubs_select_card,
     ease_background_colour = function(self)
         ease_background_colour({ new_colour = G.C.SUITS.Clubs, special_colour = G.C.SO_1.Clubs, contrast = 2 })
     end,
