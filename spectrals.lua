@@ -155,6 +155,7 @@ SMODS.Consumable({
     can_use = function(self, card)
         return true
     end,
+    can_bulk_use = true,
     use = function(self, card, area, copier)
         local hand_key = pulsar_target()
         local hand_center = G.GAME.hands[hand_key]
@@ -166,6 +167,20 @@ SMODS.Consumable({
                 level = hand_center.level
             })
         level_up_hand(card, hand_key, false, hand_center.level * (card.ability.factor - 1))
+        update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
+            { mult = 0, chips = 0, handname = '', level = '' })
+    end,
+    bulk_use = function(self, card, area, copier, number)
+        local hand_key = pulsar_target()
+        local hand_center = G.GAME.hands[hand_key]
+        update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
+            {
+                handname = localize(hand_key, 'poker_hands'),
+                chips = hand_center.chips,
+                mult = hand_center.mult,
+                level = hand_center.level
+            })
+        level_up_hand(card, hand_key, false, hand_center.level * (card.ability.factor ^ number - 1))
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
             { mult = 0, chips = 0, handname = '', level = '' })
     end,
