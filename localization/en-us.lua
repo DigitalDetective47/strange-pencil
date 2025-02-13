@@ -437,7 +437,7 @@ return {
                     "learn what it does"
                 }
             },
-            p_pencil_workshop_1 = {
+            p_pencil_workshop_normal_1 = {
                 name = "Arcana Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -445,7 +445,7 @@ return {
                     "be used immediately",
                 }
             },
-            p_pencil_workshop_2 = {
+            p_pencil_workshop_normal_2 = {
                 name = "Arcana Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -453,7 +453,7 @@ return {
                     "be used immediately",
                 }
             },
-            p_pencil_workshop_3 = {
+            p_pencil_workshop_normal_3 = {
                 name = "Arcana Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -461,7 +461,7 @@ return {
                     "be used immediately",
                 }
             },
-            p_pencil_workshop_4 = {
+            p_pencil_workshop_normal_4 = {
                 name = "Arcana Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -469,7 +469,7 @@ return {
                     "be used immediately",
                 }
             },
-            p_pencil_index_1 = {
+            p_pencil_index_normal_1 = {
                 name = "Doodle Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -477,7 +477,7 @@ return {
                     "be used immediately",
                 }
             },
-            p_pencil_index_2 = {
+            p_pencil_index_normal_2 = {
                 name = "Doodle Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -485,7 +485,7 @@ return {
                     "be used immediately",
                 }
             },
-            p_pencil_index_jumbo = {
+            p_pencil_index_jumbo_1 = {
                 name = "Jumbo Doodle Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
@@ -493,7 +493,7 @@ return {
                     "be used immediately",
                 }
             },
-            p_pencil_index_mega = {
+            p_pencil_index_mega_1 = {
                 name = "Mega Doodle Pack",
                 text = {
                     "Choose {C:attention}#1#{} of up to",
