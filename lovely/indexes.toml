@@ -39,6 +39,13 @@ pattern = "{card_limit = _size, type = 'consumeable', highlight_limit = 1})"
 position = "at"
 payload = "{card_limit = _size, type = 'consumeable', highlight_limit = math.huge})"
 match_indent = true
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/game_object.lua"]'
+pattern = "{card_limit = _size, type = 'consumeable', highlight_limit = 1})"
+position = "at"
+payload = "{card_limit = _size, type = 'consumeable', highlight_limit = math.huge})"
+match_indent = true
 
 # Remove hardcoded shop selection limit
 [[patches]]
