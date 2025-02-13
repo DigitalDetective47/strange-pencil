@@ -534,5 +534,8 @@ return {
             ch_c_pencil_most_played_only = { "Play only 1 hand type this run" },
             ch_c_pencil_endless_scaling = { "Endless blind scaling" },
         },
+        v_dictionary = {
+            a_echips = "^#1#",
+        }
     }
 }

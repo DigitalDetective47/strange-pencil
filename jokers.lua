@@ -274,6 +274,13 @@ SMODS.Joker({
     end,
 })
 
+if not next(SMODS.find_mod("Talisman")) then
+    SMODS.Sound({
+        key = "echips",
+        path = "echips.wav"
+    })
+end
+
 SMODS.Joker({
     key = "square",
     rarity = 4,
@@ -286,9 +293,20 @@ SMODS.Joker({
     atlas = "jokers",
     cost = 20,
     blueprint_compat = true,
-    calculate = function(self, card, context)
+    calculate = next(SMODS.find_mod("Talisman")) and function(self, card, context)
         if context.joker_main then
             return { echips = card.ability.exponent }
+        end
+    end or function(self, card, context)
+        if context.joker_main then
+            return {
+                fchips = function(chips)
+                    return chips ^ card.ability.exponent
+                end,
+                message = localize({ type = "variable", key = "a_echips", vars = { card.ability.exponent } }),
+                sound = "pencil_echips",
+                colour = G.C.CHIPS,
+            }
         end
     end,
 })
