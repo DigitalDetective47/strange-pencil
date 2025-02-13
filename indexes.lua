@@ -167,7 +167,7 @@ SMODS.Tag({
     key = "index",
     min_ante = 2,
     loc_vars = function(self, info_queue)
-        table.insert(info_queue, G.P_CENTERS.p_pencil_index_jumbo)
+        table.insert(info_queue, G.P_CENTERS.p_pencil_index_jumbo_1)
     end,
     apply = function(self, tag, context)
         if context.type == "new_blind_choice" then
@@ -181,7 +181,7 @@ SMODS.Tag({
                     G.CARD_W * 1.27,
                     G.CARD_H * 1.27,
                     G.P_CARDS.empty,
-                    G.P_CENTERS["p_pencil_index_jumbo"],
+                    G.P_CENTERS["p_pencil_index_jumbo_1"],
                     { bypass_discovery_center = true, bypass_discovery_ui = true }
                 )
                 card.cost = 0
