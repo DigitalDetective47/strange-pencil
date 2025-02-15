@@ -255,7 +255,7 @@ return {
                 }
             },
             bl_pencil_star = {
-                name = "Flourescent Star",
+                name = "Fluorescent Star",
                 text = {
                     "Only the highest",
                     "ranked card scores",
