@@ -161,6 +161,13 @@ return {
                     "{s:0.8,C:inactive}[{s:0.8,C:attention}#1#{s:0.8,C:inactive}, +{s:0.8,X:mult,C:white}X#2#{s:0.8,C:inactive}]",
                 },
             },
+            j_pencil_commie = {
+                name = "Communist",
+                text = {
+                    "Balance ranks",
+                    "of scored cards",
+                }
+            },
         },
         Back = {
             b_pencil_royal = {

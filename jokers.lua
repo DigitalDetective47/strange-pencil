@@ -639,3 +639,62 @@ SMODS.Joker({
         end
     end,
 })
+
+for r = 2, 10 do
+    SMODS.Rank:take_ownership(tostring(r), { is_numeric = true }, true)
+end
+
+SMODS.Joker({
+    key = "commie",
+    rarity = 2,
+    pos = { x = 3, y = 3 },
+    atlas = "jokers",
+    cost = 9,
+    blueprint_compat = false,
+    calculate = function(self, card, context)
+        if context.before and not context.blueprint then
+            local targets = {}
+            local target_total = 0
+            for k, v in ipairs(context.scoring_hand) do
+                if SMODS.Ranks[v.base.value].is_numeric then
+                    table.insert(targets, v)
+                    target_total = target_total + v.base.nominal
+                end
+            end
+            if #targets > 0 then
+                local ranks = {}
+                for k, v in pairs(SMODS.Ranks) do
+                    if v.is_numeric then
+                        table.insert(ranks, v)
+                    end
+                end
+                table.sort(ranks, function(a, b) return a.nominal < b.nominal end)
+                target_total = target_total / #targets
+                local target_rank = ranks[#ranks]
+                for k, v in ipairs(ranks) do
+                    if target_total < v.nominal then
+                        if k <= 1 then
+                            sendErrorMessage("Mathematical paradox detected! Aborting calculation...", self.key)
+                            return { message = "ERROR" }
+                        else
+                            target_rank = ranks[k - 1]
+                            break
+                        end
+                    end
+                end
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        for k, v in ipairs(targets) do
+                            SMODS.change_base(v, nil, target_rank.key)
+                        end
+                        play_sound("gong", 0.94, 0.3)
+                        play_sound("gong", 0.94 * 1.5, 0.2)
+                        play_sound("tarot1", 1.5)
+                        return true
+                    end
+                }))
+                return { message = localize("k_balanced"), volume = 0, colour = { 0.8, 0.45, 0.85, 1 } }
+            end
+        end
+    end,
+})

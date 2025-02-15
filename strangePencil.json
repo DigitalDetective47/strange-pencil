@@ -9,7 +9,7 @@
     "main_file": "strangePencil.lua",
     "badge_colour": "FF9E49",
     "badge_text_colour": "404040",
-    "version": "0.3.0~0b14b",
+    "version": "0.3.0~0b14c",
     "priority": 1e10,
     "dependencies": [
         "Steamodded (>=1.0.0~ALPHA-1409a)",
