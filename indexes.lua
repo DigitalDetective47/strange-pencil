@@ -299,7 +299,7 @@ SMODS.Consumable({
             end
         end
         for k, v in ipairs(targets) do
-            local consume = copy_card(v, consume)
+            local consume = copy_card(v)
             if next(SMODS.find_mod("incantation")) then
                 consume:setQty(1)
             end
