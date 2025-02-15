@@ -42,7 +42,7 @@ SMODS.Consumable({
                         edition = "e_negative",
                         -- stickers = { "eternal" },
                         area = G.consumeables,
-                        key = pseudorandom_element(G.P_CENTER_POOLS.Consumeables, pseudoseed(seed or "grc")).key,
+                        key = pseudorandom_element(G.P_CENTER_POOLS.Consumeables, pseudoseed(self.key)).key,
                     })
                     new.ability.eternal = true
                     new:add_to_deck()
@@ -85,7 +85,7 @@ SMODS.Consumable({
                             edition = "e_negative",
                             -- stickers = { "eternal" },
                             area = G.shop_booster,
-                            key = pseudorandom_element(G.P_CENTER_POOLS.Booster, pseudoseed(seed or "grc")).key,
+                            key = pseudorandom_element(G.P_CENTER_POOLS.Booster, pseudoseed(self.key)).key,
                         })
                         new.ability.eternal = true
                         new.cost = 0
