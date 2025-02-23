@@ -8,6 +8,7 @@ SMODS.load_file("indexes.lua")()
 SMODS.load_file("jokers.lua")()
 SMODS.load_file("ranks.lua")()
 SMODS.load_file("spectrals.lua")()
+SMODS.load_file("stickers.lua")()
 SMODS.load_file("tags.lua")()
 SMODS.load_file("vouchers.lua")()
 

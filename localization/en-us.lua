@@ -515,6 +515,14 @@ return {
                     "{C:attention}#2#{} {C:clubs}Club{}-related cards",
                 }
             },
+            pencil_paralyzed = {
+                name = "Paralyzed",
+                text = {
+                    "{C:green}#1# in #2#{} chance",
+                    "to be {C:red}debuffed{}",
+                    "each round",
+                }
+            }
         }
     },
     misc = {
@@ -529,6 +537,7 @@ return {
             k_clubs_pack = "Clubs Pack",
             k_infected = "Infected!",
             k_cracked = "Cracked!",
+            k_paralyzed = "Paralyzed!",
             b_pull = "PULL",
         },
         ranks = {
@@ -536,6 +545,7 @@ return {
         },
         labels = {
             index = "Index",
+            pencil_paralyzed = "Paralyzed"
         },
         v_text = {
             ch_c_pencil_most_played_only = { "Play only 1 hand type this run" },
