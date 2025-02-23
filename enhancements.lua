@@ -77,22 +77,6 @@ function CardArea:emplace(card, location, stay_flipped)
 end
 
 if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config["Enhanced Decks"] then
-    SMODS.Back({
-        key = "diseased",
-        config = { cry_force_enhancement = "m_pencil_diseased" },
-        -- loc_vars = function(self, info_queue, card)
-        --     table.insert(info_queue, SMODS.Centers.m_pencil_diseased)
-        -- end,
-        pos = { x = 2, y = 0 },
-        atlas = "enhancements",
-    })
-    SMODS.Back({
-        key = "flagged",
-        config = { cry_force_enhancement = "m_pencil_flagged" },
-        -- loc_vars = function(self, info_queue, card)
-        --     table.insert(info_queue, SMODS.Centers.m_pencil_flagged)
-        -- end,
-        pos = { x = 2, y = 1 },
-        atlas = "enhancements",
-    })
+    Cryptid.edeck_sprites.enhancement.m_pencil_diseased = {atlas = "pencil_enhancements", pos = { x = 2, y = 0 }}
+    Cryptid.edeck_sprites.enhancement.m_pencil_flagged = {atlas = "pencil_enhancements", pos = { x = 2, y = 1 }}
 end
