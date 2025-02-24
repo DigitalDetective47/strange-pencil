@@ -15,11 +15,3 @@ if self.ability.set == 'Booster' and k == 'choose' and G.GAME.modifiers.booster_
 end
 '''
 match_indent = true
-# wtf?
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "G.GAME.pack_choices = self.config.center.config.choose or 1"
-position = "after"
-payload = "G.GAME.pack_choices = self.ability.choose"
-match_indent = true
