@@ -261,6 +261,14 @@ return {
                     "ranked card scores",
                 }
             },
+            bl_pencil_fence = {
+                name = "The Fence",
+                text = {
+                    "Apply {C:attention}Paralyzed{} to",
+                    "all {C:attention}Jokers{} triggered",
+                    "on first hand of round",
+                }
+            },
         },
         Enhanced = {
             m_pencil_diseased = {

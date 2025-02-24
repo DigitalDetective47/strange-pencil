@@ -45,7 +45,29 @@ SMODS.Blind({
 local hook3 = Card.calculate_joker
 function Card:calculate_joker(context)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and (context.repetition or context.retrigger_joker_check)) then
-        return hook3(self, context)
+        local val = hook3(self, context)
+        if val and G.GAME.blind.name == "bl_pencil_fence" and G.GAME.current_round.hands_played == 0 then
+            local final = val
+            while final.extra do
+                final = final.extra
+            end
+            final.extra = {
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            self.ability.pencil_paralyzed = copy_table(SMODS.Stickers.pencil_paralyzed.config)
+                            SMODS.debuff_card(self, true, "pencil_paralyzed")
+                            G.GAME.blind.triggered = true
+                            return true
+                        end
+                    }))
+                    SMODS.calculate_effect(
+                        { message = localize("k_paralyzed_ex"), colour = SMODS.Stickers.pencil_paralyzed.badge_colour },
+                        self)
+                end
+            }
+        end
+        return val
     elseif hook3(self, context) then
         G.GAME.blind.triggered = true
     end
@@ -135,3 +157,23 @@ local hook6 = SMODS.always_scores
 function SMODS.always_scores(card)
     return not (G.GAME.blind and G.GAME.blind.name == "bl_pencil_star") and hook6(card)
 end
+
+SMODS.Blind({
+    key = "fence",
+    boss = { min = 2 },
+    in_pool = function(self)
+        if G.GAME.round_resets.ante < 2 then
+            return false
+        end
+        for k, v in ipairs(G.jokers.cards) do
+            if not v.ability.pencil_paralyzed then
+                return true
+            end
+        end
+        return false
+    end,
+    boss_colour = HEX("FFFFFF"),
+    pos = { x = 0, y = 5 },
+    atlas = "blinds",
+    mult = 2,
+})
