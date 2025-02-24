@@ -535,9 +535,9 @@ return {
             b_index_cards = "Index Cards",
             k_index_pack = "Doodle Pack",
             k_clubs_pack = "Clubs Pack",
-            k_infected = "Infected!",
-            k_cracked = "Cracked!",
-            k_paralyzed = "Paralyzed!",
+            k_infected_ex = "Infected!",
+            k_cracked_ex = "Cracked!",
+            k_paralyzed_ex = "Paralyzed!",
             b_pull = "PULL",
         },
         ranks = {

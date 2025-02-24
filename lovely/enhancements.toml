@@ -43,7 +43,7 @@ for k, v in ipairs(G.play.cards) do
                 changed = true
             end
             if changed then
-                card_eval_status_text(v, 'extra', nil, nil, nil, { message = localize('k_infected') })
+                card_eval_status_text(v, 'extra', nil, nil, nil, { message = localize('k_infected_ex') })
             end
         end
     end

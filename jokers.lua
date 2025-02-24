@@ -365,7 +365,7 @@ SMODS.Joker({
                         return true
                     end
                 }))
-                return { message = localize('k_cracked') }
+                return { message = localize('k_cracked_ex') }
             else
                 SMODS.calculate_effect({ message = localize("k_safe_ex") }, card)
                 card.ability.rounds = card.ability.rounds + 1
