@@ -22,8 +22,7 @@ SMODS.Sticker({
     needs_enable_flag = true,
     apply = function(self, card, val)
         if val then
-            card.ability[self.key] = {}
-            SMODS.merge_defaults(card.ability[self.key], self.config)
+            card.ability[self.key] = copy_table(self.config)
             SMODS.calculate_effect(roll_paralysis(self, card) or {}, card)
         else
             card.ability[self.key] = val
