@@ -86,7 +86,7 @@ SMODS.Blind({
     key = "lock",
     boss = { min = 3 },
     in_pool = function(self)
-        if G.GAME.round_resets.ante < 3 then
+        if G.GAME.round_resets.ante < self.boss.min then
             return false
         end
         for k, v in ipairs(G.jokers.cards) do
@@ -162,7 +162,7 @@ SMODS.Blind({
     key = "fence",
     boss = { min = 2 },
     in_pool = function(self)
-        if G.GAME.round_resets.ante < 2 then
+        if G.GAME.round_resets.ante < self.boss.min then
             return false
         end
         for k, v in ipairs(G.jokers.cards) do
