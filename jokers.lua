@@ -640,10 +640,6 @@ SMODS.Joker({
     end,
 })
 
-for r = 2, 10 do
-    SMODS.Rank:take_ownership(tostring(r), { is_numeric = true }, true)
-end
-
 SMODS.Joker({
     key = "commie",
     rarity = 2,
@@ -656,7 +652,7 @@ SMODS.Joker({
             local targets = {}
             local target_total = 0
             for k, v in ipairs(context.scoring_hand) do
-                if SMODS.Ranks[v.base.value].is_numeric then
+                if not SMODS.has_no_rank(v) then
                     table.insert(targets, v)
                     target_total = target_total + v.base.nominal
                 end
@@ -664,11 +660,12 @@ SMODS.Joker({
             if #targets > 0 then
                 local ranks = {}
                 for k, v in pairs(SMODS.Ranks) do
-                    if v.is_numeric then
-                        table.insert(ranks, v)
-                    end
+                    table.insert(ranks, v)
                 end
-                table.sort(ranks, function(a, b) return a.nominal < b.nominal end)
+                table.sort(ranks, function(a, b)
+                    return a.nominal == b.nominal and (a.face_nominal or 0) > (b.face_nominal or 0) or
+                        a.nominal < b.nominal
+                end)
                 target_total = target_total / #targets
                 local target_rank = ranks[#ranks]
                 for k, v in ipairs(ranks) do
