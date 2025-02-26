@@ -429,6 +429,7 @@ SMODS.Joker({
     pools = { clubs_legendary = true },
     cost = 20,
     blueprint_compat = true,
+    eternal_compat = false,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.repetition and not card.ability.dead then
             return { repetitions = card.ability.retriggers, card = card }
