@@ -527,7 +527,7 @@ SMODS.Consumable({
     pos = { x = 1, y = 1 },
     cost = 5,
     can_use = function(self, card)
-        return #SMODS.find_card("c_pencil_ono99", true) >= #G.consumeables.config.card_limit
+        return #SMODS.find_card("c_pencil_ono99", true) >= G.consumeables.config.card_limit
     end,
     use = function(self, card, area, copier)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
