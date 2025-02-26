@@ -46,22 +46,3 @@ pattern = "{card_limit = _size, type = 'consumeable', highlight_limit = 1})"
 position = "at"
 payload = "{card_limit = _size, type = 'consumeable', highlight_limit = math.huge})"
 match_indent = true
-
-# Remove hardcoded shop selection limit
-[[patches]]
-[patches.pattern]
-target = "cardarea.lua"
-pattern = '''
-if self.config.type == 'shop' then
-    if self.highlighted[1] then
-        self:remove_from_highlighted(self.highlighted[1])
-    end
-    --if not G.FUNCS.check_for_buy_space(card) then return false end
-    self.highlighted[#self.highlighted+1] = card
-    card:highlight(true)
-    if not silent then play_sound('cardSlide1') end
-elseif self.config.type == 'joker' or self.config.type == 'consumeable' then
-'''
-position = "at"
-payload = "if self.config.type == 'joker' or self.config.type == 'consumeable' or self.config.type == 'shop' then"
-match_indent = true
