@@ -23,7 +23,9 @@ SMODS.Sticker({
     apply = function(self, card, val)
         if val then
             card.ability[self.key] = copy_table(self.config)
-            SMODS.calculate_effect(roll_paralysis(self, card) or {}, card)
+            if not G.your_collection then
+                SMODS.calculate_effect(roll_paralysis(self, card) or {}, card)
+            end
         else
             card.ability[self.key] = val
         end
@@ -34,3 +36,7 @@ SMODS.Sticker({
         end
     end,
 })
+
+if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config["Enhanced Decks"] then
+    Cryptid.edeck_sprites.sticker.pencil_paralyzed = { atlas = "pencil_stickers", pos = { x = 2, y = 0 } }
+end
