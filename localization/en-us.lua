@@ -369,9 +369,8 @@ return {
                 name = "Negative Space",
                 text = {
                     "Create {C:attention}#1#{} random {C:purple,E:1}Eternal{}",
-                    "{C:dark_edition}Negative{} card for each",
-                    "slot currently visible",
-                    "{C:inactive,s:0.8}Cards added to shop are free",
+                    "{C:dark_edition}Negative{} for each",
+                    "joker slot you have",
                 }
             },
             c_pencil_pulsar = {

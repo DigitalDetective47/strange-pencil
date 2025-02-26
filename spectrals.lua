@@ -20,96 +20,12 @@ SMODS.Consumable({
             delay = 0.4,
             func = function()
                 for _ = 1, G.jokers.config.card_limit * card.ability.multiplier, 1 do
-                    local new = nil
+                    local key
                     repeat
-                        if new then
-                            new:remove()
-                        end
-                        new = SMODS.create_card({
-                            no_edition = true,
-                            edition = "e_negative",
-                            -- stickers = { "eternal" },
-                            set = "Joker",
-                        })
-                        new:set_eternal(true)
-                    until new.ability.eternal
-                    new:add_to_deck()
-                    G.jokers:emplace(new)
-                end
-                for _ = 1, G.consumeables.config.card_limit * card.ability.multiplier, 1 do
-                    local new = SMODS.create_card({
-                        no_edition = true,
-                        edition = "e_negative",
-                        -- stickers = { "eternal" },
-                        area = G.consumeables,
-                        key = pseudorandom_element(G.P_CENTER_POOLS.Consumeables, pseudoseed(self.key)).key,
-                    })
-                    new.ability.eternal = true
-                    new:add_to_deck()
-                    G.consumeables:emplace(new)
-                end
-                if #G.hand.cards ~= 0 then
-                    for _ = 1, G.hand.config.card_limit * card.ability.multiplier, 1 do
-                        local new = SMODS.create_card({
-                            no_edition = true,
-                            edition = "e_negative",
-                            -- stickers = { "eternal" },
-                            set = "Enhanced",
-                            area = G.consumeables,
-                        })
-                        new.ability.eternal = true
-                        new:add_to_deck()
-                        G.hand:emplace(new)
-                    end
-                end
-                if G.shop_jokers ~= nil then
-                    for _ = 1, G.shop_jokers.config.card_limit * card.ability.multiplier, 1 do
-                        local new = nil
-                        repeat
-                            if new then
-                                new:remove()
-                            end
-                            new = create_card_for_shop(G.shop_jokers)
-                            new:set_eternal(true)
-                            new:set_edition("e_negative")
-                        until new.ability.eternal
-                        new.cost = 0
-                        new:add_to_deck()
-                        G.shop_jokers:emplace(new)
-                    end
-                end
-                if G.shop_booster ~= nil then
-                    for _ = 1, G.shop_booster.config.card_limit * card.ability.multiplier, 1 do
-                        local new = SMODS.create_card({
-                            no_edition = true,
-                            edition = "e_negative",
-                            -- stickers = { "eternal" },
-                            area = G.shop_booster,
-                            key = pseudorandom_element(G.P_CENTER_POOLS.Booster, pseudoseed(self.key)).key,
-                        })
-                        new.ability.eternal = true
-                        new.cost = 0
-                        new:add_to_deck()
-                        create_shop_card_ui(new, 'Booster', G.shop_booster)
-                        G.shop_booster:emplace(new)
-                    end
-                end
-                if G.shop_vouchers ~= nil then
-                    for _ = 1, G.shop_vouchers.config.card_limit * card.ability.multiplier, 1 do
-                        local new = SMODS.create_card({
-                            no_edition = true,
-                            edition = "e_negative",
-                            -- stickers = { "eternal" },
-                            area = G.shop_voucher,
-                            key = get_next_voucher_key(true),
-                        })
-                        new.ability.eternal = true
-                        new.cost = 0
-                        new:add_to_deck()
-                        G.shop_vouchers.config.card_limit = G.shop_vouchers.config.card_limit + 1
-                        create_shop_card_ui(new, 'Voucher', G.shop_vouchers)
-                        G.shop_vouchers:emplace(new)
-                    end
+                        local _pool, _pool_key = get_current_pool("Joker")
+                        key = pseudorandom_element(_pool, pseudoseed(_pool_key))
+                    until G.P_CENTERS[key] and G.P_CENTERS[key].eternal_compat
+                    SMODS.add_card({ key = key, no_edition = true, edition = "e_negative", stickers = { "eternal" } })
                 end
                 play_sound("timpani")
                 return true
