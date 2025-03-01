@@ -441,6 +441,25 @@ return {
                 }
             },
         },
+        Stake = {
+            stake_pencil_charred = {
+                name = "Charred Stake",
+                text = {
+                    "Played cards can become {c:attention}Diseased{}",
+                    "{C:inactive,s:0.8}(Infects adjacent cards,",
+                    "{C:inactive,s:0.8}destroyed after 5 rounds)",
+                    "{s:0.8}Applies all previous Stakes",
+                }
+            },
+            stake_pencil_neon = {
+                name = "Neon Stake",
+                text = {
+                    "Shop can have {C:attention}Paralyzed{} Jokers",
+                    "{C:inactive,s:0.8}(Debuffed 1 in 4 rounds)",
+                    "{s:0.8}Applies all previous Stakes",
+                }
+            },
+        },
         Other = {
             undiscovered_index = {
                 name = "Not Discovered",
@@ -529,6 +548,22 @@ return {
                     "to be {C:red}debuffed{}",
                     "each round",
                 }
+            },
+            pencil_charred_sticker = {
+                name = "Charred Sticker",
+                text={
+                    "Used this Joker",
+                    "to win on {C:attention}Charred",
+                    "{C:attention}Stake{} difficulty",
+                },
+            },
+            pencil_neon_sticker = {
+                name = "Neon Sticker",
+                text={
+                    "Used this Joker",
+                    "to win on {C:attention}Neon",
+                    "{C:attention}Stake{} difficulty",
+                },
             }
         }
     },

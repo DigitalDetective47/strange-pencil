@@ -76,6 +76,19 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = "stakes",
+    path = "stakes.png",
+    px = 29,
+    py = 29,
+})
+SMODS.Atlas({
+    key = "stake_stickers",
+    path = "stake-stickers.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
     key = "stickers",
     path = "stickers.png",
     px = 71,
