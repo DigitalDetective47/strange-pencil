@@ -15,11 +15,11 @@ SMODS.Stake({
 
 local hook = eval_card
 function eval_card(card, context)
-    local ret = hook(card, context)
+    local ret, ret2 = hook(card, context)
     if context.before and context.cardarea == G.play and G.GAME.modifiers.covid_19 and pseudorandom("disease_exposure") > 0.9 then
         card:set_ability(SMODS.Centers["m_pencil_diseased"], nil, true)
     end
-    return ret
+    return ret, ret2
 end
 
 SMODS.Stake({
