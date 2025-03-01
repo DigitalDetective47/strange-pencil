@@ -195,23 +195,6 @@ return {
                     "from each {C:attention}Booster Pack",
                 },
             },
-            b_pencil_diseased = {
-                name = "Plagued Deck",
-                text = {
-                    "All {C:attention}playing cards",
-                    "are {C:attention,T:m_pencil_diseased}Diseased Cards",
-                    "Cards cannot change enhancements",
-                    "{s:0.8,C:inactive}Reminds of {s:0.8,C:inactive,T:b_cry_cry-perishable_deck}Perishable Deck",
-                },
-            },
-            b_pencil_flagged = {
-                name = "The Parade's Deck",
-                text = {
-                    "All {C:attention}playing cards",
-                    "are {C:attention,T:m_pencil_flagged}Flagged Cards",
-                    "Cards cannot change enhancements",
-                },
-            },
             b_pencil_slow_roll = {
                 name = "Slow Roller's Deck",
                 text = {
