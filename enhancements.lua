@@ -76,21 +76,25 @@ SMODS.Enhancement({
         end
     end,
     calculate = function(self, card, context)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        for k, v in ipairs(G.deck.cards) do
-                            if v == card then
-                                card.ability.pos = k
+        if context.setting_blind then
+            G.E_MANAGER:add_event(Event({
+                blocking = false,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        blocking = false,
+                        func = function()
+                            for k, v in ipairs(G.deck.cards) do
+                                if v == card then
+                                    card.ability.pos = k
+                                    return true
+                                end
                             end
                         end
-                        return true
-                    end
-                }))
-                return true
-            end
-        }))
+                    }))
+                    return true
+                end
+            }))
+        end
     end,
     atlas = "enhancements",
     pos = { x = 0, y = 1 }
