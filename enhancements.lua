@@ -117,7 +117,7 @@ end
 
 local hook2 = Card.flip
 function Card:flip()
-    if G.hand and not SMODS.has_enhancement(self, "m_pencil_flagged") or self.facing == 'back' then
+    if not (self.area == G.hand and SMODS.has_enhancement(self, "m_pencil_flagged") and self.facing ~= 'back') then
         return hook2(self)
     end
 end
