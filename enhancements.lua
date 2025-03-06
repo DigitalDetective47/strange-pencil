@@ -6,23 +6,23 @@ SMODS.Enhancement({
         return { vars = { card.ability.remaining, card.ability.total } }
     end,
     calculate = function(self, card, context)
-        if G.GAME.hands_played >= card.ability.hands_played_at_create + (card.ability.created_during_scoring and 1 or 0) and context.before and (context.cardarea == G.play or context.cardarea == "unscored") then
+        if G.GAME.hands_played >= card.ability.hands_played_at_create + (card.ability.created_during_scoring and 1 or 0) and context.before and context.cardarea == G.play then
             sendDebugMessage()
             local changed = false
             local pos
-            for k, v in ipairs(context.full_hand) do
+            for k, v in ipairs(context.scoring_hand) do
                 if v == card then
                     pos = k
                     break
                 end
             end
-            local q = context.full_hand[pos - 1]
+            local q = context.scoring_hand[pos - 1]
             if q and not SMODS.has_enhancement(q, "m_pencil_diseased") then
                 q:set_ability(G.P_CENTERS["m_pencil_diseased"], nil, true)
                 q.ability.created_during_scoring = true
                 changed = true
             end
-            q = context.full_hand[pos + 1]
+            q = context.scoring_hand[pos + 1]
             if q and not SMODS.has_enhancement(q, "m_pencil_diseased") then
                 q:set_ability(G.P_CENTERS["m_pencil_diseased"], nil, true)
                 q.ability.created_during_scoring = true
