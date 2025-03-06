@@ -1,3 +1,5 @@
+SMODS.current_mod.optional_features = { cardareas = { discard = true, deck = true } }
+
 SMODS.load_file("atlas.lua")()
 SMODS.load_file("blinds.lua")()
 SMODS.load_file("boosters.lua")()

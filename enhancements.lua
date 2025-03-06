@@ -1,9 +1,42 @@
 SMODS.Enhancement({
     key = "diseased",
     name = "Diseased Card",
-    config = { total = 5, remaining = 5, new = false },
+    config = { total = 5, remaining = 5, created_during_scoring = false },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.remaining, card.ability.total } }
+    end,
+    calculate = function(self, card, context)
+        if G.GAME.hands_played >= card.ability.hands_played_at_create + (card.ability.created_during_scoring and 1 or 0) and context.before and (context.cardarea == G.play or context.cardarea == "unscored") then
+            sendDebugMessage()
+            local changed = false
+            local pos
+            for k, v in ipairs(context.full_hand) do
+                if v == card then
+                    pos = k
+                    break
+                end
+            end
+            local q = context.full_hand[pos - 1]
+            if q and not SMODS.has_enhancement(q, "m_pencil_diseased") then
+                q:set_ability(G.P_CENTERS["m_pencil_diseased"], nil, true)
+                q.ability.created_during_scoring = true
+                changed = true
+            end
+            q = context.full_hand[pos + 1]
+            if q and not SMODS.has_enhancement(q, "m_pencil_diseased") then
+                q:set_ability(G.P_CENTERS["m_pencil_diseased"], nil, true)
+                q.ability.created_during_scoring = true
+                changed = true
+            end
+            if changed then
+                return { message = localize('k_infected_ex') }
+            end
+        elseif context.playing_card_end_of_round then
+            card.ability.remaining = card.ability.remaining - 1
+            if card.ability.remaining <= 0 then
+                card:remove()
+            end
+        end
     end,
     atlas = "enhancements",
     pos = { x = 0, y = 0 }
@@ -60,7 +93,8 @@ SMODS.Consumable({
 if next(SMODS.find_mod("cartomancer")) then
     local hook = Card.cart_to_string
     function Card:cart_to_string(args)
-        return hook(self, args) .. (SMODS.has_enhancement(self, "m_pencil_flagged") and self.ability.pos and self.ability.pos <= #G.deck.cards and tostring(self.ability.pos) or "")
+        return hook(self, args) ..
+            (SMODS.has_enhancement(self, "m_pencil_flagged") and self.ability.pos and self.ability.pos <= #G.deck.cards and tostring(self.ability.pos) or "")
     end
 end
 
@@ -77,6 +111,6 @@ function CardArea:emplace(card, location, stay_flipped)
 end
 
 if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config["Enhanced Decks"] then
-    Cryptid.edeck_sprites.enhancement.m_pencil_diseased = {atlas = "pencil_enhancements", pos = { x = 2, y = 0 }}
-    Cryptid.edeck_sprites.enhancement.m_pencil_flagged = {atlas = "pencil_enhancements", pos = { x = 2, y = 1 }}
+    Cryptid.edeck_sprites.enhancement.m_pencil_diseased = { atlas = "pencil_enhancements", pos = { x = 2, y = 0 } }
+    Cryptid.edeck_sprites.enhancement.m_pencil_flagged = { atlas = "pencil_enhancements", pos = { x = 2, y = 1 } }
 end
