@@ -309,6 +309,37 @@ SMODS.Consumable({
     end,
 })
 
+local hook2 = Game.start_run
+function Game:start_run(args)
+    hook2(self, args)
+    self.consumeables.config.highlighted_limit = math.huge
+end
+
+local hook3 = G.UIDEF.shop
+function G.UIDEF.shop()
+    local ret = hook3()
+    G.shop_jokers.config.highlighted_limit = math.huge
+    G.shop_booster.config.highlighted_limit = math.huge
+    G.shop_vouchers.config.highlighted_limit = math.huge
+    return ret
+end
+
+local hook4 = Card.open
+function Card:open()
+    hook4(self)
+    G.E_MANAGER:add_event(Event({
+        func = (function()
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    G.pack_cards.config.highlighted_limit = math.huge
+                    return true
+                end)
+            }))
+            return true
+        end)
+    }))
+end
+
 SMODS.Consumable({
     key = "counterfeit",
     set = "index",
