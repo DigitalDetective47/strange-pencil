@@ -15,12 +15,12 @@ SMODS.Joker({
             for _, other_card in ipairs(context.scoring_hand) do
                 if enhancement then
                     if other_card.ability.name ~= enhancement then
-                        return {}
+                        return
                     end
                 elseif other_card.ability.name ~= "Default Base" then
                     enhancement = other_card.ability.name
                 else
-                    return {}
+                    return
                 end
             end
             return { mult = card.ability.mult }
