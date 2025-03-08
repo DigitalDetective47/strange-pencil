@@ -77,6 +77,14 @@ SMODS.Back({
     end
 })
 
+local hook = Card.set_ability
+function Card:set_ability(center, initial, delay_sprites)
+    hook(self, center, initial, delay_sprites)
+    if self.ability.set == "Booster" and G.GAME.modifiers.booster_choices then
+        self.ability.choose = self.ability.choose + G.GAME.modifiers.booster_choices
+    end
+end
+
 SMODS.Back({
     key = "slow_roll",
     config = { reroll_discount = get_starting_params().reroll_cost, decrement = 1 },
