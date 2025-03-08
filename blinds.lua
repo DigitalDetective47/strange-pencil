@@ -177,3 +177,36 @@ SMODS.Blind({
     atlas = "blinds",
     mult = 2,
 })
+
+local function flower_disable(self)
+    G.hand.config.highlighted_limit = G.hand.config.highlighted_limit + G.GAME.current_round.hands_played
+end
+
+SMODS.Blind({
+    key = "flower",
+    boss = { min = 2 },
+    in_pool = function(self)
+        return G.GAME.round_resets.ante >= self.boss.min and
+            G.hand.config.highlighted_limit >= G.GAME.round_resets.hands
+    end,
+    boss_colour = HEX("0080FF"),
+    pos = { x = 0, y = 6 },
+    atlas = "blinds",
+    mult = 2,
+    press_play = function(self)
+        G.hand.config.highlighted_limit = G.hand.config.highlighted_limit - 1
+    end,
+    disable = flower_disable,
+    defeat = flower_disable,
+    drawn_to_hand = function(self)
+        if G.hand.config.highlighted_limit < 1 then
+            G.STATE = G.STATES.GAME_OVER
+            if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then
+                G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
+            end
+            G:save_settings()
+            G.FILE_HANDLER.force = true
+            G.STATE_COMPLETE = false
+        end
+    end,
+})

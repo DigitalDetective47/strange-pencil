@@ -252,6 +252,13 @@ return {
                     "on first hand of round",
                 }
             },
+            bl_pencil_flower = {
+                name = "The Flower",
+                text = {
+                    "-1 Hand Selection Limit",
+                    "per hand played this round",
+                }
+            },
         },
         Enhanced = {
             m_pencil_diseased = {
