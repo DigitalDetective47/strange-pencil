@@ -48,6 +48,9 @@ SMODS.Joker({
     pos = { x = 1, y = 0 },
     atlas = "jokers",
     cost = 7,
+    in_pool = function (self, args)
+        return lassCount() > 1
+    end,
     pools = { clubs_pack = true },
     blueprint_compat = true,
     calculate = function(self, card, context)
@@ -514,6 +517,21 @@ SMODS.Joker({
     end,
     pos = { x = 5, y = 2 },
     atlas = "jokers",
+    in_pool = function (self, args)
+        local diseased = false
+        local flagged = false
+        for _, other_card in ipairs(G.playing_cards) do
+            if SMODS.has_enhancement(other_card, "m_pencil_diseased") then
+                diseased = true
+            end
+            if SMODS.has_enhancement(other_card, "m_pencil_flagged") then
+                flagged = true
+            end
+            if diseased and flagged then
+                return true
+            end
+        end
+    end,
     cost = 4,
     blueprint_compat = true,
     calculate = function(self, card, context)
