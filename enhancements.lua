@@ -9,9 +9,9 @@ SMODS.Enhancement({
         if G.GAME.hands_played >= card.ability.hands_played_at_create + (card.ability.created_during_scoring and 1 or 0) and context.before and context.cardarea == G.play then
             local changed = false
             local pos
-            for k, v in ipairs(context.scoring_hand) do
-                if v == card then
-                    pos = k
+            for i, other_card in ipairs(context.scoring_hand) do
+                if other_card == card then
+                    pos = i
                     break
                 end
             end
@@ -62,8 +62,8 @@ SMODS.Enhancement({
             return { vars = { "Shows its position in the deck", "" } }
         end
         if G.your_collection then
-            for k, v in ipairs(G.your_collection) do
-                if card.area == v then
+            for _, row in ipairs(G.your_collection) do
+                if card.area == row then
                     return { vars = { "Shows its position in the deck", "" } }
                 end
             end
@@ -82,9 +82,9 @@ SMODS.Enhancement({
                     G.E_MANAGER:add_event(Event({
                         blocking = false,
                         func = function()
-                            for k, v in ipairs(G.deck.cards) do
-                                if v == card then
-                                    card.ability.pos = k
+                            for i, other_card in ipairs(G.deck.cards) do
+                                if other_card == card then
+                                    card.ability.pos = i
                                     return true
                                 end
                             end

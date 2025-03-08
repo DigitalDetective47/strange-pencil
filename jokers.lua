@@ -12,13 +12,13 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual then
             local enhancement = nil;
-            for i = 1, #context.scoring_hand do
+            for _, other_card in ipairs(context.scoring_hand) do
                 if enhancement then
-                    if context.scoring_hand[i].ability.name ~= enhancement then
+                    if other_card.ability.name ~= enhancement then
                         return {}
                     end
-                elseif context.scoring_hand[i].ability.name ~= "Default Base" then
-                    enhancement = context.scoring_hand[i].ability.name
+                elseif other_card.ability.name ~= "Default Base" then
+                    enhancement = other_card.ability.name
                 else
                     return {}
                 end
@@ -30,8 +30,8 @@ SMODS.Joker({
 
 function lassCount()
     local queens = 0
-    for k, v in ipairs(G.playing_cards or {}) do
-        if v:is_suit("Clubs") and not SMODS.has_no_rank(v) and v.base.value == "Queen" then
+    for _, card in ipairs(G.playing_cards or {}) do
+        if card:is_suit("Clubs") and not SMODS.has_no_rank(card) and card.base.value == "Queen" then
             queens = queens + 1
         end
     end
@@ -60,8 +60,8 @@ SMODS.Joker({
 function forbidden_part_added(center, card, from_debuff)
     if not (G.GAME.won or G.GAME.win_notified)
     then
-        for k, v in ipairs({ "j_pencil_forbidden_one", "j_pencil_left_arm", "j_pencil_left_leg", "j_pencil_right_arm", "j_pencil_right_leg" }) do
-            if center.key ~= v and #SMODS.find_card(v) == 0 then
+        for _, key in ipairs({ "j_pencil_forbidden_one", "j_pencil_left_arm", "j_pencil_left_leg", "j_pencil_right_arm", "j_pencil_right_leg" }) do
+            if center.key ~= key and #SMODS.find_card(key) == 0 then
                 return
             end
         end
@@ -247,11 +247,11 @@ SMODS.Joker({
             local repetitions = 0
             local juicers = {}
             local juice_i = 1
-            for k, v in ipairs(G.hand.cards) do
-                if v.base.value == "7" then
+            for _, other_card in ipairs(G.hand.cards) do
+                if other_card.base.value == "7" then
                     repetitions = repetitions + card.ability.factor
                     while #juicers < repetitions do
-                        table.insert(juicers, v)
+                        table.insert(juicers, other_card)
                     end
                 end
             end
@@ -328,8 +328,8 @@ SMODS.Joker({
             return { mult = card.ability.mult }
         elseif context.before and not context.blueprint and next(context.poker_hands["Two Pair"]) then
             local diamonds = 0
-            for k, v in ipairs(context.scoring_hand) do
-                if v:is_suit("Diamonds") then
+            for _, other_card in ipairs(context.scoring_hand) do
+                if other_card:is_suit("Diamonds") then
                     diamonds = diamonds + 1
                     if diamonds >= card.ability.required_diamonds then
                         card.ability.mult = card.ability.mult + card.ability.scaling
@@ -436,8 +436,8 @@ SMODS.Joker({
         elseif context.cardarea == G.play and context.individual and not card.ability.dead then
             return { x_mult = card.ability.xmult }
         elseif context.before then
-            for k, v in ipairs(context.full_hand) do
-                if not v:is_suit("Clubs") then
+            for _, other_card in ipairs(context.full_hand) do
+                if not other_card:is_suit("Clubs") then
                     card.ability.dead = true
                     G.E_MANAGER:add_event(Event({
                         func = function()
@@ -518,11 +518,11 @@ SMODS.Joker({
         if context.before then
             local diseased = false
             local flagged = false
-            for k, v in ipairs(context.scoring_hand) do
-                if SMODS.has_enhancement(v, "m_pencil_diseased") then
+            for _, other_card in ipairs(context.scoring_hand) do
+                if SMODS.has_enhancement(other_card, "m_pencil_diseased") then
                     diseased = true
                 end
-                if SMODS.has_enhancement(v, "m_pencil_flagged") then
+                if SMODS.has_enhancement(other_card, "m_pencil_flagged") then
                     flagged = true
                 end
                 if diseased and flagged then
@@ -624,8 +624,8 @@ SMODS.Joker({
             local suit
             local ratio
             suit, ratio = calc_ratio()
-            for k, v in ipairs(context.scoring_hand) do
-                if v:is_suit(suit) then
+            for _, other_card in ipairs(context.scoring_hand) do
+                if other_card:is_suit(suit) then
                     card.ability.xmult = 1
                     return { message = localize('k_reset'), colour = G.C.MULT }
                 end

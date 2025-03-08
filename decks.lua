@@ -40,7 +40,7 @@ SMODS.Back({
         G.E_MANAGER:add_event(Event({
             blockable = false,
             func = function()
-                for k, v in ipairs(G.playing_cards) do
+                for _, card in ipairs(G.playing_cards) do
                     local rank_suffix
                     repeat
                         rank_suffix = math.floor(Gaussian(self.config.mean, self.config.variance) + 0.5)
@@ -56,7 +56,7 @@ SMODS.Back({
                     elseif rank_suffix == 14 then
                         rank_suffix = 'Ace'
                     end
-                    SMODS.change_base(v, nil, rank_suffix)
+                    SMODS.change_base(card, nil, rank_suffix)
                 end
                 return true
             end

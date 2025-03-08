@@ -36,11 +36,11 @@ SMODS.Consumable({
 
 local function pulsar_target()
     local most, played
-    for k, v in ipairs(G.handlist) do
-        if G.GAME.hands[v].visible then
-            if not played or G.GAME.hands[v].played > played then
+    for _, hand_key in ipairs(G.handlist) do
+        if G.GAME.hands[hand_key].visible then
+            if not played or G.GAME.hands[hand_key].played > played then
                 most = v
-                played = G.GAME.hands[v].played
+                played = G.GAME.hands[hand_key].played
             end
         end
     end

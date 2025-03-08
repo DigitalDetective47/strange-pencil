@@ -32,8 +32,8 @@ SMODS.ObjectType({
 local clubs_select_card = { Joker = "jokers", Default = "deck", Enhanced = "deck" }
 G.E_MANAGER:add_event(Event({
     func = function()
-        for k, v in pairs(SMODS.ConsumableTypes) do
-            clubs_select_card[k] = "consumeables"
+        for type, _ in pairs(SMODS.ConsumableTypes) do
+            clubs_select_card[type] = "consumeables"
         end
         return true
     end,

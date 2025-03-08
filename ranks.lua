@@ -16,7 +16,7 @@ SMODS.Rank({
                 return true
             end
         end
-        for i, card in ipairs(G.playing_cards or {}) do
+        for _, card in ipairs(G.playing_cards or {}) do
             if card.base.value == "pencil_sneven" then
                 return true
             end

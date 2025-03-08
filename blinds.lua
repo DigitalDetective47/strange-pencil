@@ -89,8 +89,8 @@ SMODS.Blind({
         if G.GAME.round_resets.ante < self.boss.min then
             return false
         end
-        for k, v in ipairs(G.jokers.cards) do
-            if not v.ability.pinned then
+        for _, joker in ipairs(G.jokers.cards) do
+            if not joker.ability.pinned then
                 return true
             end
         end
@@ -102,9 +102,9 @@ SMODS.Blind({
     mult = 2,
     press_play = function(self)
         local targets = {}
-        for k, v in ipairs(G.jokers.cards) do
-            if not v.ability.pinned then
-                table.insert(targets, v)
+        for _, joker in ipairs(G.jokers.cards) do
+            if not joker.ability.pinned then
+                table.insert(targets, joker)
             end
         end
         if #targets >= 1 then
@@ -165,8 +165,8 @@ SMODS.Blind({
         if G.GAME.round_resets.ante < self.boss.min then
             return false
         end
-        for k, v in ipairs(G.jokers.cards) do
-            if not v.ability.pencil_paralyzed then
+        for _, joker in ipairs(G.jokers.cards) do
+            if not joker.ability.pencil_paralyzed then
                 return true
             end
         end

@@ -208,43 +208,43 @@ SMODS.Consumable({
     config = { selections = 1 },
     can_use = function(self, card)
         local targets = {}
-        for k, v in ipairs(G.consumeables.highlighted) do
+        for _, other_card in ipairs(G.consumeables.highlighted) do
             if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                table.insert(targets, v)
+                table.insert(targets, other_card)
             end
         end
         if G.shop_jokers ~= nil then
-            for k, v in ipairs(G.shop_jokers.highlighted) do
+            for _, other_card in ipairs(G.shop_jokers.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
         if G.shop_booster ~= nil then
-            for k, v in ipairs(G.shop_booster.highlighted) do
+            for _, other_card in ipairs(G.shop_booster.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
         if G.shop_vouchers ~= nil then
-            for k, v in ipairs(G.shop_vouchers.highlighted) do
+            for _, other_card in ipairs(G.shop_vouchers.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
         if G.pack_cards ~= nil then
-            for k, v in ipairs(G.pack_cards.highlighted) do
+            for _, other_card in ipairs(G.pack_cards.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
         if G.hand ~= nil then
-            for k, v in ipairs(G.hand.highlighted) do
+            for _, other_card in ipairs(G.hand.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
@@ -255,47 +255,47 @@ SMODS.Consumable({
     use = function(self, card, area, copier)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local targets = {}
-        for k, v in ipairs(G.consumeables.highlighted) do
+        for _, other_card in ipairs(G.consumeables.highlighted) do
             if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                table.insert(targets, v)
+                table.insert(targets, other_card)
             end
         end
         if G.shop_jokers ~= nil then
-            for k, v in ipairs(G.shop_jokers.highlighted) do
+            for _, other_card in ipairs(G.shop_jokers.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
         if G.shop_booster ~= nil then
-            for k, v in ipairs(G.shop_booster.highlighted) do
+            for _, other_card in ipairs(G.shop_booster.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
         if G.shop_vouchers ~= nil then
-            for k, v in ipairs(G.shop_vouchers.highlighted) do
+            for _, other_card in ipairs(G.shop_vouchers.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
         if G.pack_cards ~= nil then
-            for k, v in ipairs(G.pack_cards.highlighted) do
+            for _, other_card in ipairs(G.pack_cards.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
         if G.hand ~= nil then
-            for k, v in ipairs(G.hand.highlighted) do
+            for _, other_card in ipairs(G.hand.highlighted) do
                 if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
-                    table.insert(targets, v)
+                    table.insert(targets, other_card)
                 end
             end
         end
-        for k, v in ipairs(targets) do
+        for _, other_card in ipairs(targets) do
             local consume = copy_card(v)
             if next(SMODS.find_mod("incantation")) then
                 consume:setQty(1)
@@ -366,8 +366,8 @@ SMODS.Consumable({
         if #G.jokers.highlighted ~= 1 then
             return false
         end
-        for k, v in pairs(SMODS.Stickers) do
-            if G.jokers.highlighted[1].ability[v.key] then
+        for _, sticker in pairs(SMODS.Stickers) do
+            if G.jokers.highlighted[1].ability[sticker.key] then
                 return true
             end
         end
@@ -417,8 +417,8 @@ SMODS.Consumable({
     pos = { x = 4, y = 0 },
     cost = 5,
     can_use = function(self, card)
-        for k, v in ipairs(G.hand.cards or {}) do
-            if v.facing == "back" then
+        for _, other_card in ipairs(G.hand.cards or {}) do
+            if other_card.facing == "back" then
                 return true
             end
         end
@@ -426,9 +426,9 @@ SMODS.Consumable({
     end,
     use = function(self, card, area, copier)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
-        for k, v in ipairs(G.hand.cards) do
-            if v.facing == "back" then
-                v:flip()
+        for _, other_card in ipairs(G.hand.cards) do
+            if other_card.facing == "back" then
+                other_card:flip()
             end
         end
     end,
@@ -447,12 +447,12 @@ SMODS.Consumable({
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local left = false
         local right = false
-        for k, v in ipairs(G.hand.highlighted) do
-            if v == card then
+        for _, other_card in ipairs(G.hand.highlighted) do
+            if other_card == card then
             elseif left then
-                right = v
+                right = other_card
             else
-                left = v
+                left = other_card
             end
         end
         G.E_MANAGER:add_event(Event({
@@ -528,7 +528,7 @@ SMODS.Consumable({
     end,
     use = function(self, card, area, copier)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
-        for i = 1, math.min(card.ability.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
+        for _ = 1, math.min(card.ability.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.4,
@@ -561,13 +561,13 @@ SMODS.Consumable({
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         G.GAME.banned_keys.c_pencil_ono99 = true
         play_sound('timpani')
-        for k, v in ipairs(SMODS.find_card("c_pencil_ono99")) do
-            if not v.ability.eternal then
+        for _, other_card in ipairs(SMODS.find_card("c_pencil_ono99")) do
+            if not other_card.ability.eternal then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     func = function()
                         for i = 1, next(SMODS.find_mod("incantation")) and v:getQty() or 1, 1 do
-                            SMODS.add_card({ set = "index", no_edition = true, edition = v.edition })
+                            SMODS.add_card({ set = "index", no_edition = true, edition = other_card.edition })
                         end
                         v:start_dissolve()
                         return true
