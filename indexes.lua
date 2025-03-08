@@ -256,10 +256,7 @@ SMODS.Consumable({
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local targets = {}
         for k, v in ipairs(G.consumeables.highlighted) do
-            if v.ability.set == "Unique" or not v.ability.consumeable then
-                return false
-            end
-            if v ~= card then
+            if v.ability.set ~= "Unique" and v.ability.consumeable and v ~= card then
                 table.insert(targets, v)
             end
         end
