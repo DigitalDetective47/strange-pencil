@@ -7,7 +7,6 @@ SMODS.Enhancement({
     end,
     calculate = function(self, card, context)
         if G.GAME.hands_played >= card.ability.hands_played_at_create + (card.ability.created_during_scoring and 1 or 0) and context.before and context.cardarea == G.play then
-            sendDebugMessage()
             local changed = false
             local pos
             for k, v in ipairs(context.scoring_hand) do
