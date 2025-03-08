@@ -42,10 +42,10 @@ SMODS.Blind({
     mult = 2,
 })
 
-local hook3 = Card.calculate_joker
+local calculate_joker_hook = Card.calculate_joker
 function Card:calculate_joker(context)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and (context.repetition or context.retrigger_joker_check)) then
-        local val = hook3(self, context)
+        local val = calculate_joker_hook(self, context)
         if val and G.GAME.blind.name == "bl_pencil_fence" and G.GAME.current_round.hands_played == 0 then
             local final = val
             while final.extra do
@@ -68,16 +68,16 @@ function Card:calculate_joker(context)
             }
         end
         return val
-    elseif hook3(self, context) then
+    elseif calculate_joker_hook(self, context) then
         G.GAME.blind.triggered = true
     end
 end
 
-local hook4 = Card.calculate_seal
+local calculate_seal_hook = Card.calculate_seal
 function Card:calculate_seal(context)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and context.repetition) then
-        return hook4(self, context)
-    elseif hook4(self, context) then
+        return calculate_seal_hook(self, context)
+    elseif calculate_seal_hook(self, context) then
         G.GAME.blind.triggered = true
     end
 end
@@ -135,14 +135,14 @@ SMODS.Blind({
     mult = 2,
 })
 
-local hook5 = G.FUNCS.get_poker_hand_info
+local poker_hand_info_hook = G.FUNCS.get_poker_hand_info
 G.FUNCS.get_poker_hand_info = function(_cards)
     local text
     local loc_disp_text
     local poker_hands
     local scoring_hand
     local disp_text
-    text, loc_disp_text, poker_hands, scoring_hand, disp_text = hook5(_cards)
+    text, loc_disp_text, poker_hands, scoring_hand, disp_text = poker_hand_info_hook(_cards)
     if next(poker_hands["High Card"]) and G.GAME.blind and G.GAME.blind.name == "bl_pencil_star" then
         local old_size = #scoring_hand
         scoring_hand = SMODS.has_no_rank(poker_hands["High Card"][1][1]) and {} or poker_hands["High Card"][1]
@@ -153,9 +153,9 @@ G.FUNCS.get_poker_hand_info = function(_cards)
     return text, loc_disp_text, poker_hands, scoring_hand, disp_text
 end
 
-local hook6 = SMODS.always_scores
+local always_scores_hook = SMODS.always_scores
 function SMODS.always_scores(card)
-    return not (G.GAME.blind and G.GAME.blind.name == "bl_pencil_star") and hook6(card)
+    return not (G.GAME.blind and G.GAME.blind.name == "bl_pencil_star") and always_scores_hook(card)
 end
 
 SMODS.Blind({

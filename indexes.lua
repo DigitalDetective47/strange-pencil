@@ -306,24 +306,24 @@ SMODS.Consumable({
     end,
 })
 
-local hook2 = Game.start_run
+local start_run_hook = Game.start_run
 function Game:start_run(args)
-    hook2(self, args)
+    start_run_hook(self, args)
     self.consumeables.config.highlighted_limit = math.huge
 end
 
-local hook3 = G.UIDEF.shop
+local shop_ui_hook = G.UIDEF.shop
 function G.UIDEF.shop()
-    local ret = hook3()
+    local ret = shop_ui_hook()
     G.shop_jokers.config.highlighted_limit = math.huge
     G.shop_booster.config.highlighted_limit = math.huge
     G.shop_vouchers.config.highlighted_limit = math.huge
     return ret
 end
 
-local hook4 = Card.open
+local open_hook = Card.open
 function Card:open()
-    hook4(self)
+    open_hook(self)
     G.E_MANAGER:add_event(Event({
         func = (function()
             G.E_MANAGER:add_event(Event({
@@ -578,7 +578,7 @@ SMODS.Consumable({
     end,
 })
 
-local hook = Card.can_sell_card
+local can_sell_hook = Card.can_sell_card
 function Card:can_sell_card(context)
-    return self.config.center.key ~= "c_pencil_ono99" and hook(self, context)
+    return self.config.center.key ~= "c_pencil_ono99" and can_sell_hook(self, context)
 end

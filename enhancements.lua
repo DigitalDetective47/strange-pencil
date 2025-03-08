@@ -111,23 +111,23 @@ SMODS.Consumable({
 })
 
 if next(SMODS.find_mod("cartomancer")) then
-    local hook = Card.cart_to_string
+    local cartomancer_stringify_hook = Card.cart_to_string
     function Card:cart_to_string(args)
-        return hook(self, args) ..
+        return cartomancer_stringify_hook(self, args) ..
             (SMODS.has_enhancement(self, "m_pencil_flagged") and self.ability.pos and self.ability.pos <= #G.deck.cards and tostring(self.ability.pos) or "")
     end
 end
 
-local hook2 = Card.flip
+local flip_hook = Card.flip
 function Card:flip()
     if not (self.area == G.hand and SMODS.has_enhancement(self, "m_pencil_flagged") and self.facing ~= 'back') then
-        return hook2(self)
+        return flip_hook(self)
     end
 end
 
-local hook3 = CardArea.emplace
+local emplace_hook = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
-    return hook3(self, card, location, stay_flipped and not SMODS.has_enhancement(card, "m_pencil_flagged"))
+    return emplace_hook(self, card, location, stay_flipped and not SMODS.has_enhancement(card, "m_pencil_flagged"))
 end
 
 if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config["Enhanced Decks"] then

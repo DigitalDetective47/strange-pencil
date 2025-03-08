@@ -77,9 +77,9 @@ SMODS.Back({
     end
 })
 
-local hook = Card.set_ability
+local set_ability_hook = Card.set_ability
 function Card:set_ability(center, initial, delay_sprites)
-    hook(self, center, initial, delay_sprites)
+    set_ability_hook(self, center, initial, delay_sprites)
     if self.ability.set == "Booster" and G.GAME.modifiers.booster_choices then
         self.ability.choose = self.ability.choose + G.GAME.modifiers.booster_choices
     end
