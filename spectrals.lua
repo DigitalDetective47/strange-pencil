@@ -14,7 +14,7 @@ SMODS.Consumable({
     can_use = function(self, card)
         return true
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         G.E_MANAGER:add_event(Event({
             trigger = "after",
             delay = 0.4,
@@ -71,7 +71,7 @@ SMODS.Consumable({
     can_use = function(self, card)
         return true
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         local hand_key = pulsar_target()
         local hand_center = G.GAME.hands[hand_key]
         update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },

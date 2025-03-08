@@ -252,7 +252,7 @@ SMODS.Consumable({
             #G.consumeables.cards + #targets - (card.area == G.consumeables and 1 or 0) <=
             G.consumeables.config.card_limit
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local targets = {}
         for _, other_card in ipairs(G.consumeables.highlighted) do
@@ -350,7 +350,7 @@ SMODS.Consumable({
     can_use = function(self, card)
         return true
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         ease_dollars(card.ability.dollars)
     end,
@@ -373,7 +373,7 @@ SMODS.Consumable({
         end
         return false
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local target = G.jokers.highlighted[1]
         target:flip()
@@ -424,7 +424,7 @@ SMODS.Consumable({
         end
         return false
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         for _, other_card in ipairs(G.hand.cards) do
             if other_card.facing == "back" then
@@ -443,7 +443,7 @@ SMODS.Consumable({
     can_use = function(self, card)
         return #G.hand.highlighted - (card.area == G.hand and 1 or 0) == 2
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         local left = false
         local right = false
@@ -526,7 +526,7 @@ SMODS.Consumable({
     can_use = function(self, card)
         return #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         for _ = 1, math.min(card.ability.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
             G.E_MANAGER:add_event(Event({
@@ -557,7 +557,7 @@ SMODS.Consumable({
     can_use = function(self, card)
         return #SMODS.find_card("c_pencil_ono99", true) >= G.consumeables.config.card_limit
     end,
-    use = function(self, card, area, copier)
+    use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         G.GAME.banned_keys.c_pencil_ono99 = true
         play_sound('timpani')
