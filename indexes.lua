@@ -569,7 +569,7 @@ SMODS.Consumable({
                         for i = 1, next(SMODS.find_mod("incantation")) and v:getQty() or 1, 1 do
                             SMODS.add_card({ set = "index", no_edition = true, edition = other_card.edition })
                         end
-                        v:start_dissolve()
+                        other_card:start_dissolve()
                         return true
                     end
                 }))
