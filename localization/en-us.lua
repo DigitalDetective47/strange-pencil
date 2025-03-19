@@ -168,6 +168,14 @@ return {
                     "of scored cards",
                 }
             },
+            j_pencil_night_club = {
+                name = "Night Club",
+                text = {
+                    "Convert all scoring",
+                    "cards to {C:clubs}Clubs",
+                    "on {C:attention}final hand{} of round",
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
@@ -570,6 +578,7 @@ return {
             k_infected_ex = "Infected!",
             k_cracked_ex = "Cracked!",
             k_paralyzed_ex = "Paralyzed!",
+            k_clubbin_ex = "Clubbin!",
             b_pull = "PULL",
         },
         ranks = {

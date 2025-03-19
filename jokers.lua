@@ -48,7 +48,7 @@ SMODS.Joker({
     pos = { x = 1, y = 0 },
     atlas = "jokers",
     cost = 7,
-    in_pool = function (self, args)
+    in_pool = function(self, args)
         return lassCount() > 1
     end,
     pools = { clubs_pack = true },
@@ -517,7 +517,7 @@ SMODS.Joker({
     end,
     pos = { x = 5, y = 2 },
     atlas = "jokers",
-    in_pool = function (self, args)
+    in_pool = function(self, args)
         local diseased = false
         local flagged = false
         for _, other_card in ipairs(G.playing_cards) do
@@ -713,6 +713,24 @@ SMODS.Joker({
                 }))
                 return { message = localize("k_balanced"), volume = 0, colour = { 0.8, 0.45, 0.85, 1 } }
             end
+        end
+    end,
+})
+
+SMODS.Joker({
+    key = "night_club",
+    rarity = 3,
+    pos = { x = 4, y = 3 },
+    atlas = "jokers",
+    cost = 7,
+    pools = { clubs_pack = true },
+    blueprint_compat = false,
+    calculate = function(self, card, context)
+        if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint then
+            for _, played_card in ipairs(context.scoring_hand) do
+                SMODS.change_base(played_card, "Clubs", nil)
+            end
+            return { message = localize("k_clubbin_ex"), colour = G.C.SUITS.Clubs }
         end
     end,
 })
