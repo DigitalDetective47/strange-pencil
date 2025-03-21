@@ -39,7 +39,7 @@ local function pulsar_target()
     for _, hand_key in ipairs(G.handlist) do
         if G.GAME.hands[hand_key].visible then
             if not played or G.GAME.hands[hand_key].played > played then
-                most = v
+                most = hand_key
                 played = G.GAME.hands[hand_key].played
             end
         end
