@@ -734,3 +734,49 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Sound({
+    key = "fizzle",
+    path = "fizzle.wav"
+})
+
+SMODS.Joker({
+    key = "fizzler",
+    rarity = 1,
+    config = { mult = 0 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.mult } }
+    end,
+    pos = { x = 5, y = 3 },
+    atlas = "jokers",
+    cost = 4,
+    blueprint_compat = true,
+    perishable_compat = false,
+    calculate = function(self, card, context)
+        if context.setting_blind and not card.getting_sliced and not context.blueprint then
+            local prev_mult = card.ability.mult
+            local destroy_queue = {}
+            for i = #G.consumeables.cards, 1, -1 do
+                local consumable = G.consumeables.cards[i]
+                if not consumable.ability.eternal then
+                    card.ability.mult = card.ability.mult + consumable.sell_cost
+                    table.insert(destroy_queue, consumable)
+                end
+            end
+            if card.ability.mult ~= prev_mult then
+                return {
+                    message = localize({ type = 'variable', key = 'a_mult', vars = { card.ability.mult - prev_mult } }),
+                    colour = { 0, 0.5, 1, 1 },
+                    sound = "pencil_fizzle",
+                    func = function()
+                        for _, consumable in ipairs(destroy_queue) do
+                            consumable:start_dissolve({ { 0, 0.5, 1, 1 } }, true)
+                        end
+                    end,
+                }
+            end
+        elseif context.joker_main and card.ability.mult >= 0 then
+            return { mult = card.ability.mult }
+        end
+    end,
+})

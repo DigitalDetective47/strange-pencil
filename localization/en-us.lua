@@ -176,6 +176,16 @@ return {
                     "on {C:attention}final hand{} of round",
                 }
             },
+            j_pencil_fizzler = {
+                name = "Fizzler",
+                text = {
+                    "When {C:attention}Blind{} is selected,",
+                    "destroy all consumables",
+                    "and permanently add their",
+                    "sell values to this {C:mult}Mult",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)",
+                }
+            },
         },
         Back = {
             b_pencil_royal = {
