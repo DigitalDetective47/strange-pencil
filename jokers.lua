@@ -296,11 +296,7 @@ SMODS.Joker({
     atlas = "jokers",
     cost = 20,
     blueprint_compat = true,
-    calculate = next(SMODS.find_mod("Talisman")) and function(self, card, context)
-        if context.joker_main then
-            return { echips = card.ability.exponent }
-        end
-    end or function(self, card, context)
+    calculate = function(self, card, context)
         if context.joker_main then
             return {
                 fchips = function(chips)

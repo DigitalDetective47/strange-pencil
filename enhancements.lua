@@ -110,14 +110,6 @@ SMODS.Consumable({
     end,
 })
 
-if next(SMODS.find_mod("cartomancer")) then
-    local cartomancer_stringify_hook = Card.cart_to_string
-    function Card:cart_to_string(args)
-        return cartomancer_stringify_hook(self, args) ..
-            (SMODS.has_enhancement(self, "m_pencil_flagged") and self.ability.pos and self.ability.pos <= #G.deck.cards and tostring(self.ability.pos) or "")
-    end
-end
-
 local flip_hook = Card.flip
 function Card:flip()
     if not (self.area == G.hand and SMODS.has_enhancement(self, "m_pencil_flagged") and self.facing ~= 'back') then
@@ -128,9 +120,4 @@ end
 local emplace_hook = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
     return emplace_hook(self, card, location, stay_flipped and not SMODS.has_enhancement(card, "m_pencil_flagged"))
-end
-
-if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config["Enhanced Decks"] then
-    Cryptid.edeck_sprites.enhancement.m_pencil_diseased = { atlas = "pencil_enhancements", pos = { x = 2, y = 0 } }
-    Cryptid.edeck_sprites.enhancement.m_pencil_flagged = { atlas = "pencil_enhancements", pos = { x = 2, y = 1 } }
 end

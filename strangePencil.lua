@@ -15,6 +15,12 @@ SMODS.load_file("stickers.lua")()
 SMODS.load_file("tags.lua")()
 SMODS.load_file("vouchers.lua")()
 
+for _, filename in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path .. "/compat")) do
+    if next(SMODS.find_mod(filename:match("^(.*)%.lua$"))) then
+        SMODS.load_file("compat/" .. filename)()
+    end
+end
+
 for challenge_key, restrictions in pairs(SMODS.load_file("challenge_restrictions.lua")()) do
     if SMODS.Challenges[challenge_key] then -- allows overriding modded challenges without crashing if that mod isn't installed
         if restrictions.banned_cards then

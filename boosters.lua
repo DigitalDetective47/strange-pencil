@@ -18,9 +18,6 @@ SMODS.ObjectType({
         self:inject_card(G.P_CENTERS.j_onyx_agate)
         self:inject_card(G.P_CENTERS.j_seeing_double)
         self:inject_card(G.P_CENTERS.c_moon)
-        if next(SMODS.find_mod("YART")) then
-            self:inject_card(SMODS.Centers.c_yart_rmoon)
-        end
     end
 })
 SMODS.ObjectType({
@@ -68,7 +65,7 @@ SMODS.Booster({
     end,
     create_card = function(self, card, i)
         local rng = pseudorandom('pencil_clubs_pack')
-        if rng < 0.1 and not (G.GAME.modifiers.cry_force_enhancement and (G.GAME.modifiers.cry_force_enhancement == "m_stone" or G.P_CENTERS[G.GAME.modifiers.cry_force_enhancement].no_suit)) then
+        if rng < 0.1 then
             local new = nil
             repeat
                 if new then

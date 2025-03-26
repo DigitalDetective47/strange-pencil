@@ -9,10 +9,7 @@ end
 SMODS.Sticker({
     key = "paralyzed",
     atlas = "stickers",
-    pos = {
-        x = next(SMODS.find_mod("Cryptid")) and 1 or 0, --don't overlap with Banana
-        y = 0,
-    },
+    pos = { x = 0, y = 0 },
     config = { chance = 4 },
     loc_vars = function(self, info_queue, card)
         return { vars = { G.GAME.probabilities.normal, card.ability[self.key].chance } }
@@ -37,7 +34,3 @@ SMODS.Sticker({
         end
     end,
 })
-
-if next(SMODS.find_mod("Cryptid")) and SMODS.find_mod("Cryptid")[1].config["Enhanced Decks"] then
-    Cryptid.edeck_sprites.sticker.pencil_paralyzed = { atlas = "pencil_stickers", pos = { x = 2, y = 0 } }
-end
