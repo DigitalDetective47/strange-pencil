@@ -127,7 +127,7 @@ local reroll_voucher_override = {
         G.E_MANAGER:add_event(Event({
             func = function()
                 if G.GAME.selected_back.name == "b_pencil_slow_roll" then
-                    card.ability.b_pencil_slow_roll_savings = math.min(G.GAME.current_round.reroll_cost_increase, 2)
+                    card.ability.b_pencil_slow_roll_savings = math.min(G.GAME.current_round.reroll_cost_increase, card.ability.extra)
                     G.GAME.current_round.reroll_cost_increase = math.max(
                         G.GAME.current_round.reroll_cost_increase - card.ability.extra, 0)
                     calculate_reroll_cost(true)
