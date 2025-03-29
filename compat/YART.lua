@@ -1,4 +1,8 @@
-SMODS.ObjectTypes.pencil_clubs_pack:inject_card(SMODS.Centers.c_yart_rmoon)
+local clubs_pack_inject_hook = SMODS.ObjectTypes.clubs_pack.inject
+function SMODS.ObjectTypes.clubs_pack.inject(self)
+    clubs_pack_inject_hook(self)
+    self:inject_card(SMODS.Centers.c_yart_rmoon)
+end
 StrangeLib.bulk_add(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, {
     { id = "c_yart_rmagician" },
     { id = "c_yart_rempress" },
