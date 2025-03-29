@@ -44,3 +44,9 @@ for challenge_key, restrictions in pairs(SMODS.load_file("challenge_restrictions
         end
     end
 end
+
+local main_menu_hook = Game.main_menu
+function Game:main_menu(change_context)
+    main_menu_hook(self, change_context)
+    G.title_top.cards[1]:set_base(G.P_CARDS.C_A, true)
+end
