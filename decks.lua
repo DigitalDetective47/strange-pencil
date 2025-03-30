@@ -104,56 +104,107 @@ SMODS.Back({
     end
 })
 
-SMODS.Tag:take_ownership("d_six", {
-    apply = function(self, tag, context)
-        if context.type == 'shop_start' and not G.GAME.shop_d6ed then
+local d_six_apply_hook = G.P_TAGS.tag_d_six.apply or function(self, tag, context)
+    if context.type == "shop_start" and not G.GAME.shop_d6ed then
+        G.GAME.shop_d6ed = true
+        tag:yep("+", G.C.GREEN, function()
+            G.GAME.round_resets.temp_reroll_cost = 0
+            calculate_reroll_cost(true)
+            return true
+        end)
+        tag.triggered = true
+        return true
+    end
+end
+local function d_six_apply(self, tag, context)
+    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
+        if context.type == "shop_start" and not G.GAME.shop_d6ed then
             G.GAME.shop_d6ed = true
-            tag:yep('+', G.C.GREEN, function()
-                if G.GAME.selected_back.name == "b_pencil_slow_roll" then
-                    G.GAME.current_round.reroll_cost_increase = 0
-                else
-                    G.GAME.round_resets.temp_reroll_cost = 0
-                end
+            tag:yep("+", G.C.GREEN, function()
+                G.GAME.current_round.reroll_cost_increase = 0
                 calculate_reroll_cost(true)
                 return true
             end)
             tag.triggered = true
             return true
         end
+    else
+        return d_six_apply_hook(self, tag, context)
     end
-}, true)
-local reroll_voucher_override = {
-    redeem = function(self, card)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                if G.GAME.selected_back.name == "b_pencil_slow_roll" then
-                    card.ability.b_pencil_slow_roll_savings = math.min(G.GAME.current_round.reroll_cost_increase, card.ability.extra)
-                    G.GAME.current_round.reroll_cost_increase = math.max(
-                        G.GAME.current_round.reroll_cost_increase - card.ability.extra, 0)
-                    calculate_reroll_cost(true)
-                else
-                    G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost - card.ability.extra
-                    G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost - card.ability.extra)
-                end
-                return true
-            end
-        }))
-    end,
-    unredeem = function(self, card)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                if G.GAME.selected_back.name == "b_pencil_slow_roll" then
-                    G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase +
-                        card.ability.b_pencil_slow_roll_savings -- Only roll back the actual amount saved
-                    calculate_reroll_cost(true)
-                else
-                    G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + card.ability.extra
-                    G.GAME.current_round.reroll_cost = G.GAME.current_round.reroll_cost + card.ability.extra
-                end
-                return true
-            end
-        }))
-    end,
-}
-SMODS.Voucher:take_ownership("reroll_surplus", reroll_voucher_override, true)
-SMODS.Voucher:take_ownership("reroll_glut", reroll_voucher_override, true)
+end
+SMODS.Tag:take_ownership("d_six", { apply = d_six_apply }, true)
+local function default_reroll_voucher_apply(self, card)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost - card.ability.extra
+            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost - card.ability.extra)
+            return true
+        end
+    }))
+end
+local function slow_roll_reroll_voucher_apply(self, card)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            card.ability.b_pencil_slow_roll_savings = math.min(G.GAME.current_round.reroll_cost_increase,
+                card.ability.extra)
+            G.GAME.current_round.reroll_cost_increase = math.max(
+                G.GAME.current_round.reroll_cost_increase - card.ability.extra, 0)
+            calculate_reroll_cost(true)
+            return true
+        end
+    }))
+end
+local function default_reroll_voucher_unapply(self, card)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + card.ability.extra
+            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost + card.ability.extra)
+            return true
+        end,
+    }))
+end
+local function slow_roll_reroll_voucher_unapply(self, card)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase +
+                card.ability.b_pencil_slow_roll_savings -- Only roll back the actual amount saved
+            calculate_reroll_cost(true)
+            return true
+        end
+    }))
+end
+local reroll_surplus_redeem_hook = G.P_CENTERS.v_reroll_surplus.redeem or default_reroll_voucher_apply
+local function reroll_surplus_redeem(self, card)
+    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
+        slow_roll_reroll_voucher_apply(self, card)
+    else
+        reroll_surplus_redeem_hook(self, card)
+    end
+end
+local reroll_surplus_unredeem_hook = G.P_CENTERS.v_reroll_surplus.unredeem or default_reroll_voucher_unapply
+local function reroll_surplus_unredeem(self, card)
+    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
+        slow_roll_reroll_voucher_unapply(self, card)
+    else
+        reroll_surplus_unredeem_hook(self, card)
+    end
+end
+local reroll_glut_redeem_hook = G.P_CENTERS.v_reroll_glut.redeem or default_reroll_voucher_apply
+local function reroll_glut_redeem(self, card)
+    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
+        slow_roll_reroll_voucher_apply(self, card)
+    else
+        reroll_glut_redeem_hook(self, card)
+    end
+end
+local reroll_glut_unredeem_hook = G.P_CENTERS.v_reroll_glut.unredeem or default_reroll_voucher_unapply
+local function reroll_glut_unredeem(self, card)
+    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
+        slow_roll_reroll_voucher_unapply(self, card)
+    else
+        reroll_glut_unredeem_hook(self, card)
+    end
+end
+SMODS.Voucher:take_ownership("reroll_surplus", { redeem = reroll_surplus_redeem, unredeem = reroll_surplus_unredeem },
+    true)
+SMODS.Voucher:take_ownership("reroll_glut", { redeem = reroll_glut_redeem, unredeem = reroll_glut_unredeem }, true)
