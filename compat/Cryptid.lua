@@ -65,28 +65,17 @@ function StrangeLib.dynablind.get_blind_score(blind, base)
         (G.GAME.starting_params.ante_scaling_exponential or 1))
 end
 
-SMODS.Voucher:take_ownership("pencil_half_chip", {
-    unredeem = function(self, card)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
-                StrangeLib.dynablind.update_blind_scores()
-                return true
-            end,
-        }))
-    end,
-}, true)
-SMODS.Voucher:take_ownership("pencil_vision", {
-    unredeem = function(self, card)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
-                StrangeLib.dynablind.update_blind_scores()
-                return true
-            end,
-        }))
-    end,
-}, true)
+local function scaling_voucher_unredeem(self, card)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
+            StrangeLib.dynablind.update_blind_scores()
+            return true
+        end,
+    }))
+end
+SMODS.Voucher:take_ownership("pencil_half_chip", { unredeem = scaling_voucher_unredeem }, true)
+SMODS.Voucher:take_ownership("pencil_vision", { unredeem = scaling_voucher_unredeem }, true)
 SMODS.Voucher({
     key = "sqrt",
     atlas = "vouchers",
