@@ -15,15 +15,6 @@ SMODS.Voucher({
 			end,
 		}))
 	end,
-	unredeem = function(self, card)
-		G.E_MANAGER:add_event(Event({
-			func = function()
-				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
-				StrangeLib.dynablind.update_blind_scores()
-				return true
-			end,
-		}))
-	end,
 })
 
 SMODS.Voucher({
@@ -39,15 +30,6 @@ SMODS.Voucher({
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * card.ability.multiplier
-				StrangeLib.dynablind.update_blind_scores()
-				return true
-			end,
-		}))
-	end,
-	unredeem = function(self, card)
-		G.E_MANAGER:add_event(Event({
-			func = function()
-				G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
 				StrangeLib.dynablind.update_blind_scores()
 				return true
 			end,
@@ -72,8 +54,5 @@ SMODS.Voucher({
 	requires = { "v_pencil_pull" },
 	redeem = function(self, card)
 		G.GAME.index_pack_bonus = (G.GAME.index_pack_bonus or 0) + card.ability.extra
-	end,
-	unredeem = function(self, card)
-		G.GAME.index_pack_bonus = G.GAME.index_pack_bonus - card.ability.extra
 	end,
 })

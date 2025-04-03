@@ -17,6 +17,44 @@ Cryptid.edeck_sprites.enhancement.m_pencil_diseased = { atlas = "pencil_enhancem
 Cryptid.edeck_sprites.enhancement.m_pencil_flagged = { atlas = "pencil_enhancements", pos = { x = 2, y = 1 } }
 Cryptid.edeck_sprites.sticker.pencil_paralyzed = { atlas = "pencil_stickers", pos = { x = 2, y = 0 } }
 
+local function default_reroll_voucher_unapply(self, card)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + card.ability.extra
+            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost + card.ability.extra)
+            return true
+        end,
+    }))
+end
+local function slow_roll_reroll_voucher_unapply(self, card)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase +
+                card.ability.b_pencil_slow_roll_savings -- Only roll back the actual amount saved
+            calculate_reroll_cost(true)
+            return true
+        end
+    }))
+end
+local reroll_surplus_unredeem_hook = G.P_CENTERS.v_reroll_surplus.unredeem or default_reroll_voucher_unapply
+local function reroll_surplus_unredeem(self, card)
+    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
+        slow_roll_reroll_voucher_unapply(self, card)
+    else
+        reroll_surplus_unredeem_hook(self, card)
+    end
+end
+local reroll_glut_unredeem_hook = G.P_CENTERS.v_reroll_glut.unredeem or default_reroll_voucher_unapply
+local function reroll_glut_unredeem(self, card)
+    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
+        slow_roll_reroll_voucher_unapply(self, card)
+    else
+        reroll_glut_unredeem_hook(self, card)
+    end
+end
+SMODS.Voucher:take_ownership("reroll_surplus", { unredeem = reroll_surplus_unredeem }, true)
+SMODS.Voucher:take_ownership("reroll_glut", { unredeem = reroll_glut_unredeem }, true)
+
 SMODS.Sticker:take_ownership("pencil_paralyzed", { pos = { x = 1, y = 0 } }, true) --don't overlap with Banana
 
 local blind_score_hook = StrangeLib.dynablind.get_blind_score
@@ -27,6 +65,28 @@ function StrangeLib.dynablind.get_blind_score(blind, base)
         (G.GAME.starting_params.ante_scaling_exponential or 1))
 end
 
+SMODS.Voucher:take_ownership("pencil_half_chip", {
+    unredeem = function(self, card)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
+                StrangeLib.dynablind.update_blind_scores()
+                return true
+            end,
+        }))
+    end,
+}, true)
+SMODS.Voucher:take_ownership("pencil_vision", {
+    unredeem = function(self, card)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
+                StrangeLib.dynablind.update_blind_scores()
+                return true
+            end,
+        }))
+    end,
+}, true)
 SMODS.Voucher({
     key = "sqrt",
     atlas = "vouchers",
@@ -58,3 +118,8 @@ SMODS.Voucher({
     end,
     pools = { Tier3 = true },
 })
+SMODS.Voucher:take_ownership("pencil_overstock", {
+    unredeem = function(self, card)
+        G.GAME.index_pack_bonus = G.GAME.index_pack_bonus - card.ability.extra
+    end,
+}, true)

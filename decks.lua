@@ -154,39 +154,12 @@ local function slow_roll_reroll_voucher_apply(self, card)
         end
     }))
 end
-local function default_reroll_voucher_unapply(self, card)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + card.ability.extra
-            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost + card.ability.extra)
-            return true
-        end,
-    }))
-end
-local function slow_roll_reroll_voucher_unapply(self, card)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase +
-                card.ability.b_pencil_slow_roll_savings -- Only roll back the actual amount saved
-            calculate_reroll_cost(true)
-            return true
-        end
-    }))
-end
 local reroll_surplus_redeem_hook = G.P_CENTERS.v_reroll_surplus.redeem or default_reroll_voucher_apply
 local function reroll_surplus_redeem(self, card)
     if G.GAME.selected_back.name == "b_pencil_slow_roll" then
         slow_roll_reroll_voucher_apply(self, card)
     else
         reroll_surplus_redeem_hook(self, card)
-    end
-end
-local reroll_surplus_unredeem_hook = G.P_CENTERS.v_reroll_surplus.unredeem or default_reroll_voucher_unapply
-local function reroll_surplus_unredeem(self, card)
-    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
-        slow_roll_reroll_voucher_unapply(self, card)
-    else
-        reroll_surplus_unredeem_hook(self, card)
     end
 end
 local reroll_glut_redeem_hook = G.P_CENTERS.v_reroll_glut.redeem or default_reroll_voucher_apply
@@ -197,14 +170,5 @@ local function reroll_glut_redeem(self, card)
         reroll_glut_redeem_hook(self, card)
     end
 end
-local reroll_glut_unredeem_hook = G.P_CENTERS.v_reroll_glut.unredeem or default_reroll_voucher_unapply
-local function reroll_glut_unredeem(self, card)
-    if G.GAME.selected_back.name == "b_pencil_slow_roll" then
-        slow_roll_reroll_voucher_unapply(self, card)
-    else
-        reroll_glut_unredeem_hook(self, card)
-    end
-end
-SMODS.Voucher:take_ownership("reroll_surplus", { redeem = reroll_surplus_redeem, unredeem = reroll_surplus_unredeem },
-    true)
-SMODS.Voucher:take_ownership("reroll_glut", { redeem = reroll_glut_redeem, unredeem = reroll_glut_unredeem }, true)
+SMODS.Voucher:take_ownership("reroll_surplus", { redeem = reroll_surplus_redeem }, true)
+SMODS.Voucher:take_ownership("reroll_glut", { redeem = reroll_glut_redeem }, true)
