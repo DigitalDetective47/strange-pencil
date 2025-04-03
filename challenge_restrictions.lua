@@ -1,10 +1,9 @@
-local eternal = { banned_cards = { "c_pencil_chisel" } }
-local no_enhancements = { banned_cards = { "c_pencil_plague", "c_pencil_parade" } }
+local eternal = { banned_cards = { { id = "c_pencil_chisel" } } }
 
 return {
     c_omelette_1 = {
         banned_cards = {
-            "j_pencil_forbidden_one",
+            { id = "j_pencil_forbidden_one" },
         },
     },
     c_city_1 = eternal,
@@ -14,48 +13,21 @@ return {
     c_typecast_1 = eternal,
     c_fragile_1 = {
         banned_cards = {
-            "c_pencil_plague",
-            "c_pencil_parade",
-            "c_pencil_chisel",
+            { id = "c_pencil_plague" },
+            { id = "c_pencil_parade" },
+            { id = "c_pencil_chisel" },
         }
     },
     c_monolith_1 = eternal,
     c_jokerless_1 = {
         banned_cards = {
-            "p_pencil_clubs"
+            { id = "p_pencil_clubs" },
         },
         banned_tags = {
-            "tag_pencil_clubs",
+            { id = "tag_pencil_clubs" },
         },
         banned_other = {
-            "bl_pencil_lock",
-        },
-    },
-    c_cry_ballin = no_enhancements,
-    c_cry_dagger_war = eternal,
-    c_cry_onlycard = {
-        banned_cards = {
-            p_pencil_index_1 = { "p_pencil_index_1", "p_pencil_index_2", "p_pencil_index_jumbo", "p_pencil_index_mega" },
-            "p_pencil_clubs",
-        },
-        banned_tags = {
-            "tag_pencil_workshop",
-            "tag_pencil_index",
-            "tag_pencil_clubs",
-        },
-    },
-    c_cry_rng = {
-        banned_cards = {
-            "p_pencil_clubs",
-        },
-        banned_tags = {
-            "tag_pencil_clubs",
-        },
-    },
-    joker_poker = {
-        banned_cards = {
-            "j_pencil_doodlebob",
-            "j_pencil_pencil",
+            { id = "bl_pencil_lock", type = "blind" },
         },
     },
 }
