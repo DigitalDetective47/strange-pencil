@@ -34,6 +34,8 @@ SMODS.Rank({
         six_Moons = 7,
         bunc_Fleurons = 8,
         bunc_Halberds = 9,
+        paperback_Stars = 10,
+        paperback_Crowns = 11,
     },
 })
 
