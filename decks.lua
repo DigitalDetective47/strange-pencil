@@ -23,6 +23,10 @@ SMODS.Back({
     end
 })
 
+---Return random numbers from a gaussian distribution
+---@param mean number
+---@param variance number
+---@return number
 function Gaussian(mean, variance)
     return math.sqrt(-2 * variance * math.log(pseudorandom('normal_deck'))) *
         math.cos(2 * math.pi * pseudorandom('normal_deck')) + mean

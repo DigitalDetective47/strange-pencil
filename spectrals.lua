@@ -34,6 +34,7 @@ SMODS.Consumable({
     end,
 })
 
+---@return string handname the current most played hand
 local function pulsar_target()
     local most, played
     for _, hand_key in ipairs(G.handlist) do

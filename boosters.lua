@@ -26,7 +26,9 @@ SMODS.ObjectType({
     cards = {},
 })
 
+---@type { [string]: string }
 local clubs_select_card = { Joker = "jokers", Default = "deck", Enhanced = "deck" }
+--All consumables should go into the consumable area
 G.E_MANAGER:add_event(Event({
     func = function()
         for type, _ in pairs(SMODS.ConsumableTypes) do

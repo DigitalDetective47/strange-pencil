@@ -1,3 +1,6 @@
+---Shared redeem function for the blind scaling vouchers
+---@param self SMODS.Voucher
+---@param card Card
 local function scaling_voucher_redeem(self, card)
 	G.E_MANAGER:add_event(Event({
 		func = function()

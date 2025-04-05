@@ -1,3 +1,5 @@
+---Recalculate this blind's score
+---@param self SMODS.Blind
 local function recalculate_on_disable(self)
     StrangeLib.dynablind.update_blind_scores(StrangeLib.dynablind.find_blind(self.key))
 end
@@ -178,6 +180,8 @@ SMODS.Blind({
     mult = 2,
 })
 
+---Shared disable/defeat function for The Flower
+---@param self SMODS.Blind
 local function flower_disable(self)
     G.hand.config.highlighted_limit = G.hand.config.highlighted_limit + G.GAME.current_round.hands_played
 end

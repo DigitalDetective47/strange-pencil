@@ -28,6 +28,8 @@ SMODS.Joker({
     end,
 })
 
+---Return the number of Queens of Clubs in the player's full deck
+---@return integer
 local function lassCount()
     local queens = 0
     for _, card in ipairs(G.playing_cards or {}) do
@@ -60,6 +62,10 @@ SMODS.Joker({
     end,
 })
 
+---Automatically win the game if the player has all 5 parts of The Forbidden One
+---@param center SMODS.Center
+---@param card Card
+---@param from_debuff boolean
 local function forbidden_part_added(center, card, from_debuff)
     if not (G.GAME.won or G.GAME.win_notified)
     then
@@ -589,6 +595,10 @@ SMODS.Joker({
     end,
 })
 
+---Calculate the values used by Ratio<br>
+---Returns `nil` if multiple suits are tied for most common
+---@return string? suit the most common suit in the deck
+---@return number? ratio the proportion of the deck that is that suit
 local function calc_ratio()
     if not G.playing_cards then
         return
