@@ -28,7 +28,7 @@ SMODS.Joker({
     end,
 })
 
-function lassCount()
+local function lassCount()
     local queens = 0
     for _, card in ipairs(G.playing_cards or {}) do
         if card:is_suit("Clubs") and not SMODS.has_no_rank(card) and card.base.value == "Queen" then
@@ -60,7 +60,7 @@ SMODS.Joker({
     end,
 })
 
-function forbidden_part_added(center, card, from_debuff)
+local function forbidden_part_added(center, card, from_debuff)
     if not (G.GAME.won or G.GAME.win_notified)
     then
         for _, key in ipairs({ "j_pencil_forbidden_one", "j_pencil_left_arm", "j_pencil_left_leg", "j_pencil_right_arm", "j_pencil_right_leg" }) do
@@ -556,7 +556,7 @@ SMODS.Joker({
     pools = { Meme = true }
 })
 
-function set_stonehenge(self, card, func)
+local function set_stonehenge(self, card, func)
     card.ability.chips = G.PROFILES[G.SETTINGS.profile].pencil_stonehenge or 0
 end
 
@@ -593,7 +593,7 @@ SMODS.Joker({
     end,
 })
 
-function calc_ratio()
+local function calc_ratio()
     if not G.playing_cards then
         return
     end
