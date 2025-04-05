@@ -556,10 +556,6 @@ SMODS.Joker({
     pools = { Meme = true }
 })
 
-local function set_stonehenge(self, card, func)
-    card.ability.chips = G.PROFILES[G.SETTINGS.profile].pencil_stonehenge or 0
-end
-
 SMODS.Joker({
     key = "stonehenge",
     rarity = 1,
@@ -571,9 +567,9 @@ SMODS.Joker({
     atlas = "jokers",
     cost = 6,
     blueprint_compat = true,
-    set_ability = set_stonehenge,
-    apply_glitched = set_stonehenge,
-    apply_oversat = set_stonehenge,
+    set_ability = function(self, card)
+        card.ability.chips = G.PROFILES[G.SETTINGS.profile].pencil_stonehenge or 0
+    end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
             card.ability.chips = card.ability.chips + card.ability.extra

@@ -17,6 +17,9 @@ Cryptid.edeck_sprites.enhancement.m_pencil_diseased = { atlas = "pencil_enhancem
 Cryptid.edeck_sprites.enhancement.m_pencil_flagged = { atlas = "pencil_enhancements", pos = { x = 2, y = 1 } }
 Cryptid.edeck_sprites.sticker.pencil_paralyzed = { atlas = "pencil_stickers", pos = { x = 2, y = 0 } }
 
+local set_stonehenge = SMODS.Centers.j_pencil_stonehenge.set_ability
+SMODS.Joker:take_ownership("pencil_stonehenge", { apply_glitched = set_stonehenge, apply_oversat = set_stonehenge }, true)
+
 local function default_reroll_voucher_unapply(self, card)
     G.E_MANAGER:add_event(Event({
         func = function()
