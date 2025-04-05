@@ -625,10 +625,9 @@ SMODS.Joker({
         local ratio
         suit, ratio = calc_ratio()
         if not suit then
-            suit = "Inactive"
             ratio = 0
         end
-        return { vars = { suit, ratio, card.ability.xmult } }
+        return { vars = { suit and localize(suit, "suits_plural") or "Inactive", ratio, card.ability.xmult, colours = { suit and G.C.SUITS[suit] or G.C.IMPORTANT } } }
     end,
     pos = { x = 2, y = 2 },
     atlas = "jokers",

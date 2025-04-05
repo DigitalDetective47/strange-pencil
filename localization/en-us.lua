@@ -158,7 +158,7 @@ return {
                     "which is that suit; otherwise {C:attention}reset",
                     "Does not scale if multiple suits are tied",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
-                    "{s:0.8,C:inactive}[{s:0.8,C:attention}#1#{s:0.8,C:inactive}, +{s:0.8,X:mult,C:white}X#2#{s:0.8,C:inactive}]",
+                    "{s:0.8,C:inactive}[{s:0.8,V:1}#1#{s:0.8,C:inactive}, +{s:0.8,X:mult,C:white}X#2#{s:0.8,C:inactive}]",
                 },
             },
             j_pencil_commie = {
