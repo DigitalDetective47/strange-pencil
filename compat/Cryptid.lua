@@ -60,12 +60,10 @@ SMODS.Voucher:take_ownership("reroll_glut", { unredeem = reroll_glut_unredeem },
 
 SMODS.Sticker:take_ownership("pencil_paralyzed", { pos = { x = 1, y = 0 } }, true) --don't overlap with Banana
 
-local blind_score_hook = StrangeLib.dynablind.get_blind_score
-function StrangeLib.dynablind.get_blind_score(blind, base)
-    G.GAME.modifiers.scaling = G.GAME.modifiers.scaling or 1
-    return blind_score_hook(blind, base or
-        (SMODS.get_blind_amount(G.GAME.round_resets.blind_ante) * G.GAME.starting_params.ante_scaling) ^
-        (G.GAME.starting_params.ante_scaling_exponential or 1))
+local blind_amount_hook = get_blind_amount
+function get_blind_amount(ante)
+    return (blind_amount_hook(ante) * G.GAME.starting_params.ante_scaling) ^
+        (G.GAME.starting_params.ante_scaling_exponential or 1) / G.GAME.starting_params.ante_scaling
 end
 
 local function scaling_voucher_unredeem(self, card)
