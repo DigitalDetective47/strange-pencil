@@ -437,14 +437,14 @@ return {
             v_pencil_pull = {
                 name = "Storage Facility",
                 text = {
-                    "Cards from {C:blue}Index Packs{} can be",
+                    "Cards from {C:blue}Doodle Packs{} can be",
                     "saved in your consumable slots",
                 }
             },
             v_pencil_overstock = {
                 name = "Mass Storage",
                 text = {
-                    "All {C:blue}Index Packs{} contain",
+                    "All {C:blue}Doodle Packs{} contain",
                     "{C:attention}#1#{} additional card",
                 }
             },
