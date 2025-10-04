@@ -51,6 +51,7 @@ SMODS.Challenge({
         banned_cards = {
             { id = "j_vampire" },
             { id = "j_midas_mask" },
+            { id = "j_pencil_night_club" },
             { id = "c_magician" },
             { id = "c_empress" },
             { id = "c_heirophant" },

@@ -13,7 +13,6 @@ StrangeLib.bulk_add(SMODS.Challenges.c_pencil_immutable.restrictions.banned_card
     { id = "c_yart_rwheel_of_fortune" },
     { id = "c_yart_rstrength" },
     { id = "c_yart_rdeath" },
-    { id = "c_yart_rtemperance" },
     { id = "c_yart_rdevil" },
     { id = "c_yart_rtower" },
     { id = "c_yart_rstar" },
