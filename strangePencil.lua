@@ -15,11 +15,7 @@ SMODS.load_file("stickers.lua")()
 SMODS.load_file("tags.lua")()
 SMODS.load_file("vouchers.lua")()
 
-for _, filename in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path .. "/compat")) do
-    if next(SMODS.find_mod(filename:match("^(.*)%.lua$"))) then
-        SMODS.load_file("compat/" .. filename)()
-    end
-end
+StrangeLib.load_compat()
 
 for challenge_key, restrictions in pairs(SMODS.load_file("challenge_restrictions.lua")()) do
     for category, bans in pairs(restrictions) do
