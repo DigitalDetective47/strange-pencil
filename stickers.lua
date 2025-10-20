@@ -2,7 +2,7 @@
 ---@param card Card
 ---@return table? effect
 local function roll_paralysis(sticker, card)
-    local hit = pseudorandom(sticker.key) < G.GAME.probabilities.normal / card.ability.pencil_paralyzed.chance
+    local hit = SMODS.pseudorandom_probability(card, sticker.key, 1, card.ability.pencil_paralyzed.chance)
     SMODS.debuff_card(card, hit, sticker.key)
     if hit then
         return { message = localize("k_paralyzed_ex"), colour = sticker.badge_colour }

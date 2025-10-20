@@ -16,7 +16,7 @@ SMODS.Stake({
 local eval_card_hook = eval_card
 function eval_card(card, context)
     local ret, ret2 = eval_card_hook(card, context)
-    if context.before and context.cardarea == G.play and G.GAME.modifiers.covid_19 and pseudorandom("disease_exposure") > 0.9 then
+    if context.before and context.cardarea == G.play and G.GAME.modifiers.covid_19 and SMODS.pseudorandom_probability(card, "disease_exposure", 1, 10) then
         card:set_ability(SMODS.Centers["m_pencil_diseased"], nil, true)
     end
     return ret, ret2
@@ -39,8 +39,7 @@ SMODS.Stake({
 local create_card_hook = create_card
 function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     local ret = create_card_hook(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
-    if G.GAME.modifiers.enable_pencil_paralyzed and pseudorandom((area == G.pack_cards and "pack" or "") .. "_pencil_paralyzed" .. G.GAME.round_resets.ante) > 0.7
-        and _type == "Joker" and (area == G.shop_jokers or area == G.pack_cards) then
+    if G.GAME.modifiers.enable_pencil_paralyzed and _type == "Joker" and area == G.shop_jokers and SMODS.pseudorandom_probability(ret, "pencil_paralyzed" .. G.GAME.round_resets.ante, 3, 10) then
         SMODS.Stickers.pencil_paralyzed:apply(ret, true)
     end
     return ret

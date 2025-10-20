@@ -362,7 +362,7 @@ SMODS.Joker({
     eternal_compat = false,
     calculate = function(self, card, context)
         if context.end_of_round and not (context.individual or context.repetition or context.blueprint) then
-            if pseudorandom('j_pencil_squeeze') < G.GAME.probabilities.normal / card.ability.chance then
+            if SMODS.pseudorandom_probability(card, 'j_pencil_squeeze', 1, card.ability.chance) then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         G.jokers:remove_card(card)
