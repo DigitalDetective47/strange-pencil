@@ -39,7 +39,7 @@ SMODS.Stake({
 local create_card_hook = create_card
 function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     local ret = create_card_hook(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
-    if G.GAME.modifiers.enable_pencil_paralyzed and _type == "Joker" and area == G.shop_jokers and SMODS.pseudorandom_probability(ret, "pencil_paralyzed" .. G.GAME.round_resets.ante, 3, 10) then
+    if G.GAME.modifiers.enable_pencil_paralyzed and _type == "Joker" and (area == G.shop_jokers or area == G.pack_cards) and SMODS.pseudorandom_probability(ret, (area == G.pack_cards and "pack_pencil_paralyzed" or "_pencil_paralyzed") .. G.GAME.round_resets.ante, 3, 10) then
         SMODS.Stickers.pencil_paralyzed:apply(ret, true)
     end
     return ret
