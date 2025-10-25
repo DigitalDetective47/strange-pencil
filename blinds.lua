@@ -19,6 +19,24 @@ SMODS.Blind({
     disable = recalculate_on_disable,
 })
 
+local play_hook = G.FUNCS.play_cards_from_highlighted
+function G.FUNCS.play_cards_from_highlighted(e)
+    play_hook(e)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = (function()
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = (function()
+                    StrangeLib.dynablind.update_blind_scores(StrangeLib.dynablind.find_blind("bl_pencil_glove"))
+                    return true
+                end)
+            }))
+            return true
+        end)
+    }))
+end
+
 SMODS.Blind({
     key = "caret",
     boss = { min = 9 },
