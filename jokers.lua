@@ -337,8 +337,12 @@ SMODS.Joker({
                 if other_card:is_suit("Diamonds") then
                     diamonds = diamonds + 1
                     if diamonds >= card.ability.required_diamonds then
-                        card.ability.mult = card.ability.mult + card.ability.scaling
-                        return { message = localize('k_upgrade_ex'), colour = G.C.MULT }
+                        return SMODS.scale_card(card, {
+                            ref_table = card.ability,
+                            ref_value = "mult",
+                            scalar_value = "scaling",
+                            message_colour = G.C.MULT,
+                        })
                     end
                 end
             end
@@ -403,19 +407,25 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual and not context.blueprint then
             if context.other_card:is_suit("Clubs") then
-                card.ability.mult = card.ability.mult + card.ability.gain
-                return {
-                    message = localize({ type = "variable", key = "a_mult", vars = { card.ability.gain } }),
-                    message_card = card
-                }
+                return SMODS.scale_card(card,
+                    {
+                        ref_table = card.ability,
+                        ref_value = "mult",
+                        scalar_value = "gain",
+                        message_colour = G.C.MULT,
+                        message_key = "a_mult",
+                    })
             end
             if context.other_card:is_suit("Hearts") and card.ability.mult ~= 0 then
-                card.ability.mult = math.max(card.ability.mult - card.ability.loss, 0)
-                return {
-                    message = localize({ type = "variable", key = "a_mult_minus", vars = { card.ability.loss } }),
-                    colour = G.C.RED,
-                    message_card = card
-                }
+                return SMODS.scale_card(card,
+                    {
+                        ref_table = card.ability,
+                        ref_value = "mult",
+                        scalar_value = "loss",
+                        operation = "-",
+                        message_colour = G.C.RED,
+                        message_key = "a_mult_minus",
+                    })
             end
         elseif context.joker_main then
             return { mult = card.ability.mult }
@@ -578,14 +588,13 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
-            card.ability.chips = card.ability.chips + card.ability.extra
+            SMODS.scale_card(card, {
+                ref_table = card.ability,
+                ref_value = "chips",
+                scalar_value = "extra",
+                message_colour = G.C.CHIPS
+            })
             G.PROFILES[G.SETTINGS.profile].pencil_stonehenge = card.ability.chips
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    SMODS.calculate_effect({ message = localize("k_upgrade_ex"), colour = G.C.CHIPS }, card)
-                    return true
-                end
-            }))
         end
     end,
     calculate = function(self, card, context)
@@ -604,8 +613,8 @@ local function calc_ratio()
         return
     end
     local tallies = {}
-    for k, v in ipairs(G.playing_cards) do
-        tallies[v.base.suit] = (tallies[v.base.suit] or 0) + 1
+    for _, card in ipairs(G.playing_cards) do
+        tallies[card.base.suit] = (tallies[card.base.suit] or 0) + 1
     end
     local most = nil
     local active = false
@@ -651,11 +660,15 @@ SMODS.Joker({
                     return { message = localize('k_reset'), colour = G.C.MULT }
                 end
             end
-            card.ability.xmult = card.ability.xmult + ratio
-            return {
-                message = localize({ type = 'variable', key = 'a_xmult', vars = { card.ability.xmult } }),
-                colour = G.C.MULT
-            }
+            return SMODS.scale_card(card,
+                {
+                    ref_table = card.ability,
+                    ref_value = "xmult",
+                    scalar_table = { ratio },
+                    scalar_value = 1,
+                    message_colour = G.C.MULT,
+                    message_key = "a_xmult",
+                })
         elseif context.joker_main then
             return { xmult = card.ability.xmult }
         end
@@ -673,16 +686,16 @@ SMODS.Joker({
         if context.before and not context.blueprint then
             local targets = {}
             local target_total = 0
-            for k, v in ipairs(context.scoring_hand) do
-                if not SMODS.has_no_rank(v) then
-                    table.insert(targets, v)
-                    target_total = target_total + v.base.nominal
+            for _, other in ipairs(context.scoring_hand) do
+                if not SMODS.has_no_rank(other) then
+                    table.insert(targets, other)
+                    target_total = target_total + other.base.nominal
                 end
             end
             if #targets > 0 then
                 local ranks = {}
-                for k, v in pairs(SMODS.Ranks) do
-                    table.insert(ranks, v)
+                for _, rank in pairs(SMODS.Ranks) do
+                    table.insert(ranks, rank)
                 end
                 table.sort(ranks, function(a, b)
                     return a.nominal == b.nominal and (a.face_nominal or 0) > (b.face_nominal or 0) or
@@ -703,8 +716,11 @@ SMODS.Joker({
                 end
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        for k, v in ipairs(targets) do
-                            SMODS.change_base(v, nil, target_rank.key)
+                        for _, target in ipairs(targets) do
+                            local succ, msg = SMODS.change_base(target, nil, target_rank.key)
+                            if not succ then
+                                sendErrorMessage(msg)
+                            end
                         end
                         play_sound("gong", 0.94, 0.3)
                         play_sound("gong", 0.94 * 1.5, 0.2)
@@ -729,7 +745,10 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint then
             for _, played_card in ipairs(context.scoring_hand) do
-                SMODS.change_base(played_card, "Clubs", nil)
+                local succ, msg = SMODS.change_base(played_card, "Clubs", nil)
+                if not succ then
+                    sendErrorMessage(msg)
+                end
             end
             return { message = localize("k_clubbin_ex"), colour = G.C.SUITS.Clubs }
         end
@@ -757,9 +776,8 @@ SMODS.Joker({
         if context.setting_blind and not card.getting_sliced and not context.blueprint then
             local prev_mult = card.ability.mult
             local destroy_queue = {}
-            for i = #G.consumeables.cards, 1, -1 do
-                local consumable = G.consumeables.cards[i]
-                if not consumable.ability.eternal then
+            for _, consumable in ipairs(G.consumeables.cards) do
+                if not SMODS.is_eternal(consumable, card) then
                     card.ability.mult = card.ability.mult + consumable.sell_cost
                     table.insert(destroy_queue, consumable)
                 end

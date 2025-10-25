@@ -17,7 +17,7 @@ local eval_card_hook = eval_card
 function eval_card(card, context)
     local ret, ret2 = eval_card_hook(card, context)
     if context.before and context.cardarea == G.play and G.GAME.modifiers.covid_19 and SMODS.pseudorandom_probability(card, "disease_exposure", 1, 10) then
-        card:set_ability(SMODS.Centers["m_pencil_diseased"], nil, true)
+        card:set_ability(SMODS.Centers.m_pencil_diseased, nil, true)
     end
     return ret, ret2
 end

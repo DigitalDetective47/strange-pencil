@@ -19,7 +19,7 @@ SMODS.Consumable({
             trigger = "after",
             delay = 0.4,
             func = function()
-                for _ = 1, G.jokers.config.card_limit * card.ability.multiplier, 1 do
+                for _ = 1, G.jokers.config.card_limit * card.ability.multiplier do
                     local key
                     repeat
                         local _pool, _pool_key = get_current_pool("Joker")
@@ -73,17 +73,7 @@ SMODS.Consumable({
         return true
     end,
     use = function(self, card, area)
-        local hand_key = pulsar_target()
-        local hand_center = G.GAME.hands[hand_key]
-        update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
-            {
-                handname = localize(hand_key, 'poker_hands'),
-                chips = hand_center.chips,
-                mult = hand_center.mult,
-                level = hand_center.level
-            })
-        level_up_hand(card, hand_key, false, hand_center.level * (card.ability.factor - 1))
-        update_hand_text({ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
-            { mult = 0, chips = 0, handname = '', level = '' })
+        local hand = pulsar_target()
+        SMODS.smart_level_up_hand(card, hand, false, G.GAME.hands[hand].level * (card.ability.factor - 1))
     end,
 })

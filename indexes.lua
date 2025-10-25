@@ -181,7 +181,7 @@ SMODS.Tag({
                     G.CARD_W * 1.27,
                     G.CARD_H * 1.27,
                     G.P_CARDS.empty,
-                    G.P_CENTERS["p_pencil_index_jumbo_1"],
+                    G.P_CENTERS.p_pencil_index_jumbo_1,
                     { bypass_discovery_center = true, bypass_discovery_ui = true }
                 )
                 card.cost = 0
@@ -452,61 +452,18 @@ SMODS.Consumable({
                 left = other_card
             end
         end
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.15,
-            func = function()
-                left:flip()
-                play_sound("card1", 1.15 - (1 - 0.999) / (2 - 0.998) * 0.3)
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.15,
-            func = function()
-                right:flip()
-                play_sound("card1", 1.15 - (2 - 0.999) / (2 - 0.998) * 0.3)
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.1,
-            func = function()
-                local temp = { suit = left.base.suit, rank = left.base.value }
-                SMODS.change_base(left, right.base.suit, right.base.value)
-                SMODS.change_base(right, temp.suit, temp.rank)
-                card:juice_up(0.3, 0.3)
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.85,
-            func = function()
-                left:flip()
-                play_sound("card1", 1.15 - (1 - 0.999) / (2 - 0.998) * 0.3)
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.15,
-            func = function()
-                right:flip()
-                play_sound("card1", 1.15 - (2 - 0.999) / (2 - 0.998) * 0.3)
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                return true
+        local old_bases = { left = left.base, right = right.base }
+        StrangeLib.consumable.tarot_animation({ left, right }, function(card)
+            local succ, msg
+            if card == left then
+                succ, msg = SMODS.change_base(left, old_bases.right.suit, old_bases.right.value)
+            else
+                succ, msg = SMODS.change_base(right, old_bases.left.suit, old_bases.left.value)
             end
-        }))
+            if not succ then
+                sendErrorMessage(msg)
+            end
+        end)
     end,
 })
 

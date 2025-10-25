@@ -46,7 +46,7 @@ SMODS.Tag({
                     G.CARD_W * 1.27,
                     G.CARD_H * 1.27,
                     G.P_CARDS.empty,
-                    G.P_CENTERS["p_pencil_workshop_normal_" .. math.random(1, 4)],
+                    SMODS.Centers["p_pencil_workshop_normal_" .. math.random(1, 4)],
                     { bypass_discovery_center = true, bypass_discovery_ui = true }
                 )
                 card.cost = 0

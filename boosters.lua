@@ -74,7 +74,10 @@ SMODS.Booster({
                     new:remove()
                 end
                 new = SMODS.create_card(G.P_CENTERS.p_standard_jumbo_1:create_card(card, i))
-                SMODS.change_base(new, "Clubs")
+                local succ, msg = SMODS.change_base(new, "Clubs")
+                if not succ then
+                    sendErrorMessage(msg)
+                end
             until not SMODS.has_no_suit(new)
             return new
         elseif rng > 0.997 then
@@ -93,7 +96,7 @@ SMODS.Tag({
     key = "clubs",
     min_ante = 4,
     loc_vars = function(self, info_queue)
-        table.insert(info_queue, G.P_CENTERS.p_pencil_clubs)
+        table.insert(info_queue, SMODS.Centers.p_pencil_clubs)
     end,
     apply = function(self, tag, context)
         if context.type == "new_blind_choice" then
@@ -107,7 +110,7 @@ SMODS.Tag({
                     G.CARD_W * 1.27,
                     G.CARD_H * 1.27,
                     G.P_CARDS.empty,
-                    G.P_CENTERS["p_pencil_clubs"],
+                    SMODS.Centers.p_pencil_clubs,
                     { bypass_discovery_center = true, bypass_discovery_ui = true }
                 )
                 card.cost = 0
