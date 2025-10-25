@@ -15,8 +15,8 @@ SMODS.load_file("stickers.lua")()
 SMODS.load_file("tags.lua")()
 SMODS.load_file("vouchers.lua")()
 
-StrangeLib.load_compat()
 StrangeLib.update_challenge_restrictions("challenge_bans.json")
+StrangeLib.load_compat()
 
 local main_menu_hook = Game.main_menu
 function Game:main_menu(change_context)
