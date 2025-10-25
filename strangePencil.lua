@@ -16,12 +16,7 @@ SMODS.load_file("tags.lua")()
 SMODS.load_file("vouchers.lua")()
 
 StrangeLib.load_compat()
-
-for challenge_key, restrictions in pairs(SMODS.load_file("challenge_restrictions.lua")()) do
-    for category, bans in pairs(restrictions) do
-        StrangeLib.bulk_add(SMODS.Challenges[challenge_key].restrictions[category], bans)
-    end
-end
+StrangeLib.update_challenge_restrictions("challenge_bans.json")
 
 local main_menu_hook = Game.main_menu
 function Game:main_menu(change_context)
