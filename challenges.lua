@@ -10,9 +10,6 @@ SMODS.Challenge({
         { id = "v_hieroglyph" },
     },
     restrictions = {
-        banned_cards = {
-            { id = "j_obelisk" },
-        },
         banned_other = {
             { id = "bl_ox",      type = "blind" },
             { id = "bl_psychic", type = "blind" },
