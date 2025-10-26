@@ -37,3 +37,25 @@ SMODS.Sticker({
         end
     end,
 })
+
+SMODS.Enhancement({
+    key = "suitless_quantum",
+    no_collection = true,
+    no_suit = true,
+    weight = 0,
+    in_pool = function(self, args) return false end,
+})
+SMODS.Sticker({
+    key = "suitless",
+    atlas = "stickers",
+    pos = { x = 0, y = 1 },
+    badge_colour = { 0.5, 0.5, 0.5, 1 },
+    default_compat = true,
+    sets = { Default = true, Enhanced = true },
+    needs_enabled_flag = false,
+    calculate = function(self, card, context)
+        if context.check_enhancement and context.other_card == card then
+            return { m_pencil_suitless_quantum = true }
+        end
+    end
+})

@@ -467,6 +467,15 @@
                     "{C:inactive,s:0.8}(Debuffed 1 in 4 rounds)",
                     "{s:0.8}Applies all previous Stakes"
                 ]
+            },
+            "stake_pencil_grey": {
+                "name": "Monochrome Stake",
+                "text": [
+                    "Shop can have {C:attention}Suitless{} playing cards",
+                    "{C:inactive,s:0.8}(Has no suit)",
+                    "Cards in your starting deck can also have {C:attention}Suitless{}",
+                    "{s:0.8}Applies all previous Stakes"
+                ]
             }
         },
         "Other": {
@@ -558,6 +567,12 @@
                     "each round"
                 ]
             },
+            "pencil_suitless": {
+                "name": "Suitless",
+                "text": [
+                    "Has no suit"
+                ]
+            },
             "pencil_charred_sticker": {
                 "name": "Charred Sticker",
                 "text": [
@@ -571,6 +586,14 @@
                 "text": [
                     "Used this Joker",
                     "to win on {C:attention}Neon",
+                    "{C:attention}Stake{} difficulty"
+                ]
+            },
+            "pencil_grey_sticker": {
+                "name": "Monochrome Sticker",
+                "text": [
+                    "Used this Joker",
+                    "to win on {C:attention}Monochrome",
                     "{C:attention}Stake{} difficulty"
                 ]
             }
@@ -597,7 +620,8 @@
         },
         "labels": {
             "index": "Index",
-            "pencil_paralyzed": "Paralyzed"
+            "pencil_paralyzed": "Paralyzed",
+            "pencil_suitless": "Suitless"
         },
         "v_text": {
             "ch_c_pencil_most_played_only": [

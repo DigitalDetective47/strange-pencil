@@ -35,3 +35,28 @@ SMODS.Stake({
         G.GAME.modifiers.enable_pencil_paralyzed = true
     end
 })
+
+SMODS.Stake({
+    key = "grey",
+    applied_stakes = { "neon" },
+    atlas = "stakes",
+    pos = { x = 2, y = 0 },
+    sticker_atlas = "stake_stickers",
+    sticker_pos = { x = 2, y = 0 },
+    colour = { 0.5, 0.5, 0.5, 1 },
+    above_stake = "stake_pencil_neon",
+    modifiers = function()
+        G.GAME.modifiers.enable_pencil_suitless = true
+        G.E_MANAGER:add_event(Event({
+            blockable = false,
+            func = function()
+                for _, card in ipairs(G.playing_cards) do
+                    if SMODS.Stickers.pencil_suitless:should_apply(card, card.config.center, G.deck) then
+                        SMODS.Stickers.pencil_suitless:apply(card, true)
+                    end
+                end
+                return true
+            end
+        }))
+    end
+})
