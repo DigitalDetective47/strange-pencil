@@ -19,7 +19,7 @@ SMODS.Sticker({
     end,
     badge_colour = G.C.YELLOW,
     default_compat = true,
-    should_apply = false,
+    sets = { Joker = true },
     needs_enable_flag = true,
     apply = function(self, card, val)
         if val then
