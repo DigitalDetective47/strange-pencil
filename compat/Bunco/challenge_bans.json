@@ -1,10 +1,5 @@
 {
     "c_pencil_permamouth": {
-        "banned_cards": [
-            {
-                "id": "j_bunc_ghost_print"
-            }
-        ],
         "banned_other": [
             {
                 "id": "bl_bunc_mask",
