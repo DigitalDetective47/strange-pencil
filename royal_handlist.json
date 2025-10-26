@@ -1,0 +1,40 @@
+{
+    "Straight Flush": {
+        "visible": false,
+        "order": 2,
+        "s_chips": 140,
+        "s_mult": 14
+    },
+    "Flush House": {
+        "order": 3,
+        "s_chips": 120,
+        "s_mult": 12
+    },
+    "Straight": {
+        "visible": false,
+        "order": 4,
+        "s_chips": 100,
+        "s_mult": 8
+    },
+    "Flush": {
+        "visible": false,
+        "order": 5,
+        "s_chips": 65,
+        "s_mult": 8
+    },
+    "Five of a Kind": {
+        "order": 6,
+        "s_chips": 60,
+        "s_mult": 7
+    },
+    "Full House": {
+        "visible": false,
+        "order": 7,
+        "s_chips": 50
+    },
+    "Four of a Kind": {
+        "order": 8,
+        "s_chips": 40,
+        "s_mult": 4
+    }
+}

@@ -10,8 +10,7 @@ SMODS.Back({
         G.E_MANAGER:add_event(Event({
             blockable = false,
             func = function()
-                for i = #G.playing_cards, 1, -1 do
-                    local card = G.playing_cards[i]
+                for _, card in ipairs(SMODS.shallow_copy(G.playing_cards)) do
                     if not card:is_face() then
                         card:remove()
                     end
@@ -20,6 +19,11 @@ SMODS.Back({
                 return true
             end
         }))
+        for hand, parameters in pairs(JSON.decode(NFS.read(SMODS.find_mod("StrangePencil")[1].path .. "/royal_handlist.json"))) do
+            G.GAME.hands[hand] = SMODS.merge_defaults(parameters, G.GAME.hands[hand])
+            G.GAME.hands[hand].chips = G.GAME.hands[hand].s_chips
+            G.GAME.hands[hand].mult = G.GAME.hands[hand].s_mult
+        end
     end
 })
 
