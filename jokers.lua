@@ -504,7 +504,7 @@ SMODS.Joker({
     atlas = "calendar",
     immutable = true,
     cost = 5,
-    pixel_size = { h = 59 },
+    display_size = { h = 59 },
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main then
