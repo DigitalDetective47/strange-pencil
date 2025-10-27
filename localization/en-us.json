@@ -294,6 +294,13 @@
                     "#1#{C:attention}#2#",
                     "Cannot be flipped"
                 ]
+            },
+            "m_pencil_sticky": {
+                "name": "Sticky Card",
+                "text": [
+                    "When drawn, force",
+                    "draw another card"
+                ]
             }
         },
         "Tarot": {
@@ -311,6 +318,14 @@
                     "Enhances {C:attention}#1#{}",
                     "selected cards to",
                     "{C:attention}Flagged Cards"
+                ]
+            },
+            "c_pencil_kfc": {
+                "name": "Finger Lickin' Good",
+                "text": [
+                    "Enhances {C:attention}#1#{}",
+                    "selected cards to",
+                    "{C:attention}Sticky Cards"
                 ]
             }
         },

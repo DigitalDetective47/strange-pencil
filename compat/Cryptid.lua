@@ -15,6 +15,7 @@ SMODS.Booster:take_ownership("pencil_clubs", { create_card = clubs_create_card }
 
 Cryptid.edeck_sprites.enhancement.m_pencil_diseased = { atlas = "pencil_enhancements", pos = { x = 2, y = 0 } }
 Cryptid.edeck_sprites.enhancement.m_pencil_flagged = { atlas = "pencil_enhancements", pos = { x = 2, y = 1 } }
+Cryptid.edeck_sprites.enhancement.m_pencil_sticky = { atlas = "pencil_enhancements", pos = { x = 2, y = 2 } }
 Cryptid.edeck_sprites.sticker.pencil_paralyzed = { atlas = "pencil_stickers", pos = { x = 2, y = 0 } }
 Cryptid.edeck_sprites.sticker.pencil_suitless = { atlas = "pencil_stickers", pos = { x = 2, y = 1 } }
 

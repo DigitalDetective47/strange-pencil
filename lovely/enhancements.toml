@@ -1,0 +1,17 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+# Sticky Cards
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "table.insert(cards_to_draw, card)"
+position = "after"
+payload = '''
+if SMODS.has_enhancement(card, "m_pencil_sticky") then
+    limit = limit + 1 - mod
+end
+'''
+match_indent = true

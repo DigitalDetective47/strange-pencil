@@ -121,3 +121,21 @@ local emplace_hook = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
     return emplace_hook(self, card, location, stay_flipped and not SMODS.has_enhancement(card, "m_pencil_flagged"))
 end
+
+SMODS.Enhancement({
+    key = "sticky",
+    name = "Sticky Card",
+    atlas = "enhancements",
+    pos = { x = 0, y = 2 }
+})
+SMODS.Consumable({
+    key = "kfc",
+    set = "Tarot",
+    atlas = "enhancements",
+    pos = { x = 1, y = 2 },
+    config = { mod_conv = "m_pencil_sticky", max_highlighted = 2 },
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, G.P_CENTERS.m_pencil_sticky)
+        return { vars = { card.ability.max_highlighted } }
+    end,
+})
