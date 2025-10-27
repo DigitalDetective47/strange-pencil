@@ -52,7 +52,7 @@ SMODS.Atlas({
     key = "calendar",
     path = "calendar.png",
     px = 71,
-    py = 95,
+    py = 59,
 })
 
 SMODS.Atlas({
