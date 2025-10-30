@@ -234,7 +234,7 @@ SMODS.Joker({
 
 SMODS.Joker({
     key = "forty_seven",
-    rarity = 3,
+    rarity = 2,
     config = { factor = 1 },
     loc_vars = function(self, info_queue, card)
         if card.ability.factor == 1 then
@@ -249,7 +249,7 @@ SMODS.Joker({
     end,
     pos = { x = 5, y = 0 },
     atlas = "jokers",
-    cost = 11,
+    cost = 7,
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play and context.other_card.base.value == "4" then
