@@ -799,3 +799,19 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Joker({
+    key = "cell",
+    rarity = 2,
+    pos = { x = 0, y = 4 },
+    atlas = "jokers",
+    cost = 7,
+    blueprint_compat = false,
+    update = function(self, card, dt)
+        if G.playing_cards then
+            for _, other in ipairs(G.playing_cards) do
+                SMODS.debuff_card(other, other:is_face(true) and "prevent_debuff", "j_pencil_cell")
+            end
+        end
+    end,
+})

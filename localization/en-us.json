@@ -185,6 +185,13 @@
                     "sell values to this {C:mult}Mult",
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
                 ]
+            },
+            "j_pencil_cell": {
+                "name": "Plant Cell",
+                "text": [
+                    "{C:attention}Face Cards{} cannot",
+                    "be {C:red}debuffed{}"
+                ]
             }
         },
         "Back": {
