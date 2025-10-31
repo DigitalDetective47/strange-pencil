@@ -337,7 +337,7 @@ SMODS.Joker({
                 if other_card:is_suit("Diamonds") then
                     diamonds = diamonds + 1
                     if diamonds >= card.ability.required_diamonds then
-                        return SMODS.scale_card(card, {
+                        SMODS.scale_card(card, {
                             ref_table = card.ability,
                             ref_value = "mult",
                             scalar_value = "scaling",
@@ -407,25 +407,33 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual and not context.blueprint then
             if context.other_card:is_suit("Clubs") then
-                return SMODS.scale_card(card,
+                SMODS.scale_card(card,
                     {
                         ref_table = card.ability,
                         ref_value = "mult",
                         scalar_value = "gain",
-                        message_colour = G.C.MULT,
-                        message_key = "a_mult",
+                        no_message = true,
                     })
+                return {
+                    message = localize({ type = "variable", key = "a_mult", vars = { card.ability.gain } }),
+                    message_card = card,
+                    colour = G.C.MULT
+                }
             end
             if context.other_card:is_suit("Hearts") and card.ability.mult ~= 0 then
-                return SMODS.scale_card(card,
+                SMODS.scale_card(card,
                     {
                         ref_table = card.ability,
                         ref_value = "mult",
                         scalar_value = "loss",
                         operation = "-",
-                        message_colour = G.C.RED,
-                        message_key = "a_mult_minus",
+                        no_message = true,
                     })
+                return {
+                    message = localize({ type = "variable", key = "a_mult_minus", vars = { card.ability.loss } }),
+                    message_card = card,
+                    colour = G.C.RED
+                }
             end
         elseif context.joker_main then
             return { mult = card.ability.mult }
@@ -660,7 +668,7 @@ SMODS.Joker({
                     return { message = localize('k_reset'), colour = G.C.MULT }
                 end
             end
-            return SMODS.scale_card(card,
+            SMODS.scale_card(card,
                 {
                     ref_table = card.ability,
                     ref_value = "xmult",
