@@ -312,9 +312,9 @@ end
 local shop_ui_hook = G.UIDEF.shop
 function G.UIDEF.shop()
     local ret = shop_ui_hook()
-    G.shop_jokers.config.highlighted_limit = math.huge
-    G.shop_booster.config.highlighted_limit = math.huge
-    G.shop_vouchers.config.highlighted_limit = math.huge
+    G.shop_jokers.config.highlighted_limit = 1e308
+    G.shop_booster.config.highlighted_limit = 1e308
+    G.shop_vouchers.config.highlighted_limit = 1e308
     return ret
 end
 
