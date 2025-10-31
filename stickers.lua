@@ -29,6 +29,7 @@ SMODS.Sticker({
             end
         else
             card.ability[self.key] = val
+            SMODS.debuff_card(card, false, self.key)
         end
     end,
     calculate = function(self, card, context)
