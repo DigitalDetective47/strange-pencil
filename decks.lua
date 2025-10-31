@@ -24,6 +24,8 @@ SMODS.Back({
             G.GAME.hands[hand].chips = G.GAME.hands[hand].s_chips
             G.GAME.hands[hand].mult = G.GAME.hands[hand].s_mult
         end
+        G.GAME.banned_keys.bl_plant = true
+        G.GAME.banned_keys.bl_psychic = true
     end
 })
 
