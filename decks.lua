@@ -20,6 +20,8 @@ SMODS.Back({
                 return true
             end
         }))
+        G.GAME.banned_keys.bl_plant = true
+        G.GAME.banned_keys.bl_psychic = true
     end
 })
 

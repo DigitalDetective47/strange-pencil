@@ -194,7 +194,9 @@
                     "Start run with",
                     "only {C:attention}Face Cards",
                     "in your deck",
-                    "{C:attention}#1#{} hand size"
+                    "{C:attention}#1#{} hand size",
+                    "{s:0.8,C:attention}The Plant{s:0.8,C:inactive} and {s:0.8,C:attention}The Psychic",
+                    "{s:0.8,C:inactive}cannot appear"
                 ]
             },
             "b_pencil_normal": {
