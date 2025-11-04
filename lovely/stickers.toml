@@ -1,0 +1,12 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+
+# Clear paralysis debuff at end of round
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = "-- context.end_of_round calculations"
+position = 'after'
+match_indent = true
+payload = "for _, joker in ipairs(G.jokers.cards) do SMODS.debuff_card(joker, false, 'pencil_paralyzed') end"
