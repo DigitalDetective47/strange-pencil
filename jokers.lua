@@ -823,3 +823,54 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Joker({
+    key = "peter",
+    rarity = 1,
+    config = { mult = 1 },
+    loc_vars = function(self, info_queue, card)
+        ---@type Card?
+        local other = nil
+        if G.jokers then
+            for index, joker in ipairs(G.jokers.cards) do
+                if joker == card then
+                    other = G.jokers.cards[index + 1]
+                    break
+                end
+            end
+        end
+        return { vars = { card.ability.mult, other and #G.localization.descriptions.Joker[other.config.center_key].text or 0 } }
+    end,
+    pos = { x = 1, y = 4 },
+    atlas = "jokers",
+    cost = 1,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            ---@type Card?
+            local other = nil
+            for index, joker in ipairs(G.jokers.cards) do
+                if joker == card then
+                    other = G.jokers.cards[index + 1]
+                    break
+                end
+            end
+            if not other then
+                return
+            end
+            ---@type table[]
+            local messages = {}
+            for _, line in ipairs(localize({ type = "raw_descriptions", set = "Joker", key = other.config.center_key, vars = other:generate_UIBox_ability_table(true) })) do
+                table.insert(messages,
+                    {
+                        mult = card.ability.mult,
+                        remove_default_message = true,
+                        message = line,
+                        sound = 'multhit1',
+                        colour = G.C.MULT,
+                    })
+            end
+            return SMODS.merge_effects(messages)
+        end
+    end,
+})

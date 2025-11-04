@@ -14,5 +14,8 @@
     "dependencies": [
         "Steamodded (>=1.0.0~BETA-0808a)",
         "StrangeLib (>=3.5)"
+    ],
+    "conflicts": [
+        "JokerSellValue"
     ]
 }
