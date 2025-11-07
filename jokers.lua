@@ -825,6 +825,13 @@ SMODS.Joker({
             end
         end
     end,
+    remove_from_deck = function (self, card, from_debuff)
+        if not next(SMODS.find_card(self.key)) then
+            for _, other in ipairs(G.playing_cards) do
+                SMODS.debuff_card(other, false, "j_pencil_cell")
+            end
+        end
+    end
 })
 
 ---@param card Card
