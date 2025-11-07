@@ -1,4 +1,4 @@
-SMODS.Enhancement({
+SMODS.Enhancement {
     key = "diseased",
     name = "Diseased Card",
     config = { total = 5, remaining = 5, created_during_scoring = false },
@@ -39,9 +39,8 @@ SMODS.Enhancement({
     end,
     atlas = "enhancements",
     pos = { x = 0, y = 0 }
-})
-
-SMODS.Consumable({
+}
+SMODS.Consumable {
     key = "plague",
     set = "Tarot",
     atlas = "enhancements",
@@ -51,9 +50,9 @@ SMODS.Consumable({
         table.insert(info_queue, G.P_CENTERS.m_pencil_diseased)
         return { vars = { card.ability.max_highlighted } }
     end,
-})
+}
 
-SMODS.Enhancement({
+SMODS.Enhancement {
     key = "flagged",
     name = "Flagged Card",
     config = { pos = nil },
@@ -76,29 +75,23 @@ SMODS.Enhancement({
     end,
     calculate = function(self, card, context)
         if context.setting_blind then
-            G.E_MANAGER:add_event(Event({
-                blocking = false,
-                func = function()
-                    G.E_MANAGER:add_event(Event({
-                        blocking = false,
-                        func = function()
-                            for i, other_card in ipairs(G.deck.cards) do
-                                if other_card == card then
-                                    card.ability.pos = i
-                                    return true
-                                end
-                            end
+            G.E_MANAGER:add_event(Event { blocking = false, func = function()
+                G.E_MANAGER:add_event(Event { blocking = false, func = function()
+                    for i, other_card in ipairs(G.deck.cards) do
+                        if other_card == card then
+                            card.ability.pos = i
+                            return true
                         end
-                    }))
-                    return true
-                end
-            }))
+                    end
+                end })
+                return true
+            end })
         end
     end,
     atlas = "enhancements",
     pos = { x = 0, y = 1 }
-})
-SMODS.Consumable({
+}
+SMODS.Consumable {
     key = "parade",
     set = "Tarot",
     atlas = "enhancements",
@@ -108,7 +101,7 @@ SMODS.Consumable({
         table.insert(info_queue, G.P_CENTERS.m_pencil_flagged)
         return { vars = { card.ability.max_highlighted } }
     end,
-})
+}
 
 local flip_hook = Card.flip
 function Card:flip()

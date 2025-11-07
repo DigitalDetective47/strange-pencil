@@ -1,4 +1,4 @@
-SMODS.Rank({
+SMODS.Rank {
     key = "sneven",
     card_key = "7~",
     pos = { x = 0 },
@@ -37,7 +37,7 @@ SMODS.Rank({
         paperback_Stars = 10,
         paperback_Crowns = 11,
     },
-})
+}
 
 table.insert(SMODS.Ranks["6"].next, "pencil_sneven")
 table.insert(SMODS.Ranks["7"].next, "pencil_sneven")

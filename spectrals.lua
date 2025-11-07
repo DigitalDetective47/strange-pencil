@@ -1,4 +1,4 @@
-SMODS.Consumable({
+SMODS.Consumable {
     key = "negative_space",
     set = "Spectral",
     pos = { x = 0, y = 0 },
@@ -15,24 +15,20 @@ SMODS.Consumable({
         return true
     end,
     use = function(self, card, area)
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.4,
-            func = function()
-                for _ = 1, G.jokers.config.card_limit * card.ability.multiplier do
-                    local key
-                    repeat
-                        local _pool, _pool_key = get_current_pool("Joker")
-                        key = pseudorandom_element(_pool, pseudoseed(_pool_key))
-                    until G.P_CENTERS[key] and G.P_CENTERS[key].eternal_compat
-                    SMODS.add_card({ key = key, no_edition = true, edition = "e_negative", stickers = { "eternal" } })
-                end
-                play_sound("timpani")
-                return true
+        G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.4, func = function()
+            for _ = 1, G.jokers.config.card_limit * card.ability.multiplier do
+                local key
+                repeat
+                    local _pool, _pool_key = get_current_pool("Joker")
+                    key = pseudorandom_element(_pool, pseudoseed(_pool_key))
+                until G.P_CENTERS[key] and G.P_CENTERS[key].eternal_compat
+                SMODS.add_card { key = key, no_edition = true, edition = "e_negative", stickers = { "eternal" } }
             end
-        }))
+            play_sound("timpani")
+            return true
+        end })
     end,
-})
+}
 
 ---@return string handname the current most played hand
 local function pulsar_target()
@@ -48,7 +44,7 @@ local function pulsar_target()
     return most
 end
 
-SMODS.Consumable({
+SMODS.Consumable {
     key = "pulsar",
     set = "Spectral",
     pos = { x = 1, y = 0 },
@@ -76,4 +72,4 @@ SMODS.Consumable({
         local hand = pulsar_target()
         SMODS.smart_level_up_hand(card, hand, false, G.GAME.hands[hand].level * (card.ability.factor - 1))
     end,
-})
+}

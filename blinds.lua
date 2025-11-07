@@ -4,7 +4,7 @@ local function recalculate_on_disable(self)
     StrangeLib.dynablind.update_blind_scores(StrangeLib.dynablind.find_blind(self.key))
 end
 
-SMODS.Blind({
+SMODS.Blind {
     key = "glove",
     boss = { showdown = true },
     dollars = 8,
@@ -17,27 +17,21 @@ SMODS.Blind({
         return base * (self.mult + (self.disabled and 0 or (self.increase * G.GAME.hands_played)))
     end,
     disable = recalculate_on_disable,
-})
+}
 
 local play_hook = G.FUNCS.play_cards_from_highlighted
 function G.FUNCS.play_cards_from_highlighted(e)
     play_hook(e)
-    G.E_MANAGER:add_event(Event({
-        trigger = 'immediate',
-        func = (function()
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                func = (function()
-                    StrangeLib.dynablind.update_blind_scores(StrangeLib.dynablind.find_blind("bl_pencil_glove"))
-                    return true
-                end)
-            }))
+    G.E_MANAGER:add_event(Event { trigger = 'immediate', func = function()
+        G.E_MANAGER:add_event(Event { trigger = 'immediate', func = function()
+            StrangeLib.dynablind.update_blind_scores(StrangeLib.dynablind.find_blind("bl_pencil_glove"))
             return true
-        end)
-    }))
+        end })
+        return true
+    end })
 end
 
-SMODS.Blind({
+SMODS.Blind {
     key = "caret",
     boss = { min = 9 },
     in_pool = function()
@@ -51,37 +45,35 @@ SMODS.Blind({
         return self.disabled and base or base ^ self.mult
     end,
     disable = recalculate_on_disable,
-})
+}
 
-SMODS.Blind({
+SMODS.Blind {
     key = "arrow",
     boss = { min = 4 },
     boss_colour = HEX("FFFFFF"),
     pos = { x = 0, y = 2 },
     atlas = "blinds",
     mult = 2,
-})
+}
 
 local calculate_joker_hook = Card.calculate_joker
 function Card:calculate_joker(context)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and (context.repetition or context.retrigger_joker_check)) then
         local val = calculate_joker_hook(self, context)
         if val and G.GAME.blind.name == "bl_pencil_fence" and G.GAME.current_round.hands_played == 0 then
-            return SMODS.merge_effects({ val, {
+            return SMODS.merge_effects { val, {
                 func = function()
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            self.ability.pencil_paralyzed = copy_table(SMODS.Stickers.pencil_paralyzed.config)
-                            SMODS.debuff_card(self, true, "pencil_paralyzed")
-                            G.GAME.blind.triggered = true
-                            return true
-                        end
-                    }))
+                    G.E_MANAGER:add_event(Event { func = function()
+                        self.ability.pencil_paralyzed = copy_table(SMODS.Stickers.pencil_paralyzed.config)
+                        SMODS.debuff_card(self, true, "pencil_paralyzed")
+                        G.GAME.blind.triggered = true
+                        return true
+                    end })
                     SMODS.calculate_effect(
                         { message = localize("k_paralyzed_ex"), colour = SMODS.Stickers.pencil_paralyzed.badge_colour },
                         self)
                 end
-            } })
+            } }
         end
         return val
     elseif calculate_joker_hook(self, context) then
@@ -98,7 +90,7 @@ function Card:calculate_seal(context)
     end
 end
 
-SMODS.Blind({
+SMODS.Blind {
     key = "lock",
     boss = { min = 3 },
     in_pool = function(self)
@@ -125,23 +117,19 @@ SMODS.Blind({
         end
         if #targets >= 1 then
             local hit = pseudorandom_element(targets, pseudoseed(self.key))
-            G.E_MANAGER:add_event(Event({
-                trigger = "after",
-                delay = 0.3,
-                func = function()
-                    play_sound("gold_seal", 1.2, 0.4)
-                    hit:juice_up(0.3, 0.3)
-                    SMODS.Stickers.pinned:apply(hit, true)
-                    SMODS.juice_up_blind()
-                    return true
-                end
-            }))
+            G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.3, func = function()
+                play_sound("gold_seal", 1.2, 0.4)
+                hit:juice_up(0.3, 0.3)
+                SMODS.Stickers.pinned:apply(hit, true)
+                SMODS.juice_up_blind()
+                return true
+            end })
             G.GAME.blind.triggered = true
         end
     end,
-})
+}
 
-SMODS.Blind({
+SMODS.Blind {
     key = "star",
     boss = { showdown = true },
     dollars = 8,
@@ -149,7 +137,7 @@ SMODS.Blind({
     pos = { x = 0, y = 4 },
     atlas = "blinds",
     mult = 2,
-})
+}
 
 local poker_hand_info_hook = G.FUNCS.get_poker_hand_info
 G.FUNCS.get_poker_hand_info = function(_cards)
@@ -169,7 +157,7 @@ function SMODS.always_scores(card)
     return not (G.GAME.blind and G.GAME.blind.name == "bl_pencil_star") and always_scores_hook(card)
 end
 
-SMODS.Blind({
+SMODS.Blind {
     key = "fence",
     boss = { min = 2 },
     in_pool = function(self)
@@ -187,7 +175,7 @@ SMODS.Blind({
     pos = { x = 0, y = 5 },
     atlas = "blinds",
     mult = 2,
-})
+}
 
 ---Shared disable/defeat function for The Flower
 ---@param self SMODS.Blind
@@ -195,7 +183,7 @@ local function flower_disable(self)
     G.hand.config.highlighted_limit = G.hand.config.highlighted_limit + G.GAME.current_round.hands_played
 end
 
-SMODS.Blind({
+SMODS.Blind {
     key = "flower",
     boss = { min = 2 },
     in_pool = function(self)
@@ -222,4 +210,4 @@ SMODS.Blind({
             G.STATE_COMPLETE = false
         end
     end,
-})
+}

@@ -1,4 +1,4 @@
-SMODS.Challenge({
+SMODS.Challenge {
     key = "permamouth",
     rules = {
         custom = {
@@ -17,7 +17,7 @@ SMODS.Challenge({
             { id = "bl_mouth",   type = "blind" },
         }
     }
-})
+}
 
 -- Apply debuff for "Ride or Die" challenge
 local debuff_hand_hook = Blind.debuff_hand
@@ -42,7 +42,7 @@ function Blind:get_loc_debuff_text()
     return debuff_text_hook(self)
 end
 
-SMODS.Challenge({
+SMODS.Challenge {
     key = "immutable",
     restrictions = {
         banned_cards = {
@@ -85,4 +85,4 @@ SMODS.Challenge({
             { id = "bl_pencil_lock", type = "blind" },
         },
     },
-})
+}

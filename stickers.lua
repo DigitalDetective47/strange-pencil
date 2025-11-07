@@ -9,7 +9,7 @@ local function roll_paralysis(sticker, card)
     end
 end
 
-SMODS.Sticker({
+SMODS.Sticker {
     key = "paralyzed",
     atlas = "stickers",
     pos = { x = 0, y = 0 },
@@ -37,4 +37,4 @@ SMODS.Sticker({
             return roll_paralysis(self, card)
         end
     end,
-})
+}
