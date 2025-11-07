@@ -662,6 +662,9 @@ SMODS.Joker({
             local suit
             local ratio
             suit, ratio = calc_ratio()
+            if not suit then
+                return
+            end
             for _, other_card in ipairs(context.scoring_hand) do
                 if other_card:is_suit(suit) then
                     card.ability.xmult = 1
