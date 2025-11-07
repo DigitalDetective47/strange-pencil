@@ -824,6 +824,18 @@ SMODS.Joker({
     end,
 })
 
+---@param card Card
+---@return string[]
+local function get_joker_desc(card)
+    return localize({
+        type = "raw_descriptions",
+        set = "Joker",
+        key = card.config.center_key,
+        vars = card.config.center.loc_vars and card.config.center:loc_vars({}, card).vars or
+            card:generate_UIBox_ability_table(true),
+    })
+end
+
 SMODS.Joker({
     key = "peter",
     rarity = 1,
@@ -839,7 +851,7 @@ SMODS.Joker({
                 end
             end
         end
-        return { vars = { card.ability.mult, other and #G.localization.descriptions.Joker[other.config.center_key].text or 0 } }
+        return { vars = { card.ability.mult, other and #get_joker_desc(other) or 0 } }
     end,
     pos = { x = 1, y = 4 },
     atlas = "jokers",
@@ -860,7 +872,7 @@ SMODS.Joker({
             end
             ---@type table[]
             local messages = {}
-            for _, line in ipairs(localize({ type = "raw_descriptions", set = "Joker", key = other.config.center_key, vars = other:generate_UIBox_ability_table(true) })) do
+            for _, line in ipairs(get_joker_desc(other)) do
                 table.insert(messages,
                     {
                         mult = card.ability.mult,
