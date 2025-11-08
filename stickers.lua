@@ -2,6 +2,7 @@
 ---@param card Card
 ---@return table? effect
 local function roll_paralysis(sticker, card)
+    ---@type boolean
     local hit = SMODS.pseudorandom_probability(card, sticker.key, 1, card.ability.pencil_paralyzed.chance)
     SMODS.debuff_card(card, hit, sticker.key)
     if hit then

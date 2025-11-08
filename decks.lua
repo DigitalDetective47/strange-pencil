@@ -9,6 +9,7 @@ SMODS.Back {
     apply = function(self)
         G.E_MANAGER:add_event(Event { blockable = false, func = function()
             for i = #G.playing_cards, 1, -1 do
+                ---@type Card
                 local card = G.playing_cards[i]
                 if not card:is_face() then
                     card:remove()
@@ -42,22 +43,25 @@ SMODS.Back {
     apply = function(self)
         G.E_MANAGER:add_event(Event { blockable = false, func = function()
             for _, card in ipairs(G.playing_cards) do
-                local rank_suffix
+                ---@type integer
+                local rank_num
                 repeat
-                    rank_suffix = math.floor(Gaussian(self.config.mean, self.config.variance) + 0.5)
-                until rank_suffix >= 2 and rank_suffix <= 14
-                if rank_suffix <= 10 then
-                    rank_suffix = tostring(rank_suffix)
-                elseif rank_suffix == 11 then
-                    rank_suffix = 'Jack'
-                elseif rank_suffix == 12 then
-                    rank_suffix = 'Queen'
-                elseif rank_suffix == 13 then
-                    rank_suffix = 'King'
-                elseif rank_suffix == 14 then
-                    rank_suffix = 'Ace'
+                    rank_num = math.floor(Gaussian(self.config.mean, self.config.variance) + 0.5)
+                until rank_num >= 2 and rank_num <= 14
+                ---@type string
+                local rank_key
+                if rank_num <= 10 then
+                    rank_key = tostring(rank_num)
+                elseif rank_num == 11 then
+                    rank_key = 'Jack'
+                elseif rank_num == 12 then
+                    rank_key = 'Queen'
+                elseif rank_num == 13 then
+                    rank_key = 'King'
+                elseif rank_num == 14 then
+                    rank_key = 'Ace'
                 end
-                StrangeLib.assert(SMODS.change_base(card, nil, rank_suffix))
+                StrangeLib.assert(SMODS.change_base(card, nil, rank_key))
             end
             return true
         end })

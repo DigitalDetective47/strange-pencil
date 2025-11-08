@@ -171,6 +171,7 @@ SMODS.Tag {
                 G.GAME.PACK_INTERRUPT = G.STATE
             end
             tag:yep("+", G.C.BLUE, function()
+                ---@type Card
                 local card = Card(
                     G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
                     G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
@@ -203,6 +204,7 @@ SMODS.Consumable {
     cost = 5,
     config = { selections = 1 },
     can_use = function(self, card)
+        ---@type Card[]
         local targets = {}
         for _, other_card in ipairs(G.consumeables.highlighted) do
             if other_card.ability.set ~= "Unique" and other_card.ability.consumeable and other_card ~= card then
@@ -250,6 +252,7 @@ SMODS.Consumable {
     end,
     use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
+        ---@type Card[]
         local targets = {}
         for _, other_card in ipairs(G.consumeables.highlighted) do
             if other_card.ability.set ~= "Unique" and other_card.ability.consumeable and other_card ~= card then
@@ -422,8 +425,10 @@ SMODS.Consumable {
     end,
     use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
-        local left = false
-        local right = false
+        ---@type Card?
+        local left = nil
+        ---@type Card?
+        local right = nil
         for _, other_card in ipairs(G.hand.highlighted) do
             if other_card == card then
             elseif left then
@@ -435,7 +440,7 @@ SMODS.Consumable {
         local old_bases = { left = left.base, right = right.base }
         StrangeLib.consumable.tarot_animation({ left, right }, function(card)
             if card == left then
-                StrangeLib.assert( SMODS.change_base(left, old_bases.right.suit, old_bases.right.value))
+                StrangeLib.assert(SMODS.change_base(left, old_bases.right.suit, old_bases.right.value))
             else
                 StrangeLib.assert(SMODS.change_base(right, old_bases.left.suit, old_bases.left.value))
             end
@@ -462,6 +467,7 @@ SMODS.Consumable {
             G.E_MANAGER:add_event(Event { trigger = 'after', delay = 0.4, func = function()
                 if G.consumeables.config.card_limit > #G.consumeables.cards then
                     play_sound('timpani')
+                    ---@type Card
                     local new = SMODS.create_card { set = "index" }
                     new:add_to_deck()
                     G.consumeables:emplace(new)

@@ -11,6 +11,7 @@ SMODS.Joker {
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual then
+            ---@type string?
             local enhancement = nil;
             for _, other_card in ipairs(context.scoring_hand) do
                 if enhancement then
@@ -31,6 +32,7 @@ SMODS.Joker {
 ---Return the number of Queens of Clubs in the player's full deck
 ---@return integer
 local function lassCount()
+    ---@type integer
     local queens = 0
     for _, card in ipairs(G.playing_cards or {}) do
         if card:is_suit("Clubs") and not SMODS.has_no_rank(card) and card.base.value == "Queen" then
@@ -244,8 +246,11 @@ SMODS.Joker {
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play and context.other_card.base.value == "4" then
+            ---@type integer
             local repetitions = 0
+            ---@type Card[]
             local juicers = {}
+            ---@type integer
             local juice_i = 1
             for _, other_card in ipairs(G.hand.cards) do
                 if other_card.base.value == "7" then
@@ -323,6 +328,7 @@ SMODS.Joker {
         if context.joker_main then
             return { mult = card.ability.mult }
         elseif context.before and not context.blueprint and next(context.poker_hands["Two Pair"]) then
+            ---@type integer
             local diamonds = 0
             for _, other_card in ipairs(context.scoring_hand) do
                 if other_card:is_suit("Diamonds") then
@@ -518,7 +524,9 @@ SMODS.Joker {
     pos = { x = 5, y = 2 },
     atlas = "jokers",
     in_pool = function(self, args)
+        ---@type boolean
         local diseased = false
+        ---@type boolean
         local flagged = false
         for _, other_card in ipairs(G.playing_cards) do
             if SMODS.has_enhancement(other_card, "m_pencil_diseased") then
@@ -536,7 +544,9 @@ SMODS.Joker {
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.before then
+            ---@type boolean
             local diseased = false
+            ---@type boolean
             local flagged = false
             for _, other_card in ipairs(context.scoring_hand) do
                 if SMODS.has_enhancement(other_card, "m_pencil_diseased") then
@@ -598,11 +608,14 @@ local function calc_ratio()
     if not G.playing_cards then
         return
     end
+    ---@type table<string | "Spades" | "Hearts" | "Clubs" | "Diamonds", integer>
     local tallies = {}
     for _, card in ipairs(G.playing_cards) do
         tallies[card.base.suit] = (tallies[card.base.suit] or 0) + 1
     end
+    ---@type (string | "Spades" | "Hearts" | "Clubs" | "Diamonds")?
     local most = nil
+    ---@type boolean
     local active = false
     for k, v in pairs(tallies) do
         if not most or v > tallies[most] then
@@ -622,9 +635,8 @@ SMODS.Joker {
     rarity = 2,
     config = { xmult = 1 },
     loc_vars = function(self, info_queue, card)
-        local suit
-        local ratio
-        suit, ratio = calc_ratio()
+        ---@type string?, number?
+        local suit, ratio = calc_ratio()
         if not suit then
             ratio = 0
         end
@@ -637,9 +649,8 @@ SMODS.Joker {
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
-            local suit
-            local ratio
-            suit, ratio = calc_ratio()
+            ---@type string?, number?
+            local suit, ratio = calc_ratio()
             if not suit then
                 return
             end
@@ -673,7 +684,9 @@ SMODS.Joker {
     blueprint_compat = false,
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
+            ---@type Card[]
             local targets = {}
+            ---@type number
             local target_total = 0
             for _, other in ipairs(context.scoring_hand) do
                 if not SMODS.has_no_rank(other) then
@@ -682,6 +695,7 @@ SMODS.Joker {
                 end
             end
             if #targets > 0 then
+                ---@type SMODS.Rank[]
                 local ranks = {}
                 for _, rank in pairs(SMODS.Ranks) do
                     table.insert(ranks, rank)
@@ -691,6 +705,7 @@ SMODS.Joker {
                         a.nominal < b.nominal
                 end)
                 target_total = target_total / #targets
+                ---@type SMODS.Rank
                 local target_rank = ranks[#ranks]
                 for k, v in ipairs(ranks) do
                     if target_total < v.nominal then
@@ -755,7 +770,9 @@ SMODS.Joker {
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.setting_blind and not card.getting_sliced and not context.blueprint then
+            ---@type number
             local prev_mult = card.ability.mult
+            ---@type Card[]
             local destroy_queue = {}
             for _, consumable in ipairs(G.consumeables.cards) do
                 if not SMODS.is_eternal(consumable, card) then

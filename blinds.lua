@@ -108,6 +108,7 @@ SMODS.Blind {
     atlas = "blinds",
     mult = 2,
     press_play = function(self)
+        ---@type Card[]
         local targets = {}
         for _, joker in ipairs(G.jokers.cards) do
             if not joker.ability.pinned then
@@ -115,6 +116,7 @@ SMODS.Blind {
             end
         end
         if #targets >= 1 then
+            ---@type Card
             local hit = pseudorandom_element(targets, pseudoseed(self.key))
             G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.3, func = function()
                 play_sound("gold_seal", 1.2, 0.4)
@@ -145,6 +147,7 @@ G.FUNCS.get_poker_hand_info = function(_cards)
         if #scoring_hand ~= 1 then
             G.GAME.blind.triggered = true
         end
+        ---@type Card?
         local scoring_card = nil
         for _, card in ipairs(_cards) do
             if not SMODS.has_no_rank(card) and (not scoring_card or card.base.nominal > scoring_card.base.nominal or

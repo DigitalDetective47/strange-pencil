@@ -64,8 +64,10 @@ SMODS.Booster {
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function(self, card, i)
+        ---@type number
         local rng = pseudorandom('pencil_clubs_pack')
         if rng < 0.1 then
+            ---@type Card?
             local new = nil
             repeat
                 if new then
@@ -99,6 +101,7 @@ SMODS.Tag {
                 G.GAME.PACK_INTERRUPT = G.STATE
             end
             tag:yep("+", G.C.SO_1.Clubs, function()
+                ---@type Card
                 local card = Card(
                     G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
                     G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,

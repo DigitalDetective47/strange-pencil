@@ -53,6 +53,7 @@ SMODS.Consumable {
     atlas = "spectrals",
     config = { factor = 2 },
     loc_vars = function(self, info_queue, card)
+        ---@type string
         local mult_text
         if card.ability.factor == 2 then
             mult_text = "Double"
@@ -69,6 +70,7 @@ SMODS.Consumable {
         return true
     end,
     use = function(self, card, area)
+        ---@type string
         local hand = pulsar_target()
         SMODS.smart_level_up_hand(card, hand, false, G.GAME.hands[hand].level * (card.ability.factor - 1))
     end,

@@ -7,7 +7,9 @@ SMODS.Enhancement {
     end,
     calculate = function(self, card, context)
         if G.GAME.hands_played >= card.ability.hands_played_at_create + (card.ability.created_during_scoring and 1 or 0) and context.before and context.cardarea == G.play then
+            ---@type boolean
             local changed = false
+            ---@type integer
             local pos
             for i, other_card in ipairs(context.scoring_hand) do
                 if other_card == card then
@@ -15,6 +17,7 @@ SMODS.Enhancement {
                     break
                 end
             end
+            ---@type Card
             local q = context.scoring_hand[pos - 1]
             if q and not SMODS.has_enhancement(q, "m_pencil_diseased") then
                 q:set_ability(G.P_CENTERS["m_pencil_diseased"], nil, true)
