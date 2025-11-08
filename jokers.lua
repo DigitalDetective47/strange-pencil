@@ -883,3 +883,26 @@ SMODS.Joker({
         end
     end,
 })
+
+SMODS.Joker({
+    key = "hole",
+    rarity = 1,
+    pos = { x = 2, y = 4 },
+    atlas = "jokers",
+    cost = 4,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.first_hand_drawn then
+            ---@type integer
+            local highlight_limit = G.hand.config.highlighted_limit
+            G.hand.config.highlighted_limit = #G.hand.cards
+            for _, other in ipairs(G.hand.cards) do
+                G.hand:add_to_highlighted(other)
+            end
+            G.hand.config.highlighted_limit = highlight_limit
+            if next(G.hand.highlighted) then
+                G.FUNCS:discard_cards_from_highlighted(true)
+            end
+        end
+    end,
+})

@@ -200,6 +200,13 @@
                     "description of the Joker to the right",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)"
                 ]
+            },
+            "j_pencil_hole": {
+                "name": "Sinkhole",
+                "text": [
+                    "{C:red}Free discard{}",
+                    "entire first hand"
+                ]
             }
         },
         "Back": {
