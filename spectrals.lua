@@ -22,7 +22,7 @@ SMODS.Consumable {
                     local _pool, _pool_key = get_current_pool("Joker")
                     key = pseudorandom_element(_pool, pseudoseed(_pool_key))
                 until G.P_CENTERS[key] and G.P_CENTERS[key].eternal_compat
-                SMODS.add_card { key = key, no_edition = true, edition = "e_negative", stickers = { "eternal" } }
+                SMODS.add_card { key = key, no_edition = true, edition = "e_negative", stickers = { "eternal" }, force_stickers = true }
             end
             play_sound("timpani")
             return true

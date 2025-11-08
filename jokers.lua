@@ -255,19 +255,21 @@ SMODS.Joker {
                     end
                 end
             end
-            return {
-                remove_default_message = true,
-                repetitions = repetitions,
-                card = card,
-                func = function()
-                    G.E_MANAGER:add_event(Event { func = function()
-                        juicers[juice_i]:juice_up(0.3, 0.5)
-                        juice_i = juice_i + 1
-                        return true
-                    end })
-                    SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
-                end
-            }
+            if repetitions > 0 then
+                return {
+                    remove_default_message = true,
+                    repetitions = repetitions,
+                    card = card,
+                    func = function()
+                        G.E_MANAGER:add_event(Event { func = function()
+                            juicers[juice_i]:juice_up(0.3, 0.5)
+                            juice_i = juice_i + 1
+                            return true
+                        end })
+                        SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
+                    end
+                }
+            end
         end
     end,
 }
@@ -701,13 +703,13 @@ SMODS.Joker {
                         end
                     end
                 end
-                G.E_MANAGER:add_event(Event { func = function()
-                    for _, target in ipairs(targets) do
-                        local succ, msg = SMODS.change_base(target, nil, target_rank.key)
-                        if not succ then
-                            sendErrorMessage(msg)
-                        end
+                for _, target in ipairs(targets) do
+                    local succ, msg = SMODS.change_base(target, nil, target_rank.key)
+                    if not succ then
+                        sendErrorMessage(msg)
                     end
+                end
+                G.E_MANAGER:add_event(Event { func = function()
                     play_sound("gong", 0.94, 0.3)
                     play_sound("gong", 0.94 * 1.5, 0.2)
                     play_sound("tarot1", 1.5)

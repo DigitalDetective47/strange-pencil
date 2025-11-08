@@ -12,9 +12,8 @@ SMODS.Blind {
     pos = { x = 0, y = 0 },
     atlas = "blinds",
     mult = 2,
-    increase = 0.1,
     score = function(self, base)
-        return base * (self.mult + (self.disabled and 0 or (self.increase * G.GAME.hands_played)))
+        return base * (self.mult + (self.disabled and 0 or (0.1 * G.GAME.hands_played)))
     end,
     disable = recalculate_on_disable,
 }
@@ -143,11 +142,18 @@ local poker_hand_info_hook = G.FUNCS.get_poker_hand_info
 G.FUNCS.get_poker_hand_info = function(_cards)
     local text, loc_disp_text, poker_hands, scoring_hand, disp_text = poker_hand_info_hook(_cards)
     if next(poker_hands["High Card"]) and G.GAME.blind and G.GAME.blind.name == "bl_pencil_star" then
-        local old_size = #scoring_hand
-        scoring_hand = SMODS.has_no_rank(poker_hands["High Card"][1][1]) and {} or poker_hands["High Card"][1]
-        if old_size ~= #scoring_hand then
+        if #scoring_hand ~= 1 then
             G.GAME.blind.triggered = true
         end
+        local scoring_card = nil
+        for _, card in ipairs(_cards) do
+            if not SMODS.has_no_rank(card) and (not scoring_card or card.base.nominal > scoring_card.base.nominal or
+                    (card.base.nominal == scoring_card.base.nominal and card.base.face_nominal > scoring_card.base.face_nominal) or
+                    (card.base.nominal == scoring_card.base.nominal and card.base.face_nominal == scoring_card.base.face_nominal and card.T.x < scoring_card.T.x)) then
+                scoring_card = card
+            end
+        end
+        scoring_hand = { scoring_card }
     end
     return text, loc_disp_text, poker_hands, scoring_hand, disp_text
 end
