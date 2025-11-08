@@ -23,3 +23,9 @@ function Game:main_menu(change_context)
     main_menu_hook(self, change_context)
     G.title_top.cards[1]:set_base(G.P_CARDS.C_A, true)
 end
+
+if next(SMODS.find_mod("Balatest")) then
+    for _, filename in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path .. "/test")) do
+        SMODS.load_file("test/" .. filename)()
+    end
+end
