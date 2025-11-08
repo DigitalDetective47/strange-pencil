@@ -434,14 +434,10 @@ SMODS.Consumable {
         end
         local old_bases = { left = left.base, right = right.base }
         StrangeLib.consumable.tarot_animation({ left, right }, function(card)
-            local succ, msg
             if card == left then
-                succ, msg = SMODS.change_base(left, old_bases.right.suit, old_bases.right.value)
+                StrangeLib.assert( SMODS.change_base(left, old_bases.right.suit, old_bases.right.value))
             else
-                succ, msg = SMODS.change_base(right, old_bases.left.suit, old_bases.left.value)
-            end
-            if not succ then
-                sendErrorMessage(msg)
+                StrangeLib.assert(SMODS.change_base(right, old_bases.left.suit, old_bases.left.value))
             end
         end)
     end,

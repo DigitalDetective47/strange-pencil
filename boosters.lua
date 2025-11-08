@@ -72,10 +72,7 @@ SMODS.Booster {
                     new:remove()
                 end
                 new = SMODS.create_card(G.P_CENTERS.p_standard_jumbo_1:create_card(card, i))
-                local succ, msg = SMODS.change_base(new, "Clubs")
-                if not succ then
-                    sendErrorMessage(msg)
-                end
+                StrangeLib.assert(SMODS.change_base(new, "Clubs"))
             until not SMODS.has_no_suit(new)
             return new
         elseif rng > 0.997 then

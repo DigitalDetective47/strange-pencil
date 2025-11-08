@@ -57,10 +57,7 @@ SMODS.Back {
                 elseif rank_suffix == 14 then
                     rank_suffix = 'Ace'
                 end
-                local succ, msg = SMODS.change_base(card, nil, rank_suffix)
-                if not succ then
-                    sendErrorMessage(msg)
-                end
+                StrangeLib.assert(SMODS.change_base(card, nil, rank_suffix))
             end
             return true
         end })

@@ -704,10 +704,7 @@ SMODS.Joker {
                     end
                 end
                 for _, target in ipairs(targets) do
-                    local succ, msg = SMODS.change_base(target, nil, target_rank.key)
-                    if not succ then
-                        sendErrorMessage(msg)
-                    end
+                    StrangeLib.assert(SMODS.change_base(target, nil, target_rank.key))
                 end
                 G.E_MANAGER:add_event(Event { func = function()
                     play_sound("gong", 0.94, 0.3)
@@ -732,10 +729,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint then
             for _, played_card in ipairs(context.scoring_hand) do
-                local succ, msg = SMODS.change_base(played_card, "Clubs", nil)
-                if not succ then
-                    sendErrorMessage(msg)
-                end
+                StrangeLib.assert(SMODS.change_base(played_card, "Clubs", nil))
             end
             return { message = localize("k_clubbin_ex"), colour = G.C.SUITS.Clubs }
         end
