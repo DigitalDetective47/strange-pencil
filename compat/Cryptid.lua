@@ -1,8 +1,7 @@
 local clubs_create_card_hook = SMODS.Centers.p_pencil_clubs.create_card
 local function clubs_create_card(self, card, i)
     if G.GAME.modifiers.cry_force_enhancement and (G.GAME.modifiers.cry_force_enhancement == "m_stone" or G.P_CENTERS[G.GAME.modifiers.cry_force_enhancement].no_suit) then
-        local rng = pseudorandom('pencil_clubs_pack')
-        if rng > 0.997 then
+        if SMODS.pseudorandom_probability(card, 'pencil_clubs_pack', 3, 1000, nil, true) then
             return { set = "clubs_legendary", area = G.pack_cards, skip_materialize = true }
         else
             return { set = "clubs_pack", area = G.pack_cards, skip_materialize = true }
@@ -19,27 +18,24 @@ Cryptid.edeck_sprites.enhancement.m_pencil_sticky = { atlas = "pencil_enhancemen
 Cryptid.edeck_sprites.sticker.pencil_paralyzed = { atlas = "pencil_stickers", pos = { x = 2, y = 0 } }
 Cryptid.edeck_sprites.sticker.pencil_suitless = { atlas = "pencil_stickers", pos = { x = 2, y = 1 } }
 
+---@type fun(self: SMODS.Joker, card: Card, initial: boolean?, delay_sprites: boolean?)
 local set_stonehenge = SMODS.Centers.j_pencil_stonehenge.set_ability
 SMODS.Joker:take_ownership("pencil_stonehenge", { apply_glitched = set_stonehenge, apply_oversat = set_stonehenge }, true)
 
 local function default_reroll_voucher_unapply(self, card)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + card.ability.extra
-            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost + card.ability.extra)
-            return true
-        end,
-    }))
+    G.E_MANAGER:add_event(Event { func = function()
+        G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + card.ability.extra
+        G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost + card.ability.extra)
+        return true
+    end })
 end
 local function slow_roll_reroll_voucher_unapply(self, card)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase +
-                card.ability.b_pencil_slow_roll_savings -- Only roll back the actual amount saved
-            calculate_reroll_cost(true)
-            return true
-        end
-    }))
+    G.E_MANAGER:add_event(Event { func = function()
+        G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase +
+            card.ability.b_pencil_slow_roll_savings -- Only roll back the actual amount saved
+        calculate_reroll_cost(true)
+        return true
+    end })
 end
 local reroll_surplus_unredeem_hook = G.P_CENTERS.v_reroll_surplus.unredeem or default_reroll_voucher_unapply
 local function reroll_surplus_unredeem(self, card)
@@ -69,17 +65,15 @@ function get_blind_amount(ante)
 end
 
 local function scaling_voucher_unredeem(self, card)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
-            StrangeLib.dynablind.update_blind_scores()
-            return true
-        end,
-    }))
+    G.E_MANAGER:add_event(Event { func = function()
+        G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
+        StrangeLib.dynablind.update_blind_scores()
+        return true
+    end })
 end
 SMODS.Voucher:take_ownership("pencil_half_chip", { unredeem = scaling_voucher_unredeem }, true)
 SMODS.Voucher:take_ownership("pencil_vision", { unredeem = scaling_voucher_unredeem }, true)
-SMODS.Voucher({
+SMODS.Voucher {
     key = "sqrt",
     atlas = "vouchers",
     pos = { x = 0, y = 2 },
@@ -89,27 +83,23 @@ SMODS.Voucher({
     end,
     requires = { "v_pencil_vision" },
     redeem = function(self, card)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                G.GAME.starting_params.ante_scaling_exponential = (G.GAME.starting_params.ante_scaling_exponential or 1) *
-                    card.ability.exponent
-                StrangeLib.dynablind.update_blind_scores()
-                return true
-            end,
-        }))
+        G.E_MANAGER:add_event(Event { func = function()
+            G.GAME.starting_params.ante_scaling_exponential = (G.GAME.starting_params.ante_scaling_exponential or 1) *
+                card.ability.exponent
+            StrangeLib.dynablind.update_blind_scores()
+            return true
+        end })
     end,
     unredeem = function(self, card)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                G.GAME.starting_params.ante_scaling_exponential = (G.GAME.starting_params.ante_scaling_exponential or 1) /
-                    card.ability.exponent
-                StrangeLib.dynablind.update_blind_scores()
-                return true
-            end,
-        }))
+        G.E_MANAGER:add_event(Event { func = function()
+            G.GAME.starting_params.ante_scaling_exponential = (G.GAME.starting_params.ante_scaling_exponential or 1) /
+                card.ability.exponent
+            StrangeLib.dynablind.update_blind_scores()
+            return true
+        end })
     end,
     pools = { Tier3 = true },
-})
+}
 SMODS.Voucher:take_ownership("pencil_overstock", {
     unredeem = function(self, card)
         G.GAME.index_pack_bonus = G.GAME.index_pack_bonus - card.ability.extra

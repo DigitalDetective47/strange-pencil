@@ -2,16 +2,14 @@
 ---@param self SMODS.Voucher
 ---@param card Card
 local function scaling_voucher_redeem(self, card)
-	G.E_MANAGER:add_event(Event({
-		func = function()
-			G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * card.ability.multiplier
-			StrangeLib.dynablind.update_blind_scores()
-			return true
-		end,
-	}))
+	G.E_MANAGER:add_event(Event { func = function()
+		G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling * card.ability.multiplier
+		StrangeLib.dynablind.update_blind_scores()
+		return true
+	end })
 end
 
-SMODS.Voucher({
+SMODS.Voucher {
 	key = "half_chip",
 	atlas = "vouchers",
 	pos = { x = 0, y = 0 },
@@ -20,9 +18,9 @@ SMODS.Voucher({
 		return { vars = { card.ability.multiplier } }
 	end,
 	redeem = scaling_voucher_redeem,
-})
+}
 
-SMODS.Voucher({
+SMODS.Voucher {
 	key = "vision",
 	atlas = "vouchers",
 	pos = { x = 0, y = 1 },
@@ -32,15 +30,15 @@ SMODS.Voucher({
 	end,
 	requires = { "v_pencil_half_chip" },
 	redeem = scaling_voucher_redeem,
-})
+}
 
-SMODS.Voucher({
+SMODS.Voucher {
 	key = "pull",
 	atlas = "vouchers",
 	pos = { x = 1, y = 0 },
-})
+}
 
-SMODS.Voucher({
+SMODS.Voucher {
 	key = "overstock",
 	atlas = "vouchers",
 	pos = { x = 1, y = 1 },
@@ -52,4 +50,4 @@ SMODS.Voucher({
 	redeem = function(self, card)
 		G.GAME.index_pack_bonus = (G.GAME.index_pack_bonus or 0) + card.ability.extra
 	end,
-})
+}

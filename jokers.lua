@@ -1,4 +1,4 @@
-SMODS.Joker({
+SMODS.Joker {
     key = "swimmers",
     config = { mult = 11 },
     loc_vars = function(self, info_queue, card)
@@ -11,6 +11,7 @@ SMODS.Joker({
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual then
+            ---@type string?
             local enhancement = nil;
             for _, other_card in ipairs(context.scoring_hand) do
                 if enhancement then
@@ -26,11 +27,12 @@ SMODS.Joker({
             return { mult = card.ability.mult }
         end
     end,
-})
+}
 
 ---Return the number of Queens of Clubs in the player's full deck
 ---@return integer
 local function lassCount()
+    ---@type integer
     local queens = 0
     for _, card in ipairs(G.playing_cards or {}) do
         if card:is_suit("Clubs") and not SMODS.has_no_rank(card) and card.base.value == "Queen" then
@@ -40,7 +42,7 @@ local function lassCount()
     return queens
 end
 
-SMODS.Joker({
+SMODS.Joker {
     key = "lass",
     config = { xmult_per_queen = 1 },
     loc_vars = function(self, info_queue, card)
@@ -60,7 +62,7 @@ SMODS.Joker({
             return { xmult = math.max(lassCount() * card.ability.xmult_per_queen, 1) }
         end
     end,
-})
+}
 
 ---Automatically win the game if the player has all 5 parts of The Forbidden One
 ---@param center SMODS.Center
@@ -75,20 +77,15 @@ local function forbidden_part_added(center, card, from_debuff)
             end
         end
         G.GAME.win_notified = true
-        G.E_MANAGER:add_event(Event({
-            trigger = 'immediate',
-            blocking = false,
-            blockable = false,
-            func = (function()
-                win_game()
-                G.GAME.won = true
-                return true
-            end)
-        }))
+        G.E_MANAGER:add_event(Event { trigger = 'immediate', blocking = false, blockable = false, func = function()
+            win_game()
+            G.GAME.won = true
+            return true
+        end })
     end
 end
 
-SMODS.Joker({
+SMODS.Joker {
     key = "forbidden_one",
     config = { payout = 4 },
     loc_vars = function(self, info_queue, card)
@@ -106,8 +103,8 @@ SMODS.Joker({
     calc_dollar_bonus = function(self, card)
         return card.ability.payout
     end
-})
-SMODS.Joker({
+}
+SMODS.Joker {
     key = "left_arm",
     config = { xchips = 2.5 },
     loc_vars = function(self, info_queue, card)
@@ -124,8 +121,8 @@ SMODS.Joker({
             return { xchips = card.ability.xchips }
         end
     end,
-})
-SMODS.Joker({
+}
+SMODS.Joker {
     key = "left_leg",
     config = { chips = 50 },
     loc_vars = function(self, info_queue, card)
@@ -142,8 +139,8 @@ SMODS.Joker({
             return { chips = card.ability.chips }
         end
     end,
-})
-SMODS.Joker({
+}
+SMODS.Joker {
     key = "right_arm",
     config = { xmult = 1.5 },
     loc_vars = function(self, info_queue, card)
@@ -160,8 +157,8 @@ SMODS.Joker({
             return { xmult = card.ability.xmult }
         end
     end,
-})
-SMODS.Joker({
+}
+SMODS.Joker {
     key = "right_leg",
     config = { mult = 10 },
     loc_vars = function(self, info_queue, card)
@@ -178,9 +175,9 @@ SMODS.Joker({
             return { mult = card.ability.mult }
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "doodlebob",
     config = { chips_per_index = 10 },
     loc_vars = function(self, info_queue, card)
@@ -201,12 +198,12 @@ SMODS.Joker({
         if context.joker_main and G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.pencil_index and G.GAME.consumeable_usage_total.pencil_index > 0 then
             return { chips = card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index }
         elseif context.using_consumeable and not context.blueprint and context.consumeable.ability.set == "index" then
-            return { message = localize({ type = "variable", key = "a_chips", vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } }) }
+            return { message = localize { type = "variable", key = "a_chips", vars = { card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index } } }
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "pencil",
     rarity = 4,
     pos = { x = 3, y = 0 },
@@ -216,23 +213,19 @@ SMODS.Joker({
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.using_consumeable and context.consumeable.ability.set ~= "index" then
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.4,
-                func = function()
-                    if G.consumeables.config.card_limit > #G.consumeables.cards then
-                        play_sound('timpani')
-                        SMODS.add_card({ set = "index" })
-                        card:juice_up(0.3, 0.5)
-                    end
-                    return true
+            G.E_MANAGER:add_event(Event { trigger = 'after', delay = 0.4, func = function()
+                if G.consumeables.config.card_limit > #G.consumeables.cards then
+                    play_sound('timpani')
+                    SMODS.add_card { set = "index" }
+                    card:juice_up(0.3, 0.5)
                 end
-            }))
+                return true
+            end })
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "forty_seven",
     rarity = 2,
     config = { factor = 1 },
@@ -253,8 +246,11 @@ SMODS.Joker({
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play and context.other_card.base.value == "4" then
+            ---@type integer
             local repetitions = 0
+            ---@type Card[]
             local juicers = {}
+            ---@type integer
             local juice_i = 1
             for _, other_card in ipairs(G.hand.cards) do
                 if other_card.base.value == "7" then
@@ -264,33 +260,33 @@ SMODS.Joker({
                     end
                 end
             end
-            return {
-                remove_default_message = true,
-                repetitions = repetitions,
-                card = card,
-                func = function()
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
+            if repetitions > 0 then
+                return {
+                    remove_default_message = true,
+                    repetitions = repetitions,
+                    card = card,
+                    func = function()
+                        G.E_MANAGER:add_event(Event { func = function()
                             juicers[juice_i]:juice_up(0.3, 0.5)
                             juice_i = juice_i + 1
                             return true
-                        end
-                    }))
-                    SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
-                end
-            }
+                        end })
+                        SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
+                    end
+                }
+            end
         end
     end,
-})
+}
 
 if not next(SMODS.find_mod("Talisman")) then
-    SMODS.Sound({
+    SMODS.Sound {
         key = "echips",
-        path = "echips.wav"
-    })
+        path = "echips.wav",
+    }
 end
 
-SMODS.Joker({
+SMODS.Joker {
     key = "square",
     rarity = 4,
     config = { exponent = 2 },
@@ -308,15 +304,15 @@ SMODS.Joker({
                 fchips = function(chips)
                     return chips ^ card.ability.exponent
                 end,
-                message = localize({ type = "variable", key = "a_echips", vars = { card.ability.exponent } }),
+                message = localize { type = "variable", key = "a_echips", vars = { card.ability.exponent } },
                 sound = "pencil_echips",
                 colour = G.C.CHIPS,
             }
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "pee_pants",
     rarity = 2,
     config = { scaling = 4, mult = 0, required_diamonds = 2 },
@@ -332,6 +328,7 @@ SMODS.Joker({
         if context.joker_main then
             return { mult = card.ability.mult }
         elseif context.before and not context.blueprint and next(context.poker_hands["Two Pair"]) then
+            ---@type integer
             local diamonds = 0
             for _, other_card in ipairs(context.scoring_hand) do
                 if other_card:is_suit("Diamonds") then
@@ -348,9 +345,9 @@ SMODS.Joker({
             end
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "squeeze",
     rarity = 1,
     config = { chance = 4, rounds = 0 },
@@ -367,29 +364,24 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.end_of_round and not (context.individual or context.repetition or context.blueprint) then
             if SMODS.pseudorandom_probability(card, 'j_pencil_squeeze', 1, card.ability.chance) then
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.jokers:remove_card(card)
-                        card:shatter()
-                        return true
-                    end
-                }))
+                G.E_MANAGER:add_event(Event { func = function()
+                    G.jokers:remove_card(card)
+                    card:shatter()
+                    return true
+                end })
                 return { message = localize('k_cracked_ex') }
             else
                 card.ability.rounds = card.ability.rounds + 1
                 card.ability.extra_value = card.ability.extra_value + card.ability.rounds
                 card:set_cost()
                 delay(0.4)
-                return {
-                    message = localize("k_safe_ex"),
-                    extra = { message = localize("k_val_up"), colour = G.C.MONEY },
-                }
+                return { message = localize("k_safe_ex"), extra = { message = localize("k_val_up"), colour = G.C.MONEY } }
             end
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "eclipse",
     rarity = 2,
     config = { gain = 1, loss = 1, mult = 0 },
@@ -415,7 +407,7 @@ SMODS.Joker({
                         no_message = true,
                     })
                 return {
-                    message = localize({ type = "variable", key = "a_mult", vars = { card.ability.gain } }),
+                    message = localize { type = "variable", key = "a_mult", vars = { card.ability.gain } },
                     message_card = card,
                     colour = G.C.MULT
                 }
@@ -430,7 +422,7 @@ SMODS.Joker({
                         no_message = true,
                     })
                 return {
-                    message = localize({ type = "variable", key = "a_mult_minus", vars = { card.ability.loss } }),
+                    message = localize { type = "variable", key = "a_mult_minus", vars = { card.ability.loss } },
                     message_card = card,
                     colour = G.C.RED
                 }
@@ -439,9 +431,9 @@ SMODS.Joker({
             return { mult = card.ability.mult }
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "club",
     rarity = 4,
     config = { xmult = 1.3, retriggers = 3, dead = false },
@@ -464,32 +456,26 @@ SMODS.Joker({
             for _, other_card in ipairs(context.full_hand) do
                 if not other_card:is_suit("Clubs") then
                     card.ability.dead = true
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            play_sound('tarot1')
-                            card.T.r = -0.2
-                            card:juice_up(0.3, 0.4)
-                            card.states.drag.is = true
-                            card.children.center.pinch.x = true
-                            G.E_MANAGER:add_event(Event({
-                                trigger = 'after',
-                                delay = 0.3,
-                                func = function()
-                                    G.jokers:remove_card(card)
-                                    card:remove()
-                                    return true
-                                end
-                            }))
+                    G.E_MANAGER:add_event(Event { func = function()
+                        play_sound('tarot1')
+                        card.T.r = -0.2
+                        card:juice_up(0.3, 0.4)
+                        card.states.drag.is = true
+                        card.children.center.pinch.x = true
+                        G.E_MANAGER:add_event(Event { trigger = 'after', delay = 0.3, func = function()
+                            G.jokers:remove_card(card)
+                            card:remove()
                             return true
-                        end
-                    }))
+                        end })
+                        return true
+                    end })
                     delay(0.4)
                     return
                 end
             end
         end
     end,
-})
+}
 
 local calendar_date = os.date("*t")
 local month_type = -1
@@ -501,7 +487,7 @@ elseif calendar_date.year % 4 == 0 and (calendar_date.year % 100 ~= 0 or calenda
     month_type = 6
 end
 
-SMODS.Joker({
+SMODS.Joker {
     key = "calendar",
     rarity = 1,
     config = { month = calendar_date.month, day = calendar_date.day },
@@ -519,14 +505,14 @@ SMODS.Joker({
             return { chips = card.ability.day, mult = card.ability.month }
         end
     end,
-})
+}
 
-SMODS.Sound({
+SMODS.Sound {
     key = "doot",
     path = "doot.ogg"
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "doot",
     rarity = 1,
     config = { dollars = 5 },
@@ -538,7 +524,9 @@ SMODS.Joker({
     pos = { x = 5, y = 2 },
     atlas = "jokers",
     in_pool = function(self, args)
+        ---@type boolean
         local diseased = false
+        ---@type boolean
         local flagged = false
         for _, other_card in ipairs(G.playing_cards) do
             if SMODS.has_enhancement(other_card, "m_pencil_diseased") then
@@ -556,7 +544,9 @@ SMODS.Joker({
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.before then
+            ---@type boolean
             local diseased = false
+            ---@type boolean
             local flagged = false
             for _, other_card in ipairs(context.scoring_hand) do
                 if SMODS.has_enhancement(other_card, "m_pencil_diseased") then
@@ -566,21 +556,19 @@ SMODS.Joker({
                     flagged = true
                 end
                 if diseased and flagged then
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            play_sound("pencil_doot")
-                            return true
-                        end
-                    }))
+                    G.E_MANAGER:add_event(Event { func = function()
+                        play_sound("pencil_doot")
+                        return true
+                    end })
                     return { dollars = card.ability.dollars }
                 end
             end
         end
     end,
     pools = { Meme = true }
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "stonehenge",
     rarity = 1,
     config = { chips = 0, extra = 5 },
@@ -610,7 +598,7 @@ SMODS.Joker({
             return { chips = card.ability.chips }
         end
     end,
-})
+}
 
 ---Calculate the values used by Ratio<br>
 ---Returns `nil` if multiple suits are tied for most common
@@ -620,11 +608,14 @@ local function calc_ratio()
     if not G.playing_cards then
         return
     end
+    ---@type table<string | "Spades" | "Hearts" | "Clubs" | "Diamonds", integer>
     local tallies = {}
     for _, card in ipairs(G.playing_cards) do
         tallies[card.base.suit] = (tallies[card.base.suit] or 0) + 1
     end
+    ---@type (string | "Spades" | "Hearts" | "Clubs" | "Diamonds")?
     local most = nil
+    ---@type boolean
     local active = false
     for k, v in pairs(tallies) do
         if not most or v > tallies[most] then
@@ -639,14 +630,13 @@ local function calc_ratio()
     end
 end
 
-SMODS.Joker({
+SMODS.Joker {
     key = "ratio",
     rarity = 2,
     config = { xmult = 1 },
     loc_vars = function(self, info_queue, card)
-        local suit
-        local ratio
-        suit, ratio = calc_ratio()
+        ---@type string?, number?
+        local suit, ratio = calc_ratio()
         if not suit then
             ratio = 0
         end
@@ -659,9 +649,8 @@ SMODS.Joker({
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
-            local suit
-            local ratio
-            suit, ratio = calc_ratio()
+            ---@type string?, number?
+            local suit, ratio = calc_ratio()
             if not suit then
                 return
             end
@@ -684,9 +673,9 @@ SMODS.Joker({
             return { xmult = card.ability.xmult }
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "commie",
     rarity = 2,
     pos = { x = 3, y = 3 },
@@ -695,7 +684,9 @@ SMODS.Joker({
     blueprint_compat = false,
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
+            ---@type Card[]
             local targets = {}
+            ---@type number
             local target_total = 0
             for _, other in ipairs(context.scoring_hand) do
                 if not SMODS.has_no_rank(other) then
@@ -704,6 +695,7 @@ SMODS.Joker({
                 end
             end
             if #targets > 0 then
+                ---@type SMODS.Rank[]
                 local ranks = {}
                 for _, rank in pairs(SMODS.Ranks) do
                     table.insert(ranks, rank)
@@ -713,6 +705,7 @@ SMODS.Joker({
                         a.nominal < b.nominal
                 end)
                 target_total = target_total / #targets
+                ---@type SMODS.Rank
                 local target_rank = ranks[#ranks]
                 for k, v in ipairs(ranks) do
                     if target_total < v.nominal then
@@ -725,27 +718,22 @@ SMODS.Joker({
                         end
                     end
                 end
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        for _, target in ipairs(targets) do
-                            local succ, msg = SMODS.change_base(target, nil, target_rank.key)
-                            if not succ then
-                                sendErrorMessage(msg)
-                            end
-                        end
-                        play_sound("gong", 0.94, 0.3)
-                        play_sound("gong", 0.94 * 1.5, 0.2)
-                        play_sound("tarot1", 1.5)
-                        return true
-                    end
-                }))
+                for _, target in ipairs(targets) do
+                    StrangeLib.assert(SMODS.change_base(target, nil, target_rank.key))
+                end
+                G.E_MANAGER:add_event(Event { func = function()
+                    play_sound("gong", 0.94, 0.3)
+                    play_sound("gong", 0.94 * 1.5, 0.2)
+                    play_sound("tarot1", 1.5)
+                    return true
+                end })
                 return { message = localize("k_balanced"), volume = 0, colour = { 0.8, 0.45, 0.85, 1 } }
             end
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "night_club",
     rarity = 3,
     pos = { x = 4, y = 3 },
@@ -756,22 +744,19 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint then
             for _, played_card in ipairs(context.scoring_hand) do
-                local succ, msg = SMODS.change_base(played_card, "Clubs", nil)
-                if not succ then
-                    sendErrorMessage(msg)
-                end
+                StrangeLib.assert(SMODS.change_base(played_card, "Clubs", nil))
             end
             return { message = localize("k_clubbin_ex"), colour = G.C.SUITS.Clubs }
         end
     end,
-})
+}
 
-SMODS.Sound({
+SMODS.Sound {
     key = "fizzle",
     path = "fizzle.wav"
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "fizzler",
     rarity = 1,
     config = { mult = 0 },
@@ -785,7 +770,9 @@ SMODS.Joker({
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.setting_blind and not card.getting_sliced and not context.blueprint then
+            ---@type number
             local prev_mult = card.ability.mult
+            ---@type Card[]
             local destroy_queue = {}
             for _, consumable in ipairs(G.consumeables.cards) do
                 if not SMODS.is_eternal(consumable, card) then
@@ -795,7 +782,7 @@ SMODS.Joker({
             end
             if card.ability.mult ~= prev_mult then
                 return {
-                    message = localize({ type = 'variable', key = 'a_mult', vars = { card.ability.mult - prev_mult } }),
+                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.mult - prev_mult } },
                     colour = { 0, 0.5, 1, 1 },
                     sound = "pencil_fizzle",
                     func = function()
@@ -809,7 +796,7 @@ SMODS.Joker({
             return { mult = card.ability.mult }
         end
     end,
-})
+}
 
 SMODS.Joker({
     key = "cell",

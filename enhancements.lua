@@ -1,4 +1,4 @@
-SMODS.Enhancement({
+SMODS.Enhancement {
     key = "diseased",
     name = "Diseased Card",
     config = { total = 5, remaining = 5, created_during_scoring = false },
@@ -7,7 +7,9 @@ SMODS.Enhancement({
     end,
     calculate = function(self, card, context)
         if G.GAME.hands_played >= card.ability.hands_played_at_create + (card.ability.created_during_scoring and 1 or 0) and context.before and context.cardarea == G.play then
+            ---@type boolean
             local changed = false
+            ---@type integer
             local pos
             for i, other_card in ipairs(context.scoring_hand) do
                 if other_card == card then
@@ -15,6 +17,7 @@ SMODS.Enhancement({
                     break
                 end
             end
+            ---@type Card
             local q = context.scoring_hand[pos - 1]
             if q and not SMODS.has_enhancement(q, "m_pencil_diseased") then
                 q:set_ability(G.P_CENTERS["m_pencil_diseased"], nil, true)
@@ -39,9 +42,8 @@ SMODS.Enhancement({
     end,
     atlas = "enhancements",
     pos = { x = 0, y = 0 }
-})
-
-SMODS.Consumable({
+}
+SMODS.Consumable {
     key = "plague",
     set = "Tarot",
     atlas = "enhancements",
@@ -51,9 +53,9 @@ SMODS.Consumable({
         table.insert(info_queue, G.P_CENTERS.m_pencil_diseased)
         return { vars = { card.ability.max_highlighted } }
     end,
-})
+}
 
-SMODS.Enhancement({
+SMODS.Enhancement {
     key = "flagged",
     name = "Flagged Card",
     config = { pos = nil },
@@ -76,29 +78,23 @@ SMODS.Enhancement({
     end,
     calculate = function(self, card, context)
         if context.setting_blind then
-            G.E_MANAGER:add_event(Event({
-                blocking = false,
-                func = function()
-                    G.E_MANAGER:add_event(Event({
-                        blocking = false,
-                        func = function()
-                            for i, other_card in ipairs(G.deck.cards) do
-                                if other_card == card then
-                                    card.ability.pos = i
-                                    return true
-                                end
-                            end
+            G.E_MANAGER:add_event(Event { blocking = false, func = function()
+                G.E_MANAGER:add_event(Event { blocking = false, func = function()
+                    for i, other_card in ipairs(G.deck.cards) do
+                        if other_card == card then
+                            card.ability.pos = i
+                            return true
                         end
-                    }))
-                    return true
-                end
-            }))
+                    end
+                end })
+                return true
+            end })
         end
     end,
     atlas = "enhancements",
     pos = { x = 0, y = 1 }
-})
-SMODS.Consumable({
+}
+SMODS.Consumable {
     key = "parade",
     set = "Tarot",
     atlas = "enhancements",
@@ -108,7 +104,7 @@ SMODS.Consumable({
         table.insert(info_queue, G.P_CENTERS.m_pencil_flagged)
         return { vars = { card.ability.max_highlighted } }
     end,
-})
+}
 
 local flip_hook = Card.flip
 function Card:flip()

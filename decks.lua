@@ -1,4 +1,4 @@
-SMODS.Back({
+SMODS.Back {
     key = "royal",
     config = { hand_size = -4 },
     loc_vars = function(self, info_queue, card)
@@ -7,18 +7,15 @@ SMODS.Back({
     pos = { x = 0, y = 0 },
     atlas = "decks",
     apply = function(self)
-        G.E_MANAGER:add_event(Event({
-            blockable = false,
-            func = function()
-                for _, card in ipairs(SMODS.shallow_copy(G.playing_cards)) do
-                    if not card:is_face() then
-                        card:remove()
-                    end
+        G.E_MANAGER:add_event(Event { blockable = false, func = function()
+            for _, card in ipairs(SMODS.shallow_copy(G.playing_cards)) do
+                if not card:is_face() then
+                    card:remove()
                 end
-                G.GAME.starting_deck_size = #G.playing_cards
-                return true
             end
-        }))
+            G.GAME.starting_deck_size = #G.playing_cards
+            return true
+        end })
         for hand, parameters in pairs(JSON.decode(NFS.read(SMODS.find_mod("StrangePencil")[1].path .. "/royal_handlist.json"))) do
             G.GAME.hands[hand] = SMODS.merge_defaults(parameters, G.GAME.hands[hand])
             G.GAME.hands[hand].chips = G.GAME.hands[hand].s_chips
@@ -27,7 +24,7 @@ SMODS.Back({
         G.GAME.banned_keys.bl_plant = true
         G.GAME.banned_keys.bl_psychic = true
     end
-})
+}
 
 ---Return random numbers from a gaussian distribution
 ---@param mean number
@@ -38,7 +35,7 @@ function Gaussian(mean, variance)
         math.cos(2 * math.pi * pseudorandom('normal_deck')) + mean
 end
 
-SMODS.Back({
+SMODS.Back {
     key = "normal",
     config = { mean = 8, variance = 9 },
     loc_vars = function(self, info_queue, card)
@@ -47,37 +44,34 @@ SMODS.Back({
     pos = { x = 1, y = 0 },
     atlas = "decks",
     apply = function(self)
-        G.E_MANAGER:add_event(Event({
-            blockable = false,
-            func = function()
-                for _, card in ipairs(G.playing_cards) do
-                    local rank_suffix
-                    repeat
-                        rank_suffix = math.floor(Gaussian(self.config.mean, self.config.variance) + 0.5)
-                    until rank_suffix >= 2 and rank_suffix <= 14
-                    if rank_suffix <= 10 then
-                        rank_suffix = tostring(rank_suffix)
-                    elseif rank_suffix == 11 then
-                        rank_suffix = 'Jack'
-                    elseif rank_suffix == 12 then
-                        rank_suffix = 'Queen'
-                    elseif rank_suffix == 13 then
-                        rank_suffix = 'King'
-                    elseif rank_suffix == 14 then
-                        rank_suffix = 'Ace'
-                    end
-                    local succ, msg = SMODS.change_base(card, nil, rank_suffix)
-                    if not succ then
-                        sendErrorMessage(msg)
-                    end
+        G.E_MANAGER:add_event(Event { blockable = false, func = function()
+            for _, card in ipairs(G.playing_cards) do
+                ---@type integer
+                local rank_num
+                repeat
+                    rank_num = math.floor(Gaussian(self.config.mean, self.config.variance) + 0.5)
+                until rank_num >= 2 and rank_num <= 14
+                ---@type string
+                local rank_key
+                if rank_num <= 10 then
+                    rank_key = tostring(rank_num)
+                elseif rank_num == 11 then
+                    rank_key = 'Jack'
+                elseif rank_num == 12 then
+                    rank_key = 'Queen'
+                elseif rank_num == 13 then
+                    rank_key = 'King'
+                elseif rank_num == 14 then
+                    rank_key = 'Ace'
                 end
-                return true
+                StrangeLib.assert(SMODS.change_base(card, nil, rank_key))
             end
-        }))
+            return true
+        end })
     end
-})
+}
 
-SMODS.Back({
+SMODS.Back {
     key = "booster",
     config = { booster_choices = 1 },
     loc_vars = function(self, info_queue, card)
@@ -88,7 +82,7 @@ SMODS.Back({
     apply = function(self)
         G.GAME.modifiers.booster_choices = (G.GAME.modifiers.booster_choices or 0) + self.config.booster_choices
     end
-})
+}
 
 local set_ability_hook = Card.set_ability
 function Card:set_ability(center, initial, delay_sprites)
@@ -98,7 +92,7 @@ function Card:set_ability(center, initial, delay_sprites)
     end
 end
 
-SMODS.Back({
+SMODS.Back {
     key = "slow_roll",
     config = { reroll_discount = get_starting_params().reroll_cost, decrement = 1 },
     loc_vars = function(self, info_queue, card)
@@ -115,7 +109,7 @@ SMODS.Back({
             calculate_reroll_cost(true)
         end
     end
-})
+}
 
 local d_six_apply_hook = G.P_TAGS.tag_d_six.apply or function(self, tag, context)
     if context.type == "shop_start" and not G.GAME.shop_d6ed then
@@ -147,25 +141,21 @@ local function d_six_apply(self, tag, context)
 end
 SMODS.Tag:take_ownership("d_six", { apply = d_six_apply }, true)
 local function default_reroll_voucher_apply(self, card)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost - card.ability.extra
-            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost - card.ability.extra)
-            return true
-        end
-    }))
+    G.E_MANAGER:add_event(Event { func = function()
+        G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost - card.ability.extra
+        G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost - card.ability.extra)
+        return true
+    end })
 end
 local function slow_roll_reroll_voucher_apply(self, card)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            card.ability.b_pencil_slow_roll_savings = math.min(G.GAME.current_round.reroll_cost_increase,
-                card.ability.extra)
-            G.GAME.current_round.reroll_cost_increase = math.max(
-                G.GAME.current_round.reroll_cost_increase - card.ability.extra, 0)
-            calculate_reroll_cost(true)
-            return true
-        end
-    }))
+    G.E_MANAGER:add_event(Event { func = function()
+        card.ability.b_pencil_slow_roll_savings = math.min(G.GAME.current_round.reroll_cost_increase,
+            card.ability.extra)
+        G.GAME.current_round.reroll_cost_increase = math.max(
+            G.GAME.current_round.reroll_cost_increase - card.ability.extra, 0)
+        calculate_reroll_cost(true)
+        return true
+    end })
 end
 local reroll_surplus_redeem_hook = G.P_CENTERS.v_reroll_surplus.redeem or default_reroll_voucher_apply
 local function reroll_surplus_redeem(self, card)

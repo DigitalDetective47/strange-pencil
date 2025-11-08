@@ -6,7 +6,7 @@ function Card:open()
     return open_hook(self)
 end
 
-SMODS.ObjectType({
+SMODS.ObjectType {
     key = "clubs_pack",
     default = "j_gluttenous_joker",
     cards = {},
@@ -19,26 +19,24 @@ SMODS.ObjectType({
         self:inject_card(G.P_CENTERS.j_seeing_double)
         self:inject_card(G.P_CENTERS.c_moon)
     end
-})
-SMODS.ObjectType({
+}
+SMODS.ObjectType {
     key = "clubs_legendary",
     default = "j_pencil_club",
     cards = {},
-})
+}
 
 ---@type { [string]: string }
 local clubs_select_card = { Joker = "jokers", Default = "deck", Enhanced = "deck" }
 --All consumables should go into the consumable area
-G.E_MANAGER:add_event(Event({
-    func = function()
-        for type, _ in pairs(SMODS.ConsumableTypes) do
-            clubs_select_card[type] = "consumeables"
-        end
-        return true
-    end,
-}))
+G.E_MANAGER:add_event(Event { func = function()
+    for type, _ in pairs(SMODS.ConsumableTypes) do
+        clubs_select_card[type] = "consumeables"
+    end
+    return true
+end })
 
-SMODS.Booster({
+SMODS.Booster {
     key = "clubs",
     kind = "Special",
     atlas = "boosters",
@@ -48,7 +46,7 @@ SMODS.Booster({
     config = { extra = 5, choose = 1 },
     select_card = clubs_select_card,
     ease_background_colour = function(self)
-        ease_background_colour({ new_colour = G.C.SUITS.Clubs, special_colour = G.C.SO_1.Clubs, contrast = 2 })
+        ease_background_colour { new_colour = G.C.SUITS.Clubs, special_colour = G.C.SO_1.Clubs, contrast = 2 }
     end,
     particles = function(self)
         G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -66,18 +64,17 @@ SMODS.Booster({
         G.booster_pack_sparkles:fade(1, 0)
     end,
     create_card = function(self, card, i)
+        ---@type number
         local rng = pseudorandom('pencil_clubs_pack')
         if rng < 0.1 then
+            ---@type Card?
             local new = nil
             repeat
                 if new then
                     new:remove()
                 end
                 new = SMODS.create_card(G.P_CENTERS.p_standard_jumbo_1:create_card(card, i))
-                local succ, msg = SMODS.change_base(new, "Clubs")
-                if not succ then
-                    sendErrorMessage(msg)
-                end
+                StrangeLib.assert(SMODS.change_base(new, "Clubs"))
             until not SMODS.has_no_suit(new)
             return new
         elseif rng > 0.997 then
@@ -87,9 +84,9 @@ SMODS.Booster({
         end
     end,
     group_key = "k_clubs_pack",
-})
+}
 
-SMODS.Tag({
+SMODS.Tag {
     atlas = "tags",
     pos = { x = 2, y = 0 },
     config = { type = "new_blind_choice" },
@@ -104,6 +101,7 @@ SMODS.Tag({
                 G.GAME.PACK_INTERRUPT = G.STATE
             end
             tag:yep("+", G.C.SO_1.Clubs, function()
+                ---@type Card
                 local card = Card(
                     G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
                     G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
@@ -115,7 +113,7 @@ SMODS.Tag({
                 )
                 card.cost = 0
                 card.from_tag = true
-                G.FUNCS.use_card({ config = { ref_table = card } })
+                G.FUNCS.use_card { config = { ref_table = card } }
                 card:start_materialize()
                 return true
             end)
@@ -123,4 +121,4 @@ SMODS.Tag({
             return true
         end
     end,
-})
+}

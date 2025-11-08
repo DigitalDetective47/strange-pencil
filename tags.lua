@@ -22,7 +22,7 @@ StrangeLib.make_boosters("workshop",
         end,
         group_key = "k_tarot_pack",
     })
-SMODS.Tag({
+SMODS.Tag {
     atlas = "tags",
     pos = { x = 0, y = 0 },
     config = { type = "new_blind_choice" },
@@ -40,6 +40,7 @@ SMODS.Tag({
                 G.GAME.PACK_INTERRUPT = G.STATE
             end
             tag:yep("+", G.C.SECONDARY_SET.Tarot, function()
+                ---@type Card
                 local card = Card(
                     G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
                     G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
@@ -51,7 +52,7 @@ SMODS.Tag({
                 )
                 card.cost = 0
                 card.from_tag = true
-                G.FUNCS.use_card({ config = { ref_table = card } })
+                G.FUNCS.use_card { config = { ref_table = card } }
                 card:start_materialize()
                 return true
             end)
@@ -59,4 +60,4 @@ SMODS.Tag({
             return true
         end
     end,
-})
+}

@@ -1,4 +1,4 @@
-SMODS.Stake({
+SMODS.Stake {
     key = "charred",
     applied_stakes = { "gold" },
     prefix_config = { applied_stakes = { mod = false } },
@@ -11,7 +11,7 @@ SMODS.Stake({
     modifiers = function()
         G.GAME.modifiers.covid_19 = true
     end
-})
+}
 
 local eval_card_hook = eval_card
 function eval_card(card, context)
@@ -22,7 +22,7 @@ function eval_card(card, context)
     return ret, ret2
 end
 
-SMODS.Stake({
+SMODS.Stake {
     key = "neon",
     applied_stakes = { "charred" },
     atlas = "stakes",
@@ -34,7 +34,7 @@ SMODS.Stake({
     modifiers = function()
         G.GAME.modifiers.enable_pencil_paralyzed = true
     end
-})
+}
 
 SMODS.Stake({
     key = "grey",

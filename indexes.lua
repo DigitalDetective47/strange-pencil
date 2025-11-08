@@ -1,16 +1,16 @@
-SMODS.ConsumableType({
+SMODS.ConsumableType {
     key = "index",
     primary_colour = HEX("FFFFFF"),
     secondary_colour = HEX("FF0000"),
     shop_rate = 4,
     loc_txt = {},
     default = "c_pencil_ono99",
-})
-SMODS.UndiscoveredSprite({
+}
+SMODS.UndiscoveredSprite {
     key = "index",
     atlas = "indexes",
     pos = { x = 0, y = 0 },
-})
+}
 
 StrangeLib.make_boosters("index",
     { { x = 0, y = 1 }, { x = 1, y = 1 } }, { { x = 2, y = 1 } }, { { x = 3, y = 1 } },
@@ -22,7 +22,7 @@ StrangeLib.make_boosters("index",
             card.ability.extra = card.ability.extra + (G.GAME.index_pack_bonus or 0)
         end,
         ease_background_colour = function(self)
-            ease_background_colour({ new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 })
+            ease_background_colour { new_colour = G.C.WHITE, special_colour = G.C.BLUE, contrast = 2 }
         end,
         particles = function(self)
             G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
@@ -135,32 +135,28 @@ G.FUNCS.can_reserve_card = function(e)
 end
 G.FUNCS.reserve_card = function(e)
     local c1 = e.config.ref_table
-    G.E_MANAGER:add_event(Event({
-        trigger = "after",
-        delay = 0.1,
-        func = function()
-            c1.area:remove_card(c1)
-            c1:add_to_deck()
-            if c1.children.price then
-                c1.children.price:remove()
-            end
-            c1.children.price = nil
-            if c1.children.buy_button then
-                c1.children.buy_button:remove()
-            end
-            c1.children.buy_button = nil
-            remove_nils(c1.children)
-            G.consumeables:emplace(c1)
-            G.GAME.pack_choices = G.GAME.pack_choices - 1
-            if G.GAME.pack_choices <= 0 then
-                G.FUNCS.end_consumeable(nil, delay_fac)
-            end
-            return true
-        end,
-    }))
+    G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.1, func = function()
+        c1.area:remove_card(c1)
+        c1:add_to_deck()
+        if c1.children.price then
+            c1.children.price:remove()
+        end
+        c1.children.price = nil
+        if c1.children.buy_button then
+            c1.children.buy_button:remove()
+        end
+        c1.children.buy_button = nil
+        remove_nils(c1.children)
+        G.consumeables:emplace(c1)
+        G.GAME.pack_choices = G.GAME.pack_choices - 1
+        if G.GAME.pack_choices <= 0 then
+            G.FUNCS.end_consumeable(nil, delay_fac)
+        end
+        return true
+    end })
 end
 
-SMODS.Tag({
+SMODS.Tag {
     atlas = "tags",
     pos = { x = 1, y = 0 },
     config = { type = "new_blind_choice" },
@@ -175,6 +171,7 @@ SMODS.Tag({
                 G.GAME.PACK_INTERRUPT = G.STATE
             end
             tag:yep("+", G.C.BLUE, function()
+                ---@type Card
                 local card = Card(
                     G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
                     G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
@@ -186,7 +183,7 @@ SMODS.Tag({
                 )
                 card.cost = 0
                 card.from_tag = true
-                G.FUNCS.use_card({ config = { ref_table = card } })
+                G.FUNCS.use_card { config = { ref_table = card } }
                 card:start_materialize()
                 return true
             end)
@@ -194,9 +191,9 @@ SMODS.Tag({
             return true
         end
     end,
-})
+}
 
-SMODS.Consumable({
+SMODS.Consumable {
     key = "replica",
     set = "index",
     atlas = "indexes",
@@ -207,6 +204,7 @@ SMODS.Consumable({
     cost = 5,
     config = { selections = 1 },
     can_use = function(self, card)
+        ---@type Card[]
         local targets = {}
         for _, other_card in ipairs(G.consumeables.highlighted) do
             if other_card.ability.set ~= "Unique" and other_card.ability.consumeable and other_card ~= card then
@@ -254,6 +252,7 @@ SMODS.Consumable({
     end,
     use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
+        ---@type Card[]
         local targets = {}
         for _, other_card in ipairs(G.consumeables.highlighted) do
             if other_card.ability.set ~= "Unique" and other_card.ability.consumeable and other_card ~= card then
@@ -301,7 +300,7 @@ SMODS.Consumable({
             G.consumeables:emplace(consume)
         end
     end,
-})
+}
 
 local start_run_hook = Game.start_run
 function Game:start_run(args)
@@ -321,20 +320,16 @@ end
 local open_hook = Card.open
 function Card:open()
     open_hook(self)
-    G.E_MANAGER:add_event(Event({
-        func = (function()
-            G.E_MANAGER:add_event(Event({
-                func = (function()
-                    G.pack_cards.config.highlighted_limit = math.huge
-                    return true
-                end)
-            }))
+    G.E_MANAGER:add_event(Event { func = function()
+        G.E_MANAGER:add_event(Event { func = function()
+            G.pack_cards.config.highlighted_limit = math.huge
             return true
-        end)
-    }))
+        end })
+        return true
+    end })
 end
 
-SMODS.Consumable({
+SMODS.Consumable {
     key = "counterfeit",
     set = "index",
     atlas = "indexes",
@@ -351,9 +346,9 @@ SMODS.Consumable({
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         ease_dollars(card.ability.dollars)
     end,
-})
+}
 
-SMODS.Consumable({
+SMODS.Consumable {
     key = "chisel",
     set = "index",
     atlas = "indexes",
@@ -375,39 +370,27 @@ SMODS.Consumable({
         local target = G.jokers.highlighted[1]
         target:flip()
         play_sound("card1", 0.9)
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.3,
-            func = function()
-                play_sound("gold_seal", 1.2, 0.4)
-                target:juice_up(0.3, 0.3)
-                card:juice_up(0.3, 0.3)
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.1,
-            func = function()
-                for k, v in pairs(SMODS.Stickers) do
-                    v:apply(target, nil)
-                end
-                return true
-            end,
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.85,
-            func = function()
-                target:flip()
-                play_sound("card1", 1.1)
-                return true
-            end,
-        }))
+        G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.3, func = function()
+            play_sound("gold_seal", 1.2, 0.4)
+            target:juice_up(0.3, 0.3)
+            card:juice_up(0.3, 0.3)
+            return true
+        end })
+        G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.1, func = function()
+            for k, v in pairs(SMODS.Stickers) do
+                v:apply(target, nil)
+            end
+            return true
+        end })
+        G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.85, func = function()
+            target:flip()
+            play_sound("card1", 1.1)
+            return true
+        end })
     end,
-})
+}
 
-SMODS.Consumable({
+SMODS.Consumable {
     key = "peek",
     set = "index",
     atlas = "indexes",
@@ -429,9 +412,9 @@ SMODS.Consumable({
             end
         end
     end,
-})
+}
 
-SMODS.Consumable({
+SMODS.Consumable {
     key = "mixnmatch",
     set = "index",
     atlas = "indexes",
@@ -442,8 +425,10 @@ SMODS.Consumable({
     end,
     use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
-        local left = false
-        local right = false
+        ---@type Card?
+        local left = nil
+        ---@type Card?
+        local right = nil
         for _, other_card in ipairs(G.hand.highlighted) do
             if other_card == card then
             elseif left then
@@ -454,20 +439,16 @@ SMODS.Consumable({
         end
         local old_bases = { left = left.base, right = right.base }
         StrangeLib.consumable.tarot_animation({ left, right }, function(card)
-            local succ, msg
             if card == left then
-                succ, msg = SMODS.change_base(left, old_bases.right.suit, old_bases.right.value)
+                StrangeLib.assert(SMODS.change_base(left, old_bases.right.suit, old_bases.right.value))
             else
-                succ, msg = SMODS.change_base(right, old_bases.left.suit, old_bases.left.value)
-            end
-            if not succ then
-                sendErrorMessage(msg)
+                StrangeLib.assert(SMODS.change_base(right, old_bases.left.suit, old_bases.left.value))
             end
         end)
     end,
-})
+}
 
-SMODS.Consumable({
+SMODS.Consumable {
     key = "fractal",
     set = "index",
     atlas = "indexes",
@@ -483,26 +464,23 @@ SMODS.Consumable({
     use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         for _ = 1, math.min(card.ability.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.4,
-                func = function()
-                    if G.consumeables.config.card_limit > #G.consumeables.cards then
-                        play_sound('timpani')
-                        local new = SMODS.create_card({ set = "index" })
-                        new:add_to_deck()
-                        G.consumeables:emplace(new)
-                        card:juice_up(0.3, 0.5)
-                    end
-                    return true
+            G.E_MANAGER:add_event(Event { trigger = 'after', delay = 0.4, func = function()
+                if G.consumeables.config.card_limit > #G.consumeables.cards then
+                    play_sound('timpani')
+                    ---@type Card
+                    local new = SMODS.create_card { set = "index" }
+                    new:add_to_deck()
+                    G.consumeables:emplace(new)
+                    card:juice_up(0.3, 0.5)
                 end
-            }))
+                return true
+            end })
         end
         delay(0.6)
     end,
-})
+}
 
-SMODS.Consumable({
+SMODS.Consumable {
     key = "ono99",
     set = "index",
     atlas = "indexes",
@@ -517,18 +495,15 @@ SMODS.Consumable({
         play_sound('timpani')
         for _, other_card in ipairs(SMODS.find_card("c_pencil_ono99")) do
             if not other_card.ability.eternal then
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    func = function()
-                        SMODS.add_card({ set = "index", no_edition = true, edition = other_card.edition })
-                        other_card:start_dissolve()
-                        return true
-                    end
-                }))
+                G.E_MANAGER:add_event(Event { trigger = 'immediate', func = function()
+                    SMODS.add_card { set = "index", no_edition = true, edition = other_card.edition }
+                    other_card:start_dissolve()
+                    return true
+                end })
             end
         end
     end,
-})
+}
 
 local can_sell_hook = Card.can_sell_card
 function Card:can_sell_card(context)
