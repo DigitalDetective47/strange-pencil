@@ -1,9 +1,7 @@
 local clubs_create_card_hook = SMODS.Centers.p_pencil_clubs.create_card
 local function clubs_create_card(self, card, i)
     if G.GAME.modifiers.cry_force_enhancement and (G.GAME.modifiers.cry_force_enhancement == "m_stone" or G.P_CENTERS[G.GAME.modifiers.cry_force_enhancement].no_suit) then
-        ---@type number
-        local rng = pseudorandom('pencil_clubs_pack')
-        if rng > 0.997 then
+        if SMODS.pseudorandom_probability(card, 'pencil_clubs_pack', 3, 1000, nil, true) then
             return { set = "clubs_legendary", area = G.pack_cards, skip_materialize = true }
         else
             return { set = "clubs_pack", area = G.pack_cards, skip_materialize = true }
