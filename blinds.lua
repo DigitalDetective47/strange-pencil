@@ -130,6 +130,9 @@ SMODS.Blind {
     end,
 }
 
+---when set to `true`, means no cards will score
+---@type Card | true?
+local star_scoring_card = nil
 SMODS.Blind {
     key = "star",
     boss = { showdown = true },
@@ -138,33 +141,31 @@ SMODS.Blind {
     pos = { x = 0, y = 4 },
     atlas = "blinds",
     mult = 2,
-}
-
-local poker_hand_info_hook = G.FUNCS.get_poker_hand_info
-G.FUNCS.get_poker_hand_info = function(_cards)
-    local text, loc_disp_text, poker_hands, scoring_hand, disp_text = poker_hand_info_hook(_cards)
-    if next(poker_hands["High Card"]) and G.GAME.blind and G.GAME.blind.name == "bl_pencil_star" then
-        if #scoring_hand ~= 1 then
-            G.GAME.blind.triggered = true
-        end
-        ---@type Card?
-        local scoring_card = nil
-        for _, card in ipairs(_cards) do
-            if not SMODS.has_no_rank(card) and (not scoring_card or card.base.nominal > scoring_card.base.nominal or
-                    (card.base.nominal == scoring_card.base.nominal and card.base.face_nominal > scoring_card.base.face_nominal) or
-                    (card.base.nominal == scoring_card.base.nominal and card.base.face_nominal == scoring_card.base.face_nominal and card.T.x < scoring_card.T.x)) then
-                scoring_card = card
+    debuff_hand = function(self, cards, hand, handname, check)
+        star_scoring_card = nil
+        return false
+    end,
+    calculate = function(self, blind, context)
+        if context.modify_scoring_hand then
+            if not star_scoring_card then
+                if #context.scoring_hand ~= 1 then
+                    blind.triggered = true
+                end
+                for _, card in ipairs(context.full_hand) do
+                    if not SMODS.has_no_rank(card) and (not star_scoring_card or card.base.nominal > star_scoring_card.base.nominal or
+                            (card.base.nominal == star_scoring_card.base.nominal and card.base.face_nominal > star_scoring_card.base.face_nominal)) then
+                        star_scoring_card = card
+                    end
+                end
+                star_scoring_card = star_scoring_card or true
             end
+            return {
+                add_to_hand = context.other_card == star_scoring_card,
+                remove_from_hand = context.other_card ~= star_scoring_card,
+            }
         end
-        scoring_hand = { scoring_card }
     end
-    return text, loc_disp_text, poker_hands, scoring_hand, disp_text
-end
-
-local always_scores_hook = SMODS.always_scores
-function SMODS.always_scores(card)
-    return not (G.GAME.blind and G.GAME.blind.name == "bl_pencil_star") and always_scores_hook(card)
-end
+}
 
 SMODS.Blind {
     key = "fence",
