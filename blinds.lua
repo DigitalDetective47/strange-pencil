@@ -220,3 +220,27 @@ SMODS.Blind {
         end
     end,
 }
+
+SMODS.Blind {
+    key = "vessel",
+    boss = { showdown = true },
+    dollars = 8,
+    boss_colour = G.P_BLINDS.bl_final_vessel.boss_colour,
+    pos = { x = 0, y = 7 },
+    atlas = "blinds",
+    mult = 2,
+    calculate = function(self, blind, context)
+        if context.before or context.pre_discard then
+            ---@type table<Card, true>
+            local highlighted_set = StrangeLib.as_set(context.full_hand)
+            ---@type Card[]
+            local destroy = {}
+            for _, card in ipairs(G.hand.cards) do
+                if not highlighted_set[card] then
+                    table.insert(destroy, card)
+                end
+            end
+            SMODS.destroy_cards(destroy)
+        end
+    end
+}

@@ -301,6 +301,13 @@
                     "-1 Hand Selection Limit",
                     "per hand played this round"
                 ]
+            },
+            "bl_pencil_vessel": {
+                "name": "Violent Vessel",
+                "text": [
+                    "On Play or Discard,",
+                    "destroy all held cards"
+                ]
             }
         },
         "Enhanced": {
