@@ -798,7 +798,7 @@ SMODS.Joker {
     end,
 }
 
-SMODS.Joker({
+SMODS.Joker {
     key = "cell",
     rarity = 2,
     pos = { x = 0, y = 4 },
@@ -812,28 +812,28 @@ SMODS.Joker({
             end
         end
     end,
-    remove_from_deck = function (self, card, from_debuff)
+    remove_from_deck = function(self, card, from_debuff)
         if not next(SMODS.find_card(self.key)) then
             for _, other in ipairs(G.playing_cards) do
                 SMODS.debuff_card(other, false, "j_pencil_cell")
             end
         end
     end
-})
+}
 
 ---@param card Card
 ---@return string[]
 local function get_joker_desc(card)
-    return localize({
+    return localize {
         type = "raw_descriptions",
         set = "Joker",
         key = card.config.center_key,
         vars = card.config.center.loc_vars and card.config.center:loc_vars({}, card).vars or
             card:generate_UIBox_ability_table(true),
-    })
+    }
 end
 
-SMODS.Joker({
+SMODS.Joker {
     key = "peter",
     rarity = 1,
     config = { mult = 1 },
@@ -882,9 +882,9 @@ SMODS.Joker({
             return SMODS.merge_effects(messages)
         end
     end,
-})
+}
 
-SMODS.Joker({
+SMODS.Joker {
     key = "hole",
     rarity = 1,
     pos = { x = 2, y = 4 },
@@ -905,4 +905,4 @@ SMODS.Joker({
             end
         end
     end,
-})
+}

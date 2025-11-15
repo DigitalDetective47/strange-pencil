@@ -36,7 +36,7 @@ SMODS.Stake {
     end
 }
 
-SMODS.Stake({
+SMODS.Stake {
     key = "grey",
     applied_stakes = { "neon" },
     atlas = "stakes",
@@ -47,16 +47,13 @@ SMODS.Stake({
     above_stake = "stake_pencil_neon",
     modifiers = function()
         G.GAME.modifiers.enable_pencil_suitless = true
-        G.E_MANAGER:add_event(Event({
-            blockable = false,
-            func = function()
-                for _, card in ipairs(G.playing_cards) do
-                    if SMODS.Stickers.pencil_suitless:should_apply(card, card.config.center, G.deck) then
-                        SMODS.Stickers.pencil_suitless:apply(card, true)
-                    end
+        G.E_MANAGER:add_event(Event { blockable = false, func = function()
+            for _, card in ipairs(G.playing_cards) do
+                if SMODS.Stickers.pencil_suitless:should_apply(card, card.config.center, G.deck) then
+                    SMODS.Stickers.pencil_suitless:apply(card, true)
                 end
-                return true
             end
-        }))
+            return true
+        end })
     end
-})
+}

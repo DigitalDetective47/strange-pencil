@@ -40,14 +40,14 @@ SMODS.Sticker {
     end,
 }
 
-SMODS.Enhancement({
+SMODS.Enhancement {
     key = "suitless_quantum",
     no_collection = true,
     no_suit = true,
     weight = 0,
     in_pool = function(self, args) return false end,
-})
-SMODS.Sticker({
+}
+SMODS.Sticker {
     key = "suitless",
     atlas = "stickers",
     pos = { x = 0, y = 1 },
@@ -60,4 +60,4 @@ SMODS.Sticker({
             return { m_pencil_suitless_quantum = true }
         end
     end
-})
+}
