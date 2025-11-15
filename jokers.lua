@@ -887,6 +887,9 @@ SMODS.Joker {
 SMODS.Joker {
     key = "hole",
     rarity = 1,
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, { key = "free_discard", set = "Other", vars = {} })
+    end,
     pos = { x = 2, y = 4 },
     atlas = "jokers",
     cost = 4,

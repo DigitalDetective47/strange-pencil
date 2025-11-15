@@ -642,6 +642,14 @@
                     "to win on {C:attention}Monochrome",
                     "{C:attention}Stake{} difficulty"
                 ]
+            },
+            "free_discard": {
+                "name": "Free discard",
+                "text": [
+                    "Discard cards",
+                    "without consuming",
+                    "a discard"
+                ]
             }
         }
     },
