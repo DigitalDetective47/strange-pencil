@@ -497,6 +497,21 @@
             }
         },
         "Stake": {
+            "stake_pencil_bronze": {
+                "name": "Bronze Stake",
+                "text": [
+                    "{C:red}-1{} Hand",
+                    "{s:0.8}Applies all previous Stakes"
+                ]
+            },
+            "stake_pencil_rainbow": {
+                "name": "Rainbow Stake",
+                "text": [
+                    "Required score scales",
+                    "faster for each {C:attention}Ante",
+                    "{s:0.8}Applies all previous Stakes"
+                ]
+            },
             "stake_pencil_charred": {
                 "name": "Charred Stake",
                 "text": [
@@ -514,12 +529,36 @@
                     "{s:0.8}Applies all previous Stakes"
                 ]
             },
+            "stake_pencil_blue": {
+                "name": "Deep Blue Stake",
+                "text": [
+                    "{C:attention}Big Blind{} gives",
+                    "no reward money",
+                    "{s:0.8}Applies all previous Stakes"
+                ]
+            },
+            "stake_pencil_transparent":{
+                "name": "Translucent Stake",
+                "text": [
+                    "Required score scales",
+                    "faster for each {C:attention}Ante",
+                    "{s:0.8}Applies all previous Stakes"
+                ]
+            },
             "stake_pencil_grey": {
                 "name": "Monochrome Stake",
                 "text": [
                     "Shop can have {C:attention}Suitless{} playing cards",
                     "{C:inactive,s:0.8}(Has no suit)",
                     "Cards in your starting deck can also have {C:attention}Suitless{}",
+                    "{s:0.8}Applies all previous Stakes"
+                ]
+            },
+            "stake_pencil_negative":{
+                "name": "Negative Stake",
+                "text": [
+                    "All poker hands",
+                    "start with {C:chips}0{} chips",
                     "{s:0.8}Applies all previous Stakes"
                 ]
             }
