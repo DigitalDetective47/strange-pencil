@@ -6,7 +6,7 @@ SMODS.Stake {
     pos = { x = 1, y = 0 },
     sticker_atlas = "stake_stickers",
     sticker_pos = { x = 1, y = 0 },
-    colour = { 0, 1, 0, 1 },
+    colour = HEX("A52F00"),
     above_stake = "gold",
     modifiers = function()
         G.GAME.modifiers.covid_19 = true
@@ -29,7 +29,7 @@ SMODS.Stake {
     pos = { x = 0, y = 0 },
     sticker_atlas = "stake_stickers",
     sticker_pos = { x = 0, y = 0 },
-    colour = HEX("A52F00"),
+    colour = { 0, 1, 0, 1 },
     above_stake = "stake_pencil_charred",
     modifiers = function()
         G.GAME.modifiers.enable_pencil_paralyzed = true
