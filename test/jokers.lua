@@ -621,3 +621,84 @@ Balatest.TestPlay {
             (G.GAME.hands["High Card"].mult + math.floor(G.P_CENTERS.c_emperor.cost / 2) + math.floor(SMODS.Centers.c_pencil_counterfeit.cost / 2)))
     end
 }
+
+Balatest.TestPlay {
+    name = "j_cell_protect",
+    category = { "jokers", "j_cell" },
+
+    jokers = { "j_pencil_cell" },
+    blind = "bl_plant",
+
+    execute = function()
+        Balatest.play_hand({ "QC" })
+    end,
+    assert = function()
+        Balatest.assert_chips((G.GAME.hands["High Card"].chips + SMODS.Ranks.Queen.nominal) *
+            G.GAME.hands["High Card"].mult)
+    end
+}
+Balatest.TestPlay {
+    name = "j_cell_sell",
+    category = { "jokers", "j_cell" },
+
+    jokers = { "j_pencil_cell" },
+    blind = "bl_plant",
+
+    execute = function()
+        G.jokers.cards[1]:sell_card()
+        Balatest.play_hand({ "QC" })
+    end,
+    assert = function()
+        Balatest.assert_chips(G.GAME.hands["High Card"].chips * G.GAME.hands["High Card"].mult)
+    end
+}
+
+Balatest.TestPlay {
+    name = "j_peter_none",
+    category = { "jokers", "j_peter" },
+
+    jokers = { "j_pencil_peter" },
+
+    execute = default_exexute,
+    assert = function()
+        Balatest.assert_chips((G.GAME.hands["High Card"].chips + SMODS.Ranks.Ace.nominal) *
+            G.GAME.hands["High Card"].mult)
+    end
+}
+Balatest.TestPlay {
+    name = "j_peter_vanilla",
+    category = { "jokers", "j_peter" },
+
+    jokers = { "j_pencil_peter", "j_zany" },
+
+    execute = default_exexute,
+    assert = function()
+        Balatest.assert_chips((G.GAME.hands["High Card"].chips + SMODS.Ranks.Ace.nominal) *
+            (G.GAME.hands["High Card"].mult + #G.localization.descriptions.Joker.j_zany.text))
+    end
+}
+Balatest.TestPlay {
+    name = "j_peter_modded",
+    category = { "jokers", "j_peter" },
+
+    jokers = { "j_pencil_peter", "j_pencil_pencil" },
+
+    execute = default_exexute,
+    assert = function()
+        Balatest.assert_chips((G.GAME.hands["High Card"].chips + SMODS.Ranks.Ace.nominal) *
+            (G.GAME.hands["High Card"].mult + #G.localization.descriptions.Joker.j_pencil_pencil.text))
+    end
+}
+
+Balatest.TestPlay {
+    name = "j_hole",
+    category = { "jokers", "j_hole" },
+
+    jokers = { "j_pencil_hole" },
+    hand_size = 8,
+
+    execute = function() end,
+    assert = function()
+        Balatest.assert_eq(#G.deck.cards, 52 - 8 * 2)
+    end
+}
