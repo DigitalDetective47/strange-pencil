@@ -107,6 +107,7 @@ Balatest.TestPlay {
         Balatest.hook(_G, "create_card", function(orig, t, a, l, r, k, s, forced_key, ...)
             return orig(t, a, l, r, k, s, "j_pencil_right_leg", ...)
         end)
+        Balatest.end_round()
         Balatest.cash_out()
         Balatest.hook(_G, "win_game", function(orig) end)
         Balatest.buy(function() return G.shop_jokers.cards[1] end)
@@ -700,5 +701,36 @@ Balatest.TestPlay {
     execute = function() end,
     assert = function()
         Balatest.assert_eq(#G.deck.cards, 52 - 8 * 2)
+    end
+}
+
+Balatest.TestPlay {
+    name = "j_open",
+    category = { "jokers", "j_open" },
+
+    jokers = { "j_pencil_open" },
+
+    execute = function()
+        Balatest.end_round()
+        Balatest.cash_out()
+    end,
+    assert = function()
+        Balatest.assert_eq(#G.shop_jokers.cards, 3)
+    end
+}
+Balatest.TestPlay {
+    name = "j_open_sell",
+    category = { "jokers", "j_open" },
+
+    jokers = { "j_pencil_open" },
+
+    execute = function()
+        Balatest.end_round()
+        Balatest.cash_out()
+        Balatest.q(function() G.jokers.cards[1]:sell_card() end)
+        Balatest.wait()
+    end,
+    assert = function()
+        Balatest.assert_eq(#G.shop_jokers.cards, 2)
     end
 }

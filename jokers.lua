@@ -909,3 +909,22 @@ SMODS.Joker {
         end
     end,
 }
+
+SMODS.Joker {
+    key = "open",
+    rarity = 2,
+    config = { extra = 1 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra } }
+    end,
+    pos = { x = 3, y = 4 },
+    atlas = "jokers",
+    cost = 5,
+    blueprint_compat = false,
+    add_to_deck = function(self, card, from_debuff)
+        change_shop_size(card.ability.extra)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        change_shop_size(-card.ability.extra)
+    end,
+}

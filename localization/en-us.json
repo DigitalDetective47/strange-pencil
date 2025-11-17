@@ -207,6 +207,13 @@
                     "{C:red}Free discard{}",
                     "entire first hand"
                 ]
+            },
+            "j_pencil_open": {
+                "name": "Open Sign",
+                "text": [
+                    "{C:attention}+#1#{} card slot",
+                    "available in shop"
+                ]
             }
         },
         "Back": {
