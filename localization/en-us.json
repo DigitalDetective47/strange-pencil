@@ -421,6 +421,22 @@
                     "be used immediately"
                 ]
             },
+            "pencil_blue_sticker": {
+                "name": "Deep Blue Sticker",
+                "text": [
+                    "Used this Joker",
+                    "to win on {C:attention}Deep Blue",
+                    "{C:attention}Stake{} difficulty"
+                ]
+            },
+            "pencil_bronze_sticker": {
+                "name": "Bronze Sticker",
+                "text": [
+                    "Used this Joker",
+                    "to win on {C:attention}Bronze",
+                    "{C:attention}Stake{} difficulty"
+                ]
+            },
             "pencil_charred_sticker": {
                 "name": "Charred Sticker",
                 "text": [
@@ -437,11 +453,35 @@
                     "{C:attention}Stake{} difficulty"
                 ]
             },
+            "pencil_negative_sticker": {
+                "name": "Negative Sticker",
+                "text": [
+                    "Used this Joker",
+                    "to win on {C:attention}Negative",
+                    "{C:attention}Stake{} difficulty"
+                ]
+            },
             "pencil_neon_sticker": {
                 "name": "Neon Sticker",
                 "text": [
                     "Used this Joker",
                     "to win on {C:attention}Neon",
+                    "{C:attention}Stake{} difficulty"
+                ]
+            },
+            "pencil_rainbow_sticker": {
+                "name": "Rainbow Sticker",
+                "text": [
+                    "Used this Joker",
+                    "to win on {C:attention}Rainbow",
+                    "{C:attention}Stake{} difficulty"
+                ]
+            },
+            "pencil_transparent_sticker": {
+                "name": "Translucent Sticker",
+                "text": [
+                    "Used this Joker",
+                    "to win on {C:attention}Translucent",
                     "{C:attention}Stake{} difficulty"
                 ]
             },
