@@ -509,6 +509,53 @@
                 ]
             }
         },
+        "Planet": {
+            "c_pencil_iss": {
+                "name": "International Space Station",
+                "text":[
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                ]
+            },
+            "c_pencil_junk": {
+                "name": "Space Junk",
+                "text":[
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                ]
+            },
+            "c_pencil_rover": {
+                "name": "Mars Rover",
+                "text":[
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                ]
+            },
+            "c_pencil_sphere": {
+                "name": "Dyson Sphere",
+                "text":[
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                ]
+            },
+            "c_pencil_voyager": {
+                "name": "Voyager",
+                "text":[
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips"
+                ]
+            }
+        },
         "Spectral": {
             "c_pencil_negative_space": {
                 "name": "Negative Space",
@@ -753,12 +800,46 @@
             "k_index": "Index",
             "k_index_pack": "Doodle Pack",
             "k_infected_ex": "Infected!",
-            "k_paralyzed_ex": "Paralyzed!"
+            "k_paralyzed_ex": "Paralyzed!",
+            "k_planet_av": "Autonomous Vehicle",
+            "k_planet_debris": "Debris",
+            "k_planet_generator": "Generator",
+            "k_planet_human_sattelite": "Artificial Sattelite",
+            "k_planet_spacecraft": "Spacecraft"
         },
         "labels": {
             "index": "Index",
             "pencil_paralyzed": "Paralyzed",
             "pencil_suitless": "Suitless"
+        },
+        "poker_hand_descriptions": {
+            "pencil_dichrome": [
+                "Three cards of one suit",
+                "and two cards of a different suit"
+            ],
+            "pencil_dichrome_five": [
+                "A hand containing both a",
+                "Five of a Kind and a Dichrome"
+            ],
+            "pencil_dichrome_house": [
+                "A hand containing both a",
+                "Full House and a Dichrome"
+            ],
+            "pencil_dichrome_house2": [
+                "Three cards with the same rank and suit and",
+                "two cards with a different rank and suit"
+            ],
+            "pencil_dichrome_straight": [
+                "A hand containing both a",
+                "Straight and a Dichrome"
+            ]
+        },
+        "poker_hands": {
+            "pencil_dichrome": "Dichrome",
+            "pencil_dichrome_five": "Dichrome Five",
+            "pencil_dichrome_house": "Dichrome House",
+            "pencil_dichrome_house2": "Synchronized Dichrome House",
+            "pencil_dichrome_straight": "Dichrome Straight"
         },
         "ranks": {
             "pencil_sneven": "S\u00f1even"
