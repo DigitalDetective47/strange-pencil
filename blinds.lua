@@ -8,7 +8,7 @@ SMODS.Blind {
     key = "glove",
     boss = { showdown = true },
     dollars = 8,
-    boss_colour = HEX("FFFFFF"),
+    boss_colour = G.C.WHITE,
     pos = { x = 0, y = 0 },
     atlas = "blinds",
     mult = 2,
@@ -24,7 +24,7 @@ SMODS.Blind {
     in_pool = function()
         return G.GAME.round_resets.ante >= G.GAME.win_ante -- Boss should only appear in endless
     end,
-    boss_colour = HEX("FFFFFF"),
+    boss_colour = G.C.WHITE,
     pos = { x = 0, y = 1 },
     atlas = "blinds",
     mult = 1.5,
@@ -37,7 +37,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "arrow",
     boss = { min = 4 },
-    boss_colour = HEX("FFFFFF"),
+    boss_colour = G.C.WHITE,
     pos = { x = 0, y = 2 },
     atlas = "blinds",
     mult = 2,
@@ -75,7 +75,7 @@ SMODS.Blind {
         end
         return false
     end,
-    boss_colour = HEX("FFFFFF"),
+    boss_colour = G.C.WHITE,
     pos = { x = 0, y = 3 },
     atlas = "blinds",
     mult = 2,
@@ -153,7 +153,7 @@ SMODS.Blind {
         end
         return false
     end,
-    boss_colour = HEX("FFFFFF"),
+    boss_colour = G.C.WHITE,
     pos = { x = 0, y = 5 },
     atlas = "blinds",
     mult = 2,
