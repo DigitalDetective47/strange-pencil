@@ -47,7 +47,7 @@ StrangeLib.make_boosters("index",
     2)
 
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons -- copied from Cryptid
-function G.UIDEF.use_and_sell_buttons(card)
+function G.UIDEF.use_and_sell_buttons(card, ...)
     if (card.area == G.pack_cards and G.pack_cards) and
         G.GAME.used_vouchers.v_pencil_pull and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config.center.kind == "Index" then --Add a use button
         return {
@@ -120,7 +120,7 @@ function G.UIDEF.use_and_sell_buttons(card)
             },
         }
     end
-    return G_UIDEF_use_and_sell_buttons_ref(card)
+    return G_UIDEF_use_and_sell_buttons_ref(card, ...)
 end
 
 --Code from Betmma's Vouchers
@@ -303,23 +303,24 @@ SMODS.Consumable {
 }
 
 local start_run_hook = Game.start_run
-function Game:start_run(args)
-    start_run_hook(self, args)
+function Game:start_run(args, ...)
+    local ret = { start_run_hook(self, args, ...) }
     self.consumeables.config.highlighted_limit = math.huge
+    return unpack(ret)
 end
 
 local shop_ui_hook = G.UIDEF.shop
-function G.UIDEF.shop()
-    local ret = shop_ui_hook()
+function G.UIDEF.shop(...)
+    local ret = { shop_ui_hook(...) }
     G.shop_jokers.config.highlighted_limit = 1e308
     G.shop_booster.config.highlighted_limit = 1e308
     G.shop_vouchers.config.highlighted_limit = 1e308
-    return ret
+    return unpack(ret)
 end
 
 local open_hook = Card.open
-function Card:open()
-    open_hook(self)
+function Card:open(...)
+    local ret = { open_hook(self, ...) }
     G.E_MANAGER:add_event(Event { func = function()
         G.E_MANAGER:add_event(Event { func = function()
             G.pack_cards.config.highlighted_limit = math.huge
@@ -327,6 +328,7 @@ function Card:open()
         end })
         return true
     end })
+    return unpack(ret)
 end
 
 SMODS.Consumable {
@@ -506,6 +508,10 @@ SMODS.Consumable {
 }
 
 local can_sell_hook = Card.can_sell_card
-function Card:can_sell_card(context)
-    return self.config.center.key ~= "c_pencil_ono99" and can_sell_hook(self, context)
+function Card:can_sell_card(...)
+    if self.config.center.key ~= "c_pencil_ono99" then
+        return can_sell_hook(self, ...)
+    else
+        return false
+    end
 end

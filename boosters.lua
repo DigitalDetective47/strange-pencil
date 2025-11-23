@@ -1,9 +1,9 @@
 local open_hook = Card.open
-function Card:open()
+function Card:open(...)
     if self.ability.set == "Booster" then
         G.GAME.pack_size = self.ability.extra
     end
-    return open_hook(self)
+    return open_hook(self, ...)
 end
 
 SMODS.ObjectType {

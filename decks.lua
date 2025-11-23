@@ -85,11 +85,12 @@ SMODS.Back {
 }
 
 local set_ability_hook = Card.set_ability
-function Card:set_ability(center, initial, delay_sprites)
-    set_ability_hook(self, center, initial, delay_sprites)
+function Card:set_ability(...)
+    local ret = { set_ability_hook(self, ...) }
     if self.ability.set == "Booster" and G.GAME.modifiers.booster_choices then
         self.ability.choose = self.ability.choose + G.GAME.modifiers.booster_choices
     end
+    return unpack(ret)
 end
 
 SMODS.Back {
@@ -123,7 +124,7 @@ local d_six_apply_hook = G.P_TAGS.tag_d_six.apply or function(self, tag, context
         return true
     end
 end
-local function d_six_apply(self, tag, context)
+local function d_six_apply(self, tag, context, ...)
     if G.GAME.selected_back.name == "b_pencil_slow_roll" then
         if context.type == "shop_start" and not G.GAME.shop_d6ed then
             G.GAME.shop_d6ed = true
@@ -136,7 +137,7 @@ local function d_six_apply(self, tag, context)
             return true
         end
     else
-        return d_six_apply_hook(self, tag, context)
+        return d_six_apply_hook(self, tag, context, ...)
     end
 end
 SMODS.Tag:take_ownership("d_six", { apply = d_six_apply }, true)
@@ -158,19 +159,19 @@ local function slow_roll_reroll_voucher_apply(self, card)
     end })
 end
 local reroll_surplus_redeem_hook = G.P_CENTERS.v_reroll_surplus.redeem or default_reroll_voucher_apply
-local function reroll_surplus_redeem(self, card)
+local function reroll_surplus_redeem(self, card, ...)
     if G.GAME.selected_back.name == "b_pencil_slow_roll" then
         slow_roll_reroll_voucher_apply(self, card)
     else
-        reroll_surplus_redeem_hook(self, card)
+        return reroll_surplus_redeem_hook(self, card, ...)
     end
 end
 local reroll_glut_redeem_hook = G.P_CENTERS.v_reroll_glut.redeem or default_reroll_voucher_apply
-local function reroll_glut_redeem(self, card)
+local function reroll_glut_redeem(self, card, ...)
     if G.GAME.selected_back.name == "b_pencil_slow_roll" then
         slow_roll_reroll_voucher_apply(self, card)
     else
-        reroll_glut_redeem_hook(self, card)
+        return reroll_glut_redeem_hook(self, card, ...)
     end
 end
 SMODS.Voucher:take_ownership("reroll_surplus", { redeem = reroll_surplus_redeem }, true)

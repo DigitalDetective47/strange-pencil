@@ -44,19 +44,19 @@ SMODS.Blind {
 }
 
 local calculate_joker_hook = Card.calculate_joker
-function Card:calculate_joker(context)
+function Card:calculate_joker(context, ...)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and (context.repetition or context.retrigger_joker_check)) then
-        return calculate_joker_hook(self, context)
-    elseif calculate_joker_hook(self, context) then
+        return calculate_joker_hook(self, context, ...)
+    elseif calculate_joker_hook(self, context, ...) then
         G.GAME.blind.triggered = true
     end
 end
 
 local calculate_seal_hook = Card.calculate_seal
-function Card:calculate_seal(context)
+function Card:calculate_seal(context, ...)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and context.repetition) then
-        return calculate_seal_hook(self, context)
-    elseif calculate_seal_hook(self, context) then
+        return calculate_seal_hook(self, context, ...)
+    elseif calculate_seal_hook(self, context, ...) then
         G.GAME.blind.triggered = true
     end
 end
