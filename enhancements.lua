@@ -89,6 +89,8 @@ SMODS.Enhancement {
                 end })
                 return true
             end })
+        elseif context.stay_flipped then
+            return { prevent_stay_flipped = true }
         end
     end,
     atlas = "enhancements",
@@ -105,18 +107,6 @@ SMODS.Consumable {
         return { vars = { card.ability.max_highlighted } }
     end,
 }
-
-local flip_hook = Card.flip
-function Card:flip()
-    if not (self.area == G.hand and SMODS.has_enhancement(self, "m_pencil_flagged") and self.facing ~= 'back') then
-        return flip_hook(self)
-    end
-end
-
-local emplace_hook = CardArea.emplace
-function CardArea:emplace(card, location, stay_flipped)
-    return emplace_hook(self, card, location, stay_flipped and not SMODS.has_enhancement(card, "m_pencil_flagged"))
-end
 
 SMODS.Enhancement {
     key = "sticky",

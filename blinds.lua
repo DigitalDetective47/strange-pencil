@@ -18,18 +18,6 @@ SMODS.Blind {
     disable = recalculate_on_disable,
 }
 
-local play_hook = G.FUNCS.play_cards_from_highlighted
-function G.FUNCS.play_cards_from_highlighted(e)
-    play_hook(e)
-    G.E_MANAGER:add_event(Event { trigger = 'immediate', func = function()
-        G.E_MANAGER:add_event(Event { trigger = 'immediate', func = function()
-            StrangeLib.dynablind.update_blind_scores(StrangeLib.dynablind.find_blind("bl_pencil_glove"))
-            return true
-        end })
-        return true
-    end })
-end
-
 SMODS.Blind {
     key = "caret",
     boss = { min = 9 },
@@ -58,23 +46,7 @@ SMODS.Blind {
 local calculate_joker_hook = Card.calculate_joker
 function Card:calculate_joker(context)
     if not (G.GAME.blind.name == "bl_pencil_arrow" and (context.repetition or context.retrigger_joker_check)) then
-        local val = calculate_joker_hook(self, context)
-        if val and G.GAME.blind.name == "bl_pencil_fence" and G.GAME.current_round.hands_played == 0 then
-            return SMODS.merge_effects { val, {
-                func = function()
-                    G.E_MANAGER:add_event(Event { func = function()
-                        self.ability.pencil_paralyzed = copy_table(SMODS.Stickers.pencil_paralyzed.config)
-                        SMODS.debuff_card(self, true, "pencil_paralyzed")
-                        G.GAME.blind.triggered = true
-                        return true
-                    end })
-                    SMODS.calculate_effect(
-                        { message = localize("k_paralyzed_ex"), colour = SMODS.Stickers.pencil_paralyzed.badge_colour },
-                        self)
-                end
-            } }
-        end
-        return val
+        return calculate_joker_hook(self, context)
     elseif calculate_joker_hook(self, context) then
         G.GAME.blind.triggered = true
     end
@@ -185,6 +157,24 @@ SMODS.Blind {
     pos = { x = 0, y = 5 },
     atlas = "blinds",
     mult = 2,
+    calculate = function(self, blind, context)
+        if context.post_trigger and G.GAME.current_round.hands_played == 0 then
+            return {
+                func = function()
+                    G.E_MANAGER:add_event(Event { func = function()
+                        context.other_card.ability.pencil_paralyzed = copy_table(SMODS.Stickers.pencil_paralyzed.config)
+                        SMODS.debuff_card(context.other_card, true, "pencil_paralyzed")
+                        SMODS.juice_up_blind()
+                        return true
+                    end })
+                    blind.triggered = true
+                    SMODS.calculate_effect(
+                        { message = localize("k_paralyzed_ex"), colour = SMODS.Stickers.pencil_paralyzed.badge_colour },
+                        context.other_card)
+                end
+            }
+        end
+    end
 }
 
 ---Shared disable/defeat function for The Flower

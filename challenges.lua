@@ -19,29 +19,6 @@ SMODS.Challenge {
     }
 }
 
--- Apply debuff for "Ride or Die" challenge
-local debuff_hand_hook = Blind.debuff_hand
-function Blind:debuff_hand(cards, hand, handname, check)
-    if G.GAME.modifiers.pencil_most_played_only then
-        if G.GAME.first_hand and G.GAME.first_hand ~= handname then
-            return true
-        end
-        if not check then
-            G.GAME.first_hand = handname
-        end
-    end
-    return debuff_hand_hook(self, cards, hand, handname, check)
-end
-
--- Debuff text for "Ride or Die" challenge
-local debuff_text_hook = Blind.get_loc_debuff_text
-function Blind:get_loc_debuff_text()
-    if G.GAME.modifiers.pencil_most_played_only then
-        return 'Play only 1 hand type this run [' .. localize(G.GAME.first_hand, 'poker_hands') .. ']'
-    end
-    return debuff_text_hook(self)
-end
-
 SMODS.Challenge {
     key = "immutable",
     restrictions = {
