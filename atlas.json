@@ -1,0 +1,44 @@
+[
+    {
+        "key": "modicon",
+        "path": "icon.png",
+        "px": 34,
+        "py": 34
+    },
+    {
+        "key": "blinds",
+        "px": 34,
+        "py": 34,
+        "atlas_table": "ANIMATION_ATLAS",
+        "frames": 1
+    },
+    "boosters",
+    "decks",
+    "enhancements",
+    "planets",
+    "indexes",
+    "jokers",
+    {
+        "key": "calendar",
+        "py": 59
+    },
+    "ranks",
+    "hc_ranks",
+    "spectrals",
+    {
+        "key": "stakes",
+        "px": 29,
+        "py": 29
+    },
+    {
+        "key": "stake_stickers",
+        "path": "stake-stickers.png"
+    },
+    "stickers",
+    {
+        "key": "tags",
+        "px": 34,
+        "py": 34
+    },
+    "vouchers"
+]

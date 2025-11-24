@@ -1,6 +1,15 @@
 SMODS.current_mod.optional_features = { cardareas = { discard = true, deck = true }, post_trigger = true, quantum_enhancements = true }
 
-SMODS.load_file("atlas.lua")()
+for _, args in ipairs(JSON.decode(NFS.read(SMODS.current_mod.path .. "/atlas.json"))) do
+    if type(args) == "string" then
+        args = { key = args }
+    end
+    args.path = args.path or args.key .. ".png"
+    args.px = args.px or 71
+    args.py = args.py or 95
+    SMODS.Atlas(args)
+end
+
 SMODS.load_file("blinds.lua")()
 SMODS.load_file("boosters.lua")()
 SMODS.load_file("challenges.lua")()
