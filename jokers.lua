@@ -369,13 +369,11 @@ SMODS.Joker {
                     card:shatter()
                     return true
                 end })
-                return { message = localize('k_cracked_ex') }
             else
                 card.ability.rounds = card.ability.rounds + 1
                 card.ability.extra_value = card.ability.extra_value + card.ability.rounds
                 card:set_cost()
-                delay(0.4)
-                return { message = localize("k_safe_ex"), extra = { message = localize("k_val_up"), colour = G.C.MONEY } }
+                return { message = localize("k_val_up"), colour = G.C.MONEY }
             end
         end
     end,
