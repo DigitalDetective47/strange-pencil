@@ -556,11 +556,15 @@ SMODS.Joker {
                     flagged = true
                 end
                 if diseased and flagged then
-                    G.E_MANAGER:add_event(Event { func = function()
-                        play_sound("pencil_doot")
-                        return true
-                    end })
-                    return { dollars = card.ability.dollars }
+                    if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                        G.E_MANAGER:add_event(Event { func = function()
+                            SMODS.add_card { set = "Spectral" }
+                            G.GAME.consumeable_buffer = 0
+                            return true
+                        end })
+                    end
+                    return { sound = "pencil_doot", message = localize("k_doot_ex"), colour = G.C.SECONDARY_SET.Spectral }
                 end
             end
         end

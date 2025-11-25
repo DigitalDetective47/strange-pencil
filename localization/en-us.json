@@ -167,7 +167,8 @@
             "j_pencil_doot": {
                 "name": "Doot",
                 "text": [
-                    "Earn {C:money}$#1#{} if scored hand",
+                    "Create a random {C:spectral}Spectral",
+                    "card if scored hand",
                     "contains a {C:attention}Diseased Card",
                     "and a {C:attention}Flagged Card"
                 ]
@@ -523,7 +524,7 @@
         "Planet": {
             "c_pencil_iss": {
                 "name": "International Space Station",
-                "text":[
+                "text": [
                     "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#",
                     "{C:mult}+#3#{} Mult and",
@@ -532,7 +533,7 @@
             },
             "c_pencil_junk": {
                 "name": "Space Junk",
-                "text":[
+                "text": [
                     "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#",
                     "{C:mult}+#3#{} Mult and",
@@ -541,7 +542,7 @@
             },
             "c_pencil_rover": {
                 "name": "Mars Rover",
-                "text":[
+                "text": [
                     "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#",
                     "{C:mult}+#3#{} Mult and",
@@ -550,7 +551,7 @@
             },
             "c_pencil_sphere": {
                 "name": "Dyson Sphere",
-                "text":[
+                "text": [
                     "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#",
                     "{C:mult}+#3#{} Mult and",
@@ -559,7 +560,7 @@
             },
             "c_pencil_voyager": {
                 "name": "Voyager",
-                "text":[
+                "text": [
                     "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
                     "{C:attention}#2#",
                     "{C:mult}+#3#{} Mult and",
@@ -808,6 +809,7 @@
             "k_clubbin_ex": "Clubbin!",
             "k_clubs_pack": "Clubs Pack",
             "k_cracked_ex": "Cracked!",
+            "k_doot_ex": "Doot!",
             "k_index": "Index",
             "k_index_pack": "Doodle Pack",
             "k_infected_ex": "Infected!",

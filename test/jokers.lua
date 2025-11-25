@@ -475,7 +475,7 @@ Balatest.TestPlay {
         Balatest.play_hand({ "AC", "AH", "AS" })
     end,
     assert = function()
-        Balatest.assert_eq(G.GAME.dollars, SMODS.Centers.j_pencil_doot.config.dollars)
+        Balatest.assert_eq(#G.consumeables.cards, 1)
     end
 }
 
