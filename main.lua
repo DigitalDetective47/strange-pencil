@@ -52,6 +52,7 @@ function SMODS.current_mod.calculate(self, context)
         for _, joker in ipairs(G.jokers.cards) do
             SMODS.debuff_card(joker, false, 'pencil_paralyzed')
         end
+        SMODS.Centers.j_pencil_killer:reset_target()
     end
 end
 

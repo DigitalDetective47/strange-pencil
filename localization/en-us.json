@@ -217,6 +217,17 @@
                     "entire first hand"
                 ]
             },
+            "j_pencil_killer": {
+                "name": "Hitman",
+                "text": [
+                    "If you have a",
+                    "{C:attention}#2#",
+                    "when {C:attention}Blind{} is selected,",
+                    "destroy it and gain",
+                    "{X:mult,C:white}X#3#{} Mult",
+                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive})"
+                ]
+            },
             "j_pencil_lass": {
                 "name": "The Lass",
                 "text": [

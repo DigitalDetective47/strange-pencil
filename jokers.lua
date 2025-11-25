@@ -928,3 +928,49 @@ SMODS.Joker {
         change_shop_size(-card.ability.extra)
     end,
 }
+
+SMODS.Joker {
+    key = "killer",
+    rarity = 2,
+    config = { xmult = 1, increase = 1 },
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, G.P_CENTERS[G.GAME.current_round.pencil_killer_joker or "j_joker"])
+        return { vars = { card.ability.xmult, G.localization.descriptions.Joker[G.GAME.current_round.pencil_killer_joker or "j_joker"].name, card.ability.increase } }
+    end,
+    pos = { x = 4, y = 4 },
+    atlas = "jokers",
+    cost = 6,
+    blueprint_compat = true,
+    perishable_compat = false,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { xmult = card.ability.xmult }
+        elseif context.setting_blind and not card.getting_sliced and not context.blueprint_card then
+            for _, joker in ipairs(G.jokers.cards) do
+                if joker ~= card and not joker.getting_sliced and joker.config.center_key == G.GAME.current_round.pencil_killer_joker and not SMODS.is_eternal(joker, card) then
+                    joker.getting_sliced = true
+                    G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+                    G.E_MANAGER:add_event(Event { func = function()
+                        G.GAME.joker_buffer = 0
+                        card:juice_up(0.8, 0.8)
+                        joker:start_dissolve({ HEX("57ecab") }, nil, 1.6)
+                        play_sound('slice1', 0.96 + math.random() * 0.08)
+                        return true
+                    end })
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability,
+                        ref_value = "xmult",
+                        scalar_value = "increase",
+                        message_colour = G.C.MULT,
+                        message_key = "a_xmult",
+                    })
+                    return
+                end
+            end
+        end
+    end,
+    reset_target = function(self)
+        G.GAME.current_round.pencil_killer_joker =
+            pseudorandom_element(get_current_pool("Joker"), pseudoseed("j_pencil_killer"))
+    end
+}
