@@ -232,7 +232,14 @@ SMODS.Consumable {
                 end
             end
         end
-        if G.pack_cards ~= nil then
+        ---@type table<integer, true>
+        local booster_states = {
+            [G.STATES.TAROT_PACK] = true,
+            [G.STATES.PLANET_PACK] = true,
+            [G.STATES.SPECTRAL_PACK] = true,
+            [G.STATES.SMODS_BOOSTER_OPENED] = true,
+        }
+        if G.pack_cards ~= nil and booster_states[G.STATE] then
             for _, other_card in ipairs(G.pack_cards.highlighted) do
                 if other_card.ability.set ~= "Unique" and other_card.ability.consumeable and other_card ~= card then
                     table.insert(targets, other_card)
@@ -280,7 +287,14 @@ SMODS.Consumable {
                 end
             end
         end
-        if G.pack_cards ~= nil then
+        ---@type table<integer, true>
+        local booster_states = {
+            [G.STATES.TAROT_PACK] = true,
+            [G.STATES.PLANET_PACK] = true,
+            [G.STATES.SPECTRAL_PACK] = true,
+            [G.STATES.SMODS_BOOSTER_OPENED] = true,
+        }
+        if G.pack_cards ~= nil and booster_states[G.STATE] then
             for _, other_card in ipairs(G.pack_cards.highlighted) do
                 if other_card.ability.set ~= "Unique" and other_card.ability.consumeable and other_card ~= card then
                     table.insert(targets, other_card)
