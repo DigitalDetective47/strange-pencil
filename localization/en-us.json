@@ -17,6 +17,17 @@
                     "{C:inactive}(mean {C:attention}#1#{C:inactive}, standard deviation {C:attention}#2#{C:inactive})"
                 ]
             },
+            "b_pencil_ram": {
+                "name": "RAM Deck",
+                "text": [
+                    "Base {C:chips}Chips{} and {C:mult}Mult{} set",
+                    "to final {C:chips}Chips{} and {C:mult}Mult",
+                    "from previous hand",
+                    "Resets at end of round",
+                    "Base Blind size",
+                    "multiplied by ante"
+                ]
+            },
             "b_pencil_royal": {
                 "name": "Royal Deck",
                 "text": [

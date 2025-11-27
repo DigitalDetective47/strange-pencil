@@ -176,3 +176,34 @@ local function reroll_glut_redeem(self, card, ...)
 end
 SMODS.Voucher:take_ownership("reroll_surplus", { redeem = reroll_surplus_redeem }, true)
 SMODS.Voucher:take_ownership("reroll_glut", { redeem = reroll_glut_redeem }, true)
+
+SMODS.Back {
+    key = "ram",
+    loc_vars = function(self, info_queue)
+        return { vars = { self.config.ante_scaling } }
+    end,
+    pos = { x = 4, y = 0 },
+    atlas = "decks",
+    apply = function(self, deck)
+        G.GAME.b_pencil_ram = {}
+    end,
+    calculate = function(self, deck, context)
+        if context.modify_hand then
+            if G.GAME.b_pencil_ram.chips then
+                hand_chips = G.GAME.b_pencil_ram.chips
+                mult = G.GAME.b_pencil_ram.mult
+                return { calculated = true }
+            end
+        elseif context.final_scoring_step then
+            G.GAME.b_pencil_ram.chips = SMODS.Scoring_Parameters.chips.current
+            G.GAME.b_pencil_ram.mult = SMODS.Scoring_Parameters.mult.current
+        elseif context.end_of_round and not context.repetition and not context.individual and not context.game_over then
+            G.GAME.b_pencil_ram.chips = nil
+            G.GAME.b_pencil_ram.mult = nil
+            return { message = localize("k_reset") }
+        elseif context.ante_change then
+            G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / G.GAME.round_resets.ante *
+                (G.GAME.round_resets.ante + context.ante_change)
+        end
+    end
+}
