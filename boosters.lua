@@ -9,21 +9,11 @@ end
 SMODS.ObjectType {
     key = "clubs_pack",
     default = "j_gluttenous_joker",
-    cards = {},
-    inject = function(self)
-        SMODS.ObjectType.inject(self)
-        -- insert base game meme jokers
-        self:inject_card(G.P_CENTERS.j_gluttenous_joker)
-        self:inject_card(G.P_CENTERS.j_blackboard)
-        self:inject_card(G.P_CENTERS.j_onyx_agate)
-        self:inject_card(G.P_CENTERS.j_seeing_double)
-        self:inject_card(G.P_CENTERS.c_moon)
-    end
+    cards = { c_moon = true, j_blackboard = true, j_gluttenous_joker = true, j_onyx_agate = true, j_seeing_double = true }
 }
 SMODS.ObjectType {
     key = "clubs_legendary",
     default = "j_pencil_club",
-    cards = {},
 }
 
 ---@type { [string]: string }
