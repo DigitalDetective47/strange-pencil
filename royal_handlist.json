@@ -1,39 +1,54 @@
 {
     "Straight Flush": {
         "visible": false,
-        "order": 2,
         "s_chips": 140,
         "s_mult": 14
     },
+    "pencil_dichrome_straight": {
+        "visible": false,
+        "s_chips": 130,
+        "s_mult": 13
+    },
     "Flush House": {
-        "order": 3,
         "s_chips": 120,
         "s_mult": 12
     },
+    "pencil_dichrome_five": {
+        "s_chips": 110,
+        "s_mult": 11
+    },
     "Straight": {
         "visible": false,
-        "order": 4,
         "s_chips": 100,
+        "s_mult": 8
+    },
+    "pencil_dichrome_house2": {
+        "s_chips": 90,
+        "s_mult": 8
+    },
+    "pencil_dichrome_house": {
+        "s_chips": 80,
         "s_mult": 8
     },
     "Flush": {
         "visible": false,
-        "order": 5,
         "s_chips": 65,
         "s_mult": 8
     },
     "Five of a Kind": {
-        "order": 6,
         "s_chips": 60,
         "s_mult": 7
     },
     "Full House": {
         "visible": false,
-        "order": 7,
         "s_chips": 50
     },
+    "pencil_dichrome": {
+        "visible": false,
+        "s_chips": 45,
+        "s_mult": 4
+    },
     "Four of a Kind": {
-        "order": 8,
         "s_chips": 40,
         "s_mult": 4
     }

@@ -14,6 +14,25 @@ SMODS.Back {
                 end
             end
             G.GAME.starting_deck_size = #G.playing_cards
+            ---@type table<string, number>
+            local key_cache = {}
+            table.sort(G.handlist, StrangeLib.key_to_comparator(function(key)
+                if key_cache[key] then
+                    return key_cache[key]
+                end
+                ---@type SMODS.PokerHand
+                local hand = G.GAME.hands[key]
+                ---the Chips &times; Mult product for a given Poker Hand
+                ---@param h SMODS.PokerHand
+                ---@return number
+                local function prod(h)
+                    return h.chips * h.mult + (h.order_offset or 0)
+                end
+                ---@type number
+                local ret = -(hand.above_hand and (1e-6 * prod(hand) + prod(G.GAME.hands[hand.above_hand])) or prod(hand))
+                key_cache[key] = ret
+                return ret
+            end)) --Re-sort poker hands
             return true
         end })
         for hand, parameters in pairs(JSON.decode(NFS.read(SMODS.find_mod("StrangePencil")[1].path .. "/royal_handlist.json"))) do
