@@ -355,9 +355,7 @@ SMODS.Consumable {
     end,
     cost = 5,
     config = { dollars = 15 },
-    can_use = function(self, card)
-        return true
-    end,
+    can_use = StrangeLib.consumable.use_templates.always_usable,
     use = function(self, card, area)
         G.GAME.consumeable_usage_total.pencil_index = (G.GAME.consumeable_usage_total.pencil_index or 0) + 1
         ease_dollars(card.ability.dollars)

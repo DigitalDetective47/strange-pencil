@@ -12,9 +12,7 @@ SMODS.Consumable {
         table.insert(info_queue, G.P_CENTERS.e_negative)
         return { vars = { card.ability.multiplier } }
     end,
-    can_use = function(self, card)
-        return true
-    end,
+    can_use = StrangeLib.consumable.use_templates.always_usable,
     use = function(self, card, area)
         G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.4, func = function()
             for _ = 1, G.jokers.config.card_limit * card.ability.multiplier do
@@ -68,9 +66,7 @@ SMODS.Consumable {
         end
         return { vars = { mult_text, localize(pulsar_target(), "poker_hands") } }
     end,
-    can_use = function(self, card)
-        return true
-    end,
+    can_use = StrangeLib.consumable.use_templates.always_usable,
     use = function(self, card, area)
         ---@type string
         local hand = pulsar_target()
