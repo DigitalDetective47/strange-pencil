@@ -10,20 +10,11 @@ for _, args in ipairs(JSON.decode(NFS.read(SMODS.current_mod.path .. "/atlas.jso
     SMODS.Atlas(args)
 end
 
-SMODS.load_file("blinds.lua")()
-SMODS.load_file("boosters.lua")()
-SMODS.load_file("challenges.lua")()
-SMODS.load_file("decks.lua")()
-SMODS.load_file("enhancements.lua")()
-SMODS.load_file("hands.lua")()
-SMODS.load_file("indexes.lua")()
-SMODS.load_file("jokers.lua")()
-SMODS.load_file("ranks.lua")()
-SMODS.load_file("spectrals.lua")()
-SMODS.load_file("stakes.lua")()
-SMODS.load_file("stickers.lua")()
-SMODS.load_file("tags.lua")()
-SMODS.load_file("vouchers.lua")()
+for _, filename in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path)) do
+    if filename ~= "main.lua" and filename:find("[^/]*%.lua$") then
+        SMODS.load_file(filename)()
+    end
+end
 
 ---@param self Mod
 ---@param context CalcContext
