@@ -126,7 +126,7 @@ Balatest.TestPlay {
         Balatest.next_round()
     end,
     assert = function()
-        Balatest.assert_eq(G.GAME.dollars, SMODS.Centers.j_pencil_forbidden_one.config.payout)
+        Balatest.assert_dollars(SMODS.Centers.j_pencil_forbidden_one.config.payout)
     end
 }
 Balatest.TestPlay {
@@ -646,7 +646,7 @@ Balatest.TestPlay {
     blind = "bl_plant",
 
     execute = function()
-        G.jokers.cards[1]:sell_card()
+        Balatest.sell(G.jokers.cards[1])
         Balatest.play_hand({ "QC" })
     end,
     assert = function()
@@ -727,7 +727,7 @@ Balatest.TestPlay {
     execute = function()
         Balatest.end_round()
         Balatest.cash_out()
-        Balatest.q(function() G.jokers.cards[1]:sell_card() end)
+        Balatest.sell(G.jokers.cards[1])
         Balatest.wait()
     end,
     assert = function()

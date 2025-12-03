@@ -50,7 +50,7 @@ Balatest.TestPlay {
 
     execute = use_first,
     assert = function()
-        Balatest.assert_eq(G.GAME.dollars, SMODS.Centers.c_pencil_counterfeit.config.dollars)
+        Balatest.assert_dollars(SMODS.Centers.c_pencil_counterfeit.config.dollars)
     end
 }
 
@@ -159,7 +159,7 @@ Balatest.TestPlay {
     assert = function()
         for _, card in ipairs(G.hand.cards) do
             if card.base.value == "Ace" and card:is_suit("Clubs") then
-                assert(SMODS.has_enhancement(card, "m_bonus"))
+                Balatest.assert(SMODS.has_enhancement(card, "m_bonus"))
             end
         end
     end
