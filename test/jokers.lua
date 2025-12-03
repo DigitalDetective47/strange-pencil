@@ -440,7 +440,7 @@ Balatest.TestPlay {
         Balatest.play_hand({ "AC" })
     end,
     assert = function()
-        Balatest.assert_eq(G.GAME.dollars, 0)
+        Balatest.assert_eq(#G.consumeables.cards, 0)
     end
 }
 Balatest.TestPlay {
@@ -456,7 +456,7 @@ Balatest.TestPlay {
         Balatest.play_hand({ "AC" })
     end,
     assert = function()
-        Balatest.assert_eq(G.GAME.dollars, 0)
+        Balatest.assert_eq(#G.consumeables.cards, 0)
     end
 }
 Balatest.TestPlay {
