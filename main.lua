@@ -47,6 +47,13 @@ function SMODS.current_mod.calculate(self, context)
     end
 end
 
+---@param run_start boolean
+function SMODS.current_mod.reset_game_globals(run_start)
+    if run_start then
+        SMODS.Centers.j_pencil_killer:reset_target()
+    end
+end
+
 StrangeLib.update_challenge_restrictions("challenge_bans.json")
 StrangeLib.load_compat()
 
