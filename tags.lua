@@ -32,7 +32,6 @@ SMODS.Tag {
         table.insert(info_queue, G.P_CENTERS.c_death)
         table.insert(info_queue, G.P_CENTERS.c_hanged_man)
         table.insert(info_queue, G.P_CENTERS.c_hermit)
-        return { vars = {} }
     end,
     apply = function(self, tag, context)
         if context.type == "new_blind_choice" then
