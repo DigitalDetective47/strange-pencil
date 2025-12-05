@@ -352,9 +352,10 @@ SMODS.Joker {
     rarity = 1,
     config = { chance = 4, rounds = 0 },
     loc_vars = function(self, info_queue, card)
-        return {
-            vars = { G.GAME.probabilities.normal, card.ability.chance, card.ability.rounds }
-        }
+        ---@type any[]
+        local ret = { SMODS.get_probability_vars(card, 1, card.ability.chance) }
+        ret[3] = card.ability.rounds
+        return { vars = ret }
     end,
     pos = { x = 3, y = 2 },
     atlas = "jokers",

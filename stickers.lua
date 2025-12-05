@@ -16,7 +16,7 @@ SMODS.Sticker {
     pos = { x = 0, y = 0 },
     config = { chance = 4 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { G.GAME.probabilities.normal, card.ability[self.key].chance } }
+        return { vars = { SMODS.get_probability_vars(card, 1, card.ability[self.key].chance) } }
     end,
     badge_colour = G.C.YELLOW,
     default_compat = true,
