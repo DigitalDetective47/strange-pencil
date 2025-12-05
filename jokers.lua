@@ -808,20 +808,11 @@ SMODS.Joker {
     atlas = "jokers",
     cost = 7,
     blueprint_compat = false,
-    update = function(self, card, dt)
-        if G.playing_cards then
-            for _, other in ipairs(G.playing_cards) do
-                SMODS.debuff_card(other, other:is_face(true) and "prevent_debuff", "j_pencil_cell")
-            end
+    calculate = function(self, card, context)
+        if context.debuff_card and context.debuff_card:is_face(true) then
+            return { prevent_debuff = true }
         end
     end,
-    remove_from_deck = function(self, card, from_debuff)
-        if not next(SMODS.find_card(self.key)) then
-            for _, other in ipairs(G.playing_cards) do
-                SMODS.debuff_card(other, false, "j_pencil_cell")
-            end
-        end
-    end
 }
 
 ---@param card Card
