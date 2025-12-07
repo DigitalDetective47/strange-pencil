@@ -492,22 +492,6 @@
                     "{C:attention}Stake{} difficulty"
                 ]
             },
-            "pencil_rainbow_sticker": {
-                "name": "Rainbow Sticker",
-                "text": [
-                    "Used this Joker",
-                    "to win on {C:attention}Rainbow",
-                    "{C:attention}Stake{} difficulty"
-                ]
-            },
-            "pencil_transparent_sticker": {
-                "name": "Translucent Sticker",
-                "text": [
-                    "Used this Joker",
-                    "to win on {C:attention}Translucent",
-                    "{C:attention}Stake{} difficulty"
-                ]
-            },
             "pencil_paralyzed": {
                 "name": "Paralyzed",
                 "text": [
@@ -516,10 +500,26 @@
                     "each round"
                 ]
             },
+            "pencil_rainbow_sticker": {
+                "name": "Rainbow Sticker",
+                "text": [
+                    "Used this Joker",
+                    "to win on {C:attention}Rainbow",
+                    "{C:attention}Stake{} difficulty"
+                ]
+            },
             "pencil_suitless": {
                 "name": "Suitless",
                 "text": [
                     "Has no suit"
+                ]
+            },
+            "pencil_transparent_sticker": {
+                "name": "Translucent Sticker",
+                "text": [
+                    "Used this Joker",
+                    "to win on {C:attention}Translucent",
+                    "{C:attention}Stake{} difficulty"
                 ]
             },
             "undiscovered_index": {
