@@ -67,6 +67,14 @@
                     "large blind"
                 ]
             },
+            "bl_pencil_caret2": {
+                "name": "The Point EX",
+                "score_at_least": "2^ Base",
+                "text": [
+                    "Absurdly",
+                    "large blind"
+                ]
+            },
             "bl_pencil_fence": {
                 "name": "The Fence",
                 "text": [
