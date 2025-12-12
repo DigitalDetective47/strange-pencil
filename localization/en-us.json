@@ -476,12 +476,23 @@
                     "{C:attention}Stake{} difficulty"
                 ]
             },
+            "pencil_dollars": {
+                "text": [
+                    "Sets money to {C:money}$#1#",
+                    "if you have less"
+                ]
+            },
             "pencil_grey_sticker": {
                 "name": "Monochrome Sticker",
                 "text": [
                     "Used this Joker",
                     "to win on {C:attention}Monochrome",
                     "{C:attention}Stake{} difficulty"
+                ]
+            },
+            "pencil_mults": {
+                "text": [
+                    "{C:mult}+#1#{} Mult"
                 ]
             },
             "pencil_negative_sticker": {
@@ -498,6 +509,12 @@
                     "Used this Joker",
                     "to win on {C:attention}Neon",
                     "{C:attention}Stake{} difficulty"
+                ]
+            },
+            "pencil_oracles": {
+                "text": [
+                    "{C:green}#1# in #2#{} chance to create",
+                    "a random {C:tarot}Tarot{} card"
                 ]
             },
             "pencil_paralyzed": {
@@ -520,6 +537,12 @@
                 "name": "Suitless",
                 "text": [
                     "Has no suit"
+                ]
+            },
+            "pencil_swords": {
+                "text": [
+                    "{C:attention}-#1#%{} base blind",
+                    "size this round"
                 ]
             },
             "pencil_transparent_sticker": {
@@ -588,6 +611,30 @@
             }
         },
         "Spectral": {
+            "c_pencil_charm": {
+                "name": "Charm",
+                "text": [
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {C:pencil_oracles}Oracles"
+                ]
+            },
+            "c_pencil_liquidation": {
+                "name": "Liquidation",
+                "text": [
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {C:pencil_dollars}Dollars"
+                ]
+            },
+            "c_pencil_multiply": {
+                "name": "Multiply",
+                "text": [
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {C:pencil_mults}Mults"
+                ]
+            },
             "c_pencil_negative_space": {
                 "name": "Negative Space",
                 "text": [
@@ -603,6 +650,14 @@
                     "of your most played",
                     "{C:legendary,E:1}poker hand",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive})"
+                ]
+            },
+            "c_pencil_rift": {
+                "name": "Rift",
+                "text": [
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {C:pencil_swords}Swords"
                 ]
             }
         },
@@ -875,7 +930,20 @@
         "ranks": {
             "pencil_sneven": "S\u00f1even"
         },
+        "suits_plural": {
+            "pencil_dollars": "Dollars",
+            "pencil_mults": "Mults",
+            "pencil_oracles": "Oracles",
+            "pencil_swords": "Swords"
+        },
+        "suits_singular": {
+            "pencil_dollars": "Dollar",
+            "pencil_mults": "Mult",
+            "pencil_oracles": "Oracle",
+            "pencil_swords": "Sword"
+        },
         "v_dictionary": {
+            "a_blind_reduced": "-#1#%",
             "a_echips": "^#1#"
         },
         "v_text": {

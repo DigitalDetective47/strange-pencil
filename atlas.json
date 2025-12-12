@@ -35,6 +35,18 @@
         "path": "stake-stickers.png"
     },
     "stickers",
+    "suits",
+    "hc_suits",
+    {
+        "key": "suit_ui",
+        "px": 18,
+        "py": 18
+    },
+    {
+        "key": "hc_suit_ui",
+        "px": 18,
+        "py": 18
+    },
     {
         "key": "tags",
         "px": 34,
