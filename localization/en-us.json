@@ -106,6 +106,13 @@
                     "hand played this run"
                 ]
             },
+            "bl_pencil_hot": {
+                "name": "Red Hot",
+                "text": [
+                    "Hearts cannot",
+                    "be selected"
+                ]
+            },
             "bl_pencil_lock": {
                 "name": "The Lock",
                 "text": [
@@ -899,6 +906,7 @@
             "k_clubbin_ex": "Clubbin!",
             "k_clubs_pack": "Clubs Pack",
             "k_doot_ex": "Doot!",
+            "k_hot": "Ouch!",
             "k_index": "Index",
             "k_index_pack": "Doodle Pack",
             "k_infected_ex": "Infected!",

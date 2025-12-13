@@ -263,3 +263,28 @@ SMODS.Blind {
         return false
     end
 }
+
+SMODS.Blind {
+    key = "hot",
+    boss = { showdown = true },
+    dollars = 8,
+    boss_colour = { 1, 0.5, 0, 1 },
+    pos = { x = 0, y = 10 },
+    atlas = "blinds",
+    mult = 2,
+    debuff_hand = function(self, cards, hand, handname, check)
+        if not check then
+            return
+        end
+        for _, card in ipairs(cards) do
+            if card:is_suit("Hearts") then
+                play_area_status_text(localize("k_hot"), nil, 0.2)
+                G.E_MANAGER:add_event(Event { func = function()
+                    G.hand:unhighlight_all()
+                    return true
+                end })
+                return
+            end
+        end
+    end
+}
