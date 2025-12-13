@@ -49,6 +49,15 @@
                     "when Blind is defeated",
                     "{s:0.8,C:inactive}Cannot go below 0"
                 ]
+            },
+            "b_pencil_suit": {
+                "name": "Strange Suit Deck",
+                "text": [
+                    "Strnage suits can",
+                    "appear randomly",
+                    "Start with 2 strange",
+                    "suit spectrals"
+                ]
             }
         },
         "Blind": {

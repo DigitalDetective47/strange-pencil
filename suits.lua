@@ -7,7 +7,8 @@ local function in_pool(self, args)
         if args.initial_deck then
             return false
         elseif args.suit ~= "" then
-            return false
+            return G.GAME.selected_back and G.GAME.selected_back.name == "b_pencil_suit" and
+                SMODS.pseudorandom_probability(nil, pseudoseed("b_pencil_suit"), 1, 4, nil, true)
         end
     end
     if G.playing_cards then
@@ -40,6 +41,11 @@ local function loc_vars(self, info_queue, card)
     return { vars = { card.ability.max_highlighted } }
 end
 
+SMODS.ObjectType {
+    key = "strange_suit_spectral",
+    default = "c_pencil_multiply",
+}
+
 SMODS.Suit {
     key = "mults",
     card_key = "M",
@@ -69,6 +75,7 @@ SMODS.Consumable {
     pos = { x = 13, y = 0 },
     config = { suit_conv = "pencil_mults", max_highlighted = 3 },
     loc_vars = loc_vars,
+    pools = { strange_suit_spectral = true },
 }
 
 SMODS.Suit {
@@ -103,6 +110,7 @@ SMODS.Consumable {
     pos = { x = 13, y = 1 },
     config = { suit_conv = "pencil_dollars", max_highlighted = 3 },
     loc_vars = loc_vars,
+    pools = { strange_suit_spectral = true },
 }
 
 SMODS.Suit {
@@ -144,6 +152,7 @@ SMODS.Consumable {
     pos = { x = 13, y = 2 },
     config = { suit_conv = "pencil_oracles", max_highlighted = 3 },
     loc_vars = loc_vars,
+    pools = { strange_suit_spectral = true },
 }
 
 SMODS.Suit {
@@ -189,4 +198,5 @@ SMODS.Consumable {
     pos = { x = 13, y = 3 },
     config = { suit_conv = "pencil_swords", max_highlighted = 3 },
     loc_vars = loc_vars,
+    pools = { strange_suit_spectral = true },
 }

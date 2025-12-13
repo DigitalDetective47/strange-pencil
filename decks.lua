@@ -226,3 +226,17 @@ SMODS.Back {
         end
     end
 }
+
+SMODS.Back {
+    key = "suit",
+    pos = { x = 5, y = 0 },
+    atlas = "decks",
+    apply = function(self)
+        G.E_MANAGER:add_event(Event { func = function()
+            for _ = 1, 2 do
+                SMODS.add_card { set = "strange_suit_spectral", area = G.consumeables }
+            end
+            return true
+        end })
+    end
+}
