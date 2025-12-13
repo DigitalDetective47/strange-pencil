@@ -63,7 +63,7 @@ SMODS.Stake {
     pos = { x = 5, y = 0 },
     sticker_atlas = "stake_stickers",
     sticker_pos = { x = 5, y = 0 },
-    colour = { 0, 0, 0, 1 },
+    colour = { 0, 0, 1, 1 },
     above_stake = "stake_pencil_neon",
     modifiers = function()
         G.GAME.modifiers.no_blind_reward.Big = true
