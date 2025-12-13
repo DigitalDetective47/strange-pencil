@@ -235,3 +235,31 @@ SMODS.Blind {
         end
     end
 }
+
+SMODS.Blind {
+    key = "science",
+    boss = { min = 1 },
+    in_pool = function(self)
+        if G.GAME.round_resets.ante < self.boss.min or not G.playing_cards then
+            return false
+        end
+        for _, card in ipairs(G.playing_cards) do
+            if card.base and card.base.suit and card:is_suit(card.base.suit) and SMODS.Suits[card.base.suit].strange then
+                return true
+            end
+        end
+        return false
+    end,
+    boss_colour = G.C.WHITE,
+    pos = { x = 0, y = 9 },
+    atlas = "blinds",
+    mult = 2,
+    recalc_debuff = function(self, card, from_blind)
+        for key, suit in pairs(SMODS.Suits) do
+            if suit.strange and card:is_suit(key, true) then
+                return true
+            end
+        end
+        return false
+    end
+}
