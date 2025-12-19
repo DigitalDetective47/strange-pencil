@@ -896,6 +896,15 @@
         }
     },
     "misc": {
+        "achievement_names": {
+            "ach_pencil_hands": "Celestial Traveler"
+        },
+        "achievement_descriptions": {
+            "ach_pencil_hands": [
+                "Play all #1# poker",
+                "hands in a single run"
+            ]
+        },
         "challenge_names": {
             "c_pencil_immutable": "Immutable",
             "c_pencil_permamouth": "Ride or Die"

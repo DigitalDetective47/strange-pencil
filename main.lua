@@ -54,6 +54,16 @@ function SMODS.current_mod.reset_game_globals(run_start)
     end
 end
 
+function SMODS.current_mod.process_loc_text()
+    G.E_MANAGER:add_event(Event { func = function()
+        for index, line in ipairs(G.localization.misc.achievement_descriptions.ach_pencil_hands) do
+            G.localization.misc.achievement_descriptions.ach_pencil_hands[index] = line:gsub("#1#",
+                #SMODS.PokerHand.obj_buffer)
+        end
+        return true
+    end })
+end
+
 StrangeLib.update_challenge_restrictions("challenge_bans.json")
 StrangeLib.load_compat()
 
