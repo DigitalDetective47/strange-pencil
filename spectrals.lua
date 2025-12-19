@@ -70,6 +70,6 @@ SMODS.Consumable {
     use = function(self, card, area)
         ---@type string
         local hand = pulsar_target()
-        SMODS.smart_level_up_hand(card, hand, false, G.GAME.hands[hand].level * (card.ability.factor - 1))
+        SMODS.upgrade_poker_hands { hands = hand, level_up = G.GAME.hands[hand].level * (card.ability.factor - 1), from = card }
     end,
 }
