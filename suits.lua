@@ -64,7 +64,7 @@ SMODS.Suit {
     strange = true,
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
-            return { mult = card.base.nominal / 10 }
+            return { mult = 0.5 * card.base.nominal }
         end
     end,
 }
