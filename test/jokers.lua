@@ -734,3 +734,67 @@ Balatest.TestPlay {
         Balatest.assert_eq(#G.shop_jokers.cards, 2)
     end
 }
+
+Balatest.TestPlay {
+    name = "j_adultery_no_pool",
+    category = { "jokers", "j_adultery" },
+
+    execute = function() end,
+    assert = function()
+        Balatest.assert(not SMODS.Centers.j_pencil_adultery:in_pool({}))
+    end
+}
+Balatest.TestPlay {
+    name = "j_adultery_pool",
+    category = { "jokers", "j_adultery" },
+
+    consumeables = { "c_pencil_multiply" },
+
+    execute = function()
+        Balatest.highlight({ "AC" })
+        Balatest.use(G.consumeables.cards[1])
+    end,
+    assert = function()
+        Balatest.assert(SMODS.Centers.j_pencil_adultery:in_pool({}))
+    end
+}
+Balatest.TestPlay {
+    name = "j_adultery_chips",
+    category = { "jokers", "j_adultery" },
+
+    jokers = { "j_pencil_adultery" },
+
+    execute = function()
+        for _, card in ipairs(G.hand.cards) do
+            if card.base.value == "Ace" and card:is_suit("Clubs") then
+                StrangeLib.assert(SMODS.change_base(card, "pencil_mults", nil))
+                G.hand:add_to_highlighted(card)
+            end
+        end
+        Balatest.play_hand({})
+    end,
+    assert = function()
+        Balatest.assert_chips(math.floor((G.GAME.hands["High Card"].chips + SMODS.Centers.j_pencil_adultery.config.extra.s_chips) *
+            (G.GAME.hands["High Card"].mult + 0.5 * SMODS.Ranks.Ace.nominal)))
+    end
+}
+Balatest.TestPlay {
+    name = "j_adultery_wild",
+    category = { "jokers", "j_adultery" },
+
+    jokers = { "j_pencil_adultery" },
+
+    execute = function()
+        for _, card in ipairs(G.hand.cards) do
+            if card.base.value == "Ace" and card:is_suit("Clubs") then
+                card:set_ability(G.P_CENTERS.m_wild)
+                G.hand:add_to_highlighted(card)
+            end
+        end
+        Balatest.play_hand({})
+    end,
+    assert = function()
+        Balatest.assert_chips((G.GAME.hands["High Card"].chips + SMODS.Ranks.Ace.nominal + SMODS.Centers.j_pencil_adultery.config.extra.s_chips) *
+            G.GAME.hands["High Card"].mult)
+    end
+}

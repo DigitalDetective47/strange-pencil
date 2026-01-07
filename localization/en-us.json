@@ -168,6 +168,22 @@
             }
         },
         "Joker": {
+            "j_pencil_adultery":{
+                "name": "Adulterous Joker",
+                "text": [
+                    "Played cards with",
+                    "{C:pencil_mults}#2#{} suit give",
+                    "{C:chips}+#1#{} Chips when scored"
+                ]
+            },
+            "j_pencil_blasphemy":{
+                "name": "Blasphemous Joker",
+                "text": [
+                    "Played cards with",
+                    "{C:pencil_oracles}#2#{} suit give",
+                    "{C:chips}+#1#{} Chips when scored"
+                ]
+            },
             "j_pencil_calendar": {
                 "name": "Calendar",
                 "text": [
@@ -253,6 +269,14 @@
                     "for each {C:attention}7{} held in hand"
                 ]
             },
+            "j_pencil_fraud":{
+                "name": "Fraudulent Joker",
+                "text": [
+                    "Played cards with",
+                    "{C:pencil_dollars}#2#{} suit give",
+                    "{C:chips}+#1#{} Chips when scored"
+                ]
+            },
             "j_pencil_hole": {
                 "name": "Sinkhole",
                 "text": [
@@ -291,6 +315,14 @@
                 "name": "Left Leg of The Forbidden One",
                 "text": [
                     "{C:chips}+#1#{} Chips"
+                ]
+            },
+            "j_pencil_murder":{
+                "name": "Murderous Joker",
+                "text": [
+                    "Played cards with",
+                    "{C:pencil_swords}#2#{} suit give",
+                    "{C:chips}+#1#{} Chips when scored"
                 ]
             },
             "j_pencil_night_club": {
