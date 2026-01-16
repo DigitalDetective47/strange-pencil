@@ -8,7 +8,6 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     atlas = "jokers",
     cost = 4,
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual then
             ---@type string?
@@ -56,7 +55,6 @@ SMODS.Joker {
         return lassCount() > 1
     end,
     pools = { clubs_pack = true },
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main and lassCount() * card.ability.xmult_per_queen > 1 then
             return { xmult = math.max(lassCount() * card.ability.xmult_per_queen, 1) }
@@ -100,6 +98,7 @@ SMODS.Joker {
     atlas = "jokers",
     cost = 8,
     add_to_deck = forbidden_part_added,
+    blueprint_compat = false,
     calc_dollar_bonus = function(self, card)
         return card.ability.payout
     end
@@ -114,7 +113,6 @@ SMODS.Joker {
     pos = { x = 3, y = 1 },
     atlas = "jokers",
     cost = 6,
-    blueprint_compat = true,
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -132,7 +130,6 @@ SMODS.Joker {
     pos = { x = 4, y = 1 },
     atlas = "jokers",
     cost = 5,
-    blueprint_compat = true,
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -150,7 +147,6 @@ SMODS.Joker {
     pos = { x = 1, y = 1 },
     atlas = "jokers",
     cost = 6,
-    blueprint_compat = true,
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -168,7 +164,6 @@ SMODS.Joker {
     pos = { x = 0, y = 1 },
     atlas = "jokers",
     cost = 5,
-    blueprint_compat = true,
     add_to_deck = forbidden_part_added,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -193,7 +188,6 @@ SMODS.Joker {
     pos = { x = 2, y = 0 },
     atlas = "jokers",
     cost = 5,
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main and G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.pencil_index and G.GAME.consumeable_usage_total.pencil_index > 0 then
             return { chips = card.ability.chips_per_index * G.GAME.consumeable_usage_total.pencil_index }
@@ -210,7 +204,6 @@ SMODS.Joker {
     soul_pos = { x = 4, y = 0 },
     atlas = "jokers",
     cost = 20,
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.using_consumeable and context.consumeable.ability.set ~= "index" then
             G.E_MANAGER:add_event(Event { trigger = 'after', delay = 0.4, func = function()
@@ -243,7 +236,6 @@ SMODS.Joker {
     pos = { x = 5, y = 0 },
     atlas = "jokers",
     cost = 7,
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play and context.other_card.base.value == "4" then
             ---@type integer
@@ -297,7 +289,6 @@ SMODS.Joker {
     soul_pos = { x = 1, y = 2 },
     atlas = "jokers",
     cost = 20,
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -322,7 +313,6 @@ SMODS.Joker {
     pos = { x = 5, y = 1 },
     atlas = "jokers",
     cost = 6,
-    blueprint_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -393,7 +383,6 @@ SMODS.Joker {
     atlas = "jokers",
     cost = 6,
     pools = { clubs_pack = true },
-    blueprint_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual and not context.blueprint then
@@ -444,7 +433,6 @@ SMODS.Joker {
     atlas = "jokers",
     pools = { clubs_legendary = true },
     cost = 20,
-    blueprint_compat = true,
     eternal_compat = false,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.repetition and not card.ability.dead then
@@ -498,7 +486,6 @@ SMODS.Joker {
     immutable = true,
     cost = 5,
     display_size = { h = 59 },
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main then
             return { chips = card.ability.day, mult = card.ability.month }
@@ -540,7 +527,6 @@ SMODS.Joker {
         end
     end,
     cost = 4,
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.before then
             ---@type boolean
@@ -581,7 +567,6 @@ SMODS.Joker {
     pos = { x = 2, y = 3 },
     atlas = "jokers",
     cost = 6,
-    blueprint_compat = true,
     set_ability = function(self, card)
         card.ability.chips = G.PROFILES[G.SETTINGS.profile].pencil_stonehenge or 0
     end,
@@ -648,7 +633,6 @@ SMODS.Joker {
     pos = { x = 2, y = 2 },
     atlas = "jokers",
     cost = 7,
-    blueprint_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
@@ -769,7 +753,6 @@ SMODS.Joker {
     pos = { x = 5, y = 3 },
     atlas = "jokers",
     cost = 4,
-    blueprint_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.setting_blind and not card.getting_sliced and not context.blueprint then
@@ -847,7 +830,6 @@ SMODS.Joker {
     pos = { x = 1, y = 4 },
     atlas = "jokers",
     cost = 1,
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.joker_main then
             ---@type Card?
@@ -887,7 +869,6 @@ SMODS.Joker {
     pos = { x = 2, y = 4 },
     atlas = "jokers",
     cost = 4,
-    blueprint_compat = true,
     calculate = function(self, card, context)
         if context.first_hand_drawn then
             ---@type integer
@@ -934,7 +915,6 @@ SMODS.Joker {
     pos = { x = 4, y = 4 },
     atlas = "jokers",
     cost = 6,
-    blueprint_compat = true,
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.joker_main then
