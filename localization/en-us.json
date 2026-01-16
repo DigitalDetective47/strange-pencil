@@ -168,7 +168,7 @@
             }
         },
         "Joker": {
-            "j_pencil_adultery":{
+            "j_pencil_adultery": {
                 "name": "Adulterous Joker",
                 "text": [
                     "Played cards with",
@@ -176,7 +176,7 @@
                     "{C:chips}+#1#{} Chips when scored"
                 ]
             },
-            "j_pencil_blasphemy":{
+            "j_pencil_blasphemy": {
                 "name": "Blasphemous Joker",
                 "text": [
                     "Played cards with",
@@ -269,7 +269,7 @@
                     "for each {C:attention}7{} held in hand"
                 ]
             },
-            "j_pencil_fraud":{
+            "j_pencil_fraud": {
                 "name": "Fraudulent Joker",
                 "text": [
                     "Played cards with",
@@ -317,7 +317,7 @@
                     "{C:chips}+#1#{} Chips"
                 ]
             },
-            "j_pencil_murder":{
+            "j_pencil_murder": {
                 "name": "Murderous Joker",
                 "text": [
                     "Played cards with",
