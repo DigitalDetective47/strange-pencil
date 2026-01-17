@@ -71,7 +71,7 @@ end
 ---@param context CalcContext
 ---@return { chips: number }?
 local function j_calculate(self, card, context)
-    if context.individual and context.other_card:is_suit(card.ability.extra.suit) then
+    if context.individual and context.cardarea == G.play and context.other_card:is_suit(card.ability.extra.suit) then
         return { chips = card.ability.extra.s_chips }
     end
 end
