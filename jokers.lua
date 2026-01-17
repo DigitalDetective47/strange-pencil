@@ -944,7 +944,10 @@ SMODS.Joker {
         end
     end,
     reset_target = function(self)
-        G.GAME.current_round.pencil_killer_joker =
-            pseudorandom_element(get_current_pool("Joker"), pseudoseed("j_pencil_killer"))
+        G.E_MANAGER:add_event(Event { func = function()
+            G.GAME.current_round.pencil_killer_joker =
+                pseudorandom_element(get_current_pool("Joker"), pseudoseed("j_pencil_killer"))
+            return true
+        end })
     end
 }
