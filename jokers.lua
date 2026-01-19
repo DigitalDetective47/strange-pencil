@@ -951,3 +951,101 @@ SMODS.Joker {
         end })
     end
 }
+
+SMODS.Joker {
+    key = "prism",
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, SMODS.merge_defaults(SMODS.Suits.pencil_mults:loc_vars(info_queue),
+            { key = "pencil_mults", set = "Other" }))
+    end,
+    rarity = 2,
+    pos = { x = 0, y = 5 },
+    atlas = "jokers",
+    cost = 7,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit("pencil_mults") then
+            return { xmult = 1 + 0.1 * context.other_card.base.nominal }
+        end
+    end,
+}
+
+SMODS.Joker {
+    key = "emerald",
+    config = { extra = 2 },
+    activate = false,
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, SMODS.merge_defaults(SMODS.Suits.pencil_dollars:loc_vars(info_queue),
+            { key = "pencil_dollars", set = "Other" }))
+        return { vars = { card.ability.extra } }
+    end,
+    rarity = 2,
+    pos = { x = 1, y = 5 },
+    atlas = "jokers",
+    cost = 7,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card.base.suit == "pencil_dollars" and self.activate then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra
+            return { dollars = card.ability.extra }
+        end
+    end,
+}
+
+SMODS.Joker {
+    key = "crystal",
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, SMODS.merge_defaults(SMODS.Suits.pencil_oracles:loc_vars(info_queue),
+            { key = "pencil_oracles", set = "Other" }))
+        table.insert(info_queue, { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } })
+    end,
+    rarity = 2,
+    pos = { x = 2, y = 5 },
+    atlas = "jokers",
+    cost = 7,
+    blueprint_compat = false,
+}
+
+SMODS.Joker {
+    key = "knife",
+    loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, SMODS.merge_defaults(SMODS.Suits.pencil_swords:loc_vars(info_queue),
+            { key = "pencil_swords", set = "Other" }))
+        if G.GAME and card.area and (card.area == G.jokers) then
+            local disableable = G.GAME.blind and (not G.GAME.blind.disabled and G.GAME.blind:get_type() == "Boss")
+            return {
+                main_end = { {
+                    n = G.UIT.C,
+                    config = { align = "bm", minh = 0.4 },
+                    nodes = { {
+                        n = G.UIT.C,
+                        config = { ref_table = self, align = "m", colour = disableable and G.C.GREEN or G.C.RED, r = 0.05, padding = 0.06 },
+                        nodes = { { n = G.UIT.T, config = { text = " " .. localize(disableable and "k_active" or "ph_no_boss_active") .. " ", colour = G.C.UI.TEXT_LIGHT, scale = 0.32 * 0.9 } } }
+                    } }
+                } }
+            }
+        end
+    end,
+    rarity = 2,
+    pos = { x = 3, y = 5 },
+    atlas = "jokers",
+    cost = 7,
+    calculate = function(self, card, context)
+        if G.GAME.blind
+            and not G.GAME.blind.disabled
+            and G.GAME.blind:get_type() == "Boss"
+            and context.individual
+            and context.cardarea == G.play
+            and context.other_card:is_suit("pencil_swords")
+            and SMODS.pseudorandom_probability(card, pseudoseed(self.key), context.other_card.base.nominal, 100, nil, true) then
+            return {
+                func = function()
+                    G.GAME.blind.disabled = true
+                    G.E_MANAGER:add_event(Event { func = function()
+                        G.GAME.blind:disable()
+                        return true
+                    end })
+                end,
+                extra = { message = localize("ph_boss_disabled") }
+            }
+        end
+    end,
+}

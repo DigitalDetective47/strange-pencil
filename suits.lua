@@ -141,11 +141,16 @@ SMODS.Suit {
     calculate = function(self, card, context)
         ---@type number
         local dollars = G.GAME.dollars + (G.GAME.dollar_buffer or 0)
-        if context.main_scoring and context.cardarea == G.play and dollars < card.base.nominal then
-            ---@type number
-            local ret = card.base.nominal - dollars
-            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + ret
-            return { dollars = ret }
+        if context.main_scoring and context.cardarea == G.play then
+            if dollars < card.base.nominal then
+                SMODS.Centers.j_pencil_emerald.activate = true
+                ---@type number
+                local ret = card.base.nominal - dollars
+                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + ret
+                return { dollars = ret }
+            else
+                SMODS.Centers.j_pencil_emerald.activate = false
+            end
         end
     end,
 }
@@ -196,7 +201,13 @@ SMODS.Suit {
         if context.main_scoring and context.cardarea == G.play and SMODS.pseudorandom_probability(card, self.key, card.base.nominal, 20) then
             G.E_MANAGER:add_event(Event { func = function()
                 card:juice_up(0.3, 0.5)
-                SMODS.add_card { set = "Tarot" }
+                ---@type CreateCard
+                local addition = { set = "Tarot" }
+                if next(SMODS.find_card("j_pencil_crystal")) then
+                    addition.no_edition = true
+                    addition.edition = "e_negative"
+                end
+                SMODS.add_card(addition)
                 return true
             end })
         end

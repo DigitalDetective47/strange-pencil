@@ -214,6 +214,13 @@
                     "of scored cards"
                 ]
             },
+            "j_pencil_crystal": {
+                "name": "Healing Crystal",
+                "text": [
+                    "{C:tarot}Tarot{} cards created by",
+                    "{C:pencil_oracles}Oracle{} cards are {C:dark_edition}Negative"
+                ]
+            },
             "j_pencil_doodlebob": {
                 "name": "Doodle Bob",
                 "text": [
@@ -239,6 +246,14 @@
                     "Loses {C:mult}-#2#{} Mult when",
                     "a {C:hearts}Heart{} is scored",
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
+                ]
+            },
+            "j_pencil_emerald": {
+                "name": "Minecraft Emerald",
+                "text": [ 
+                    "Earn {C:money}$#1#{} when a",
+                    "{C:pencil_dollars}Dollar{} card",
+                    "activates its ability"
                 ]
             },
             "j_pencil_fizzler": {
@@ -293,6 +308,15 @@
                     "destroy it and gain",
                     "{X:mult,C:white}X#3#{} Mult",
                     "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive})"
+                ]
+            },
+            "j_pencil_knife": {
+                "name": "Obsidian Knife",
+                "text": [
+                    "Played cards with",
+                    "{C:pencil_swords}Sword{} suit have an",
+                    "n% chance to disable current",
+                    "{C:attention}Boss Blind{} when scored"
                 ]
             },
             "j_pencil_lass": {
@@ -365,6 +389,14 @@
                     "{C:mult}+#1#{} Mult per line of text in the",
                     "description of the Joker to the right",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)"
+                ]
+            },
+            "j_pencil_prism": {
+                "name": "Prism",
+                "text": [
+                    "Played cards with",
+                    "{C:pencil_mults}Mult{} suit give",
+                    "{X:mult,C:white}X(1+0.1n){} Mult when scored"
                 ]
             },
             "j_pencil_ratio": {
