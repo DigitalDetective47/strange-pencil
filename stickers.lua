@@ -47,6 +47,10 @@ SMODS.Enhancement {
     weight = 0,
     in_pool = function(self, args) return false end,
 }
+G.E_MANAGER:add_event(Event { func = function()
+    SMODS.remove_pool(G.P_CENTER_POOLS.Enhanced, "m_pencil_suitless_quantum")
+    return true
+end })
 SMODS.Sticker {
     key = "suitless",
     atlas = "stickers",
