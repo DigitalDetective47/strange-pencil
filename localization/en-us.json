@@ -232,10 +232,10 @@
             "j_pencil_doot": {
                 "name": "Doot",
                 "text": [
-                    "Create a random {C:spectral}Spectral",
-                    "card if scored hand",
-                    "contains a {C:attention}Diseased Card",
-                    "and a {C:attention}Flagged Card"
+                    "Sell this Joker to",
+                    "create a {C:attention}The Plauge",
+                    "and a {C:attention}The Parade",
+                    "{C:inactive}(Must have room)"
                 ]
             },
             "j_pencil_eclipse": {
@@ -250,7 +250,7 @@
             },
             "j_pencil_emerald": {
                 "name": "Minecraft Emerald",
-                "text": [ 
+                "text": [
                     "Earn {C:money}$#1#{} when a",
                     "{C:pencil_dollars}Dollar{} card",
                     "activates its ability"

@@ -512,58 +512,20 @@ SMODS.Sound {
 
 SMODS.Joker {
     key = "doot",
-    attributes = { "generation", "spectral", "enhancements" },
+    attributes = { "generation", "tarot", "on_sell" },
     rarity = 1,
-    config = { dollars = 5 },
     loc_vars = function(self, info_queue, card)
-        table.insert(info_queue, SMODS.Centers.m_pencil_diseased)
-        table.insert(info_queue, SMODS.Centers.m_pencil_flagged)
-        return { vars = { card.ability.dollars } }
+        table.insert(info_queue, SMODS.Centers.c_pencil_plague)
+        table.insert(info_queue, SMODS.Centers.c_pencil_parade)
     end,
     pos = { x = 5, y = 2 },
     atlas = "jokers",
-    in_pool = function(self, args)
-        ---@type boolean
-        local diseased = false
-        ---@type boolean
-        local flagged = false
-        for _, other_card in ipairs(G.playing_cards) do
-            if SMODS.has_enhancement(other_card, "m_pencil_diseased") then
-                diseased = true
-            end
-            if SMODS.has_enhancement(other_card, "m_pencil_flagged") then
-                flagged = true
-            end
-            if diseased and flagged then
-                return true
-            end
-        end
-    end,
-    cost = 4,
+    cost = 6,
     calculate = function(self, card, context)
-        if context.before then
-            ---@type boolean
-            local diseased = false
-            ---@type boolean
-            local flagged = false
-            for _, other_card in ipairs(context.scoring_hand) do
-                if SMODS.has_enhancement(other_card, "m_pencil_diseased") then
-                    diseased = true
-                end
-                if SMODS.has_enhancement(other_card, "m_pencil_flagged") then
-                    flagged = true
-                end
-                if diseased and flagged then
-                    if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-                        G.E_MANAGER:add_event(Event { func = function()
-                            SMODS.add_card { set = "Spectral" }
-                            G.GAME.consumeable_buffer = 0
-                            return true
-                        end })
-                    end
-                    return { sound = "pencil_doot", message = localize("k_doot_ex"), colour = G.C.SECONDARY_SET.Spectral }
-                end
+        if context.selling_self and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            SMODS.add_card { key = "c_pencil_plague" }
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                SMODS.add_card { key = "c_pencil_parade" }
             end
         end
     end,
