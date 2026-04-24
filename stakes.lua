@@ -117,9 +117,9 @@ SMODS.Stake {
     shiny = true,
     above_stake = "stake_pencil_grey",
     modifiers = function()
-        for _, hand in pairs(G.GAME.hands) do
-            hand.chips = 0
-            hand.s_chips = 0
-        end
+        G.E_MANAGER:add_event(Event { blockable = false, func = function()
+            G.jokers:change_size(-1)
+            return true
+        end })
     end
 }

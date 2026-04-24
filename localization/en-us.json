@@ -785,8 +785,7 @@
             "stake_pencil_negative": {
                 "name": "Negative Stake",
                 "text": [
-                    "All poker hands",
-                    "start with {C:chips}0{} chips",
+                    "{C:red}-1{} Joker Slot",
                     "{s:0.8}Applies all previous Stakes"
                 ]
             },
@@ -971,6 +970,7 @@
         },
         "challenge_names": {
             "c_pencil_immutable": "Immutable",
+            "c_pencil_old_negative": "Short Stack",
             "c_pencil_permamouth": "Ride or Die"
         },
         "dictionary": {
@@ -1044,6 +1044,12 @@
             "a_echips": "^#1#"
         },
         "v_text": {
+            "ch_c_no_hand_chips": [
+                "All poker hands start with {C:chips}0{} chips"
+            ],
+            "ch_c_no_planet_chips": [
+                "All {C:planet}Planet Cards{} give {C:chips}+0{} chips"
+            ],
             "ch_c_pencil_most_played_only": [
                 "Play only 1 hand type this run"
             ]
