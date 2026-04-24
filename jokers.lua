@@ -4,6 +4,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.mult } }
     end,
+    attributes = { "mult", "enhancements" },
     rarity = 2,
     pos = { x = 0, y = 0 },
     atlas = "jokers",
@@ -47,6 +48,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.xmult_per_queen, math.max(lassCount() * card.ability.xmult_per_queen, 1) } }
     end,
+    attributes = { "xmult", "suit", "clubs", "rank", "queen", "full_deck" },
     rarity = 3,
     pos = { x = 1, y = 0 },
     atlas = "jokers",
@@ -93,6 +95,7 @@ SMODS.Joker {
         table.insert(info_queue, SMODS.Centers.j_pencil_right_leg)
         return { vars = { card.ability.payout } }
     end,
+    attributes = { "economy", "joker" },
     rarity = 1,
     pos = { x = 2, y = 1 },
     atlas = "jokers",
@@ -109,6 +112,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.xchips } }
     end,
+    attributes = { "xchips" },
     rarity = 1,
     pos = { x = 3, y = 1 },
     atlas = "jokers",
@@ -126,6 +130,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.chips } }
     end,
+    attributes = { "chips" },
     rarity = 1,
     pos = { x = 4, y = 1 },
     atlas = "jokers",
@@ -143,6 +148,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.xmult } }
     end,
+    attributes = { "xmult" },
     rarity = 1,
     pos = { x = 1, y = 1 },
     atlas = "jokers",
@@ -160,6 +166,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.mult } }
     end,
+    attributes = { "mult" },
     rarity = 1,
     pos = { x = 0, y = 1 },
     atlas = "jokers",
@@ -184,6 +191,7 @@ SMODS.Joker {
             }
         }
     end,
+    attributes = { "chips" },
     rarity = 1,
     pos = { x = 2, y = 0 },
     atlas = "jokers",
@@ -199,6 +207,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "pencil",
+    attributes = { "generation" },
     rarity = 4,
     pos = { x = 3, y = 0 },
     soul_pos = { x = 4, y = 0 },
@@ -220,6 +229,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "forty_seven",
+    attributes = { "retrigger", "rank", "four", "seven" },
     rarity = 2,
     config = { factor = 1 },
     loc_vars = function(self, info_queue, card)
@@ -305,6 +315,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "pee_pants",
+    attributes = { "mult", "scaling", "suit", "diamonds", "hand_type" },
     rarity = 2,
     config = { scaling = 4, mult = 0, required_diamonds = 2 },
     loc_vars = function(self, info_queue, card)
@@ -339,6 +350,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "squeeze",
+    attributes = { "scaling", "economy", "chance", "sell_value", "food" },
     rarity = 1,
     config = { chance = 4, rounds = 0 },
     loc_vars = function(self, info_queue, card)
@@ -372,6 +384,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "eclipse",
+    attributes = { "mult", "scaling", "suit", "hearts", "clubs" },
     rarity = 2,
     config = { gain = 1, loss = 1, mult = 0 },
     loc_vars = function(self, info_queue, card)
@@ -423,6 +436,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "club",
+    attributes = { "xmult", "retrigger", "suit", "clubs" },
     rarity = 4,
     config = { xmult = 1.3, retriggers = 3, dead = false },
     loc_vars = function(self, info_queue, card)
@@ -476,6 +490,7 @@ end
 
 SMODS.Joker {
     key = "calendar",
+    attributes = { "mult", "chips" },
     rarity = 1,
     config = { month = calendar_date.month, day = calendar_date.day },
     loc_vars = function(self, info_queue, card)
@@ -500,6 +515,7 @@ SMODS.Sound {
 
 SMODS.Joker {
     key = "doot",
+    attributes = { "generation", "spectral", "enhancements" },
     rarity = 1,
     config = { dollars = 5 },
     loc_vars = function(self, info_queue, card)
@@ -559,6 +575,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "stonehenge",
+    attributes = { "chips", "scaling" },
     rarity = 1,
     config = { chips = 0, extra = 5 },
     loc_vars = function(self, info_queue, card)
@@ -620,6 +637,7 @@ end
 
 SMODS.Joker {
     key = "ratio",
+    attributes = { "xmult", "scaling", "suit", "full_deck" },
     rarity = 2,
     config = { xmult = 1 },
     loc_vars = function(self, info_queue, card)
@@ -664,6 +682,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "commie",
+    attributes = { "modify_card" },
     rarity = 2,
     pos = { x = 3, y = 3 },
     atlas = "jokers",
@@ -722,6 +741,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "night_club",
+    attributes = { "suit", "clubs", "hands", "modify_card" },
     rarity = 3,
     pos = { x = 4, y = 3 },
     atlas = "jokers",
@@ -745,6 +765,7 @@ SMODS.Sound {
 
 SMODS.Joker {
     key = "fizzler",
+    attributes = { "mult", "scaling", "destroy_card" },
     rarity = 1,
     config = { mult = 0 },
     loc_vars = function(self, info_queue, card)
@@ -786,6 +807,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "cell",
+    attributes = { "face", "passive", "boss_blind" },
     rarity = 2,
     pos = { x = 0, y = 4 },
     atlas = "jokers",
@@ -812,6 +834,7 @@ end
 
 SMODS.Joker {
     key = "peter",
+    attributes = { "mult", "joker" },
     rarity = 1,
     config = { mult = 1 },
     loc_vars = function(self, info_queue, card)
@@ -862,6 +885,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "hole",
+    attributes = { "discard" },
     rarity = 1,
     loc_vars = function(self, info_queue, card)
         table.insert(info_queue, { key = "free_discard", set = "Other", vars = {} })
@@ -887,6 +911,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "open",
+    attributes = { "passive" },
     rarity = 2,
     config = { extra = 1 },
     loc_vars = function(self, info_queue, card)
@@ -906,6 +931,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "killer",
+    attributes = { "xmult", "scaling", "destroy_card", "joker" },
     rarity = 2,
     config = { xmult = 1, increase = 1 },
     loc_vars = function(self, info_queue, card)
@@ -958,6 +984,7 @@ SMODS.Joker {
         table.insert(info_queue, SMODS.merge_defaults(SMODS.Suits.pencil_mults:loc_vars(info_queue),
             { key = "pencil_mults", set = "Other" }))
     end,
+    attributes = { "xmult", "suit" },
     rarity = 2,
     pos = { x = 0, y = 5 },
     atlas = "jokers",
@@ -978,6 +1005,7 @@ SMODS.Joker {
             { key = "pencil_dollars", set = "Other" }))
         return { vars = { card.ability.extra } }
     end,
+    attributes = { "suit", "economy" },
     rarity = 2,
     pos = { x = 1, y = 5 },
     atlas = "jokers",
@@ -997,6 +1025,7 @@ SMODS.Joker {
             { key = "pencil_oracles", set = "Other" }))
         table.insert(info_queue, { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } })
     end,
+    attributes = { "suit", "tarot", "editions" },
     rarity = 2,
     pos = { x = 2, y = 5 },
     atlas = "jokers",
@@ -1024,6 +1053,7 @@ SMODS.Joker {
             }
         end
     end,
+    attributes = { "chance", "boss_blind" },
     rarity = 2,
     pos = { x = 3, y = 5 },
     atlas = "jokers",

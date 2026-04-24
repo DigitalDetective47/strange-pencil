@@ -76,6 +76,10 @@ local function j_calculate(self, card, context)
     end
 end
 
+---template attributes for suit chip jokers
+---@type ["chips", "suit"]
+local attributes = { "chips", "suit" }
+
 SMODS.ObjectType {
     key = "strange_suit_spectral",
     default = "c_pencil_multiply",
@@ -116,6 +120,7 @@ SMODS.Joker {
     key = "adultery",
     config = { extra = { s_chips = 30, suit = "pencil_mults" } },
     loc_vars = j_loc_vars,
+    attributes = attributes,
     rarity = 1,
     pos = { x = 14, y = 0 },
     atlas = "suits",
@@ -167,6 +172,7 @@ SMODS.Joker {
     key = "fraud",
     config = { extra = { s_chips = 30, suit = "pencil_dollars" } },
     loc_vars = j_loc_vars,
+    attributes = attributes,
     rarity = 1,
     pos = { x = 14, y = 1 },
     atlas = "suits",
@@ -226,6 +232,7 @@ SMODS.Joker {
     key = "blasphemy",
     config = { extra = { s_chips = 30, suit = "pencil_oracles" } },
     loc_vars = j_loc_vars,
+    attributes = attributes,
     rarity = 1,
     pos = { x = 14, y = 2 },
     atlas = "suits",
@@ -282,6 +289,7 @@ SMODS.Consumable {
 SMODS.Joker {
     key = "murder",
     config = { extra = { s_chips = 30, suit = "pencil_swords" } },
+    attributes = attributes,
     loc_vars = j_loc_vars,
     rarity = 1,
     pos = { x = 14, y = 3 },
