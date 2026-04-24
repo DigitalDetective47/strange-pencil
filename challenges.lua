@@ -23,9 +23,6 @@ SMODS.Challenge {
     key = "immutable",
     restrictions = {
         banned_cards = {
-            { id = "j_vampire" },
-            { id = "j_midas_mask" },
-            { id = "j_pencil_night_club" },
             { id = "c_magician" },
             { id = "c_empress" },
             { id = "c_heirophant" },
@@ -64,3 +61,10 @@ SMODS.Challenge {
         },
     },
 }
+
+G.E_MANAGER:add_event(Event { blockable = false, func = function()
+    for _, key in ipairs(SMODS.get_attribute_pool("modify_card")) do
+        table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = key })
+    end
+    return true
+end })
