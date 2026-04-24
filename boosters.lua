@@ -65,12 +65,10 @@ SMODS.Booster {
                 end
                 new = SMODS.create_card(G.P_CENTERS.p_standard_jumbo_1:create_card(card, i))
                 StrangeLib.assert(SMODS.change_base(new, "Clubs"))
-            until not SMODS.has_no_suit(new)
+            until new:is_suit("Clubs")
             return new
-        elseif rng > 0.997 then
-            return { set = "clubs_legendary", area = G.pack_cards, skip_materialize = true }
         else
-            return { set = "clubs_pack", area = G.pack_cards, skip_materialize = true }
+            return { key = SMODS.poll_object({ attributes = { "clubs" } }), area = G.pack_cards, skip_materialize = true }
         end
     end,
     group_key = "k_clubs_pack",

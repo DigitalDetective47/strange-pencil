@@ -56,7 +56,6 @@ SMODS.Joker {
     in_pool = function(self, args)
         return lassCount() > 1
     end,
-    pools = { clubs_pack = true },
     calculate = function(self, card, context)
         if context.joker_main and lassCount() * card.ability.xmult_per_queen > 1 then
             return { xmult = math.max(lassCount() * card.ability.xmult_per_queen, 1) }
@@ -395,7 +394,6 @@ SMODS.Joker {
     pos = { x = 4, y = 2 },
     atlas = "jokers",
     cost = 6,
-    pools = { clubs_pack = true },
     perishable_compat = false,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual and not context.blueprint then
@@ -445,7 +443,6 @@ SMODS.Joker {
     pos = { x = 0, y = 3 },
     soul_pos = { x = 1, y = 3 },
     atlas = "jokers",
-    pools = { clubs_legendary = true },
     cost = 20,
     eternal_compat = false,
     calculate = function(self, card, context)
@@ -746,7 +743,6 @@ SMODS.Joker {
     pos = { x = 4, y = 3 },
     atlas = "jokers",
     cost = 7,
-    pools = { clubs_pack = true },
     blueprint_compat = false,
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint then

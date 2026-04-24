@@ -9,10 +9,10 @@
     "main_file": "main.lua",
     "badge_colour": "FF9E49",
     "badge_text_colour": "404040",
-    "version": "0.4.0~1d23b",
+    "version": "0.4.0~1d23c",
     "priority": 200,
     "dependencies": [
-        "Steamodded (>=1.0.0~BETA-1202a)",
+        "Steamodded (>=1.0.0~BETA-1531za)",
         "StrangeLib (>=4.0)"
     ],
     "conflicts": [
