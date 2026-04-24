@@ -522,10 +522,13 @@ SMODS.Joker {
     atlas = "jokers",
     cost = 6,
     calculate = function(self, card, context)
-        if context.selling_self and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-            SMODS.add_card { key = "c_pencil_plague" }
+        if context.selling_self then
+            play_sound("pencil_doot")
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                SMODS.add_card { key = "c_pencil_parade" }
+                SMODS.add_card { key = "c_pencil_plague" }
+                if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                    SMODS.add_card { key = "c_pencil_parade" }
+                end
             end
         end
     end,
