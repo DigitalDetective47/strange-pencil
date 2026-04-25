@@ -839,6 +839,14 @@
             }
         },
         "Tarot": {
+            "c_pencil_abundance": {
+                "name": "Abundance",
+                "text": [
+                    "Gives {C:money}$#1#{} per {C:attention}#2#{} cards",
+                    "in your full deck",
+                    "{C:inactive}(Currently {C:money}$#3#{C:inactive})"
+                ]
+            },
             "c_pencil_kfc": {
                 "name": "Finger Lickin' Good",
                 "text": [
