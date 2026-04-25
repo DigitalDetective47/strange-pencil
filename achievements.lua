@@ -11,3 +11,16 @@ SMODS.Achievement {
         end
     end
 }
+
+SMODS.Achievement {
+    key = "negative_stake",
+    unlock_condition = function(self, args)
+        if args.type == "win" then
+            for _, stake in ipairs(G.GAME.applied_stakes) do
+                if stake == "stake_pencil_negative" then
+                    return true
+                end
+            end
+        end
+    end
+}

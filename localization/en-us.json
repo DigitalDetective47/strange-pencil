@@ -968,12 +968,17 @@
     },
     "misc": {
         "achievement_names": {
-            "ach_pencil_hands": "Celestial Traveler"
+            "ach_pencil_hands": "Celestial Traveler",
+            "ach_pencil_negative_stake": "Highest Stakes"
         },
         "achievement_descriptions": {
             "ach_pencil_hands": [
                 "Play all #1# poker",
                 "hands in a single run"
+            ],
+            "ach_pencil_negative_stake": [
+                "Win a run on at least",
+                "Negative Stake difficulty"
             ]
         },
         "challenge_names": {
