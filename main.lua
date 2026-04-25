@@ -1,6 +1,6 @@
 SMODS.current_mod.optional_features = { cardareas = { discard = true, deck = true }, post_trigger = true, quantum_enhancements = true }
 
-for _, args in ipairs(JSON.decode(NFS.read(SMODS.current_mod.path .. "/atlas.json"))) do
+for _, args in ipairs(JSON.decode(SMODS.NFS.read(SMODS.current_mod.path .. "/atlas.json"))) do
     if type(args) == "string" then
         args = { key = args }
     end
@@ -10,7 +10,7 @@ for _, args in ipairs(JSON.decode(NFS.read(SMODS.current_mod.path .. "/atlas.jso
     SMODS.Atlas(args)
 end
 
-for _, filename in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path)) do
+for _, filename in ipairs(SMODS.NFS.getDirectoryItems(SMODS.current_mod.path)) do
     if filename ~= "main.lua" and filename:find("[^/]*%.lua$") then
         SMODS.load_file(filename)()
     end

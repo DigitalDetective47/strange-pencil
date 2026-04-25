@@ -35,7 +35,7 @@ SMODS.Back {
             end)) --Re-sort poker hands
             return true
         end })
-        for hand, parameters in pairs(JSON.decode(NFS.read(SMODS.find_mod("StrangePencil")[1].path .. "/royal_handlist.json"))) do
+        for hand, parameters in pairs(JSON.decode(SMODS.NFS.read(SMODS.find_mod("StrangePencil")[1].path .. "/royal_handlist.json"))) do
             G.GAME.hands[hand] = SMODS.merge_defaults(parameters, G.GAME.hands[hand])
             G.GAME.hands[hand].chips = G.GAME.hands[hand].s_chips
             G.GAME.hands[hand].mult = G.GAME.hands[hand].s_mult
