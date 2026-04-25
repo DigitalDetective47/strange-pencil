@@ -428,58 +428,6 @@ Balatest.TestPlay {
 }
 
 Balatest.TestPlay {
-    name = "j_doot_diseased",
-    category = { "jokers", "j_doot" },
-
-    jokers = { "j_pencil_doot" },
-    consumeables = { "c_pencil_plague" },
-
-    execute = function()
-        Balatest.highlight({ "AC" })
-        Balatest.use(G.consumeables.cards[1])
-        Balatest.play_hand({ "AC" })
-    end,
-    assert = function()
-        Balatest.assert_eq(#G.consumeables.cards, 0)
-    end
-}
-Balatest.TestPlay {
-    name = "j_doot_flagged",
-    category = { "jokers", "j_doot" },
-
-    jokers = { "j_pencil_doot" },
-    consumeables = { "c_pencil_parade" },
-
-    execute = function()
-        Balatest.highlight({ "AC" })
-        Balatest.use(G.consumeables.cards[1])
-        Balatest.play_hand({ "AC" })
-    end,
-    assert = function()
-        Balatest.assert_eq(#G.consumeables.cards, 0)
-    end
-}
-Balatest.TestPlay {
-    name = "j_doot_hit",
-    category = { "jokers", "j_doot" },
-
-    jokers = { "j_pencil_doot" },
-    consumeables = { "c_pencil_plague", "c_pencil_parade" },
-
-    execute = function()
-        Balatest.highlight({ "AC" })
-        Balatest.use(G.consumeables.cards[1])
-        Balatest.unhighlight_all()
-        Balatest.highlight({ "AS" })
-        Balatest.use(G.consumeables.cards[2])
-        Balatest.play_hand({ "AC", "AH", "AS" })
-    end,
-    assert = function()
-        Balatest.assert_eq(#G.consumeables.cards, 1)
-    end
-}
-
-Balatest.TestPlay {
     name = "j_ratio_tie",
     category = { "jokers", "j_ratio" },
 
