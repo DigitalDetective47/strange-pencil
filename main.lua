@@ -68,7 +68,7 @@ StrangeLib.update_challenge_restrictions("challenge_bans.json")
 StrangeLib.load_compat()
 
 function SMODS.current_mod.menu_cards()
-    G.title_top.cards[1]:set_base(G.P_CARDS.C_A, true)
+    return { func = function() G.title_top.cards[1]:set_base(G.P_CARDS.C_A, true) end }
 end
 
 if next(SMODS.find_mod("Balatest")) then
