@@ -67,9 +67,7 @@ end
 StrangeLib.update_challenge_restrictions("challenge_bans.json")
 StrangeLib.load_compat()
 
-local main_menu_hook = Game.main_menu
-function Game:main_menu(change_context)
-    main_menu_hook(self, change_context)
+function SMODS.current_mod.menu_cards()
     G.title_top.cards[1]:set_base(G.P_CARDS.C_A, true)
 end
 
