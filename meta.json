@@ -10,11 +10,11 @@
     "badge_colour": "FF9E49",
     "badge_text_colour": "404040",
     "icon_path": "icon.png",
-    "version": "0.4.0~1f23a",
+    "version": "0.4.0~1f23b",
     "priority": 200,
     "dependencies": [
         "Steamodded (>=1.0.0~BETA-1531za)",
-        "StrangeLib (>=4.0)"
+        "StrangeLib (>=4.2)"
     ],
     "conflicts": [
         "Balatest (<<1.8)",

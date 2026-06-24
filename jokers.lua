@@ -289,6 +289,7 @@ end
 
 SMODS.Joker {
     key = "square",
+    attributes = { "fchips" },
     rarity = 4,
     config = { exponent = 2 },
     loc_vars = function(self, info_queue, card)
