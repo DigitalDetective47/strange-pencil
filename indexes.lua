@@ -517,13 +517,7 @@ SMODS.Consumable {
             end
         end
     end,
-}
-
-local can_sell_hook = Card.can_sell_card
-function Card:can_sell_card(...)
-    if self.config.center.key ~= "c_pencil_ono99" then
-        return can_sell_hook(self, ...)
-    else
+    can_sell = function(self, card)
         return false
-    end
-end
+    end,
+}
