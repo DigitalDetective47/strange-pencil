@@ -309,9 +309,7 @@ SMODS.Consumable {
             end
         end
         for _, other_card in ipairs(targets) do
-            local consume = copy_card(other_card)
-            consume:add_to_deck()
-            G.consumeables:emplace(consume)
+            SMODS.copy_card(other_card, G.consumeables)
         end
     end,
 }
