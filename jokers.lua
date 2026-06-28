@@ -368,8 +368,7 @@ SMODS.Joker {
         if context.end_of_round and not (context.individual or context.repetition or context.blueprint) then
             if SMODS.pseudorandom_probability(card, 'j_pencil_squeeze', 1, card.ability.chance) then
                 G.E_MANAGER:add_event(Event { func = function()
-                    G.jokers:remove_card(card)
-                    card:shatter()
+                    SMODS.destroy_cards(card, { destroy_func = Card.shatter })
                     return true
                 end })
             else
@@ -454,21 +453,9 @@ SMODS.Joker {
         elseif context.before then
             for _, other_card in ipairs(context.full_hand) do
                 if not other_card:is_suit("Clubs") then
-                    card.ability.dead = true
-                    G.E_MANAGER:add_event(Event { func = function()
-                        play_sound('tarot1')
-                        card.T.r = -0.2
-                        card:juice_up(0.3, 0.4)
-                        card.states.drag.is = true
-                        card.children.center.pinch.x = true
-                        G.E_MANAGER:add_event(Event { trigger = 'after', delay = 0.3, func = function()
-                            G.jokers:remove_card(card)
-                            card:remove()
-                            return true
-                        end })
-                        return true
-                    end })
-                    delay(0.4)
+                    if SMODS.pinch_and_remove(card) then
+                        card.ability.dead = true
+                    end
                     return
                 end
             end
@@ -754,11 +741,7 @@ SMODS.Joker {
                     message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.mult - prev_mult } },
                     colour = { 0, 0.5, 1, 1 },
                     sound = "pencil_fizzle",
-                    func = function()
-                        for _, consumable in ipairs(destroy_queue) do
-                            consumable:start_dissolve({ { 0, 0.5, 1, 1 } }, true)
-                        end
-                    end,
+                    pre_func = function() SMODS.destroy_cards(destroy_queue) end,
                 }
             end
         elseif context.joker_main and card.ability.mult >= 0 then
