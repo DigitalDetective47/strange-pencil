@@ -86,7 +86,7 @@ G.E_MANAGER:add_event(Event { blockable = false, func = function()
     for _, key in ipairs(SMODS.get_attribute_pool("modify_card")) do
         table.insert(SMODS.Challenges.c_pencil_immutable.restrictions.banned_cards, { id = key })
     end
-    for _, key in ipairs(SMODS.merge_lists { SMODS.get_attribute_pool("chips"), SMODS.get_attribute_pool("xchips") }) do
+    for _, key in ipairs(SMODS.merge_lists { SMODS.get_attribute_pool("chips"), SMODS.get_attribute_pool("xchips"), SMODS.get_attribute_pool("fchips") }) do
         table.insert(SMODS.Challenges.c_pencil_old_negative.restrictions.banned_cards, { id = key })
     end
     return true

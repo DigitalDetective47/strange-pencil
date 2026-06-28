@@ -10,7 +10,7 @@
     "badge_colour": "FF9E49",
     "badge_text_colour": "404040",
     "icon_path": "icon.png",
-    "version": "0.4.0~1f28a",
+    "version": "0.4.0~1f28b",
     "priority": 200,
     "dependencies": [
         "Steamodded (>=1.0.0~BETA-1802a)",
