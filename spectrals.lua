@@ -1,5 +1,6 @@
 SMODS.Consumable {
     key = "negative_space",
+    attributes = { "generation", "joker_slot", "joker" },
     set = "Spectral",
     pos = { x = 0, y = 0 },
     cost = G.P_CENTERS.c_soul.cost,
@@ -45,6 +46,7 @@ end
 
 SMODS.Consumable {
     key = "pulsar",
+    attributes = { "hand_level" },
     set = "Spectral",
     pos = { x = 1, y = 0 },
     cost = G.P_CENTERS.c_black_hole.cost,

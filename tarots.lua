@@ -1,5 +1,6 @@
 SMODS.Consumable {
     key = "abundance",
+    attributes = { "economy", "full_deck" },
     set = "Tarot",
     pos = { x = 0, y = 0 },
     atlas = "tarots",

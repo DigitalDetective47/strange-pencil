@@ -8,6 +8,7 @@ SMODS.Joker:take_ownership("pencil_square", {
 
 SMODS.Blind {
     key = "caret2",
+    attributes = { "large_blind" },
     boss = { showdown = true },
     dollars = 8,
     in_pool = function()

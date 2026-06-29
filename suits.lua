@@ -76,10 +76,6 @@ local function j_calculate(self, card, context)
     end
 end
 
----template attributes for suit chip jokers
----@type ["chips", "suit"]
-local attributes = { "chips", "suit" }
-
 SMODS.ObjectType {
     key = "strange_suit_spectral",
     default = "c_pencil_multiply",
@@ -107,8 +103,10 @@ SMODS.Suit {
         end
     end,
 }
+SMODS.Attribute { key = "mults_suit" }
 SMODS.Consumable {
     key = "multiply",
+    attributes = { "suit", "mults_suit", "modify_card" },
     set = "Spectral",
     atlas = "suits",
     pos = { x = 13, y = 0 },
@@ -120,7 +118,7 @@ SMODS.Joker {
     key = "adultery",
     config = { extra = { s_chips = 30, suit = "pencil_mults" } },
     loc_vars = j_loc_vars,
-    attributes = attributes,
+    attributes = { "suit", "mults_suit", "chips" },
     rarity = 1,
     pos = { x = 14, y = 0 },
     atlas = "suits",
@@ -159,8 +157,10 @@ SMODS.Suit {
         end
     end,
 }
+SMODS.Attribute { key = "dollars_suit" }
 SMODS.Consumable {
     key = "liquidation",
+    attributes = { "suit", "dollars_suit", "modify_card" },
     set = "Spectral",
     atlas = "suits",
     pos = { x = 13, y = 1 },
@@ -172,7 +172,7 @@ SMODS.Joker {
     key = "fraud",
     config = { extra = { s_chips = 30, suit = "pencil_dollars" } },
     loc_vars = j_loc_vars,
-    attributes = attributes,
+    attributes = { "suit", "dollars_suit", "chips" },
     rarity = 1,
     pos = { x = 14, y = 1 },
     atlas = "suits",
@@ -219,8 +219,10 @@ SMODS.Suit {
         end
     end,
 }
+SMODS.Attribute { key = "oracles" }
 SMODS.Consumable {
     key = "charm",
+    attributes = { "suit", "oracles", "modify_card" },
     set = "Spectral",
     atlas = "suits",
     pos = { x = 13, y = 2 },
@@ -232,7 +234,7 @@ SMODS.Joker {
     key = "blasphemy",
     config = { extra = { s_chips = 30, suit = "pencil_oracles" } },
     loc_vars = j_loc_vars,
-    attributes = attributes,
+    attributes = { "suit", "oracles", "chips" },
     rarity = 1,
     pos = { x = 14, y = 2 },
     atlas = "suits",
@@ -277,8 +279,10 @@ SMODS.Suit {
         end
     end,
 }
+SMODS.Attribute{key="swords"}
 SMODS.Consumable {
     key = "rift",
+    attributes = { "suit", "swords", "modify_card" },
     set = "Spectral",
     atlas = "suits",
     pos = { x = 13, y = 3 },
@@ -289,7 +293,7 @@ SMODS.Consumable {
 SMODS.Joker {
     key = "murder",
     config = { extra = { s_chips = 30, suit = "pencil_swords" } },
-    attributes = attributes,
+    attributes = { "suit", "swords", "chips" },
     loc_vars = j_loc_vars,
     rarity = 1,
     pos = { x = 14, y = 3 },

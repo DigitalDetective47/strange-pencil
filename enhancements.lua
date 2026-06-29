@@ -1,5 +1,6 @@
 SMODS.Enhancement {
     key = "diseased",
+    attributes = { "enhancements", "modify_card" },
     name = "Diseased Card",
     config = { total = 5, remaining = 5, created_during_scoring = false },
     loc_vars = function(self, info_queue, card)
@@ -45,6 +46,7 @@ SMODS.Enhancement {
 }
 SMODS.Consumable {
     key = "plague",
+    attributes = { "enhancements", "modify_card" },
     set = "Tarot",
     atlas = "enhancements",
     pos = { x = 1, y = 0 },
@@ -98,6 +100,7 @@ SMODS.Enhancement {
 }
 SMODS.Consumable {
     key = "parade",
+    attributes = { "enhancements", "modify_card" },
     set = "Tarot",
     atlas = "enhancements",
     pos = { x = 1, y = 1 },
@@ -110,12 +113,14 @@ SMODS.Consumable {
 
 SMODS.Enhancement {
     key = "sticky",
+    attributes = { "hand_size" },
     name = "Sticky Card",
     atlas = "enhancements",
     pos = { x = 0, y = 2 }
 }
 SMODS.Consumable {
     key = "kfc",
+    attributes = { "enhancements", "modify_card" },
     set = "Tarot",
     atlas = "enhancements",
     pos = { x = 1, y = 2 },

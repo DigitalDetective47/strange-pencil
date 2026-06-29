@@ -752,7 +752,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "cell",
-    attributes = { "face", "passive", "boss_blind" },
+    attributes = { "face", "passive", "boss_blind", "debuff" },
     rarity = 2,
     pos = { x = 0, y = 4 },
     atlas = "jokers",
@@ -779,7 +779,7 @@ end
 
 SMODS.Joker {
     key = "peter",
-    attributes = { "mult", "joker" },
+    attributes = { "mult", "joker", "position" },
     rarity = 1,
     config = { mult = 1 },
     loc_vars = function(self, info_queue, card)
@@ -856,7 +856,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "open",
-    attributes = { "passive" },
+    attributes = { "passive", "shop" },
     rarity = 2,
     config = { extra = 1 },
     loc_vars = function(self, info_queue, card)

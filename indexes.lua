@@ -15,6 +15,7 @@ SMODS.UndiscoveredSprite {
 StrangeLib.make_boosters("index",
     { { x = 0, y = 1 }, { x = 1, y = 1 } }, { { x = 2, y = 1 } }, { { x = 3, y = 1 } },
     {
+        attributes = { "index" },
         kind = "Index",
         atlas = "boosters",
         draw_hand = true,
@@ -158,6 +159,7 @@ end
 
 SMODS.Tag {
     atlas = "tags",
+    attributes = { "booster" },
     pos = { x = 1, y = 0 },
     config = { type = "new_blind_choice" },
     key = "index",
@@ -193,8 +195,11 @@ SMODS.Tag {
     end,
 }
 
+SMODS.Attribute { key = "index" }
+
 SMODS.Consumable {
     key = "replica",
+    attributes = { "generation" },
     set = "index",
     atlas = "indexes",
     pos = { x = 1, y = 0 },
@@ -345,6 +350,7 @@ end
 
 SMODS.Consumable {
     key = "counterfeit",
+    attributes = { "economy" },
     set = "index",
     atlas = "indexes",
     pos = { x = 2, y = 0 },
@@ -362,6 +368,7 @@ SMODS.Consumable {
 
 SMODS.Consumable {
     key = "chisel",
+    attributes = { "modify_card" },
     set = "index",
     atlas = "indexes",
     pos = { x = 3, y = 0 },
@@ -404,6 +411,7 @@ SMODS.Consumable {
 
 SMODS.Consumable {
     key = "peek",
+    attributes = { "face_down" },
     set = "index",
     atlas = "indexes",
     pos = { x = 4, y = 0 },
@@ -428,6 +436,7 @@ SMODS.Consumable {
 
 SMODS.Consumable {
     key = "mixnmatch",
+    attributes = { "modify_card" },
     set = "index",
     atlas = "indexes",
     pos = { x = 5, y = 0 },
@@ -462,6 +471,7 @@ SMODS.Consumable {
 
 SMODS.Consumable {
     key = "fractal",
+    attributes = { "generation", "index" },
     set = "index",
     atlas = "indexes",
     pos = { x = 0, y = 1 },

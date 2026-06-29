@@ -6,16 +6,6 @@ function Card:open(...)
     return open_hook(self, ...)
 end
 
-SMODS.ObjectType {
-    key = "clubs_pack",
-    default = "j_gluttenous_joker",
-    cards = { c_moon = true, j_blackboard = true, j_gluttenous_joker = true, j_onyx_agate = true, j_seeing_double = true }
-}
-SMODS.ObjectType {
-    key = "clubs_legendary",
-    default = "j_pencil_club",
-}
-
 ---@type { [string]: string }
 local clubs_select_card = { Joker = "jokers", Default = "deck", Enhanced = "deck" }
 --All consumables should go into the consumable area
@@ -76,6 +66,7 @@ SMODS.Booster {
 
 SMODS.Tag {
     atlas = "tags",
+    attributes = { "booster" },
     pos = { x = 2, y = 0 },
     config = { type = "new_blind_choice" },
     key = "clubs",

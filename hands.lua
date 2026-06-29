@@ -83,6 +83,7 @@ SMODS.PokerHand {
 SMODS.Consumable {
     key = "voyager",
     set = "Planet",
+    attributes = { "hand_level" },
     atlas = "planets",
     pos = { x = 0, y = 0 },
     config = { hand_type = "pencil_dichrome" },
@@ -108,6 +109,7 @@ SMODS.PokerHand {
 SMODS.Consumable {
     key = "rover",
     set = "Planet",
+    attributes = { "hand_level" },
     atlas = "planets",
     pos = { x = 1, y = 0 },
     config = { hand_type = "pencil_dichrome_straight" },
@@ -133,6 +135,7 @@ SMODS.PokerHand {
 SMODS.Consumable {
     key = "junk",
     set = "Planet",
+    attributes = { "hand_level" },
     atlas = "planets",
     pos = { x = 2, y = 0 },
     config = { hand_type = "pencil_dichrome_house" },
@@ -206,6 +209,7 @@ SMODS.PokerHand {
 SMODS.Consumable {
     key = "iss",
     set = "Planet",
+    attributes = { "hand_level" },
     atlas = "planets",
     pos = { x = 3, y = 0 },
     config = { hand_type = "pencil_dichrome_house2" },
@@ -231,6 +235,7 @@ SMODS.PokerHand {
 SMODS.Consumable {
     key = "sphere",
     set = "Planet",
+    attributes = { "hand_level" },
     atlas = "planets",
     pos = { x = 4, y = 0 },
     config = { hand_type = "pencil_dichrome_five" },

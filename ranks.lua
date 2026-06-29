@@ -42,6 +42,7 @@ SMODS.Rank {
         paperback_Crowns = 15,
     },
 }
+SMODS.Attribute { key = "sneven" }
 
 table.insert(SMODS.Ranks["6"].next, "pencil_sneven")
 table.insert(SMODS.Ranks["7"].next, "pencil_sneven")

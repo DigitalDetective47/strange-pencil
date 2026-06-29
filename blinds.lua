@@ -6,6 +6,7 @@ end
 
 SMODS.Blind {
     key = "glove",
+    attributes = { "hands", "large_blind" },
     boss = { showdown = true },
     dollars = 8,
     boss_colour = G.C.WHITE,
@@ -20,6 +21,7 @@ SMODS.Blind {
 
 SMODS.Blind {
     key = "caret",
+    attributes = { "large_blind" },
     boss = { min = 9 },
     in_pool = function()
         return G.GAME.round_resets.ante >= G.GAME.win_ante -- Boss should only appear in endless
@@ -36,6 +38,7 @@ SMODS.Blind {
 
 SMODS.Blind {
     key = "arrow",
+    attributes = { "retrigger" },
     boss = { min = 4 },
     boss_colour = G.C.WHITE,
     pos = { x = 0, y = 2 },
@@ -63,6 +66,7 @@ end
 
 SMODS.Blind {
     key = "lock",
+    attributes = { "modify_card" },
     boss = { min = 3 },
     in_pool = function(self)
         if G.GAME.round_resets.ante < self.boss.min then
@@ -141,6 +145,7 @@ SMODS.Blind {
 
 SMODS.Blind {
     key = "fence",
+    attributes = { "modify_card", "debuff" },
     boss = { min = 2 },
     in_pool = function(self)
         if G.GAME.round_resets.ante < self.boss.min then
@@ -214,6 +219,7 @@ SMODS.Blind {
 
 SMODS.Blind {
     key = "vessel",
+    attributes = { "destroy_card" },
     boss = { showdown = true },
     dollars = 8,
     boss_colour = G.P_BLINDS.bl_final_vessel.boss_colour,
@@ -238,6 +244,7 @@ SMODS.Blind {
 
 SMODS.Blind {
     key = "science",
+    attributes = { "suit", "mults_suit", "dollars_suit", "oracles", "swords", "debuff" },
     boss = { min = 1 },
     in_pool = function(self)
         if G.GAME.round_resets.ante < self.boss.min or not G.playing_cards then
@@ -266,6 +273,7 @@ SMODS.Blind {
 
 SMODS.Blind {
     key = "hot",
+    attributes = { "suit", "hearts" },
     boss = { showdown = true },
     dollars = 8,
     boss_colour = { 1, 0.5, 0, 1 },

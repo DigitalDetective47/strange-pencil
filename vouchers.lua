@@ -11,6 +11,7 @@ end
 
 SMODS.Voucher {
 	key = "half_chip",
+	attributes = { "xblindsize" },
 	atlas = "vouchers",
 	pos = { x = 0, y = 0 },
 	config = { multiplier = 0.5 },
@@ -22,6 +23,7 @@ SMODS.Voucher {
 
 SMODS.Voucher {
 	key = "vision",
+	attributes = { "xblindsize" },
 	atlas = "vouchers",
 	pos = { x = 0, y = 1 },
 	config = { multiplier = 0.5 },
@@ -34,12 +36,14 @@ SMODS.Voucher {
 
 SMODS.Voucher {
 	key = "pull",
+	attributes = { "booster" },
 	atlas = "vouchers",
 	pos = { x = 1, y = 0 },
 }
 
 SMODS.Voucher {
 	key = "overstock",
+	attributes = { "booster" },
 	atlas = "vouchers",
 	pos = { x = 1, y = 1 },
 	config = { extra = 1 },
