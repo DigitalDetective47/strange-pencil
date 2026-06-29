@@ -46,7 +46,7 @@ end
 
 SMODS.Consumable {
     key = "pulsar",
-    attributes = { "hand_level" },
+    attributes = { "hand_level", "space" },
     set = "Spectral",
     pos = { x = 1, y = 0 },
     cost = G.P_CENTERS.c_black_hole.cost,
