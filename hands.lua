@@ -70,10 +70,10 @@ end
 
 SMODS.PokerHand {
     key = "dichrome",
-    chips = 15,
-    mult = 2,
-    l_chips = 10,
-    l_mult = 1,
+    chips = 10,
+    mult = 1,
+    l_chips = 5,
+    l_mult = 2,
     example = { { "C_Q", true }, { "C_7", true }, { "C_2", true }, { "D_T", true }, { "D_4", true } },
     visible = true,
     evaluate = function(parts, hand)
