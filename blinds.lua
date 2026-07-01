@@ -258,7 +258,7 @@ SMODS.Blind {
         return false
     end,
     boss_colour = G.C.WHITE,
-    pos = { x = 0, y = 9 },
+    pos = { x = 0, y = 8 },
     atlas = "blinds",
     mult = 2,
     recalc_debuff = function(self, card, from_blind)
@@ -277,7 +277,7 @@ SMODS.Blind {
     boss = { showdown = true },
     dollars = 8,
     boss_colour = { 1, 0.5, 0, 1 },
-    pos = { x = 0, y = 10 },
+    pos = { x = 0, y = 9 },
     atlas = "blinds",
     mult = 2,
     debuff_hand = function(self, cards, hand, handname, check)

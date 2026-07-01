@@ -54,12 +54,6 @@ SMODS.Voucher:take_ownership("reroll_glut", { unredeem = reroll_glut_unredeem },
 
 SMODS.Sticker:take_ownership("pencil_paralyzed", { pos = { x = 1, y = 0 } }, true) --don't overlap with Banana
 
-local blind_amount_hook = get_blind_amount
-function get_blind_amount(ante)
-    return (blind_amount_hook(ante) * G.GAME.starting_params.ante_scaling) ^
-        (G.GAME.starting_params.ante_scaling_exponential or 1) / G.GAME.starting_params.ante_scaling
-end
-
 local function scaling_voucher_unredeem(self, card)
     G.E_MANAGER:add_event(Event { func = function()
         G.GAME.starting_params.ante_scaling = G.GAME.starting_params.ante_scaling / card.ability.multiplier
@@ -69,33 +63,6 @@ local function scaling_voucher_unredeem(self, card)
 end
 SMODS.Voucher:take_ownership("pencil_half_chip", { unredeem = scaling_voucher_unredeem }, true)
 SMODS.Voucher:take_ownership("pencil_vision", { unredeem = scaling_voucher_unredeem }, true)
-SMODS.Voucher {
-    key = "sqrt",
-    atlas = "vouchers",
-    pos = { x = 0, y = 2 },
-    config = { exponent = 0.5 },
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.exponent } }
-    end,
-    requires = { "v_pencil_vision" },
-    redeem = function(self, card)
-        G.E_MANAGER:add_event(Event { func = function()
-            G.GAME.starting_params.ante_scaling_exponential = (G.GAME.starting_params.ante_scaling_exponential or 1) *
-                card.ability.exponent
-            StrangeLib.dynablind.update_blind_scores()
-            return true
-        end })
-    end,
-    unredeem = function(self, card)
-        G.E_MANAGER:add_event(Event { func = function()
-            G.GAME.starting_params.ante_scaling_exponential = (G.GAME.starting_params.ante_scaling_exponential or 1) /
-                card.ability.exponent
-            StrangeLib.dynablind.update_blind_scores()
-            return true
-        end })
-    end,
-    pools = { Tier3 = true },
-}
 SMODS.Voucher:take_ownership("pencil_overstock", {
     unredeem = function(self, card)
         G.GAME.index_pack_bonus = G.GAME.index_pack_bonus - card.ability.extra
