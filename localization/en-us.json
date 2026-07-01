@@ -176,6 +176,14 @@
                     "{C:chips}+#1#{} Chips when scored"
                 ]
             },
+            "j_pencil_alliance": {
+                "name": "The Alliance",
+                "text": [
+                    "{X:mult,C:white}X#1#{} Mult if played",
+                    "hand contains",
+                    "a {C:attention}Dichrome"
+                ]
+            },
             "j_pencil_blasphemy": {
                 "name": "Blasphemous Joker",
                 "text": [
@@ -205,6 +213,14 @@
                     "All played {C:clubs}Clubs{} give {X:mult,C:white}X#1#{} Mult",
                     "and are retriggered {C:attention}#2#{} times",
                     "Destroyed if a non-{C:clubs}Club{} is played"
+                ]
+            },
+            "j_pencil_colorblind": {
+                "name": "Colorblind Joker",
+                "text": [
+                    "{C:chips}+#1#{} Chips if played",
+                    "hand contains",
+                    "a {C:attention}Dichrome"
                 ]
             },
             "j_pencil_commie": {
@@ -421,6 +437,14 @@
                 "name": "Right Leg of The Forbidden One",
                 "text": [
                     "{C:mult}+#1#{} Mult"
+                ]
+            },
+            "j_pencil_satisfied": {
+                "name": "Satisfied Joker",
+                "text": [
+                    "{C:mult}+#1#{} Mult if played",
+                    "hand contains",
+                    "a {C:attention}Dichrome"
                 ]
             },
             "j_pencil_square": {

@@ -92,6 +92,42 @@ SMODS.Consumable {
         badges[1] = create_badge(localize("k_planet_spacecraft"), G.C.SECONDARY_SET.Planet, nil, 1.2)
     end
 }
+SMODS.Joker {
+    key = "satisfied",
+    attributes = { "mult", "hand_type" },
+    config = { t_mult = 6, type = "pencil_dichrome" },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.t_mult } }
+    end,
+    rarity = 1,
+    pos = { x = 5, y = 5 },
+    atlas = "jokers",
+    cost = 3,
+}
+SMODS.Joker {
+    key = "colorblind",
+    attributes = { "chips", "hand_type" },
+    config = { t_chips = 35, type = "pencil_dichrome" },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.t_chips } }
+    end,
+    rarity = 1,
+    pos = { x = 5, y = 4 },
+    atlas = "jokers",
+    cost = 3,
+}
+SMODS.Joker {
+    key = "alliance",
+    attributes = { "xmult", "hand_type" },
+    config = { Xmult = 1.5, type = "pencil_dichrome" },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.Xmult } }
+    end,
+    rarity = 3,
+    pos = { x = 4, y = 5 },
+    atlas = "jokers",
+    cost = 8,
+}
 
 SMODS.PokerHand {
     key = "dichrome_straight",
