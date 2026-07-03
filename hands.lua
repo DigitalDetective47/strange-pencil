@@ -127,6 +127,8 @@ SMODS.Joker {
     pos = { x = 4, y = 5 },
     atlas = "jokers",
     cost = 8,
+    unlocked = false,
+    unlock_condition = { type = "win_no_hand", extra = "pencil_dichrome" },
 }
 
 SMODS.PokerHand {

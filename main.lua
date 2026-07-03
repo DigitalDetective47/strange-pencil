@@ -44,6 +44,15 @@ function SMODS.current_mod.calculate(self, context)
             SMODS.debuff_card(joker, false, 'pencil_paralyzed')
         end
         SMODS.Centers.j_pencil_killer:reset_target()
+    elseif context.blind_disabled then
+        G.PROFILES[G.SETTINGS.profile].career_stats.pencil_bosses_disabled = (G.PROFILES[G.SETTINGS.profile].career_stats.pencil_bosses_disabled or 0) +
+            1
+        check_for_unlock { type = "boss_disabled" }
+    elseif context.using_consumeable and context.area == G.pack_cards and context.card.ability.set == "index" then
+        G.PROFILES[G.SETTINGS.profile].career_stats.pencil_indexes_used_from_boosters = (G.PROFILES[G.SETTINGS.profile].career_stats.pencil_indexes_used_from_boosters or 0) +
+            1
+    elseif context.selling_card then
+        check_for_unlock { type = "selling_card", card = context.card }
     end
 end
 

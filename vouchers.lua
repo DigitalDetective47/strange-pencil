@@ -30,6 +30,13 @@ SMODS.Voucher {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.multiplier } }
 	end,
+	unlocked = false,
+	locked_loc_vars = function(self, info_queue, card)
+		return { vars = { 10, G.PROFILES[G.SETTINGS.profile].career_stats.pencil_bosses_disabled or 0 } }
+	end,
+	check_for_unlock = function(self, args)
+		return args.type == "boss_disabled" and G.PROFILES[G.SETTINGS.profile].career_stats.pencil_bosses_disabled >= 10
+	end,
 	requires = { "v_pencil_half_chip" },
 	redeem = scaling_voucher_redeem,
 }
@@ -49,6 +56,14 @@ SMODS.Voucher {
 	config = { extra = 1 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra } }
+	end,
+	unlocked = false,
+	locked_loc_vars = function(self, info_queue, card)
+		return { vars = { 50, G.PROFILES[G.SETTINGS.profile].career_stats.pencil_indexes_used_from_boosters or 0 } }
+	end,
+	check_for_unlock = function(self, args)
+		return args.type == "boss_disabled" and
+			G.PROFILES[G.SETTINGS.profile].career_stats.pencil_indexes_used_from_boosters >= 50
 	end,
 	requires = { "v_pencil_pull" },
 	redeem = function(self, card)

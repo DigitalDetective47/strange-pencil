@@ -212,6 +212,8 @@ SMODS.Joker {
     soul_pos = { x = 4, y = 0 },
     atlas = "jokers",
     cost = 20,
+    unlocked = false,
+    unlock_condition = { hidden = true },
     calculate = function(self, card, context)
         if context.using_consumeable and context.consumeable.ability.set ~= "index" then
             G.E_MANAGER:add_event(Event { trigger = 'after', delay = 0.4, func = function()
@@ -299,6 +301,8 @@ SMODS.Joker {
     soul_pos = { x = 1, y = 2 },
     atlas = "jokers",
     cost = 20,
+    unlocked = false,
+    unlock_condition = { hidden = true },
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -364,6 +368,14 @@ SMODS.Joker {
     cost = 5,
     blueprint_compat = false,
     eternal_compat = false,
+    unlocked = false,
+    check_for_unlock = function(self, args)
+        return args.type == "selling_card" and args.card.config.center_key == "j_egg" and args.card.sell_cost >= 20
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        table.insert(info_queue, G.P_CENTERS.j_egg)
+        return { vars = { 20 } }
+    end,
     calculate = function(self, card, context)
         if context.end_of_round and not (context.individual or context.repetition or context.blueprint) then
             if SMODS.pseudorandom_probability(card, 'j_pencil_squeeze', 1, card.ability.chance) then
@@ -445,6 +457,8 @@ SMODS.Joker {
     atlas = "jokers",
     cost = 20,
     eternal_compat = false,
+    unlocked = false,
+    unlock_condition = { hidden = true },
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.repetition and not card.ability.dead then
             return { repetitions = card.ability.retriggers, card = card }
@@ -638,6 +652,8 @@ SMODS.Joker {
     atlas = "jokers",
     cost = 9,
     blueprint_compat = false,
+    unlocked = false,
+    unlock_condition = { type = "hand", extra = "Five of a Kind" },
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
             ---@type Card[]
@@ -923,6 +939,14 @@ SMODS.Joker {
     end
 }
 
+---template `locked_loc_vars` function for suit gem jokers
+---@param self SMODS.Joker
+---@param info_queue table[]
+---@param card Card
+local function gem_locked_loc_vars(self, info_queue, card)
+    return { vars = { self.unlock_condition.extra.count } }
+end
+
 SMODS.Joker {
     key = "prism",
     loc_vars = function(self, info_queue, card)
@@ -934,6 +958,9 @@ SMODS.Joker {
     pos = { x = 0, y = 5 },
     atlas = "jokers",
     cost = 7,
+    unlocked = false,
+    unlock_condition = { type = "modify_deck", extra = { count = 12, suit = "pencil_mults" } },
+    locked_loc_vars = gem_locked_loc_vars,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:is_suit("pencil_mults") then
             return { xmult = 1 + 0.1 * context.other_card.base.nominal }
@@ -955,6 +982,9 @@ SMODS.Joker {
     pos = { x = 1, y = 5 },
     atlas = "jokers",
     cost = 7,
+    unlocked = false,
+    unlock_condition = { type = "modify_deck", extra = { count = 12, suit = "pencil_dollars" } },
+    locked_loc_vars = gem_locked_loc_vars,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card.base.suit == "pencil_dollars" and self.activate then
             G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra
@@ -976,6 +1006,9 @@ SMODS.Joker {
     atlas = "jokers",
     cost = 7,
     blueprint_compat = false,
+    unlocked = false,
+    unlock_condition = { type = "modify_deck", extra = { count = 12, suit = "pencil_oracles" } },
+    locked_loc_vars = gem_locked_loc_vars,
 }
 
 SMODS.Joker {
@@ -1003,6 +1036,9 @@ SMODS.Joker {
     pos = { x = 3, y = 5 },
     atlas = "jokers",
     cost = 7,
+    unlocked = false,
+    unlock_condition = { type = "modify_deck", extra = { count = 12, suit = "pencil_swords" } },
+    locked_loc_vars = gem_locked_loc_vars,
     calculate = function(self, card, context)
         if G.GAME.blind
             and not G.GAME.blind.disabled

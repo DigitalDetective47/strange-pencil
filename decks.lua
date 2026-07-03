@@ -6,6 +6,8 @@ SMODS.Back {
     end,
     pos = { x = 0, y = 0 },
     atlas = "decks",
+    unlocked = false,
+    unlock_condition = { type = "win_deck", deck = "b_abandoned" },
     apply = function(self)
         G.E_MANAGER:add_event(Event { blockable = false, func = function()
             for _, card in ipairs(SMODS.shallow_copy(G.playing_cards)) do
@@ -62,6 +64,8 @@ SMODS.Back {
     end,
     pos = { x = 1, y = 0 },
     atlas = "decks",
+    unlocked = false,
+    unlock_condition = { type = "win_deck", deck = "b_erratic" },
     apply = function(self)
         G.E_MANAGER:add_event(Event { blockable = false, func = function()
             for _, card in ipairs(G.playing_cards) do
@@ -98,6 +102,8 @@ SMODS.Back {
     end,
     pos = { x = 2, y = 0 },
     atlas = "decks",
+    unlocked = false,
+    unlock_condition = { type = "win_stake" },
     apply = function(self)
         G.GAME.modifiers.booster_choices = (G.GAME.modifiers.booster_choices or 0) + self.config.booster_choices
     end
@@ -120,6 +126,8 @@ SMODS.Back {
     end,
     pos = { x = 3, y = 0 },
     atlas = "decks",
+    unlocked = false,
+    unlock_condition = { type = "win_stake" },
     calculate = function(self, back, context)
         if context.ending_shop then
             G.GAME.b_pencil_slow_roll_reroll_cost = G.GAME.current_round.reroll_cost_increase
@@ -203,6 +211,8 @@ SMODS.Back {
     end,
     pos = { x = 4, y = 0 },
     atlas = "decks",
+    unlocked = false,
+    unlock_condition = { type = "win_stake" },
     apply = function(self, deck)
         G.GAME.b_pencil_ram = {}
     end,
@@ -231,6 +241,8 @@ SMODS.Back {
     key = "suit",
     pos = { x = 5, y = 0 },
     atlas = "decks",
+    unlocked = false,
+    unlock_condition = { type = "win_deck", deck = "b_checkered" },
     apply = function(self)
         G.E_MANAGER:add_event(Event { func = function()
             for _ = 1, 2 do
@@ -240,3 +252,10 @@ SMODS.Back {
         end })
     end
 }
+
+G.E_MANAGER:add_event(Event { blockable = false, func = function()
+    for deck, unlock_stake in pairs({ b_pencil_booster = "stake_pencil_bronze", b_pencil_slow_roll = "stake_pencil_neon", b_pencil_ram = "stake_pencil_grey" }) do
+        SMODS.Centers[deck].unlock_condition.stake = SMODS.Stakes[unlock_stake].stake_level
+    end
+    return true
+end })

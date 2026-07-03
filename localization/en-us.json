@@ -182,6 +182,11 @@
                     "{X:mult,C:white}X#1#{} Mult if played",
                     "hand contains",
                     "a {C:attention}Dichrome"
+                ],
+                "unlock": [
+                    "Win a run",
+                    "without playing",
+                    "a {E:1,C:attention}Dichrome"
                 ]
             },
             "j_pencil_blasphemy": {
@@ -213,6 +218,9 @@
                     "All played {C:clubs}Clubs{} give {X:mult,C:white}X#1#{} Mult",
                     "and are retriggered {C:attention}#2#{} times",
                     "Destroyed if a non-{C:clubs}Club{} is played"
+                ],
+                "unlock": [
+                    "{E:1,s:1.3}?????"
                 ]
             },
             "j_pencil_colorblind": {
@@ -228,6 +236,9 @@
                 "text": [
                     "Balance ranks",
                     "of scored cards"
+                ],
+                "unlock": [
+                    "Discover {E:1,C:attention}Five of a Kind"
                 ]
             },
             "j_pencil_crystal": {
@@ -235,6 +246,11 @@
                 "text": [
                     "{C:tarot}Tarot{} cards created by",
                     "{C:pencil_oracles}Oracle{} cards are {C:dark_edition}Negative"
+                ],
+                "unlock": [
+                    "Have at least {E:1,C:attention}#1#",
+                    "cards with {E:1,C:attention}Oracles",
+                    "suit in your deck"
                 ]
             },
             "j_pencil_doodlebob": {
@@ -270,6 +286,11 @@
                     "Earn {C:money}$#1#{} when a",
                     "{C:pencil_dollars}Dollar{} card",
                     "activates its ability"
+                ],
+                "unlock": [
+                    "Have at least {E:1,C:attention}#1#",
+                    "cards with {E:1,C:attention}Dollars",
+                    "suit in your deck"
                 ]
             },
             "j_pencil_fizzler": {
@@ -333,6 +354,11 @@
                     "{C:pencil_swords}Sword{} suit have an",
                     "n% chance to disable current",
                     "{C:attention}Boss Blind{} when scored"
+                ],
+                "unlock": [
+                    "Have at least {E:1,C:attention}#1#",
+                    "cards with {E:1,C:attention}Swords",
+                    "suit in your deck"
                 ]
             },
             "j_pencil_lass": {
@@ -397,6 +423,9 @@
                     "card when a consumable of",
                     "another type is used",
                     "{C:inactive}(Must have room)"
+                ],
+                "unlock": [
+                    "{E:1,s:1.3}?????"
                 ]
             },
             "j_pencil_peter": {
@@ -413,6 +442,11 @@
                     "Played cards with",
                     "{C:pencil_mults}Mult{} suit give",
                     "{X:mult,C:white}X(1+0.1n){} Mult when scored"
+                ],
+                "unlock": [
+                    "Have at least {E:1,C:attention}#1#",
+                    "cards with {E:1,C:attention}Mults",
+                    "suit in your deck"
                 ]
             },
             "j_pencil_ratio": {
@@ -451,6 +485,9 @@
                 "name": "Square Chip",
                 "text": [
                     "{X:dark_edition,C:white}^#1#{} Chips"
+                ],
+                "unlock": [
+                    "{E:1,s:1.3}?????"
                 ]
             },
             "j_pencil_squeeze": {
@@ -463,6 +500,10 @@
                     "{C:green}#1# in #2#{} chance this",
                     "card is destroyed",
                     "at end of round"
+                ],
+                "unlock": [
+                    "Sell an {E:1,C:attention}Egg",
+                    "for at least {E:1,C:money}$#1#"
                 ]
             },
             "j_pencil_stonehenge": {
@@ -908,6 +949,11 @@
                 "text": [
                     "All {C:blue}Doodle Packs{} contain",
                     "{C:attention}#1#{} additional card"
+                ],
+                "unlock": [
+                    "Use {C:attention}#1#{} {C:blue}Index{} cards",
+                    "from {C:blue}Doodle Packs",
+                    "{C:inactive}(#2#)"
                 ]
             },
             "v_pencil_pull": {
@@ -927,6 +973,11 @@
                 "name": "Miraculous Vision",
                 "text": [
                     "{C:red}X#1#{} base Blind size"
+                ],
+                "unlock": [
+                    "Disable {C:attention}#1#",
+                    "Boss Blinds",
+                    "{C:inactive}(#2#)"
                 ]
             }
         },
