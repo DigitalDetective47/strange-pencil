@@ -1,0 +1,10 @@
+{
+    "name": "Strange_Pencil",
+    "description": "A collection of random stuff that I've created and drawn in Paint.",
+    "version_number": "0.4.1",
+    "dependencies": [
+        "Steamodded-Steamodded-26.829.0",
+        "DigitalDetective47-Strange_Library-4.2.2"
+    ],
+    "website_url": "https://github.com/DigitalDetective47/strange-pencil"
+}
